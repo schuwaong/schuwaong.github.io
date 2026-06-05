@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting</title>
+    <script>
+      const path = window.location.pathname;
+      const normalized = path.toLowerCase();
+      let target = "/IC_wearables/men/";
+
+      if (normalized.startsWith("/ic_avatar/female")) {
+        target = "/IC_avatar/female/";
+      } else if (normalized.startsWith("/ic_avatar/male")) {
+        target = "/IC_avatar/male/";
+      } else if (normalized.startsWith("/ic_avatar")) {
+        target = "/IC_avatar/";
+      } else if (normalized.startsWith("/ic_wearables/female")) {
+        target = "/IC_wearables/female/";
+      } else if (normalized.startsWith("/ic_wearables/men")) {
+        target = "/IC_wearables/men/";
+      } else if (normalized.startsWith("/ic_wearables")) {
+        target = "/IC_wearables/men/";
+      }
+
+      window.location.replace(target + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to IC_wearables...</p>
+  </body>
+</html>
