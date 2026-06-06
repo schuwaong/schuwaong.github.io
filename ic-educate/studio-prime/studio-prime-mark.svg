@@ -1,0 +1,11 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Studio Prime mark</title>
+  <desc id="desc">A geometric SP monogram for the Studio Prime website top bar.</desc>
+  <rect x="12" y="12" width="136" height="136" rx="32" fill="#F8FAFC"/>
+  <rect x="12" y="12" width="136" height="136" rx="32" stroke="#D9E2D2" stroke-width="4"/>
+  <path d="M44 109V51H83C94 51 102 58 102 68C102 78 95 85 83 85H60V109H44Z" fill="#174EA6"/>
+  <path d="M60 72H81C84 72 86 70 86 68C86 65 84 64 81 64H60V72Z" fill="#F8FAFC"/>
+  <path d="M78 109V94H101C106 94 109 92 109 88C109 84 106 82 101 82H91C82 82 75 76 75 67C75 57 83 51 95 51H121V66H96C92 66 90 67 90 70C90 72 92 74 96 74H106C117 74 125 80 125 90C125 102 116 109 102 109H78Z" fill="#137333"/>
+  <circle cx="113" cy="48" r="8" fill="#FBBC04"/>
+  <path d="M37 121H123" stroke="#DADCE0" stroke-width="6" stroke-linecap="round"/>
+</svg>

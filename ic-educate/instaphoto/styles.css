@@ -1,0 +1,365 @@
+:root {
+  --bg: linear-gradient(120deg, #07152f, #142f52 42%, #0f2f2a);
+  --panel: rgba(12, 26, 46, 0.72);
+  --line: rgba(255, 255, 255, 0.14);
+  --text: #ecf5ff;
+  --muted: #a7c0e2;
+  --accent: #37c9a3;
+  --accent-2: #f3c13b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.page {
+  width: min(980px, calc(100vw - 2rem));
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: linear-gradient(140deg, rgba(2, 84, 128, 0.34), rgba(16, 88, 61, 0.23));
+  backdrop-filter: blur(6px);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.74rem;
+  color: var(--accent);
+  margin: 0 0 0.45rem;
+}
+
+h1,
+h2 {
+  margin: 0 0 0.6rem;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 70ch;
+  line-height: 1.55;
+}
+
+.panel {
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  padding: 1rem;
+  background: var(--panel);
+}
+
+.worksheet-form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 700;
+}
+
+input,
+select,
+textarea,
+button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(4, 12, 25, 0.75);
+  color: var(--text);
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+button {
+  margin-top: 0.6rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #04151b;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.07);
+}
+
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.feature-grid {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.feature-card {
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.85rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: rgba(4, 12, 25, 0.75);
+  font-weight: 800;
+}
+
+.feature-card:hover {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #04151b;
+}
+
+.mode-button {
+  margin: 0;
+  background: rgba(4, 12, 25, 0.75);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.mode-button.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #04151b;
+}
+
+.grid-2,
+.grid-3 {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.result,
+.catalog {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: rgba(3, 10, 22, 0.75);
+  overflow: auto;
+}
+
+.result pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.result h3 {
+  margin: 0.8rem 0 0.35rem;
+  font-size: 1rem;
+}
+
+.result-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.result-links a {
+  color: #04151b;
+  background: var(--accent);
+  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.journey-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.xp-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 78px;
+  min-height: 78px;
+  border-radius: 50%;
+  background: var(--accent-2);
+  color: #04151b;
+  font-weight: 900;
+}
+
+.journey-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.journey-step {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.journey-step small {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  font-weight: 900;
+}
+
+.journey-step.ready .step-dot {
+  background: var(--accent);
+  color: #04151b;
+}
+
+.lesson-grid,
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.lesson-card,
+.quiz-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem;
+}
+
+.lesson-card h3,
+.quiz-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+}
+
+.lesson-card p,
+.quiz-card p {
+  margin: 0;
+}
+
+.quiz-card ol {
+  margin: 0.4rem 0 0.5rem 1.2rem;
+  padding: 0;
+}
+
+.catalog-item {
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.catalog-item:last-child {
+  border-bottom: none;
+}
+
+.prompt-layout {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.prompt-group {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.prompt-title {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.prompt-text {
+  margin: 0;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.copy-action {
+  margin-top: 0.6rem;
+}
+
+.copy-action button {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .grid-2,
+  .grid-3,
+  .lesson-grid,
+  .quiz-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-switch {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-head {
+    display: grid;
+  }
+}

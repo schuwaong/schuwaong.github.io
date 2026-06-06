@@ -3,71 +3,247 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IC Educate | Learn Better, Score Higher</title>
-    <meta name="description" content="IC Educate provides focused tuition support with clear teaching, targeted practice, and consistent feedback." />
-    <link rel="stylesheet" href="./styles.css" />
+    <meta
+      name="description"
+      content="Studio Prime school platform for class planning, resources, assignments, gradebook workflows, and parent-ready learning operations."
+    />
+    <meta name="theme-color" content="#f6f8fb" />
+    <title>Studio Prime</title>
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, .88), rgba(239, 246, 255, .92)),
+          radial-gradient(circle at 84% 12%, rgba(14, 118, 110, .12), transparent 24%),
+          #f6f8fb;
+      }
+
+      #root {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #102033;
+      }
+
+      .static-fallback {
+        min-height: 100vh;
+        background: #f4f7fb;
+      }
+
+      .static-hero {
+        min-height: 72svh;
+        display: grid;
+        align-content: end;
+        padding: 22px 16px 20px;
+        background:
+          linear-gradient(180deg, rgba(246, 248, 252, .88) 0%, rgba(246, 248, 252, .78) 42%, rgba(246, 248, 252, .98) 100%),
+          url("/ic-educate/studio-prime/homepage-hero.png") center / cover;
+        border-bottom: 1px solid rgba(15, 23, 42, .1);
+      }
+
+      .static-hero-inner {
+        max-width: 760px;
+      }
+
+      .static-badge {
+        display: inline-flex;
+        border: 1px solid rgba(15, 23, 42, .14);
+        border-radius: 999px;
+        padding: 7px 11px;
+        background: rgba(255, 255, 255, .82);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .static-hero h1 {
+        margin: 16px 0 10px;
+        max-width: 720px;
+        font-size: clamp(42px, 14vw, 76px);
+        line-height: .9;
+      }
+
+      .static-hero p {
+        max-width: 680px;
+        margin: 0;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .static-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .static-actions a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 0 14px;
+        text-decoration: none;
+        font-weight: 850;
+      }
+
+      .static-primary {
+        background: #0f766e;
+        color: #fff;
+      }
+
+      .static-secondary {
+        background: rgba(255, 255, 255, .9);
+        border: 1px solid rgba(15, 23, 42, .14);
+        color: #102033;
+      }
+
+      .static-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .static-card {
+        min-height: 96px;
+        border: 1px solid rgba(15, 23, 42, .1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .9);
+        padding: 16px;
+        box-shadow: 0 14px 34px rgba(15, 23, 42, .08);
+      }
+
+      .static-card strong {
+        display: block;
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .static-card span {
+        color: #56677b;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .static-section {
+        padding: 6px 14px 28px;
+      }
+
+      .static-section h2 {
+        margin: 0 0 12px;
+        font-size: 24px;
+      }
+
+      .static-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .static-list div {
+        border: 1px solid rgba(15, 23, 42, .1);
+        border-radius: 8px;
+        background: #fff;
+        padding: 14px;
+        font-weight: 750;
+      }
+
+      .static-js-note {
+        margin-top: 18px;
+        color: #56677b;
+        font-size: 13px;
+      }
+
+      @media (max-width: 480px) {
+        .static-hero {
+          min-height: 70svh;
+          background-position: center top;
+        }
+
+        .static-badge {
+          max-width: 100%;
+          font-size: 10px;
+          line-height: 1.25;
+        }
+
+        .static-hero p {
+          font-size: 15px;
+        }
+
+        .static-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .static-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      #root:empty {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      #root:empty::before {
+        content: "Studio Prime";
+        display: grid;
+        place-items: center;
+        width: min(320px, calc(100vw - 48px));
+        min-height: 112px;
+        border: 1px solid rgba(15, 23, 42, .1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .88);
+        box-shadow: 0 18px 42px rgba(15, 23, 42, .1);
+        font-size: 1.15rem;
+        font-weight: 850;
+        letter-spacing: .02em;
+      }
+    </style>
+    <script type="module" crossorigin src="/ic-educate/assets/index-CW8w50Re.js"></script>
+    <link rel="stylesheet" crossorigin href="/ic-educate/assets/index-WqQpe-DE.css">
   </head>
   <body>
-    <header class="topbar">
-      <div class="brand">IC Educate</div>
-      <a class="cta" href="#contact">Enquire</a>
-    </header>
+    <div id="root">
+      <main class="static-fallback">
+        <section class="static-hero">
+          <div class="static-hero-inner">
+            <span class="static-badge">Registered learning centre - school reg. no. 591343</span>
+            <h1>Studio Prime</h1>
+            <p>
+              Small-group tuition in Wan Chai for Mathematics, Science, Chinese, and English,
+              with exam practice, teacher feedback, and a private learning portal behind the scenes.
+            </p>
+            <div class="static-actions">
+              <a class="static-primary" href="tel:+85200000000">Call Jasmine</a>
+              <a class="static-secondary" href="/student-resources.html">Resources</a>
+            </div>
+            <p class="static-js-note">Static phone view loaded. The interactive portal replaces this automatically when JavaScript runs.</p>
+          </div>
+        </section>
 
-    <main>
-      <section class="hero">
-        <p class="eyebrow">IC EDUCATE</p>
-        <h1>Simple, structured learning support that gets results.</h1>
-        <p class="subtitle">
-          We help students improve confidence and performance through clear explanations,
-          topical practice, and personalized feedback.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#programs">View Programs</a>
-          <a class="btn" href="#contact">Contact Us</a>
-        </div>
-      </section>
+        <section class="static-grid" aria-label="Studio Prime highlights">
+          <article class="static-card"><strong>54</strong><span>weekly classes loaded from the live schedule</span></article>
+          <article class="static-card"><strong>4</strong><span>core subject tracks</span></article>
+          <article class="static-card"><strong>6</strong><span>maximum students per class</span></article>
+          <article class="static-card"><strong>7</strong><span>subject tracks for primary to senior students</span></article>
+        </section>
 
-      <section id="programs" class="panel">
-        <h2>Programs</h2>
-        <div class="grid">
-          <article>
-            <h3>Topical Practice</h3>
-            <p>Focused worksheets by syllabus topic to close gaps quickly.</p>
-          </article>
-          <article>
-            <h3>Exam Preparation</h3>
-            <p>Past-paper style drills with review plans and correction routines.</p>
-          </article>
-          <article>
-            <h3>Feedback Coaching</h3>
-            <p>Clear comments on mistakes, next steps, and what to practice next.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>Why IC Educate</h2>
-        <ul class="checklist">
-          <li>Clear teaching with practical step-by-step methods</li>
-          <li>Consistent tracking of progress and weak topics</li>
-          <li>Simple communication with students and parents</li>
-        </ul>
-      </section>
-
-      <section id="contact" class="panel contact">
-        <h2>Contact</h2>
-        <p>Ready to start? Reach out and we will help map the right study plan.</p>
-        <p><strong>Email:</strong> hello@iceducate.hk</p>
-        <p><strong>WhatsApp:</strong> +852 5511 5251</p>
-      </section>
-    </main>
-
-    <footer>
-      <p>© <span id="year"></span> IC Educate. All rights reserved.</p>
-    </footer>
-
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+        <section class="static-section">
+          <h2>Programmes</h2>
+          <div class="static-list">
+            <div>Mathematics exam practice and feedback</div>
+            <div>Science worksheet generation and revision</div>
+            <div>Chinese and English small-group support</div>
+            <div>Released resources and parent-friendly learning support</div>
+          </div>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
