@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IC Educate | AI Tutor Prompts</title>
+    <meta
+      name="description"
+      content="AI tutor prompts for students using the IC Educate workflow."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">IC Educate</p>
+        <h1>AI Tutor Prompts</h1>
+        <p>Use these prompts to turn any LLM into a structured tutor and worksheet partner.</p>
+        <p class="hint">
+          <a href="./index.html">← Back to IC Educate</a>
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Prompt library</h2>
+        <p class="hint">
+          Copy any prompt, paste it into your AI assistant, then attach your syllabus
+          topic and upload your notes.
+        </p>
+        <div class="prompt-layout">
+          <article class="prompt-group">
+            <h3 class="prompt-title">Structured lesson + quiz starter</h3>
+            <p class="prompt-text" data-prompt>
+              You are a patient exam tutor. Teach the student the topic in 12 short
+              steps. For each step include: concept explanation, one worked example,
+              one check question, and a one-line memory trick. After the lessons,
+              create a 15-question mixed-format quiz and provide a strict answer key.
+            </p>
+            <div class="copy-action">
+              <button type="button" data-copy-target="prompt-1">Copy prompt</button>
+            </div>
+          </article>
+
+          <article class="prompt-group">
+            <h3 class="prompt-title">Worksheet builder workflow</h3>
+            <p class="prompt-text" data-prompt>
+              You are generating a grade-specific worksheet for exam preparation.
+              Inputs: syllabus, level, topic, subtopic, number of questions.
+              Create a balanced sheet with section A/B/C: recall, understanding,
+              and application questions. Include an answer key and marking scheme
+              with brief feedback notes.
+            </p>
+            <div class="copy-action">
+              <button type="button" data-copy-target="prompt-2">Copy prompt</button>
+            </div>
+          </article>
+
+          <article class="prompt-group">
+            <h3 class="prompt-title">Duo mode tutor for weak areas</h3>
+            <p class="prompt-text" data-prompt>
+              Act like a coaching tutor in duo-learning mode. Ask one question at a
+              time. If the student is wrong, correct gently and ask one simpler
+              follow-up. Keep a running checklist with XP points and only unlock the
+              next concept when the student gets a question right twice in a row.
+            </p>
+            <div class="copy-action">
+              <button type="button" data-copy-target="prompt-3">Copy prompt</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const prompts = [
+        `You are a patient exam tutor. Teach the student the topic in 12 short steps. For each step include: concept explanation, one worked example, one check question, and a one-line memory trick. After the lessons, create a 15-question mixed-format quiz and provide a strict answer key.`,
+        `You are generating a grade-specific worksheet for exam preparation. Inputs: syllabus, level, topic, subtopic, number of questions. Create a balanced sheet with section A/B/C: recall, understanding, and application questions. Include an answer key and marking scheme with brief feedback notes.`,
+        `Act like a coaching tutor in duo-learning mode. Ask one question at a time. If the student is wrong, correct gently and ask one simpler follow-up. Keep a running checklist with XP points and only unlock the next concept when the student gets a question right twice in a row.`
+      ];
+
+      document.querySelectorAll("button[data-copy-target]").forEach((button, index) => {
+        button.addEventListener("click", async () => {
+          const text = prompts[index];
+          if (!text) return;
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+          setTimeout(() => (button.textContent = "Copy prompt"), 1300);
+        });
+      });
+    </script>
+  </body>
+</html>

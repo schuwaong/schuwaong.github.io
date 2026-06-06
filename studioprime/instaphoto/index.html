@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IC Educate | Learn, Quiz, Practice</title>
+    <meta
+      name="description"
+      content="IC Educate helps students learn a topic, complete a quick quiz, and generate matched revision worksheets."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">IC Educate</p>
+        <h1>IC Educate</h1>
+        <p>
+          Learn fast, test yourself, and generate worksheets that match your
+          syllabus topic.
+        </p>
+        <p class="hint">
+          Visit:
+          <a href="https://schuwaong.github.io/studioprime/instaphoto/" target="_blank" rel="noreferrer">
+            schuwaong.github.io/studioprime/instaphoto/
+          </a>
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Features</h2>
+        <p class="hint">
+          Useful tools available on this site for paper marking, worksheet practice, and
+          lesson workflows.
+        </p>
+        <div class="feature-grid">
+          <a class="feature-card" href="#create-worksheet">Create worksheet</a>
+          <a class="feature-card" href="#learn-workflow">Learn with IC Educate</a>
+          <a class="feature-card" href="./ai-tutor-prompts.html">AI Tutor Prompts</a>
+        </div>
+      </section>
+
+      <section class="panel" id="create-worksheet">
+        <form id="worksheet-form" class="worksheet-form">
+          <div id="learn-workflow" class="mode-switch" role="group" aria-label="Choose learning mode">
+            <button type="button" class="mode-button active" data-mode="worksheet">Create worksheet</button>
+            <button type="button" class="mode-button" data-mode="learn">Learn with IC Educate</button>
+          </div>
+
+          <div class="field">
+            <label for="uploadFile">Upload source material</label>
+            <input id="uploadFile" name="uploadFile" type="file" />
+            <small class="hint">
+              Upload notes, past papers, textbooks, or sample questions.
+            </small>
+          </div>
+
+          <div class="field">
+            <label for="description">Describe the worksheet you want</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="Example: Teach me electrolysis, then give me a short quiz and 10 practice questions with answers."
+            ></textarea>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="syllabus">Syllabus</label>
+              <select id="syllabus" name="syllabus" required></select>
+            </div>
+            <div class="field">
+              <label for="level">Level</label>
+              <select id="level" name="level" required></select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic" required></select>
+            </div>
+            <div class="field">
+              <label for="subtopic">Subtopic</label>
+              <select id="subtopic" name="subtopic" required></select>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field">
+              <label for="itemCount">Questions</label>
+              <select id="itemCount" name="itemCount">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="format">Answer format</label>
+              <select id="format" name="format">
+                <option>Short answer</option>
+                <option>Mix</option>
+                <option>MCQ only</option>
+                <option>Structured practical</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="deadline">Expected by</label>
+              <input type="date" id="deadline" name="deadline" />
+            </div>
+          </div>
+
+          <button type="submit" id="submitButton">Generate worksheet</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Result</h2>
+        <p class="hint">
+          Lesson, quiz, worksheet files, and matched library sources will appear here.
+        </p>
+        <div id="result" class="result">
+          <p class="muted">No request submitted yet.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Curriculum list (seed data)</h2>
+        <p class="hint">
+          This list is a starter structure only and does not move any resource
+          files yet.
+        </p>
+        <div id="catalog" class="catalog"></div>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
