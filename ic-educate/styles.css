@@ -240,6 +240,12 @@ h2 {
   border-color: rgba(38, 48, 6, 0.28);
 }
 
+.button.ghost {
+  background: rgba(255, 250, 242, 0.45);
+  color: var(--ink);
+  border-color: rgba(47, 58, 45, 0.22);
+}
+
 .button.full-width {
   width: 100%;
 }
@@ -348,6 +354,101 @@ h2 {
   color: var(--ink);
   font-size: 1.08rem;
   font-weight: 950;
+}
+
+.connection-panel {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.54fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-top: 18px;
+  padding: 24px;
+  border: 1px solid rgba(47, 58, 45, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(223, 243, 107, 0.16), rgba(255, 250, 242, 0.72)),
+    rgba(255, 250, 242, 0.82);
+  box-shadow: 0 18px 62px rgba(48, 39, 29, 0.08);
+}
+
+.connection-panel > div {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.connection-panel h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+}
+
+.connection-panel p:not(.eyebrow),
+.library-summary {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.api-form {
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.api-form .button {
+  min-height: 44px;
+}
+
+.api-status,
+.library-summary {
+  padding: 11px 12px;
+  border: 1px solid rgba(47, 58, 45, 0.14);
+  border-radius: 8px;
+  background: #fffdf9;
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+.api-status.online {
+  border-color: rgba(47, 58, 45, 0.26);
+  background: rgba(223, 243, 107, 0.32);
+  color: var(--accent-ink);
+}
+
+.api-status.offline {
+  border-color: rgba(180, 95, 66, 0.22);
+  background: rgba(180, 95, 66, 0.08);
+  color: #633020;
+}
+
+.library-matches {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.library-match {
+  min-width: 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 9px 11px;
+  border: 1px solid rgba(47, 58, 45, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 253, 249, 0.9);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.library-match:hover,
+.library-match:focus-visible {
+  background: var(--ink);
+  color: var(--panel);
+  outline: none;
 }
 
 .panel-section {
@@ -584,6 +685,7 @@ textarea {
   }
 
   .hero-section,
+  .connection-panel,
   .panel-section {
     grid-template-columns: 1fr;
   }
@@ -606,6 +708,7 @@ textarea {
   }
 
   .feature-strip,
+  .library-matches,
   .form-grid {
     grid-template-columns: 1fr;
   }
