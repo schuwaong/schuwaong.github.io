@@ -1,65 +1,56 @@
-const API_STORAGE_KEY = "icEducate.apiBase";
+const defaultApiBase = (() => {
+  if (window.IC_EDUCATE_API_BASE) return window.IC_EDUCATE_API_BASE;
+  if (window.location.hostname.endsWith("github.io")) return "http://127.0.0.1:8001";
+  if (window.location.protocol.startsWith("http")) return window.location.origin;
+  return "http://127.0.0.1:8001";
+})();
 
-const fallbackSyllabi = [
-  "Cambridge IGCSE",
-  "Cambridge International AS & A Level",
-  "HKDSE",
-  "IB MYP",
-  "IB Diploma",
-  "Singapore PSLE",
-  "UK GCSE",
-];
+const API_BASE = defaultApiBase.replace(/\/$/, "");
 
-const fallbackYears = ["2026", "2025", "2024", "2023", "2022", "2021", "2020"];
-
-const fallbackSubjectTopics = {
-  Mathematics: ["Algebra", "Geometry", "Trigonometry", "Statistics", "Number", "Calculus"],
-  Physics: ["Motion", "Forces", "Energy", "Waves", "Electricity", "Thermal Physics"],
-  Chemistry: ["Atomic Structure", "Bonding", "Stoichiometry", "Electrolysis", "Organic Chemistry"],
-  Biology: ["Cells", "Enzymes", "Genetics", "Ecology", "Photosynthesis"],
-  English: ["Reading", "Writing", "Grammar", "Speaking", "Listening"],
-  Chinese: ["Reading Comprehension", "Writing", "Vocabulary", "Classical Chinese"],
-};
-
-const sampleLinks = {
-  Mathematics: {
-    html: "worksheets/psle_topical_math_science/PSLE_Mathematics_Full_Exam_Style_Pack.html",
-    pdf: "worksheets/psle_topical_math_science/PSLE_Mathematics_Full_Exam_Style_Pack.pdf",
+const fallbackCatalog = {
+  "Cambridge IGCSE": {
+    "IGCSE": {
+      Physics: ["Motion, Forces and Energy", "Thermal Physics", "Waves", "Electricity", "Chemical Bonding"],
+      Chemistry: ["Atomic Structure", "Stoichiometry", "Electrolysis", "Organic Chemistry", "Energy Changes"],
+      Biology: ["Cells", "Enzymes", "Ecology", "Genetics", "Photosynthesis"],
+      Mathematics: ["Number", "Algebra", "Geometry", "Trigonometry", "Statistics"]
+    }
   },
-  Science: {
-    html: "worksheets/psle_topical_math_science/PSLE_Science_Full_Exam_Style_Pack.html",
-    pdf: "worksheets/psle_topical_math_science/PSLE_Science_Full_Exam_Style_Pack.pdf",
-  },
+  "HK DSE": {
+    "Junior": {
+      English: ["Reading", "Writing", "Grammar", "Speaking", "Listening"],
+      Chinese: ["Vocabulary", "Reading Comprehension", "Writing", "Classical Chinese", "Grammar"],
+      Mathematics: ["Algebra", "Geometry", "Word Problems", "Data Handling", "Trig"]
+    }
+  }
 };
 
-const pathPrefix = window.location.pathname.toLowerCase().includes("/login") ? "../" : "./";
-const state = {
-  apiBase: "",
-  apiOnline: false,
-  options: null,
-  library: null,
-  subjectTopics: { ...fallbackSubjectTopics },
-  topicIdByTitle: new Map(),
-};
+let catalogData = structuredClone(fallbackCatalog);
+let backendReachable = false;
+let latestLibraryItems = [];
 
-const syllabusInput = document.querySelector("#syllabus");
-const yearInput = document.querySelector("#year");
-const subjectSelect = document.querySelector("#subject");
-const topicInput = document.querySelector("#topic");
-const marksInput = document.querySelector("#marks");
-const marksOutput = document.querySelector("#marksOutput");
-const ruleNote = document.querySelector("#ruleNote");
-const worksheetForm = document.querySelector("#worksheetForm");
-const generationOutput = document.querySelector("#generationOutput");
-const markingForm = document.querySelector("#markingForm");
-const feedbackOutput = document.querySelector("#feedbackOutput");
+const backendStatus = document.getElementById("backendStatus");
+const modeButtons = Array.from(document.querySelectorAll(".mode-btn"));
+const worksheetForm = document.getElementById("worksheetForm");
+const submitBtn = document.getElementById("submitBtn");
+const resultEl = document.getElementById("result");
+const catalogEl = document.getElementById("catalog");
 
-let apiInput;
-let apiStatus;
-let librarySummary;
-let libraryMatches;
+const syllabusSelect = document.getElementById("syllabus");
+const levelSelect = document.getElementById("level");
+const topicSelect = document.getElementById("topic");
+const subtopicSelect = document.getElementById("subtopic");
+const scoreWrap = document.getElementById("scoreWrap");
+const markingFields = document.getElementById("markingFields");
+const questionCountSelect = document.getElementById("questionCount");
+const descriptionInput = document.getElementById("description");
+const rubricTextInput = document.getElementById("rubricText");
 
-const escapeHtml = (value) =>
+const MAX_UPLOAD_BYTES = 12 * 1024 * 1024;
+
+let currentMode = "create";
+
+const escapeHtml = (value = "") =>
   String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -67,499 +58,543 @@ const escapeHtml = (value) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-const cleanApiBase = (value) => String(value || "").trim().replace(/\/+$/, "");
-
-const getConfiguredApiBase = () => {
-  const params = new URLSearchParams(window.location.search);
-  const fromQuery = params.get("api");
-  if (fromQuery === "clear") {
-    localStorage.removeItem(API_STORAGE_KEY);
-    return "";
-  }
-  if (fromQuery) {
-    const cleaned = cleanApiBase(fromQuery);
-    localStorage.setItem(API_STORAGE_KEY, cleaned);
-    return cleaned;
-  }
-  if (window.IC_EDUCATE_API_BASE) return cleanApiBase(window.IC_EDUCATE_API_BASE);
-  return cleanApiBase(localStorage.getItem(API_STORAGE_KEY));
-};
-
-const createOptions = (datalist, values) => {
-  datalist.replaceChildren(
-    ...values.filter(Boolean).map((value) => {
-      const option = document.createElement("option");
-      option.value = String(value);
-      return option;
-    }),
-  );
-};
-
-const apiUrl = (path) => `${state.apiBase}${path.startsWith("/") ? path : `/${path}`}`;
-
-const resolveApiUrl = (url) => {
-  if (!url) return "";
-  if (/^https?:\/\//i.test(url)) return url;
-  if (url.startsWith("/") && state.apiBase) return `${state.apiBase}${url}`;
-  return url;
-};
-
-const apiJson = async (path, options = {}) => {
-  if (!state.apiBase) throw new Error("No API URL configured.");
-  const response = await fetch(apiUrl(path), {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {}),
-    },
-  });
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok || data.error) {
-    throw new Error(data.error || `API returned HTTP ${response.status}`);
-  }
-  return data;
-};
-
-const insertConnectionPanel = () => {
-  const panel = document.createElement("section");
-  panel.className = "connection-panel";
-  panel.innerHTML = `
-    <div>
-      <p class="eyebrow">Library access</p>
-      <h2>Connect IC educate to the worksheet API.</h2>
-      <p>
-        GitHub Pages is static, so the full library comes from a backend URL.
-        Use a public HTTPS API for live users, or localhost only while testing on this machine.
-      </p>
-    </div>
-    <form class="api-form" id="apiForm">
-      <label>
-        <span>Worksheet API URL</span>
-        <input id="apiBaseInput" type="url" placeholder="https://api.example.com or http://127.0.0.1:8001" />
-      </label>
-      <button class="button secondary" type="submit">Save API URL</button>
-      <button class="button ghost" type="button" id="clearApiButton">Use demo mode</button>
-      <div class="api-status" id="apiStatus">Demo mode: no backend URL configured.</div>
-      <div class="library-summary" id="librarySummary">Library not loaded.</div>
-      <div class="library-matches" id="libraryMatches"></div>
-    </form>
-  `;
-  document.querySelector(".feature-strip").after(panel);
-  apiInput = panel.querySelector("#apiBaseInput");
-  apiStatus = panel.querySelector("#apiStatus");
-  librarySummary = panel.querySelector("#librarySummary");
-  libraryMatches = panel.querySelector("#libraryMatches");
-  panel.querySelector("#apiForm").addEventListener("submit", (event) => {
-    event.preventDefault();
-    const nextApi = cleanApiBase(apiInput.value);
-    if (nextApi) {
-      localStorage.setItem(API_STORAGE_KEY, nextApi);
-      state.apiBase = nextApi;
+const readFileAsDataUrl = (file) =>
+  new Promise((resolve, reject) => {
+    if (!file) {
+      resolve(null);
+      return;
     }
-    loadBackend();
-  });
-  panel.querySelector("#clearApiButton").addEventListener("click", () => {
-    localStorage.removeItem(API_STORAGE_KEY);
-    state.apiBase = "";
-    state.apiOnline = false;
-    state.options = null;
-    state.library = null;
-    state.subjectTopics = { ...fallbackSubjectTopics };
-    setFallbackControls();
-    updateConnectionStatus("Demo mode: backend disabled.", "offline");
-  });
-};
-
-const updateConnectionStatus = (message, mode = "offline") => {
-  if (!apiStatus) return;
-  apiStatus.textContent = message;
-  apiStatus.classList.toggle("online", mode === "online");
-  apiStatus.classList.toggle("offline", mode !== "online");
-  if (librarySummary && mode !== "online") {
-    librarySummary.textContent = "Library not loaded. Configure the API to search the full worksheet library.";
-    libraryMatches.replaceChildren();
-  }
-};
-
-const setSubjectOptions = (subjects = Object.keys(state.subjectTopics)) => {
-  subjectSelect.replaceChildren(
-    ...subjects.filter(Boolean).map((subject) => {
-      const option = document.createElement("option");
-      option.value = subject;
-      option.textContent = subject;
-      return option;
-    }),
-  );
-  if (!subjects.includes(subjectSelect.value)) {
-    subjectSelect.value = subjects.includes("Mathematics") ? "Mathematics" : subjects[0] || "";
-  }
-};
-
-const setTopicOptions = () => {
-  const topics = state.subjectTopics[subjectSelect.value] || [];
-  createOptions(document.querySelector("#topicOptions"), topics);
-  if (topics.length && !topics.includes(topicInput.value)) {
-    topicInput.value = topics[0];
-  }
-};
-
-const setFallbackControls = () => {
-  createOptions(document.querySelector("#syllabusOptions"), fallbackSyllabi);
-  createOptions(document.querySelector("#yearOptions"), fallbackYears);
-  setSubjectOptions(Object.keys(state.subjectTopics));
-  setTopicOptions();
-};
-
-const applyBackendOptions = (options) => {
-  const topicalSubjects = Array.isArray(options?.topical?.subjects) ? options.topical.subjects : [];
-  const libraryFacets = options?.library?.facets || {};
-  const syllabi = [
-    ...(Array.isArray(libraryFacets.syllabus) ? libraryFacets.syllabus.map((item) => item.label) : []),
-    "Cambridge IGCSE",
-  ];
-  const years = new Set(fallbackYears);
-  const subjectTopics = {};
-
-  topicalSubjects.forEach((subject) => {
-    if (Array.isArray(subject.years)) subject.years.forEach((year) => years.add(String(year)));
-    const topics = Array.isArray(subject.topicPacks) ? subject.topicPacks : [];
-    subjectTopics[subject.label] = topics.map((topic) => topic.title).filter(Boolean);
-    topics.forEach((topic) => {
-      if (topic.title && topic.id) state.topicIdByTitle.set(`${subject.label}::${topic.title}`, topic.id);
+    if (file.size > MAX_UPLOAD_BYTES) {
+      reject(new Error(`${file.name} is too large. Keep uploads under 12 MB.`));
+      return;
+    }
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      resolve({
+        name: file.name,
+        type: file.type || "application/octet-stream",
+        size: file.size,
+        dataUrl: reader.result,
+      });
     });
+    reader.addEventListener("error", () => reject(new Error(`Could not read ${file.name}.`)));
+    reader.readAsDataURL(file);
   });
 
-  const librarySubjects = Array.isArray(libraryFacets.subject)
-    ? libraryFacets.subject.map((item) => item.label).filter(Boolean)
-    : [];
-  librarySubjects.forEach((subject) => {
-    if (!subjectTopics[subject]) subjectTopics[subject] = fallbackSubjectTopics[subject] || [];
-  });
+const fillSelect = (select, items, placeholder = "Select") => {
+  select.innerHTML = "";
+  const first = document.createElement("option");
+  first.value = "";
+  first.textContent = placeholder;
+  first.disabled = true;
+  first.selected = true;
+  select.appendChild(first);
 
-  state.subjectTopics = Object.keys(subjectTopics).length ? subjectTopics : { ...fallbackSubjectTopics };
-  createOptions(document.querySelector("#syllabusOptions"), [...new Set(syllabi.filter(Boolean))]);
-  createOptions(document.querySelector("#yearOptions"), [...years].sort((a, b) => Number(b) - Number(a)));
-  setSubjectOptions(Object.keys(state.subjectTopics));
-  setTopicOptions();
-};
-
-const renderLibraryMatches = (items = []) => {
-  if (!libraryMatches) return;
-  libraryMatches.replaceChildren(
-    ...items.slice(0, 6).map((item) => {
-      const href = resolveApiUrl(item.localUrl || item.url || item.sources_url || "");
-      const node = document.createElement(href ? "a" : "span");
-      node.className = "library-match";
-      if (href) {
-        node.href = href;
-        node.target = "_blank";
-        node.rel = "noreferrer";
+  items.forEach((item) => {
+    const option = document.createElement("option");
+    if (typeof item === "string") {
+      option.value = item;
+      option.textContent = item;
+    } else {
+      option.value = item.value;
+      option.textContent = item.label;
+      if (item.dataset) {
+        Object.entries(item.dataset).forEach(([key, value]) => {
+          option.dataset[key] = value;
+        });
       }
-      node.textContent = item.title || item.filename || "Library item";
-      return node;
-    }),
-  );
-};
-
-const refreshLibraryMatches = async () => {
-  if (!state.apiOnline) return;
-  const query = new URLSearchParams({
-    limit: "12",
-    syllabus: syllabusInput.value,
-    subject: subjectSelect.value,
-    topic: topicInput.value,
+    }
   });
-  try {
-    const data = await apiJson(`/api/worksheets/library?${query.toString()}`, { method: "GET" });
-    renderLibraryMatches(data.items || []);
-  } catch {
-    renderLibraryMatches([]);
+};
+
+const setBackendStatus = (online) => {
+  backendReachable = online;
+  if (online) {
+    backendStatus.textContent = `AAutograder bridge: ${API_BASE} (online)`;
+    backendStatus.classList.add("online");
+    backendStatus.classList.remove("offline");
+  } else {
+    backendStatus.textContent = "Backend offline — running demo mode";
+    backendStatus.classList.add("offline");
+    backendStatus.textContent = "AAutograder bridge offline - running demo mode";
+    backendStatus.classList.remove("online");
   }
 };
 
-const loadBackend = async () => {
-  if (apiInput) apiInput.value = state.apiBase;
-  if (!state.apiBase) {
-    updateConnectionStatus("Demo mode: no backend URL configured.", "offline");
-    setFallbackControls();
-    return;
+const buildCatalogFromOptions = (payload) => {
+  const next = structuredClone(fallbackCatalog);
+  const facets = payload?.library?.facets || {};
+  if (Array.isArray(payload?.topical?.subjects) && payload.topical.subjects.length) {
+    next["Cambridge IGCSE"] = {
+      IGCSE: Object.fromEntries(
+        payload.topical.subjects.map((subject) => [
+          subject.label,
+          (subject.topicPacks || []).map((pack) => ({
+            value: pack.title,
+            label: pack.title,
+            dataset: { topicId: pack.id || "" },
+          })),
+        ])
+      ),
+    };
   }
 
-  updateConnectionStatus(`Connecting to ${state.apiBase}...`, "offline");
-  try {
-    const [health, options, library] = await Promise.all([
-      apiJson("/health", { method: "GET" }),
-      apiJson("/api/worksheets/options", { method: "GET" }),
-      apiJson("/api/worksheets/library?limit=12", { method: "GET" }),
-    ]);
-    state.apiOnline = true;
-    state.options = options;
-    state.library = library;
-    applyBackendOptions(options);
-    updateConnectionStatus(`Connected to ${health.name || "worksheet API"} at ${state.apiBase}.`, "online");
-    librarySummary.textContent = `Library loaded: ${library.count || 0} indexed files. Showing closest matches below.`;
-    renderLibraryMatches(library.items || []);
-  } catch (error) {
-    state.apiOnline = false;
-    updateConnectionStatus(`Could not reach API: ${error.message}`, "offline");
-    setFallbackControls();
+  Object.keys(facets).forEach((syllabus) => {
+    const levelList = facets[syllabus];
+    if (Array.isArray(levelList) && !next[syllabus]) {
+      next[syllabus] = { "Library": Object.fromEntries(levelList.map((lv) => [lv, []])) };
+    }
+  });
+
+  return next;
+};
+
+const fillCascade = () => {
+  fillSelect(syllabusSelect, Object.keys(catalogData), "Select syllabus");
+  fillSelect(levelSelect, []);
+  fillSelect(topicSelect, []);
+  fillSelect(subtopicSelect, []);
+};
+
+const updateLevelOptions = () => {
+  const levels = syllabusSelect.value ? Object.keys(catalogData[syllabusSelect.value] || {}) : [];
+  fillSelect(levelSelect, levels, "Select level");
+  fillSelect(topicSelect, []);
+  fillSelect(subtopicSelect, []);
+};
+
+const updateTopicOptions = () => {
+  const levelMap = catalogData[syllabusSelect.value] || {};
+  const topics = levelSelect.value ? Object.keys(levelMap[levelSelect.value] || {}) : [];
+  fillSelect(topicSelect, topics, "Select topic");
+  fillSelect(subtopicSelect, []);
+};
+
+const updateSubtopicOptions = () => {
+  const levels = catalogData[syllabusSelect.value] || {};
+  const topics = levels[levelSelect.value] || {};
+  const subtopics = topicSelect.value ? topics[topicSelect.value] || [] : [];
+  fillSelect(subtopicSelect, subtopics, "Select subtopic");
+};
+
+const renderCatalog = () => {
+  const nodes = [];
+  Object.entries(catalogData).forEach(([syllabus, levels]) => {
+    const node = document.createElement("div");
+    node.className = "catalog-item";
+    node.innerHTML = `<strong>${syllabus}</strong>`;
+    Object.entries(levels).forEach(([level, topics]) => {
+      const row = document.createElement("div");
+      row.style.marginTop = "0.35rem";
+      row.innerHTML = `<span class="hint">${level}</span>`;
+      const list = document.createElement("ul");
+      list.style.margin = "0.3rem 0 0 1rem";
+      Object.entries(topics).forEach(([topic, subtopics]) => {
+        const item = document.createElement("li");
+        const listText = Array.isArray(subtopics)
+          ? `${topic} (${subtopics.slice(0, 6).join(", ")})`
+          : String(topic);
+        item.textContent = listText;
+        list.appendChild(item);
+      });
+      row.appendChild(list);
+      node.appendChild(row);
+    });
+    nodes.push(node);
+  });
+
+  if (latestLibraryItems.length) {
+    const resNode = document.createElement("div");
+    resNode.className = "catalog-item";
+    resNode.innerHTML = `<strong>Recent library matches</strong>`;
+    const list = document.createElement("ul");
+    list.style.margin = "0.3rem 0 0 1rem";
+    latestLibraryItems.slice(0, 10).forEach((item) => {
+      const row = document.createElement("li");
+      row.textContent = `${item.title} (${item.kind || "resource"})`;
+      list.appendChild(row);
+    });
+    resNode.appendChild(list);
+    nodes.push(resNode);
   }
+
+  catalogEl.replaceChildren(...nodes);
 };
 
-const getQuestionType = () => {
-  const selected = document.querySelector('input[name="questionType"]:checked');
-  return selected ? selected.value : "MCQ";
-};
-
-const updateMarksRule = () => {
-  const marks = Number(marksInput.value);
-  const type = getQuestionType();
-  marksOutput.textContent = `${marks} marks`;
-  if (type === "MCQ") {
-    ruleNote.textContent = `MCQ rule: ${marks} marks creates ${marks} MCQs because every MCQ is worth 1 mark.`;
-    return;
+const setMode = (mode) => {
+  currentMode = mode;
+  modeButtons.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.mode === mode);
+  });
+  scoreWrap.hidden = mode !== "mark";
+  markingFields.hidden = mode !== "mark";
+  if (mode === "create") {
+    submitBtn.textContent = "Generate worksheet";
   }
-  const estimatedQuestions = Math.max(1, Math.ceil(marks / 4));
-  ruleNote.textContent = `Open-ended mode: ${marks} marks creates about ${estimatedQuestions} longer questions, with marks split by working and final answers.`;
+  if (mode === "learn") {
+    submitBtn.textContent = "Start learning journey";
+  }
+  if (mode === "mark") {
+    submitBtn.textContent = "Get mark feedback";
+  }
+  resultEl.innerHTML = `<p class="muted">Mode: ${mode}</p>`;
 };
 
-const getSampleLinks = (subject) => {
-  if (subject === "Mathematics") return sampleLinks.Mathematics;
-  if (["Physics", "Chemistry", "Biology"].includes(subject)) return sampleLinks.Science;
-  return sampleLinks.Mathematics;
-};
-
-const buildWorksheetPayload = () => {
-  const subject = subjectSelect.value;
-  const topic = topicInput.value.trim() || "Selected topic";
-  const type = getQuestionType();
-  const marks = Number(marksInput.value);
-  const questionCount = type === "MCQ" ? marks : Math.max(1, Math.ceil(marks / 4));
-  const syllabusYear = Number(yearInput.value) || undefined;
-  const topicId = state.topicIdByTitle.get(`${subject}::${topic}`) || "";
+const asPayload = () => {
+  const fileInput = document.getElementById("uploadFile");
+  const file = fileInput.files[0];
+  const selectedSubtopic = subtopicSelect.options[subtopicSelect.selectedIndex];
   return {
-    syllabus: syllabusInput.value.trim() || "Cambridge IGCSE",
-    curriculum: syllabusInput.value.trim() || "Cambridge IGCSE",
-    year: syllabusYear,
-    syllabusYear,
-    level: syllabusInput.value.toLowerCase().includes("igcse") ? "IGCSE" : "",
-    subject,
-    topic,
-    subtopic: topic,
-    officialTopic: topic,
-    topicId,
-    worksheetType: type,
-    answerFormat: type,
-    component: type === "MCQ" ? "2" : undefined,
-    marks,
-    targetMarks: marks,
-    questionCount,
-    itemCount: questionCount,
-    description: `Generate a ${type} worksheet for ${subject} ${topic}.`,
+    sourceType: "ic-educate-standalone",
+    syllabus: syllabusSelect.value,
+    curriculum: syllabusSelect.value,
+    level: levelSelect.value,
+    subject: topicSelect.value,
+    topic: topicSelect.value,
+    subtopic: subtopicSelect.value,
+    topicId: selectedSubtopic && selectedSubtopic.dataset ? selectedSubtopic.dataset.topicId : "",
+    description: descriptionInput.value.trim(),
+    questionCount: Number(questionCountSelect.value),
+    answerFormat: document.getElementById("format").value,
+    score: Number(document.getElementById("score").value || 0),
+    rubric: rubricTextInput.value.trim(),
+    deadline: null,
+    uploadedAsset: file ? { name: file.name, type: file.type || "application/octet-stream", size: file.size } : null,
   };
 };
 
-const outputLinkCandidates = (output = {}) => [
-  ["Worksheet PDF", output.pdfUrlAbsolute || output.pdfPathLocalUrl || output.pdfUrl],
-  ["Worksheet preview", output.htmlUrlAbsolute || output.htmlUrl || output.htmlPathLocalUrl],
-  ["Mark scheme PDF", output.markSchemePdfUrlAbsolute || output.markSchemePdfPathLocalUrl || output.markSchemePdfUrl],
-  ["Sources", output.sourcesMdUrlAbsolute || output.sourcesMdPathLocalUrl || output.sourcesMdUrl],
-  ["Source CSV", output.sourcesCsvUrlAbsolute || output.sourcesCsvPathLocalUrl || output.sourcesCsvUrl],
-  ["Worksheet JSON", output.jsonUrlAbsolute || output.jsonUrl || output.jsonPathLocalUrl],
-].filter(([, url]) => Boolean(url));
+const asMarkingPayload = async (payload) => {
+  const paperFile = document.getElementById("uploadFile").files[0];
+  const rubricFile = document.getElementById("rubricFile").files[0];
+  if (!paperFile) {
+    throw new Error("Upload a completed paper before requesting AAutograder feedback.");
+  }
+  const [uploadedFile, rubricFilePayload] = await Promise.all([
+    readFileAsDataUrl(paperFile),
+    readFileAsDataUrl(rubricFile),
+  ]);
+  return {
+    ...payload,
+    title: payload.description || "IC Educate marking request",
+    createdAt: new Date().toISOString(),
+    uploadedFile,
+    rubricFile: rubricFilePayload,
+    markScheme: payload.rubric,
+  };
+};
 
-const renderOutputLinks = (links) => {
-  if (!links.length) return '<span class="output-pill">No output links returned</span>';
-  return links
-    .map(([label, url]) => `<a href="${escapeHtml(resolveApiUrl(url))}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`)
+const renderLinks = (output = {}) => {
+  const candidates = [
+    ["Worksheet", output.pdfPathLocalUrl || output.htmlUrl || output.pdfUrlAbsolute || output.htmlUrlAbsolute],
+    ["Answer key", output.answerKeyLocalUrl || output.answerKey || output.answer_key],
+    ["Sources", output.sourcesMdPathLocalUrl || output.sourcesCsvPathLocalUrl],
+  ].filter(([, url]) => Boolean(url));
+  if (!candidates.length) {
+    return '<span class="muted">No output link returned.</span>';
+  }
+  return candidates
+    .map(([title, url]) => `<a href="${url}" target="_blank" rel="noreferrer">${title}</a>`)
+    .join(" ");
+};
+
+const renderGeneratedWorksheet = (payload) => {
+  const output = payload.result || payload.output || {};
+  resultEl.innerHTML = `
+    <p><strong>${payload.title || "Worksheet generated"}</strong></p>
+    <p class="hint">Mode: ${payload.mode || "create"}</p>
+    <div class="result-links">${renderLinks(output)}</div>
+    <div class="result-links">
+      <span class="chip">Syllabus: ${payload.request?.syllabus || asPayload().syllabus}</span>
+      <span class="chip">Topic: ${payload.request?.topic || asPayload().topic}</span>
+      <span class="chip">Questions: ${payload.request?.questionCount || asPayload().questionCount}</span>
+    </div>
+    <h3>Matched library</h3>
+    <ul>
+      ${(payload.libraryMatches || []).slice(0, 6).map((item) => `<li>${item.title}</li>`).join("") || "<li class='muted'>No matches found.</li>"}
+    </ul>
+  `;
+};
+
+const renderLearningJourney = (payload) => {
+  const checklist = payload.checklist || [];
+  const sections = payload.lesson?.sections || [];
+  const quiz = payload.quiz?.questions || payload.quiz || [];
+  const worksheetResult = payload.worksheet?.result || {};
+
+  const journeyHtml = checklist
+    .map(
+      (step, index) => `
+      <li class="journey-step ${step.status === "done" ? "done" : ""}">
+        <span class="step-dot">${index + 1}</span>
+        <span><strong>${step.title || step}</strong><small>${step.type || "duo mode"} · ${step.xp || 0} XP</small></span>
+      </li>
+    `
+    )
     .join("");
-};
 
-const renderBackendWorksheet = (record, payload) => {
-  const result = record.result || record;
-  const output = result.output || {};
-  const links = outputLinkCandidates(output);
-  const matches = record.libraryMatches || result.libraryMatches || [];
-  generationOutput.innerHTML = `
-    <div class="generated-card">
-      <div>
-        <span class="generated-title">${escapeHtml(result.title || `${payload.subject} ${payload.topic} worksheet`)}</span>
-        <p class="feedback-copy">
-          Backend mode: ${escapeHtml(record.mode || result.mode || "worksheet-api")} - ${escapeHtml(payload.syllabus)} - ${escapeHtml(payload.worksheetType)} - ${payload.targetMarks} marks
-        </p>
-      </div>
-      <div class="output-links" aria-label="Generated worksheet links">${renderOutputLinks(links)}</div>
-      <div class="output-links" aria-label="Generation details">
-        <span class="output-pill">${escapeHtml(matches.length)} matched library source${matches.length === 1 ? "" : "s"}</span>
-        <span class="output-pill">${payload.worksheetType === "MCQ" ? "MCQ component requested" : "Open-ended topical paper requested"}</span>
-      </div>
-    </div>
-  `;
-  renderLibraryMatches(matches);
-};
+  const lessonHtml = sections
+    .map((sec) => `<article class="lesson-card"><h3>${sec.title}</h3><p>${sec.body || sec}</p></article>`)
+    .join("");
 
-const renderDemoWorksheet = (payload) => {
-  const links = getSampleLinks(payload.subject);
-  const htmlUrl = `${pathPrefix}${links.html}`;
-  const pdfUrl = `${pathPrefix}${links.pdf}`;
+  const questionList = (quiz?.questions || quiz)
+    .map((q, i) => `<article class="quiz-card"><h3>Q${i + 1}. ${q.prompt || q}</h3><p>${q.explanation || ""}</p></article>`)
+    .join("");
 
-  generationOutput.innerHTML = `
-    <div class="generated-card">
-      <div>
-        <span class="generated-title">${escapeHtml(payload.subject)} ${escapeHtml(payload.topic)} worksheet</span>
-        <p class="feedback-copy">
-          Demo mode - ${escapeHtml(payload.syllabus)} - ${payload.year || "selected year"} - ${escapeHtml(payload.worksheetType)} - ${payload.targetMarks} marks - ${payload.questionCount} question${payload.questionCount === 1 ? "" : "s"}
-        </p>
-      </div>
-      <div class="output-links" aria-label="Generated worksheet links">
-        <a href="${htmlUrl}" target="_blank" rel="noreferrer">Open worksheet preview</a>
-        <a href="${pdfUrl}" target="_blank" rel="noreferrer">Download worksheet PDF</a>
-        <a href="${htmlUrl}" target="_blank" rel="noreferrer">Open answer link</a>
-      </div>
-      <div class="output-links" aria-label="Generation details">
-        <span class="output-pill">Demo output only</span>
-        <span class="output-pill">${payload.worksheetType === "MCQ" ? "1 mark per MCQ enforced" : "Open-ended mark split estimated"}</span>
-      </div>
-    </div>
+  resultEl.innerHTML = `
+    <p><strong>${payload.title || "Learning journey created"}</strong></p>
+    <p class="hint">${payload.lesson?.objective || ""}</p>
+    <div class="hint">Total XP: ${(checklist || []).reduce((sum, item) => sum + Number(item.xp || 0), 0)} XP</div>
+    <ol class="journey-list">${journeyHtml}</ol>
+    <h3>Lesson</h3>
+    <div class="lesson-grid">${lessonHtml}</div>
+    <h3>Workbook to practice</h3>
+    <div class="result-links">${renderLinks(worksheetResult.output || {})}</div>
+    <h3>Quiz</h3>
+    <div class="quiz-grid">${questionList}</div>
   `;
 };
 
-const renderGeneratedWorksheet = async (event) => {
-  event.preventDefault();
-  const payload = buildWorksheetPayload();
-  generationOutput.innerHTML = `<p class="feedback-copy">Generating worksheet...</p>`;
-  if (!state.apiOnline) {
-    renderDemoWorksheet(payload);
-    return;
-  }
+const renderMarkFeedback = (payload) => {
+  const maxScore = Number(payload.maxScore || payload.max_score || 20);
+  const score = Number(payload.score || payload.totalScore || payload.total_score || 0);
+  const questionScores = payload.questionScores || payload.question_scores || [];
+  const warnings = payload.warnings || [];
+  const provider = payload.provider ? `<span class="chip">Provider: ${escapeHtml(payload.provider)}</span>` : "";
+  const reviewChip = payload.needsReview ? `<span class="chip warn">Needs review</span>` : "";
+  const questionHtml = questionScores
+    .map((item) => {
+      const question = escapeHtml(item.question || item.question_label || "Question");
+      const itemScore = escapeHtml(item.score ?? 0);
+      const itemMax = escapeHtml(item.max_score ?? item.maxScore ?? 0);
+      const comment = escapeHtml(item.comment || item.feedback || "");
+      const uncertain = item.uncertain ? `<span class="mini-chip warn">uncertain</span>` : "";
+      return `
+        <li class="question-row">
+          <span><strong>${question}</strong>${uncertain}</span>
+          <span class="question-score">${itemScore}/${itemMax}</span>
+          <p>${comment || "No comment returned."}</p>
+        </li>
+      `;
+    })
+    .join("");
+  const warningHtml = warnings.length
+    ? `<h3>Warnings</h3><ul>${warnings.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+    : "";
 
-  try {
-    const record = await apiJson("/api/worksheets/generate", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    renderBackendWorksheet(record, payload);
-  } catch (error) {
-    generationOutput.innerHTML = `
-      <div class="generated-card">
-        <span class="generated-title">Backend generation failed</span>
-        <p class="feedback-copy">${escapeHtml(error.message)}. Falling back to demo links.</p>
-      </div>
-    `;
-    renderDemoWorksheet(payload);
-  }
-};
-
-const renderBackendFeedback = (result) => {
-  const prompts = Array.isArray(result.nextPrompts) && result.nextPrompts.length
-    ? result.nextPrompts
-    : [
-        "Would you wanna do a quiz worksheet to practice your mistakes?",
-        "Would you want to practice another topic?",
-      ];
-  const questionFeedback = Array.isArray(result.questions) ? result.questions : [];
-  feedbackOutput.innerHTML = `
-    <div class="feedback-card">
-      <div>
-        <span class="feedback-score">${escapeHtml(result.awardedMarks ?? "--")} / ${escapeHtml(result.totalMarks ?? "--")}</span>
-        <p class="feedback-copy">${escapeHtml(result.overallFeedback || "Marking complete. Review the feedback below.")}</p>
-      </div>
-      <ul class="feedback-list">
-        ${
-          questionFeedback.length
-            ? questionFeedback.map((item) => `<li>${escapeHtml(item.feedback || "Review this answer.")}</li>`).join("")
-            : "<li>Review method, wording, and final answer precision.</li>"
-        }
-      </ul>
-      <div class="prompt-actions" aria-label="Next prompts">
-        ${prompts.map((prompt) => `<button type="button">${escapeHtml(prompt)}</button>`).join("")}
-      </div>
+  resultEl.innerHTML = `
+    <p><strong>Marking and feedback</strong></p>
+    <div class="result-links">
+      <span class="chip">Status: ${escapeHtml(payload.status || "Generated")}</span>
+      <span class="chip">Score: ${escapeHtml(score)}/${escapeHtml(maxScore)}</span>
+      ${provider}
+      ${reviewChip}
     </div>
+    <h3>Teacher-style notes</h3>
+    <pre>${escapeHtml(payload.feedback || payload.notes || "")}</pre>
+    <h3>Question marks</h3>
+    <ul class="question-list">
+      ${questionHtml || "<li class='muted'>No question-level marks returned.</li>"}
+    </ul>
+    <h3>What to fix next</h3>
+    <ul>
+      ${(payload.fixPoints || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("") || "<li class='muted'>No specific weakness found.</li>"}
+    </ul>
+    <h3>Follow-up action</h3>
+    <p>${escapeHtml(payload.followUp || "Upload a corrected version for another review.")}</p>
+    ${warningHtml}
   `;
 };
 
-const renderDemoFeedback = () => {
-  feedbackOutput.innerHTML = `
-    <div class="feedback-card">
-      <div>
-        <span class="feedback-score">4 / 5</span>
-        <p class="feedback-copy">
-          Good method recognition. The answer shows the main rearrangement step, but the final response
-          should include a clearer method line, final statement, and a quick substitution check.
-        </p>
-      </div>
-      <ul class="feedback-list">
-        <li>Keep the working visible: move constants first, then divide both sides.</li>
-        <li>State the final answer clearly, for example: x = 6.</li>
-        <li>Check by substituting the answer into the original equation.</li>
-      </ul>
-      <div class="prompt-actions" aria-label="Next prompts">
-        <button type="button">Would you wanna do a quiz worksheet to practice your mistakes?</button>
-        <button type="button">Would you want to practice another topic?</button>
-      </div>
-    </div>
-  `;
-};
-
-const renderFeedback = async (event) => {
-  event.preventDefault();
-  const markScheme = document.querySelector("#markScheme").value.trim();
-  const answer = document.querySelector("#studentAnswer").value.trim();
-  const payload = {
-    syllabus: syllabusInput.value,
-    year: Number(yearInput.value) || undefined,
-    subject: subjectSelect.value,
-    topic: topicInput.value,
-    worksheetType: "Open-ended",
-    questions: [
-      {
-        question: markScheme || "Question block",
-        correctAnswer: markScheme,
-        studentAnswer: answer,
-        maxMarks: 5,
-      },
-    ],
+const simulateWorksheet = (payload, mode) => {
+  const safeTopic = payload.subtopic || payload.topic || "topic";
+  const id = `${mode}-${Date.now()}`;
+  const title = `${payload.level} ${payload.syllabus}: ${safeTopic}`;
+  const output = {
+    pdfUrlAbsolute: "#",
+    htmlUrlAbsolute: "#",
+    answerKeyPdfUrlAbsolute: "#",
   };
-
-  feedbackOutput.innerHTML = `<p class="feedback-copy">Marking answer...</p>`;
-  if (!state.apiOnline) {
-    renderDemoFeedback();
-    return;
+  if (mode === "learn") {
+    return {
+      id,
+      title: `${title} learning path`,
+      lesson: {
+        objective: `Understand ${safeTopic} quickly and apply to exam-style questions.`,
+        sections: [
+          { title: "Learn", body: `Core ideas and key formulas for ${safeTopic}.` },
+          { title: "Practice", body: "Try recall, application, and method-check exercises." },
+          { title: "Consolidate", body: "Use a self-check loop for errors and gaps." },
+        ],
+      },
+      checklist: [
+        { title: "Watch intro", xp: 10, status: "done", type: "lesson" },
+        { title: "Read examples", xp: 20, status: "done", type: "lesson" },
+        { title: "Take quiz", xp: 30, status: "ready", type: "quiz" },
+      ],
+      quiz: {
+        title: `Quick ${safeTopic} Quiz`,
+        questions: [
+          { prompt: `What is the most important rule for ${safeTopic}?`, explanation: "Use the exact formula and units." },
+          { prompt: `When does ${safeTopic} commonly appear in exam questions?`, explanation: "Context determines method." },
+          { prompt: `Choose the best revision approach for ${safeTopic}.`, explanation: "Use examples + mixed questions." },
+        ],
+      },
+      worksheet: {
+        result: {
+          output,
+        },
+      },
+      request: payload,
+      libraryMatches: [],
+      mode: "learn",
+    };
   }
 
+  return {
+    id,
+    title,
+    mode: "create",
+    request: payload,
+    libraryMatches: [],
+    result: { output },
+  };
+};
+
+const simulateMarking = (payload) => {
+  const score = Number(payload.score || 0);
+  const weak = [];
+  if (score < 12) weak.push("Work through one example for every question.");
+  if (score < 15) weak.push("Show one method line for all calculations.");
+  if (score < 18) weak.push("Check units and final answer precision.");
+  return {
+    id: `feedback-${Date.now()}`,
+    status: "simulated_feedback",
+    score,
+    feedback: `Good attempt on ${payload.topic || "this topic"}. Strength is shown in planning; focus on method explanation and review of weak steps.`,
+    fixPoints: weak.length ? weak : ["Keep practicing one mixed-topic worksheet this week."],
+    followUp: "Try the generated practice worksheet and take the next quiz to lock this topic.",
+    request: payload,
+  };
+};
+
+const callBackend = async (endpoint, payload) => {
+  const response = await fetch(`${API_BASE}${endpoint}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(body.error || `HTTP ${response.status}`);
+  }
+  return body;
+};
+
+const loadBackendCatalog = async () => {
   try {
-    const result = await apiJson("/api/worksheets/mark", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    renderBackendFeedback(result);
+    const [optionsResponse, libraryResponse] = await Promise.all([
+      fetch(`${API_BASE}/api/worksheets/options`),
+      fetch(`${API_BASE}/api/worksheets/library?limit=20`),
+    ]);
+    if (!optionsResponse.ok || !libraryResponse.ok) throw new Error("API status error");
+
+    const optionsPayload = await optionsResponse.json();
+    const libraryPayload = await libraryResponse.json();
+    catalogData = buildCatalogFromOptions(optionsPayload);
+    latestLibraryItems = libraryPayload.items || [];
+    setBackendStatus(true);
+  } catch {
+    catalogData = structuredClone(fallbackCatalog);
+    latestLibraryItems = [];
+    setBackendStatus(false);
+  }
+  fillCascade();
+  renderCatalog();
+};
+
+const onSubmit = async (event) => {
+  event.preventDefault();
+  const payload = asPayload();
+
+  submitBtn.disabled = true;
+  const message =
+    currentMode === "learn"
+      ? "Preparing learning journey..."
+      : currentMode === "mark"
+        ? "Preparing mark feedback..."
+        : "Generating worksheet...";
+  resultEl.innerHTML = `<p class="muted">${message}</p>`;
+
+  try {
+    if (currentMode === "mark") {
+      const requestPayload = await asMarkingPayload(payload);
+      if (backendReachable) {
+        const data = await callBackend("/api/platform/teacher-feedback", requestPayload);
+        renderMarkFeedback(data);
+      } else {
+        renderMarkFeedback(simulateMarking(requestPayload));
+      }
+      return;
+    }
+
+    const endpoint = currentMode === "learn" ? "/api/learn/journey" : "/api/worksheets/generate";
+    if (backendReachable) {
+      const generated = await callBackend(endpoint, payload);
+      if (currentMode === "learn") {
+        renderLearningJourney(generated);
+      } else {
+        renderGeneratedWorksheet(generated);
+      }
+      return;
+    }
+
+    const local = simulateWorksheet(payload, currentMode);
+    if (currentMode === "learn") {
+      renderLearningJourney(local);
+    } else {
+      renderGeneratedWorksheet(local);
+    }
   } catch (error) {
-    feedbackOutput.innerHTML = `<p class="feedback-copy">Backend marking failed: ${escapeHtml(error.message)}. Showing demo feedback.</p>`;
-    renderDemoFeedback();
+    if (currentMode === "mark") {
+      renderMarkFeedback({
+        status: backendReachable ? "aautograder_error" : "demo_mode_error",
+        score: payload.score || 0,
+        maxScore: 20,
+        feedback: backendReachable
+          ? `AAutograder could not mark this paper yet: ${error.message}`
+          : `Bridge is offline, so this is demo feedback. ${error.message}`,
+        fixPoints: backendReachable
+          ? ["Check API keys, upload format, and OCR readability, then retry."]
+          : simulateMarking(payload).fixPoints,
+        followUp: backendReachable
+          ? "Fix the bridge/provider issue, then submit the same completed paper again."
+          : "Start the AAutograder IC Educate bridge, then submit again for real marking.",
+        warnings: [error.message],
+      });
+      return;
+    }
+    const local = simulateWorksheet(payload, currentMode);
+    if (currentMode === "learn") {
+      renderLearningJourney(local);
+    } else {
+      renderGeneratedWorksheet({
+        ...local,
+        result: { output: { output: "", pdfUrlAbsolute: "#", htmlUrlAbsolute: "#", markScheme: "#" } },
+      });
+    }
+    resultEl.innerHTML += `<p class="hint">Backend error: ${error.message}. Switched to demo mode output.</p>`;
+  } finally {
+    submitBtn.disabled = false;
   }
 };
 
-insertConnectionPanel();
-state.apiBase = getConfiguredApiBase();
-if (apiInput) apiInput.value = state.apiBase;
-setFallbackControls();
-updateMarksRule();
-loadBackend();
+modeButtons.forEach((button) => {
+  button.addEventListener("click", () => setMode(button.dataset.mode));
+});
+syllabusSelect.addEventListener("change", updateLevelOptions);
+levelSelect.addEventListener("change", updateTopicOptions);
+topicSelect.addEventListener("change", updateSubtopicOptions);
+worksheetForm.addEventListener("submit", onSubmit);
 
-subjectSelect.addEventListener("change", () => {
-  setTopicOptions();
-  refreshLibraryMatches();
-});
-topicInput.addEventListener("change", refreshLibraryMatches);
-topicInput.addEventListener("input", () => {
-  window.clearTimeout(topicInput.dataset.timer);
-  topicInput.dataset.timer = window.setTimeout(refreshLibraryMatches, 300);
-});
-syllabusInput.addEventListener("change", refreshLibraryMatches);
-yearInput.addEventListener("change", refreshLibraryMatches);
-marksInput.addEventListener("input", updateMarksRule);
-document.querySelectorAll('input[name="questionType"]').forEach((input) => {
-  input.addEventListener("change", updateMarksRule);
-});
-worksheetForm.addEventListener("submit", renderGeneratedWorksheet);
-markingForm.addEventListener("submit", renderFeedback);
+setMode("create");
+loadBackendCatalog();
