@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HK Property Agent Licence Setup</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --surface2: #eef3f8;
+      --ink: #17212f;
+      --muted: #5f6e80;
+      --line: #d9e1eb;
+      --blue: #1f6fd1;
+      --green: #16825a;
+      --gold: #a66b00;
+      --red: #b03a2e;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    a { color: var(--blue); }
+
+    .wrap {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: .95rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 10px;
+      background: var(--surface);
+    }
+
+    .hero {
+      padding: 28px 0 20px;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 850px;
+      color: var(--muted);
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .metric,
+    .panel,
+    .task,
+    .route {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .metric {
+      padding: 14px;
+      min-height: 104px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .84rem;
+      margin-bottom: 6px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.25rem;
+    }
+
+    .notice {
+      border-left: 4px solid var(--gold);
+      background: #fff8eb;
+      padding: 14px 16px;
+      margin: 18px 0 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      color: #4b350c;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 26px 0 12px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.45rem;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .route {
+      padding: 18px;
+    }
+
+    .route h3,
+    .panel h3,
+    .task h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .route p,
+    .panel p,
+    .task p {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--surface2);
+      color: var(--ink);
+      font-size: .86rem;
+      font-weight: 700;
+      margin: 2px 6px 2px 0;
+    }
+
+    .badge.green { background: #e7f6ef; color: var(--green); }
+    .badge.blue { background: #e8f1fd; color: var(--blue); }
+
+    .panels {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+    }
+
+    .panel {
+      padding: 18px;
+    }
+
+    .task-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .task {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+    }
+
+    .task input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--green);
+    }
+
+    .task.done {
+      background: #f3fbf7;
+      border-color: #ccebdd;
+    }
+
+    .task small {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .link-card {
+      display: block;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      text-decoration: none;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .link-card span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      min-width: 220px;
+    }
+
+    .bar {
+      position: relative;
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--line);
+      overflow: hidden;
+    }
+
+    .bar span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      background: var(--green);
+      transition: width .2s ease;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+      background: var(--surface2);
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: .9rem;
+      padding: 26px 0 38px;
+    }
+
+    @media (max-width: 860px) {
+      .summary-grid,
+      .routes,
+      .panels,
+      .links {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 6px;
+      }
+
+      .task {
+        grid-template-columns: 28px 1fr;
+      }
+
+      .task small {
+        grid-column: 2;
+        white-space: normal;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">Property Agent Setup</div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Rental shortlist</a>
+        <a href="marketing-agency.html">Marketing agency setup</a>
+        <a href="https://www.eaa.org.hk/en-us/Licensing/Licensing" target="_blank" rel="noreferrer">EAA licensing</a>
+        <a href="https://eaa.org.hk/en-us/Examination/Exam" target="_blank" rel="noreferrer">EAA exams</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">Hong Kong licence setup</div>
+      <h1>Your first property-agent licence path.</h1>
+      <p>
+        Start with a Salesperson's Licence if you want to join an agency and begin doing estate agency work.
+        Use the Estate Agent's Licence route only if you want the higher licence or plan to control/run an agency business.
+      </p>
+
+      <div class="summary-grid" aria-label="Key requirements">
+        <div class="metric"><span>Minimum age</span><strong>18+</strong></div>
+        <div class="metric"><span>Education</span><strong>Form 5 or equivalent</strong></div>
+        <div class="metric"><span>Exam validity</span><strong>Apply within 12 months</strong></div>
+        <div class="metric"><span>Best first route</span><strong>SQE + Salesperson's Licence</strong></div>
+      </div>
+
+      <div class="notice">
+        Estate agency work in Hong Kong normally requires a valid EAA licence. The EAA states that unlicensed practice can be an offence.
+        If you prefer a marketing-agency model, keep your work to advertising/content/lead systems for licensed agents and avoid handling property introductions, viewings, negotiations, or transaction documents.
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Choose Your Route</h2>
+          <p>The salesperson route is the practical entry point. The estate agent route gives more authority but has a broader exam.</p>
+        </div>
+      </div>
+
+      <div class="routes">
+        <article class="route">
+          <h3>Salesperson's Licence</h3>
+          <p>Use this if you want to work for a licensed estate agency and learn listings, viewings, tenancy, and sale workflows.</p>
+          <span class="badge green">Recommended first</span>
+          <span class="badge">SQE exam</span>
+          <span class="badge">Licence: HK$1,280 / 12 months</span>
+        </article>
+
+        <article class="route">
+          <h3>Estate Agent's Licence (Individual)</h3>
+          <p>Use this if you want the higher licence, may manage/control agency work, or later apply for business particulars.</p>
+          <span class="badge blue">Higher licence</span>
+          <span class="badge">EAQE exam</span>
+          <span class="badge">Licence: HK$2,010 / 12 months</span>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Setup Checklist</h2>
+          <p>Tick items as you complete them. Progress is saved in this browser.</p>
+        </div>
+        <div class="progress" aria-live="polite">
+          <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+          <strong id="progressText">0/8</strong>
+        </div>
+      </div>
+
+      <div class="task-list">
+        <article class="task">
+          <input type="checkbox" id="task-education" />
+          <div>
+            <h3>Confirm education proof</h3>
+            <p>Prepare Form 5 or equivalent proof, such as school certificate or accepted examination/qualification evidence.</p>
+          </div>
+          <small>Before exam</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-route" />
+          <div>
+            <h3>Pick SQE or EAQE</h3>
+            <p>Choose SQE for salesperson only. Choose EAQE if you want eligibility for either estate agent or salesperson licence.</p>
+          </div>
+          <small>Decision</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-register" />
+          <div>
+            <h3>Register with PEAK Exam Centre</h3>
+            <p>Registration is first come, first served. Computer-based SQE registration is online only.</p>
+          </div>
+          <small>Exam booking</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-study" />
+          <div>
+            <h3>Study the EAA materials</h3>
+            <p>Read the exam handbook, syllabus, Code of Ethics, practice circulars, and EAA study guide sections.</p>
+          </div>
+          <small>2-6 weeks</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-exam" />
+          <div>
+            <h3>Pass the qualifying exam</h3>
+            <p>Keep the result slip. The licence application must be made within 12 months of the result slip date.</p>
+          </div>
+          <small>Exam day</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-docs" />
+          <div>
+            <h3>Prepare licence application documents</h3>
+            <p>Prepare ID, education proof, result slip, application form, declarations, photo, and the correct fee.</p>
+          </div>
+          <small>After pass</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-apply" />
+          <div>
+            <h3>Submit the EAA licence application</h3>
+            <p>Apply online where eligible, or submit the completed application with supporting documents and payment.</p>
+          </div>
+          <small>Within 12 months</small>
+        </article>
+
+        <article class="task">
+          <input type="checkbox" id="task-agency" />
+          <div>
+            <h3>Join an agency and start compliant work</h3>
+            <p>For salesperson route, work under a licensed estate agent. Do not market yourself as licensed until the licence is granted.</p>
+          </div>
+          <small>After approval</small>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Current Cost Snapshot</h2>
+          <p>Amounts below are from EAA pages checked in May 2026. Reconfirm before payment.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>12 months</th>
+              <th>24 months</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Salesperson's Licence</td>
+              <td>HK$1,280</td>
+              <td>HK$2,510</td>
+              <td>For working as salesperson of a licensed estate agent.</td>
+            </tr>
+            <tr>
+              <td>Estate Agent's Licence (Individual)</td>
+              <td>HK$2,010</td>
+              <td>HK$3,930</td>
+              <td>Higher individual licence.</td>
+            </tr>
+            <tr>
+              <td>SQE exam</td>
+              <td>HK$650</td>
+              <td>Not applicable</td>
+              <td>Salespersons Qualifying Examination.</td>
+            </tr>
+            <tr>
+              <td>EAQE exam</td>
+              <td>HK$900</td>
+              <td>Not applicable</td>
+              <td>Estate Agents Qualifying Examination.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Near-Term Exam Planning</h2>
+          <p>Based on the EAA timetable visible in May 2026. Dates can fill or change, so verify on EAA/PEAK before acting.</p>
+        </div>
+      </div>
+
+      <div class="panels">
+        <article class="panel">
+          <h3>Practical next move</h3>
+          <p>
+            If you are starting from zero, prepare for the next available SQE seat, then apply for the Salesperson's Licence.
+            If you want the higher route, watch the EAQE registration window and make sure you have enough study time.
+          </p>
+          <span class="badge green">First target: SQE</span>
+          <span class="badge">Then licence application</span>
+          <span class="badge">Then agency interview</span>
+        </article>
+
+        <article class="panel">
+          <h3>Business note</h3>
+          <p>
+            If you later open your own estate agency business, an individual licence alone is not enough.
+            You will also need the correct business setup and EAA statement of particulars of business for each place of business and business name.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Official Links</h2>
+          <p>Use these pages as the source of truth for rules, forms, fees, and exam dates.</p>
+        </div>
+      </div>
+
+      <div class="links">
+        <a class="link-card" href="https://www.eaa.org.hk/en-us/Licensing/Licensing-requirements" target="_blank" rel="noreferrer">
+          <strong>Licensing requirements</strong>
+          <span>Age, education, exam, and fit-and-proper requirements.</span>
+        </a>
+        <a class="link-card" href="https://www.eaa.org.hk/en-us/Licensing/Application-procedure" target="_blank" rel="noreferrer">
+          <strong>Application procedure</strong>
+          <span>How EAA processes first-time licence applications.</span>
+        </a>
+        <a class="link-card" href="https://www.eaa.org.hk/en-us/Licensing/Licence-fees" target="_blank" rel="noreferrer">
+          <strong>Licence fees</strong>
+          <span>Current licence, replacement, amendment, and business statement fees.</span>
+        </a>
+        <a class="link-card" href="https://eaa.org.hk/en-us/Examination/Exam" target="_blank" rel="noreferrer">
+          <strong>Examination overview</strong>
+          <span>SQE and EAQE format, route differences, and result validity.</span>
+        </a>
+        <a class="link-card" href="https://www.eaa.org.hk/en-us/Examination/Registration-details-post-registration-matters" target="_blank" rel="noreferrer">
+          <strong>Exam registration</strong>
+          <span>Registration windows, exam fees, PEAK Exam Centre details, and result timing.</span>
+        </a>
+        <a class="link-card" href="https://www.eaa.org.hk/en-us/Examination/Preparing-for-qualifying-examinations" target="_blank" rel="noreferrer">
+          <strong>Exam preparation</strong>
+          <span>EAA materials for study, including practice circulars and study guide references.</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    This page is a planning aid, not legal advice. Always confirm current requirements with the Estate Agents Authority before registering or applying.
+  </footer>
+
+  <script>
+    const checkboxes = Array.from(document.querySelectorAll('.task input[type="checkbox"]'));
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('progressBar');
+    const storageKey = 'hk-agent-licence-checklist';
+
+    function readProgress() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function writeProgress() {
+      const data = {};
+      checkboxes.forEach((checkbox) => {
+        data[checkbox.id] = checkbox.checked;
+      });
+      localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    function updateProgress() {
+      const done = checkboxes.filter((checkbox) => checkbox.checked).length;
+      const total = checkboxes.length;
+      progressText.textContent = `${done}/${total}`;
+      progressBar.style.width = `${Math.round((done / total) * 100)}%`;
+      checkboxes.forEach((checkbox) => {
+        checkbox.closest('.task').classList.toggle('done', checkbox.checked);
+      });
+    }
+
+    const saved = readProgress();
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = Boolean(saved[checkbox.id]);
+      checkbox.addEventListener('change', () => {
+        writeProgress();
+        updateProgress();
+      });
+    });
+    updateProgress();
+  </script>
+</body>
+</html>

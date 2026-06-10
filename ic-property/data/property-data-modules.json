@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-06-10",
+  "market": "Hong Kong residential property",
+  "note": "Product data roadmap for buyer, renter, and investor decisions. Live listing data is refreshed locally; official data modules should be automated next.",
+  "modules": [
+    {
+      "id": "listing_history",
+      "label": "Listing history",
+      "category": "Live listing intelligence",
+      "priority": "must_have",
+      "status": "live_local",
+      "whyImportant": "First-seen, last-seen, price-change, image-change, and removed-listing signals let users find fresh opportunities and avoid stale posts.",
+      "chart": "New vs seen-again listings, price changes, removed candidates",
+      "currentSource": "data/listing-history.json",
+      "nextStep": "Run the refresh daily and preserve at least 90 days of history."
+    },
+    {
+      "id": "rent_per_sqft",
+      "label": "Rent per square foot",
+      "category": "Rental affordability",
+      "priority": "must_have",
+      "status": "live_local",
+      "whyImportant": "Monthly rent alone hides tiny units. Rent per square foot makes compact, expensive, and better-value units easier to compare.",
+      "chart": "Rent per sq ft by budget bucket and listing",
+      "currentSource": "28Hse listing refresh",
+      "nextStep": "Split saleable area and gross area so users know whether comparisons are apples-to-apples."
+    },
+    {
+      "id": "rvd_rental_index",
+      "label": "RVD rental index",
+      "category": "Official market baseline",
+      "priority": "must_have",
+      "status": "ready_to_connect",
+      "whyImportant": "A shortlist can be noisy. The official rental index shows whether the wider rental market is rising, flat, or weakening.",
+      "chart": "Private domestic rental index over time",
+      "currentSource": "Rating and Valuation Department Property Market Statistics",
+      "sourceUrl": "https://www.rvd.gov.hk/en/publications/property_market_statistics.html",
+      "nextStep": "Download or scrape the RVD table monthly and store a normalized JSON series."
+    },
+    {
+      "id": "rvd_price_index",
+      "label": "RVD price index",
+      "category": "Buyer and investor baseline",
+      "priority": "must_have",
+      "status": "ready_to_connect",
+      "whyImportant": "Buyers and investors need price trend context before trusting a listing price or sales comp.",
+      "chart": "Private domestic price index over time",
+      "currentSource": "Rating and Valuation Department Property Market Statistics",
+      "sourceUrl": "https://www.rvd.gov.hk/en/publications/property_market_statistics.html",
+      "nextStep": "Add district/class filters where official table granularity supports it."
+    },
+    {
+      "id": "yield",
+      "label": "Gross and net yield",
+      "category": "Investment return",
+      "priority": "must_have",
+      "status": "ui_estimator_live",
+      "whyImportant": "Target ROI turns a vague property search into a required monthly rent and cost-adjusted return test.",
+      "chart": "Target rent vs actual rent, gross yield, net yield after costs",
+      "currentSource": "User inputs plus live rent shortlist",
+      "nextStep": "Add management fee, rates, vacancy, agency fee, mortgage interest, and stamp duty."
+    },
+    {
+      "id": "land_registry_transactions",
+      "label": "Land Registry transactions",
+      "category": "Liquidity and sales activity",
+      "priority": "must_have_for_buyers",
+      "status": "ready_to_connect",
+      "whyImportant": "Transaction volume shows market liquidity. Thin volume makes valuation and exit harder.",
+      "chart": "Monthly sale/purchase agreements and consideration",
+      "currentSource": "Hong Kong Land Registry monthly statistics",
+      "sourceUrl": "https://www.landreg.gov.hk/",
+      "nextStep": "Normalize monthly sale/purchase statistics and show the latest 12-month trend."
+    },
+    {
+      "id": "stamp_duty",
+      "label": "Stamp duty and cash needed",
+      "category": "Buyer affordability",
+      "priority": "must_have_for_buyers",
+      "status": "ready_to_connect",
+      "whyImportant": "Hong Kong buying decisions can fail on cash needed at completion, not just headline price.",
+      "chart": "Purchase price to stamp duty and upfront cash",
+      "currentSource": "Inland Revenue Department stamp duty guidance",
+      "sourceUrl": "https://www.ird.gov.hk/",
+      "nextStep": "Implement a conservative calculator and label it as an estimate."
+    },
+    {
+      "id": "mortgage",
+      "label": "Mortgage payment and LTV",
+      "category": "Buyer affordability",
+      "priority": "must_have_for_buyers",
+      "status": "ready_to_connect",
+      "whyImportant": "Monthly payment, loan-to-value, down payment, and interest sensitivity determine whether a purchase is realistic.",
+      "chart": "Monthly repayment vs rate, down payment, stress buffer",
+      "currentSource": "HKMA property lending guidance plus lender rate inputs",
+      "sourceUrl": "https://www.hkma.gov.hk/",
+      "nextStep": "Add user-selectable rate, term, LTV, and repayment chart."
+    },
+    {
+      "id": "supply_vacancy",
+      "label": "Supply, completions, vacancy",
+      "category": "Market pressure",
+      "priority": "high_value_later",
+      "status": "ready_to_connect",
+      "whyImportant": "New supply and vacancy pressure can explain why rents or prices may weaken in a district or property class.",
+      "chart": "Completions, stock, vacancy by year/property class",
+      "currentSource": "RVD Hong Kong Property Review and market statistics",
+      "sourceUrl": "https://www.rvd.gov.hk/",
+      "nextStep": "Start with territory-wide private domestic tables, then add district detail if available."
+    },
+    {
+      "id": "mtr_distance",
+      "label": "MTR and commute distance",
+      "category": "Lifestyle and rentability",
+      "priority": "nice_to_have",
+      "status": "not_started",
+      "whyImportant": "Transport access affects renter demand, resale liquidity, and daily quality of life.",
+      "chart": "Distance bands to MTR and key amenities",
+      "currentSource": "Geocoding plus OpenStreetMap or manual station coordinates",
+      "nextStep": "Geocode listing buildings and compute distance to nearest station."
+    }
+  ]
+}

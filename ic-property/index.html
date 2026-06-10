@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wan Chai Rental Candidates</title>
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #fff;
+      --ink: #161a1d;
+      --muted: #626b75;
+      --line: #d8d4ca;
+      --green: #0f6b5a;
+      --gold: #b98322;
+      --danger: #8f3f24;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 24px 0 44px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      padding: 14px 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 8px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: .98;
+      letter-spacing: 0;
+      max-width: 860px;
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .btn.primary {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .status {
+      margin: 18px 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat, .notice, .listing-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .stat { padding: 14px; }
+    .stat strong { display: block; color: var(--green); font-size: 24px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    .notice {
+      margin: 18px 0;
+      padding: 14px;
+      color: #5f4210;
+      background: #fff8e8;
+      border-color: #e2c77f;
+    }
+
+    .notice strong { color: #3e2a08; }
+
+    .decision-panel {
+      margin: 18px 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .decision-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .decision-card h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .decision-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 14px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f1eee7;
+    }
+
+    .segment {
+      min-height: 38px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 850;
+    }
+
+    .segment.active {
+      color: var(--green);
+      background: #fff;
+      box-shadow: 0 1px 8px rgba(34, 43, 40, .08);
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 140px;
+      gap: 10px;
+      align-items: end;
+      margin-top: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 11px;
+      font: inherit;
+      font-weight: 750;
+      text-transform: none;
+    }
+
+    .decision-result {
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .result-tile {
+      min-height: 94px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf7;
+      padding: 12px;
+    }
+
+    .result-tile.wide { grid-column: 1 / -1; }
+
+    .result-tile span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .result-tile strong {
+      display: block;
+      color: var(--ink);
+      font-size: 23px;
+      line-height: 1.1;
+    }
+
+    .result-tile p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .calculator-panel,
+    .modules-panel {
+      margin: 18px 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .module-card {
+      min-height: 180px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf7;
+      padding: 12px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .module-card strong,
+    .module-card span,
+    .module-card small {
+      display: block;
+    }
+
+    .module-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .module-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 24px;
+      border: 1px solid rgba(15, 107, 90, .28);
+      border-radius: 999px;
+      background: rgba(15, 107, 90, .07);
+      color: var(--green);
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .pill.pending {
+      border-color: rgba(185, 131, 34, .34);
+      background: rgba(185, 131, 34, .09);
+      color: #7a5315;
+    }
+
+    .analytics {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .72fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .section-head p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .insight {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf7;
+      padding: 12px;
+      min-height: 86px;
+    }
+
+    .insight span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .insight strong {
+      display: block;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .insight small {
+      display: block;
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .chart {
+      display: grid;
+      gap: 9px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) 36px;
+      gap: 10px;
+      align-items: center;
+      min-height: 30px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .bar-track {
+      height: 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #efede6;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      min-width: 8px;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .bar.empty {
+      min-width: 0;
+      background: transparent;
+    }
+
+    .value-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .value-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfaf7;
+      padding: 10px;
+    }
+
+    .value-item a {
+      color: inherit;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .value-item strong,
+    .value-item span {
+      display: block;
+    }
+
+    .value-item span {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .score {
+      min-width: 54px;
+      text-align: center;
+      border-radius: 999px;
+      background: rgba(15, 107, 90, .1);
+      color: var(--green);
+      font-weight: 850;
+      padding: 7px 9px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .listing-card { overflow: hidden; }
+
+    .listing-photo {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      background: #e3e0d8;
+    }
+
+    .listing-body { padding: 14px; }
+    .listing-body h2 { margin: 0 0 6px; font-size: 20px; }
+    .listing-body p { margin: 0 0 10px; color: var(--muted); }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .meta div {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fbfaf7;
+    }
+
+    .meta span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .meta strong { color: var(--ink); }
+
+    code {
+      background: #ebe7dd;
+      border-radius: 6px;
+      padding: 2px 5px;
+      font-size: .92em;
+    }
+
+    .empty {
+      margin-top: 18px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      color: var(--muted);
+      background: rgba(255,255,255,.55);
+    }
+
+    @media (max-width: 820px) {
+      header { grid-template-columns: 1fr; }
+      .btn-row { justify-content: flex-start; }
+      .status { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .decision-panel { grid-template-columns: 1fr; }
+      .control-grid { grid-template-columns: 1fr; }
+      .calc-grid,
+      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .analytics { grid-template-columns: 1fr; }
+      .insight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .status, .meta { grid-template-columns: 1fr; }
+      h1 { font-size: 36px; }
+      .segmented { grid-template-columns: 1fr; }
+      .decision-result { grid-template-columns: 1fr; }
+      .calc-grid,
+      .module-grid { grid-template-columns: 1fr; }
+      .insight-grid { grid-template-columns: 1fr; }
+      .bar-row { grid-template-columns: 88px minmax(0, 1fr) 30px; }
+    }
+
+    /* UX/UI Pro Max polish pass: real-estate operations page with stronger hierarchy. */
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .84), rgba(243, 246, 244, .96)),
+        var(--bg);
+    }
+
+    .shell {
+      width: min(1220px, calc(100vw - 32px));
+      padding-top: 20px;
+    }
+
+    header {
+      align-items: center;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .98), rgba(241, 248, 246, .9));
+      box-shadow: 0 16px 36px rgba(34, 43, 40, .08);
+    }
+
+    h1 {
+      max-width: 15ch;
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .intro {
+      line-height: 1.6;
+    }
+
+    .btn,
+    .stat,
+    .notice,
+    .decision-card,
+    .listing-card,
+    .meta div,
+    .empty {
+      border-radius: 8px;
+    }
+
+    .btn {
+      min-height: 44px;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      touch-action: manipulation;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(15, 107, 90, .28);
+    }
+
+    .listing-card {
+      box-shadow: 0 12px 30px rgba(34, 43, 40, .07);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(15, 107, 90, .24);
+      box-shadow: 0 18px 38px rgba(34, 43, 40, .11);
+    }
+
+    .listing-photo {
+      background:
+        linear-gradient(135deg, rgba(15, 107, 90, .12), rgba(185, 131, 34, .1)),
+        #e3e0d8;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(15, 107, 90, .32);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 820px) {
+      header {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div class="kicker">IC Property Pipeline - Hong Kong rentals</div>
+        <h1>Find the property numbers that actually matter.</h1>
+        <p class="intro">Start with budget, location, and target return. The dashboard turns live listing candidates into market context, risk flags, and a short "check first" list.</p>
+      </div>
+      <nav class="btn-row" aria-label="Project links">
+        <a class="btn primary" href="social-content-app.html">Open content app</a>
+        <a class="btn" href="marketing-agency.html">Marketing setup</a>
+        <a class="btn" href="license.html">Licence setup</a>
+      </nav>
+    </header>
+
+    <section class="decision-panel" aria-label="Property decision inputs">
+      <div class="decision-card">
+        <h2>Start with three inputs</h2>
+        <p>Keep the first product narrow: location, budget, and the return target. Everything else should explain whether the numbers work.</p>
+        <div class="segmented" role="group" aria-label="Property intent">
+          <button class="segment active" type="button" data-intent="rent">Rent</button>
+          <button class="segment" type="button" data-intent="invest">Invest</button>
+          <button class="segment" type="button" data-intent="buy">Buy to live</button>
+        </div>
+        <div class="control-grid">
+          <label>
+            Location
+            <select id="locationInput">
+              <option value="Wan Chai">Wan Chai</option>
+              <option value="Causeway Bay">Causeway Bay</option>
+              <option value="Central">Central</option>
+              <option value="Kennedy Town">Kennedy Town</option>
+            </select>
+          </label>
+          <label>
+            Budget
+            <input id="budgetInput" inputmode="numeric" value="8000" aria-describedby="budgetHelp" />
+          </label>
+          <label>
+            Target ROI
+            <input id="roiInput" inputmode="decimal" value="4" />
+          </label>
+        </div>
+        <p id="budgetHelp">For rent, budget is monthly HKD. For invest or buy, budget is purchase budget HKD.</p>
+      </div>
+
+      <aside class="decision-card">
+        <div class="decision-result" id="decisionResult">
+          <div class="result-tile">
+            <span>Budget fit</span>
+            <strong id="budgetFit">-</strong>
+            <p id="budgetFitNote">Waiting for listing data.</p>
+          </div>
+          <div class="result-tile">
+            <span>Target rent</span>
+            <strong id="targetRent">-</strong>
+            <p id="targetRentNote">For investment yield checks.</p>
+          </div>
+          <div class="result-tile wide">
+            <span>Decision read</span>
+            <strong id="decisionHeadline">Load the live shortlist first.</strong>
+            <p id="decisionCopy">The first useful product is not another listing page. It is a quick answer: under this budget, in this location, which options deserve attention?</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="calculator-panel" aria-label="Investment calculator">
+      <div class="section-head">
+        <div>
+          <h2>Investment reality check</h2>
+          <p>Fast gross-yield math from user inputs. Costs are estimates until stamp duty, mortgage, rates, and vacancy are connected.</p>
+        </div>
+      </div>
+      <div class="control-grid">
+        <label>
+          Purchase price
+          <input id="purchaseInput" inputmode="numeric" value="5000000" />
+        </label>
+        <label>
+          Monthly rent
+          <input id="monthlyRentInput" inputmode="numeric" value="6500" />
+        </label>
+        <label>
+          Monthly costs
+          <input id="monthlyCostInput" inputmode="numeric" value="1200" />
+        </label>
+      </div>
+      <div class="calc-grid">
+        <div class="result-tile"><span>Gross yield</span><strong id="grossYield">-</strong><p>Annual rent / purchase price.</p></div>
+        <div class="result-tile"><span>Net yield</span><strong id="netYield">-</strong><p>After simple monthly costs.</p></div>
+        <div class="result-tile"><span>Break-even rent</span><strong id="breakEvenRent">-</strong><p>Rent needed for target ROI.</p></div>
+        <div class="result-tile"><span>Gap to target</span><strong id="yieldGap">-</strong><p>Positive means rent clears target.</p></div>
+      </div>
+    </section>
+
+    <section class="status" aria-label="Feed status">
+      <div class="stat"><strong id="count">-</strong><span>loaded candidates</span></div>
+      <div class="stat"><strong id="priceBand">-</strong><span>target rent band</span></div>
+      <div class="stat"><strong id="sourceCount">-</strong><span>source result count</span></div>
+      <div class="stat"><strong id="fetchedAt">-</strong><span>last refresh</span></div>
+    </section>
+
+    <div class="notice">
+      <strong>Posting rule:</strong> use actual listing photos only when the owner/agent has the right to reuse them. Use generated images only for generic explainers, market tips, and branded backgrounds.
+    </div>
+
+    <section class="analytics" aria-label="Market snapshot">
+      <div class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Market snapshot</h2>
+            <p>Computed from the refreshed shortlist, not old hardcoded cards.</p>
+          </div>
+        </div>
+        <div class="insight-grid">
+          <div class="insight"><span>Median rent</span><strong id="medianRent">-</strong><small>shortlist midpoint</small></div>
+          <div class="insight"><span>Median rent / sq ft</span><strong id="medianRentPerSqft">-</strong><small>area basis varies</small></div>
+          <div class="insight"><span>Direct landlord</span><strong id="directLandlordCount">-</strong><small>possible lower friction</small></div>
+          <div class="insight"><span>Subdivided / short-term</span><strong id="riskFlagCount">-</strong><small>needs extra checking</small></div>
+          <div class="insight"><span>New this run</span><strong id="newListingCount">-</strong><small>history signal</small></div>
+          <div class="insight"><span>Price changes</span><strong id="priceChangedCount">-</strong><small>possible negotiation</small></div>
+          <div class="insight"><span>Image changes</span><strong id="imageChangedCount">-</strong><small>condition/update signal</small></div>
+          <div class="insight"><span>Removed/stale</span><strong id="removedCount">-</strong><small>not in shortlist</small></div>
+        </div>
+        <div class="chart" id="priceChart" aria-label="Listing count by rent band"></div>
+      </div>
+
+      <aside class="panel">
+        <div class="section-head">
+          <div>
+            <h2>Check first</h2>
+            <p>Heuristic ranking for renters; confirm every detail.</p>
+          </div>
+        </div>
+        <ul class="value-list" id="valueList"></ul>
+      </aside>
+    </section>
+
+    <section class="modules-panel" aria-label="Property data modules">
+      <div class="section-head">
+        <div>
+          <h2>Property intelligence modules</h2>
+          <p>What should power the product, why it matters, and what still needs to be connected.</p>
+        </div>
+      </div>
+      <div class="module-grid" id="moduleGrid"></div>
+    </section>
+
+    <section id="listings" class="grid" aria-label="Current listing candidates"></section>
+
+    <section class="empty" id="empty" hidden>
+      No refreshed listing data loaded. From the project root, run:
+      <br><br>
+      <code>powershell -ExecutionPolicy Bypass -File .\scripts\refresh-wanchai-listings.ps1</code>
+    </section>
+  </main>
+
+  <script>
+    const listingsEl = document.getElementById("listings");
+    const emptyEl = document.getElementById("empty");
+    const segmentButtons = Array.from(document.querySelectorAll(".segment"));
+    const locationInput = document.getElementById("locationInput");
+    const budgetInput = document.getElementById("budgetInput");
+    const roiInput = document.getElementById("roiInput");
+    const purchaseInput = document.getElementById("purchaseInput");
+    const monthlyRentInput = document.getElementById("monthlyRentInput");
+    const monthlyCostInput = document.getElementById("monthlyCostInput");
+    const appState = {
+      intent: "rent",
+      data: null,
+      listings: [],
+      modules: []
+    };
+
+    function text(value, fallback = "-") {
+      return value === undefined || value === null || value === "" ? fallback : value;
+    }
+
+    function parseNumber(value) {
+      const cleaned = String(value || "").replace(/[^0-9.]/g, "");
+      const number = Number(cleaned);
+      return Number.isFinite(number) ? number : 0;
+    }
+
+    function formatHKD(value) {
+      const number = Number(value || 0);
+      if (!Number.isFinite(number) || number <= 0) return "-";
+      return `HK$${Math.round(number).toLocaleString("en-US")}`;
+    }
+
+    function formatPercent(value) {
+      const number = Number(value || 0);
+      if (!Number.isFinite(number)) return "-";
+      return `${number.toFixed(2)}%`;
+    }
+
+    function escapeHtml(value) {
+      return String(text(value)).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function safeListingUrl(value) {
+      const url = String(value || "");
+      return url.startsWith("https://www.28hse.com/en/rent/apartment/property-") ? url : "#";
+    }
+
+    function setIntent(intent) {
+      appState.intent = intent;
+      segmentButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.intent === intent);
+      });
+      const currentBudget = parseNumber(budgetInput.value);
+      if ((intent === "invest" || intent === "buy") && currentBudget < 100000) {
+        budgetInput.value = "5000000";
+      }
+      if (intent === "rent" && currentBudget > 100000) {
+        budgetInput.value = "8000";
+      }
+      renderDecision();
+    }
+
+    function renderDecision() {
+      const listings = appState.listings;
+      const analytics = appState.data?.analytics || {};
+      const budget = parseNumber(budgetInput.value);
+      const roi = parseNumber(roiInput.value) || 0;
+      const location = locationInput.value || "Wan Chai";
+      const medianRent = Number(analytics.medianRent || 0);
+      const fitListings = listings.filter((listing) => Number(listing.priceNumber || 0) <= budget);
+      const targetRent = budget && roi ? budget * (roi / 100) / 12 : 0;
+      const targetRentMet = listings.filter((listing) => Number(listing.priceNumber || 0) >= targetRent);
+
+      if (appState.intent === "rent") {
+        document.getElementById("budgetFit").textContent = `${fitListings.length}/${listings.length || 0}`;
+        document.getElementById("budgetFitNote").textContent = `${formatHKD(budget)} monthly rent budget in ${location}.`;
+        document.getElementById("targetRent").textContent = roi ? `${roi}% ROI` : "-";
+        document.getElementById("targetRentNote").textContent = "ROI is mainly useful for buy/invest mode.";
+        document.getElementById("decisionHeadline").textContent = fitListings.length
+          ? `${fitListings.length} candidates fit the rent budget.`
+          : "No current shortlist candidates fit this rent budget.";
+        document.getElementById("decisionCopy").textContent = fitListings.length
+          ? "Best next value: show why each fit is cheap or risky: rent/sq ft, direct landlord, short-term terms, subdivided flags, and freshness."
+          : "Useful next value: widen the budget band, add nearby districts, or alert when a new listing appears under budget.";
+        return;
+      }
+
+      if (appState.intent === "invest") {
+        document.getElementById("budgetFit").textContent = `${targetRentMet.length}/${listings.length || 0}`;
+        document.getElementById("budgetFitNote").textContent = `Shortlist rents at or above ${formatHKD(targetRent)} per month.`;
+        document.getElementById("targetRent").textContent = formatHKD(targetRent);
+        document.getElementById("targetRentNote").textContent = `${roi}% gross annual yield on ${formatHKD(budget)}.`;
+        document.getElementById("decisionHeadline").textContent = targetRent && medianRent
+          ? `${formatHKD(targetRent)} target rent vs ${formatHKD(medianRent)} shortlist median.`
+          : "Investment mode needs a target yield and live rental baseline.";
+        document.getElementById("decisionCopy").textContent = "To make this investable, add sales comps, stamp duty, mortgage cost, management fees, rates, vacancy, and price-change history. Rental data alone is not enough.";
+        return;
+      }
+
+      document.getElementById("budgetFit").textContent = "Needs sales comps";
+      document.getElementById("budgetFitNote").textContent = `${formatHKD(budget)} purchase budget in ${location}.`;
+      document.getElementById("targetRent").textContent = formatHKD(targetRent);
+      document.getElementById("targetRentNote").textContent = roi ? `Rent-equivalent target at ${roi}% yield.` : "Optional opportunity-cost yield.";
+      document.getElementById("decisionHeadline").textContent = "Buy-to-live needs affordability, not only yield.";
+      document.getElementById("decisionCopy").textContent = "Add mortgage rate, LTV, stamp duty, monthly repayment, school/transport, building age, maintenance, and resale liquidity before recommending a buy.";
+    }
+
+    function renderCalculator() {
+      const purchasePrice = parseNumber(purchaseInput.value);
+      const monthlyRent = parseNumber(monthlyRentInput.value);
+      const monthlyCost = parseNumber(monthlyCostInput.value);
+      const roi = parseNumber(roiInput.value) || 0;
+      const grossYield = purchasePrice ? (monthlyRent * 12 / purchasePrice) * 100 : 0;
+      const netYield = purchasePrice ? ((monthlyRent - monthlyCost) * 12 / purchasePrice) * 100 : 0;
+      const breakEvenRent = purchasePrice && roi ? purchasePrice * (roi / 100) / 12 : 0;
+      const yieldGap = monthlyRent - breakEvenRent;
+      document.getElementById("grossYield").textContent = formatPercent(grossYield);
+      document.getElementById("netYield").textContent = formatPercent(netYield);
+      document.getElementById("breakEvenRent").textContent = formatHKD(breakEvenRent);
+      document.getElementById("yieldGap").textContent = yieldGap >= 0 ? `+${formatHKD(yieldGap)}` : `-${formatHKD(Math.abs(yieldGap))}`;
+      document.querySelector("#yieldGap + p").textContent = yieldGap >= 0
+        ? "Rent clears the target."
+        : "Rent is below the target.";
+    }
+
+    function renderListing(listing) {
+      const image = listing.image ? `<img class="listing-photo" src="${escapeHtml(listing.image)}" alt="">` : "";
+      return `
+        <article class="listing-card">
+          ${image}
+          <div class="listing-body">
+            <h2>${escapeHtml(text(listing.name, "Wan Chai listing"))}</h2>
+            <p>${escapeHtml(text(listing.highlight || listing.title, "Current listing candidate"))}</p>
+            <div class="meta">
+              <div><span>Rent</span><strong>${escapeHtml(text(listing.price))}</strong></div>
+              <div><span>Size</span><strong>${escapeHtml(text(listing.size, "Confirm"))}</strong></div>
+              <div><span>Rent / sq ft</span><strong>${escapeHtml(text(listing.rentPerSqftLabel, "Confirm"))}</strong></div>
+              <div><span>Value check</span><strong>${escapeHtml(text(listing.valueLabel, "Confirm live"))}</strong></div>
+            </div>
+            <div class="btn-row" style="justify-content:flex-start">
+              <a class="btn primary" href="social-content-app.html">Make post</a>
+              <a class="btn" href="${safeListingUrl(listing.link)}" target="_blank" rel="noreferrer">Open listing</a>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function renderAnalytics(data, listings) {
+      const analytics = data.analytics || {};
+      const medianRent = analytics.medianRentLabel || "-";
+      const medianRentPerSqft = analytics.medianRentPerSqftLabel || "-";
+      const directLandlordCount = Number(analytics.directLandlordCount || 0);
+      const subdividedCount = Number(analytics.subdividedCount || 0);
+      const shortTermCount = Number(analytics.shortTermCount || 0);
+      const riskFlagCount = analytics.riskFlagListingCount === undefined
+        ? subdividedCount + shortTermCount
+        : Number(analytics.riskFlagListingCount || 0);
+      document.getElementById("medianRent").textContent = medianRent;
+      document.getElementById("medianRentPerSqft").textContent = medianRentPerSqft;
+      document.getElementById("directLandlordCount").textContent = directLandlordCount;
+      document.getElementById("riskFlagCount").textContent = `${riskFlagCount}`;
+      document.getElementById("newListingCount").textContent = Number(analytics.newListingCount || 0);
+      document.getElementById("priceChangedCount").textContent = Number(analytics.priceChangedCount || 0);
+      document.getElementById("imageChangedCount").textContent = Number(analytics.imageChangedCount || 0);
+      document.getElementById("removedCount").textContent = Number(analytics.removedFromShortlistCount || 0);
+
+      const buckets = Array.isArray(analytics.priceBuckets) ? analytics.priceBuckets : [];
+      const maxCount = Math.max(1, ...buckets.map((bucket) => Number(bucket.count || 0)));
+      document.getElementById("priceChart").innerHTML = buckets.length ? buckets.map((bucket) => {
+        const count = Number(bucket.count || 0);
+        const width = count ? Math.max(8, Math.round((count / maxCount) * 100)) : 0;
+        const label = escapeHtml(bucket.label || "-");
+        return `
+          <div class="bar-row">
+            <span>${label}</span>
+            <div class="bar-track"><div class="bar${count ? "" : " empty"}" style="width:${width}%"></div></div>
+            <strong>${count}</strong>
+          </div>`;
+      }).join("") : `<div class="empty">No chart data yet. Refresh the listing pipeline.</div>`;
+
+      const ranked = Array.isArray(analytics.topValueListings) && analytics.topValueListings.length
+        ? analytics.topValueListings
+        : listings.slice(0, 3);
+      document.getElementById("valueList").innerHTML = ranked.length ? ranked.map((listing) => `
+        <li class="value-item">
+          <a href="${safeListingUrl(listing.link)}" target="_blank" rel="noreferrer">
+            <strong>${escapeHtml(text(listing.name, "Wan Chai listing"))}</strong>
+            <span>${escapeHtml(text(listing.price))} - ${escapeHtml(text(listing.rentPerSqftLabel, "Confirm area"))} - ${escapeHtml(text(listing.valueLabel, "compare carefully"))}</span>
+          </a>
+          <div class="score">${escapeHtml(text(listing.valueScore, "-"))}</div>
+        </li>`).join("") : `<li class="empty">No ranked candidates yet.</li>`;
+    }
+
+    function renderModules() {
+      const modules = appState.modules;
+      const priorityRank = {
+        must_have: 0,
+        must_have_for_buyers: 1,
+        high_value_later: 2,
+        nice_to_have: 3
+      };
+      const sorted = modules
+        .slice()
+        .sort((a, b) => (priorityRank[a.priority] ?? 9) - (priorityRank[b.priority] ?? 9))
+        .slice(0, 9);
+      document.getElementById("moduleGrid").innerHTML = sorted.length ? sorted.map((module) => {
+        const connected = ["live_local", "ui_estimator_live"].includes(module.status);
+        const sourceLink = module.sourceUrl
+          ? `<a class="btn" href="${escapeHtml(module.sourceUrl)}" target="_blank" rel="noreferrer">Source</a>`
+          : "";
+        return `
+          <article class="module-card">
+            <div class="module-meta">
+              <span class="pill${connected ? "" : " pending"}">${escapeHtml(module.status)}</span>
+              <span class="pill pending">${escapeHtml(module.priority)}</span>
+            </div>
+            <strong>${escapeHtml(module.label)}</strong>
+            <span>${escapeHtml(module.category)}</span>
+            <p>${escapeHtml(module.whyImportant)}</p>
+            <small>${escapeHtml(module.chart)}</small>
+            ${sourceLink}
+          </article>`;
+      }).join("") : `<div class="empty">No module roadmap loaded.</div>`;
+    }
+
+    async function init() {
+      try {
+        const [response, moduleResponse] = await Promise.all([
+          fetch("data/live-wanchai-listings.json", { cache: "no-store" }),
+          fetch("data/property-data-modules.json", { cache: "no-store" })
+        ]);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const moduleData = moduleResponse.ok ? await moduleResponse.json() : { modules: [] };
+        const listings = Array.isArray(data.listings) ? data.listings : [];
+        appState.data = data;
+        appState.listings = listings;
+        appState.modules = Array.isArray(moduleData.modules) ? moduleData.modules : [];
+
+        document.getElementById("count").textContent = listings.length;
+        document.getElementById("priceBand").textContent = `HK$${data.priceMin / 1000}K-${data.priceMax / 1000}K`;
+        document.getElementById("sourceCount").textContent = text(data.resultCount);
+        document.getElementById("fetchedAt").textContent = text(data.fetchedAt).split(" ")[0];
+
+        renderAnalytics(data, listings);
+        renderDecision();
+        renderCalculator();
+        renderModules();
+        listingsEl.innerHTML = listings.map(renderListing).join("");
+        emptyEl.hidden = listings.length > 0;
+      } catch (error) {
+        console.warn(error);
+        emptyEl.hidden = false;
+      }
+    }
+
+    segmentButtons.forEach((button) => {
+      button.addEventListener("click", () => setIntent(button.dataset.intent));
+    });
+    [locationInput, budgetInput, roiInput].forEach((input) => {
+      input.addEventListener("input", renderDecision);
+      input.addEventListener("change", renderDecision);
+    });
+    [purchaseInput, monthlyRentInput, monthlyCostInput, roiInput].forEach((input) => {
+      input.addEventListener("input", renderCalculator);
+      input.addEventListener("change", renderCalculator);
+    });
+    init();
+  </script>
+</body>
+</html>

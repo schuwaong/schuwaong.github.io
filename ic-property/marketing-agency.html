@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Estate Marketing Agency Setup</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --surface2: #edf2f7;
+      --ink: #192331;
+      --muted: #647386;
+      --line: #d8e0ea;
+      --blue: #1d66c1;
+      --green: #127455;
+      --amber: #9a6500;
+      --red: #a33a31;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    a { color: var(--blue); }
+
+    .wrap {
+      width: min(1160px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    nav a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--ink);
+      text-decoration: none;
+      padding: 7px 11px;
+      font-size: .94rem;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .hero {
+      padding: 30px 0 20px;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: .84rem;
+      letter-spacing: .07em;
+    }
+
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 880px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .grid4,
+    .grid3,
+    .grid2 {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card,
+    .panel,
+    .lead-row {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .card,
+    .panel {
+      padding: 16px;
+    }
+
+    .card span {
+      display: block;
+      color: var(--muted);
+      font-size: .84rem;
+      margin-bottom: 6px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 1.15rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 28px 0 12px;
+    }
+
+    .section-head h2,
+    .panel h3 {
+      margin: 0;
+    }
+
+    .section-head h2 {
+      font-size: 1.45rem;
+    }
+
+    .section-head p,
+    .panel p,
+    li {
+      color: var(--muted);
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 650px;
+    }
+
+    .panel h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .panel p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .ok {
+      border-left: 4px solid var(--green);
+      background: #effaf5;
+    }
+
+    .warn {
+      border-left: 4px solid var(--amber);
+      background: #fff8eb;
+    }
+
+    .stop {
+      border-left: 4px solid var(--red);
+      background: #fff1f0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--surface2);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: .85rem;
+      margin: 2px 6px 2px 0;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lead-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .lead-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .lead-row h3 {
+      margin: 0 0 5px;
+      font-size: 1rem;
+    }
+
+    .lead-row p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .lead-row button {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface2);
+      color: var(--ink);
+      cursor: pointer;
+      padding: 7px 10px;
+      align-self: start;
+    }
+
+    .empty {
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--surface);
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: .9rem;
+      padding: 26px 0 38px;
+    }
+
+    @media (max-width: 900px) {
+      .grid4,
+      .grid3,
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .lead-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand">Real Estate Marketing Agency</div>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Rental shortlist</a>
+        <a href="license.html">Licence setup</a>
+        <a href="https://www.ird.gov.hk/eng/tax/bre_abr.htm" target="_blank" rel="noreferrer">Business registration</a>
+        <a href="https://www.eaa.org.hk/en-us/Licensing/Licensing" target="_blank" rel="noreferrer">EAA rules</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">Marketing agency model</div>
+      <h1>Connect property demand to licensed agents without acting as the agent.</h1>
+      <p>
+        Build campaigns, landing pages, content, ads, and client intake systems for licensed real estate agents.
+        Keep negotiations, viewings, agency agreements, property advice, and transaction work with licensed practitioners.
+      </p>
+    </section>
+
+    <section class="grid4" aria-label="Business model summary">
+      <div class="card"><span>Core offer</span><strong>Marketing + qualified enquiries</strong></div>
+      <div class="card"><span>Client</span><strong>Licensed estate agents / agencies</strong></div>
+      <div class="card"><span>Revenue</span><strong>Monthly retainer or ad-service fee</strong></div>
+      <div class="card"><span>Boundary</span><strong>No unlicensed estate agency work</strong></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Allowed vs Risky</h2>
+          <p>The safest model is marketing services for licensed agents, not paid introductions into property transactions.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <article class="panel ok">
+          <h3>Good Marketing Agency Work</h3>
+          <ul>
+            <li>Build websites, landing pages, ads, photos, videos, SEO pages, and social posts.</li>
+            <li>Collect general enquiries and pass them to the licensed agent client.</li>
+            <li>Charge agents fixed marketing retainers, production fees, or ad-management fees.</li>
+            <li>Display the licensed agent's name, licence number, company, and contact path.</li>
+          </ul>
+        </article>
+
+        <article class="panel warn">
+          <h3>Needs Care</h3>
+          <ul>
+            <li>Charging per closed deal, per transaction, or per introduced tenant/buyer may look like estate agency remuneration.</li>
+            <li>Using listing photos, prices, or floor plans without written permission creates IP and accuracy risk.</li>
+            <li>Answering detailed buyer/tenant questions can drift into property advice.</li>
+            <li>Ranking agents or properties can create disclosure and misrepresentation issues.</li>
+          </ul>
+        </article>
+
+        <article class="panel stop">
+          <h3>Do Not Do Without Licence</h3>
+          <ul>
+            <li>Introduce a buyer, tenant, seller, or landlord to a client as a paid business.</li>
+            <li>Arrange viewings, negotiate price/rent, or handle offers.</li>
+            <li>Say you are the agent, broker, or representative for a property transaction.</li>
+            <li>Prepare or arrange signing of tenancy or sale documents.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Operating Model</h2>
+          <p>Position yourself as the marketing supplier. The licensed agent remains responsible for estate agency work.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <article class="panel">
+          <h3>Package 1: Listing Campaign</h3>
+          <p>For one property or one district niche.</p>
+          <span class="badge">Landing page</span>
+          <span class="badge">Ad creatives</span>
+          <span class="badge">Lead form</span>
+          <span class="badge">Weekly report</span>
+        </article>
+
+        <article class="panel">
+          <h3>Package 2: Agent Growth Retainer</h3>
+          <p>Monthly content and enquiry-generation system for a licensed agent or agency.</p>
+          <span class="badge">SEO pages</span>
+          <span class="badge">Short videos</span>
+          <span class="badge">CRM handoff</span>
+          <span class="badge">Analytics</span>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Lead Intake Prototype</h2>
+          <p>This stores sample leads in your browser only. It is for planning your workflow before using a real CRM.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <article class="panel">
+          <h3>Add Enquiry</h3>
+          <form id="leadForm">
+            <label>
+              Name
+              <input id="leadName" required placeholder="Client name" />
+            </label>
+            <label>
+              Contact
+              <input id="leadContact" required placeholder="Phone / WhatsApp / email" />
+            </label>
+            <label>
+              Interest
+              <select id="leadInterest">
+                <option>Rent apartment</option>
+                <option>Buy apartment</option>
+                <option>Sell property</option>
+                <option>Let property</option>
+                <option>Commercial enquiry</option>
+              </select>
+            </label>
+            <label>
+              Area / Budget
+              <input id="leadBudget" placeholder="Wan Chai, HK$8K rent, etc." />
+            </label>
+            <label>
+              Notes for licensed agent
+              <textarea id="leadNotes" placeholder="Keep this factual. Do not negotiate or promise terms."></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="button primary" type="submit">Save lead</button>
+              <button class="button" id="clearLeads" type="button">Clear demo leads</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="panel">
+          <h3>Handoff Queue</h3>
+          <div id="leadList" class="lead-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Setup Checklist</h2>
+          <p>Use this before taking money from agents or agencies.</p>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <article class="panel">
+          <h3>Business Basics</h3>
+          <ul>
+            <li>Choose sole proprietor, partnership, or limited company.</li>
+            <li>Apply for Hong Kong business registration within one month of commencing business if operating in HK.</li>
+            <li>Open a separate business bank/payment account.</li>
+            <li>Prepare service agreement, invoice template, privacy notice, and cancellation terms.</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h3>Compliance Basics</h3>
+          <ul>
+            <li>Work only for verified licensed agents or agencies.</li>
+            <li>Put the licensed agent's details on property marketing pages.</li>
+            <li>Get written permission for every listing, image, video, and floor plan.</li>
+            <li>Use fixed marketing/service fees instead of transaction commission unless a lawyer confirms the structure.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Client Pitch</h2>
+          <p>Simple positioning for outreach to licensed agents.</p>
+        </div>
+      </div>
+
+      <article class="panel">
+        <p>
+          I help licensed Hong Kong property agents turn listings and district expertise into cleaner landing pages,
+          short-form content, and trackable enquiry funnels. You remain the licensed agent handling agency work,
+          client advice, viewings, negotiations, and transaction documents. I handle the marketing system and reporting.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Sources: EAA guidance on estate agency work and licensing, plus IRD business registration guidance. This page is a planning aid, not legal advice.
+  </footer>
+
+  <script>
+    const form = document.getElementById('leadForm');
+    const leadList = document.getElementById('leadList');
+    const clearLeads = document.getElementById('clearLeads');
+    const storageKey = 'real-estate-marketing-demo-leads';
+
+    function readLeads() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function writeLeads(leads) {
+      localStorage.setItem(storageKey, JSON.stringify(leads));
+    }
+
+    function renderLeads() {
+      const leads = readLeads();
+      if (!leads.length) {
+        leadList.innerHTML = '<div class="empty">No demo leads saved yet.</div>';
+        return;
+      }
+
+      leadList.innerHTML = leads.map((lead, index) => `
+        <div class="lead-row">
+          <div>
+            <h3>${escapeHtml(lead.name)} - ${escapeHtml(lead.interest)}</h3>
+            <p>${escapeHtml(lead.contact)} | ${escapeHtml(lead.budget || 'No budget noted')}</p>
+            <p>${escapeHtml(lead.notes || 'No notes')}</p>
+          </div>
+          <button type="button" data-index="${index}">Remove</button>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const leads = readLeads();
+      leads.unshift({
+        name: document.getElementById('leadName').value.trim(),
+        contact: document.getElementById('leadContact').value.trim(),
+        interest: document.getElementById('leadInterest').value,
+        budget: document.getElementById('leadBudget').value.trim(),
+        notes: document.getElementById('leadNotes').value.trim(),
+        createdAt: new Date().toISOString()
+      });
+      writeLeads(leads);
+      form.reset();
+      renderLeads();
+    });
+
+    leadList.addEventListener('click', (event) => {
+      if (!event.target.matches('button[data-index]')) return;
+      const leads = readLeads();
+      leads.splice(Number(event.target.dataset.index), 1);
+      writeLeads(leads);
+      renderLeads();
+    });
+
+    clearLeads.addEventListener('click', () => {
+      writeLeads([]);
+      renderLeads();
+    });
+
+    renderLeads();
+  </script>
+</body>
+</html>
