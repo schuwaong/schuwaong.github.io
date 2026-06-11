@@ -45,10 +45,18 @@ const markingFields = document.getElementById("markingFields");
 const questionCountSelect = document.getElementById("questionCount");
 const descriptionInput = document.getElementById("description");
 const rubricTextInput = document.getElementById("rubricText");
+const tutorImageInput = document.getElementById("tutorImage");
+const tutorGoalInput = document.getElementById("tutorGoal");
+const tutorLaunchBtn = document.getElementById("tutorLaunchBtn");
+const tutorPreviewBtn = document.getElementById("tutorPreviewBtn");
+const tutorCopyBtn = document.getElementById("tutorCopyBtn");
+const tutorResultEl = document.getElementById("tutorResult");
 
 const MAX_UPLOAD_BYTES = 12 * 1024 * 1024;
 
 let currentMode = "create";
+let latestTutorPrompt = "";
+let latestGeminiUrl = "https://gemini.google.com/app";
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -80,6 +88,28 @@ const readFileAsDataUrl = (file) =>
     reader.addEventListener("error", () => reject(new Error(`Could not read ${file.name}.`)));
     reader.readAsDataURL(file);
   });
+
+const copyTextToClipboard = async (text) => {
+  if (!text) return false;
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const helper = document.createElement("textarea");
+  helper.value = text;
+  helper.setAttribute("readonly", "");
+  helper.style.position = "fixed";
+  helper.style.opacity = "0";
+  document.body.appendChild(helper);
+  helper.select();
+  const success = document.execCommand("copy");
+  helper.remove();
+  if (!success) {
+    throw new Error("Clipboard copy is not available in this browser.");
+  }
+  return true;
+};
 
 const fillSelect = (select, items, placeholder = "Select") => {
   select.innerHTML = "";
@@ -114,7 +144,6 @@ const setBackendStatus = (online) => {
     backendStatus.classList.add("online");
     backendStatus.classList.remove("offline");
   } else {
-    backendStatus.textContent = "Backend offline — running demo mode";
     backendStatus.classList.add("offline");
     backendStatus.textContent = "AAutograder bridge offline - running demo mode";
     backendStatus.classList.remove("online");
@@ -326,7 +355,7 @@ const renderLearningJourney = (payload) => {
       (step, index) => `
       <li class="journey-step ${step.status === "done" ? "done" : ""}">
         <span class="step-dot">${index + 1}</span>
-        <span><strong>${step.title || step}</strong><small>${step.type || "duo mode"} · ${step.xp || 0} XP</small></span>
+        <span><strong>${step.title || step}</strong><small>${step.type || "duo mode"} - ${step.xp || 0} XP</small></span>
       </li>
     `
     )
@@ -512,6 +541,113 @@ const loadBackendCatalog = async () => {
   renderCatalog();
 };
 
+const asTutorPayload = async ({ launchGemini }) => {
+  const imageFile = tutorImageInput.files[0];
+  if (!imageFile) {
+    throw new Error("Snap or upload a question image first.");
+  }
+
+  return {
+    ...asPayload(),
+    title: descriptionInput.value.trim() || "IC Educate tutor request",
+    description: descriptionInput.value.trim(),
+    extraInstructions: tutorGoalInput.value.trim(),
+    uploadedImage: await readFileAsDataUrl(imageFile),
+    copyToClipboard: launchGemini,
+    launchGemini,
+    pasteIntoGemini: launchGemini,
+  };
+};
+
+const renderTutorResult = (payload, { previewOnly = false } = {}) => {
+  latestTutorPrompt = payload.prompt || "";
+  latestGeminiUrl = payload.gemini?.url || latestGeminiUrl;
+  tutorCopyBtn.hidden = !latestTutorPrompt;
+
+  const statusChips = [
+    payload.ocrProvider ? `<span class="chip">OCR: ${escapeHtml(payload.ocrProvider)}</span>` : "",
+    payload.clipboardCopied ? `<span class="chip">Clipboard ready</span>` : "",
+    payload.gemini?.opened ? `<span class="chip">Gemini opened</span>` : "",
+    previewOnly ? `<span class="chip">Preview only</span>` : "",
+  ]
+    .filter(Boolean)
+    .join("");
+
+  const warnings = Array.isArray(payload.warnings) ? payload.warnings.filter(Boolean) : [];
+  const warningHtml = warnings.length
+    ? `<h3>Warnings</h3><ul>${warnings.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+    : "";
+  const defaultNote = previewOnly
+    ? "Prompt preview ready. Review it below, then use Copy latest prompt when you want to send it to Gemini."
+    : payload.clipboardCopied
+      ? "If Gemini opened without the prompt already in the text box, press Ctrl+V once. The prompt is still on your clipboard."
+      : "Gemini opened, but clipboard copy did not finish cleanly. Review the prompt below and copy it manually.";
+  const note = escapeHtml(previewOnly ? defaultNote : payload.clipboardCopied ? payload.note || defaultNote : defaultNote);
+
+  tutorResultEl.innerHTML = `
+    <p><strong>${previewOnly ? "Tutor prompt preview" : "Tutor prompt ready"}</strong></p>
+    <div class="result-links">${statusChips || '<span class="muted">No status returned.</span>'}</div>
+    <p class="tutor-note">${note}</p>
+    <div class="result-links">
+      <a href="${escapeHtml(latestGeminiUrl)}" target="_blank" rel="noreferrer">Open Gemini manually</a>
+    </div>
+    <h3>Generated prompt</h3>
+    <pre>${escapeHtml(payload.prompt || "")}</pre>
+    <h3>OCR text</h3>
+    <pre>${escapeHtml(payload.ocrText || "")}</pre>
+    ${warningHtml}
+  `;
+};
+
+const runTutorFlow = async ({ launchGemini }) => {
+  const primaryLabel = "Snap, read, copy and open Gemini";
+  const previewLabel = "Preview prompt only";
+
+  tutorLaunchBtn.disabled = true;
+  tutorPreviewBtn.disabled = true;
+  tutorCopyBtn.disabled = true;
+  tutorLaunchBtn.textContent = launchGemini ? "Reading and opening Gemini..." : primaryLabel;
+  tutorPreviewBtn.textContent = launchGemini ? previewLabel : "Reading photo...";
+  tutorResultEl.innerHTML = `<p class="muted">${launchGemini ? "Reading the photo, building the tutoring prompt, and opening Gemini..." : "Reading the photo and building a tutoring prompt preview..."}</p>`;
+
+  try {
+    const payload = await asTutorPayload({ launchGemini });
+    const response = await callBackend("/api/tutor/snap-to-gemini", payload);
+    renderTutorResult(response, { previewOnly: !launchGemini });
+  } catch (error) {
+    latestTutorPrompt = "";
+    tutorCopyBtn.hidden = true;
+    tutorResultEl.innerHTML = `
+      <p><strong>Tutor flow could not start</strong></p>
+      <p class="muted">${escapeHtml(error.message || "Unknown error")}</p>
+      <p class="hint">Start the local IC Educate bridge if you want OCR and Gemini handoff from the GitHub site.</p>
+    `;
+  } finally {
+    tutorLaunchBtn.disabled = false;
+    tutorPreviewBtn.disabled = false;
+    tutorCopyBtn.disabled = false;
+    tutorLaunchBtn.textContent = primaryLabel;
+    tutorPreviewBtn.textContent = previewLabel;
+  }
+};
+
+const copyLatestTutorPrompt = async () => {
+  if (!latestTutorPrompt) return;
+  const previousText = tutorCopyBtn.textContent;
+  tutorCopyBtn.disabled = true;
+  try {
+    await copyTextToClipboard(latestTutorPrompt);
+    tutorCopyBtn.textContent = "Copied";
+  } catch (error) {
+    tutorResultEl.innerHTML += `<p class="hint">Clipboard copy failed: ${escapeHtml(error.message || "Unknown error")}</p>`;
+  } finally {
+    window.setTimeout(() => {
+      tutorCopyBtn.textContent = previousText;
+      tutorCopyBtn.disabled = false;
+    }, 1200);
+  }
+};
+
 const onSubmit = async (event) => {
   event.preventDefault();
   const payload = asPayload();
@@ -595,6 +731,9 @@ syllabusSelect.addEventListener("change", updateLevelOptions);
 levelSelect.addEventListener("change", updateTopicOptions);
 topicSelect.addEventListener("change", updateSubtopicOptions);
 worksheetForm.addEventListener("submit", onSubmit);
+tutorLaunchBtn.addEventListener("click", () => runTutorFlow({ launchGemini: true }));
+tutorPreviewBtn.addEventListener("click", () => runTutorFlow({ launchGemini: false }));
+tutorCopyBtn.addEventListener("click", copyLatestTutorPrompt);
 
 setMode("create");
 loadBackendCatalog();

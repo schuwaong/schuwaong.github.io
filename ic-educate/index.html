@@ -121,6 +121,45 @@
         </form>
       </section>
 
+      <section class="panel tutor-panel">
+        <div class="tutor-header">
+          <div>
+            <p class="eyebrow">Tutor Flow</p>
+            <h2>Snap a question and hand it to Gemini</h2>
+          </div>
+          <span class="chip ghost">Photo -> OCR -> Prompt -> Gemini</span>
+        </div>
+        <p class="hint">
+          Take a photo of a worksheet, textbook page, or exam question. IC Educate will read
+          the text, build a tutoring prompt, copy it, and open Gemini for you.
+        </p>
+        <div class="tutor-grid">
+          <div class="field">
+            <label for="tutorImage">Snap or upload a question photo</label>
+            <input id="tutorImage" type="file" accept="image/*" capture="environment" />
+            <small class="hint">
+              On phone this opens the camera. On desktop you can upload a screenshot or photo.
+            </small>
+          </div>
+          <div class="field">
+            <label for="tutorGoal">Tutor instructions (optional)</label>
+            <textarea
+              id="tutorGoal"
+              rows="4"
+              placeholder="Example: explain step by step, give hints first, and only show the final answer at the end."
+            ></textarea>
+          </div>
+        </div>
+        <div class="button-row">
+          <button id="tutorLaunchBtn" type="button">Snap, read, copy and open Gemini</button>
+          <button id="tutorPreviewBtn" type="button" class="secondary-btn">Preview prompt only</button>
+          <button id="tutorCopyBtn" type="button" class="secondary-btn" hidden>Copy latest prompt</button>
+        </div>
+        <div id="tutorResult" class="result tutor-result" aria-live="polite">
+          <p class="muted">No tutoring prompt generated yet.</p>
+        </div>
+      </section>
+
       <section class="panel">
         <h2>Result</h2>
         <div id="result" class="result">

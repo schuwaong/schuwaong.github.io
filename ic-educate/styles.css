@@ -110,6 +110,25 @@ h1 {
   background: var(--panel);
 }
 
+.tutor-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.tutor-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(143, 108, 255, 0.08), transparent 42%),
+    radial-gradient(circle at top right, rgba(38, 222, 203, 0.14), transparent 38%);
+  pointer-events: none;
+}
+
+.tutor-panel > * {
+  position: relative;
+}
+
 .mode-switch {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -135,6 +154,13 @@ h1 {
 .worksheet-form {
   margin-top: 1rem;
   display: grid;
+  gap: 0.8rem;
+}
+
+.tutor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 0.8rem;
 }
 
@@ -187,10 +213,30 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.secondary-btn {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
 .grid {
   display: grid;
   gap: 0.8rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tutor-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  margin-top: 0.85rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
 }
 
 .hint {
@@ -219,6 +265,29 @@ button:disabled {
 .result pre {
   white-space: pre-wrap;
   word-break: break-word;
+  max-height: 280px;
+  overflow: auto;
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.tutor-result {
+  margin-top: 0.85rem;
+}
+
+.tutor-result h3 {
+  margin-top: 1rem;
+}
+
+.tutor-note {
+  margin-top: 0.65rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(38, 222, 203, 0.1);
+  border: 1px solid rgba(38, 222, 203, 0.24);
+  color: #dffffa;
 }
 
 .question-list {
@@ -380,10 +449,15 @@ button:disabled {
 
 @media (max-width: 900px) {
   .grid,
+  .tutor-grid,
   .lesson-grid,
   .quiz-grid,
   .mode-switch,
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tutor-header {
+    flex-direction: column;
   }
 }
