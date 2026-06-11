@@ -328,6 +328,11 @@ const renderLinks = (output = {}) => {
 
 const renderGeneratedWorksheet = (payload) => {
   const output = payload.result || payload.output || {};
+  const cacheChip = payload.cacheHit
+    ? `<span class="chip">Saved result reused</span>`
+    : payload.cacheKey
+      ? `<span class="chip">Saved for this subtopic</span>`
+      : "";
   resultEl.innerHTML = `
     <p><strong>${payload.title || "Worksheet generated"}</strong></p>
     <p class="hint">Mode: ${payload.mode || "create"}</p>
@@ -336,11 +341,69 @@ const renderGeneratedWorksheet = (payload) => {
       <span class="chip">Syllabus: ${payload.request?.syllabus || asPayload().syllabus}</span>
       <span class="chip">Topic: ${payload.request?.topic || asPayload().topic}</span>
       <span class="chip">Questions: ${payload.request?.questionCount || asPayload().questionCount}</span>
+      ${cacheChip}
     </div>
     <h3>Matched library</h3>
     <ul>
       ${(payload.libraryMatches || []).slice(0, 6).map((item) => `<li>${item.title}</li>`).join("") || "<li class='muted'>No matches found.</li>"}
     </ul>
+  `;
+};
+
+const renderStudyPack = (payload) => {
+  const notes = payload.notes || {};
+  const lanes = payload.quiz?.lanes || {};
+  const worksheetQuestions = payload.worksheet?.questions || [];
+  const cacheChip = payload.cacheHit
+    ? `<span class="chip">Saved question bank reused</span>`
+    : payload.cacheKey
+      ? `<span class="chip">Question bank saved</span>`
+      : "";
+
+  const noteCards = (notes.noteCards || [])
+    .map(
+      (card) => `
+        <article class="lesson-card">
+          <h3>${escapeHtml(card.title || "Note")}</h3>
+          <p>${escapeHtml(card.body || card.summary || "")}</p>
+        </article>
+      `
+    )
+    .join("");
+
+  const importantPoints = (notes.importantPoints || [])
+    .map((point) => `<li>${escapeHtml(point)}</li>`)
+    .join("");
+
+  const quizHtml = Object.entries(lanes)
+    .map(([lane, items]) => {
+      const questions = (items || [])
+        .map((item, index) => `<article class="quiz-card"><h3>${escapeHtml(lane)} Q${index + 1}. ${escapeHtml(item.prompt || "")}</h3><p>${escapeHtml(item.explanation || item.answer || "")}</p></article>`)
+        .join("");
+      return questions;
+    })
+    .join("");
+
+  const worksheetHtml = worksheetQuestions
+    .map((item, index) => `<li><strong>Q${index + 1}.</strong> ${escapeHtml(item.prompt || item.question || item)}</li>`)
+    .join("");
+
+  resultEl.innerHTML = `
+    <p><strong>${escapeHtml(payload.title || "Study pack generated")}</strong></p>
+    <div class="result-links">
+      <span class="chip">Provider: ${escapeHtml(payload.provider || "AI")}</span>
+      <span class="chip">Questions: ${escapeHtml(payload.quiz?.totalQuestions || 0)}</span>
+      ${cacheChip}
+    </div>
+    <h3>Notes</h3>
+    <div class="lesson-grid">${noteCards || "<p class='muted'>No notes returned.</p>"}</div>
+    <h3>Important points</h3>
+    <ul>${importantPoints || "<li class='muted'>No points returned.</li>"}</ul>
+    <h3>Flashcard / quiz bank</h3>
+    <div class="quiz-grid">${quizHtml || "<p class='muted'>No quiz questions returned.</p>"}</div>
+    <h3>Worksheet practice</h3>
+    <p>${escapeHtml(payload.worksheet?.intro || "")}</p>
+    <ol>${worksheetHtml || "<li class='muted'>No worksheet questions returned.</li>"}</ol>
   `;
 };
 
@@ -675,10 +738,16 @@ const onSubmit = async (event) => {
 
     const endpoint = currentMode === "learn" ? "/api/learn/journey" : "/api/worksheets/generate";
     if (backendReachable) {
-      const generated = await callBackend(endpoint, payload);
       if (currentMode === "learn") {
-        renderLearningJourney(generated);
+        try {
+          const studyPack = await callBackend("/api/study-pack/generate", payload);
+          renderStudyPack(studyPack);
+        } catch (_studyPackError) {
+          const generated = await callBackend(endpoint, payload);
+          renderLearningJourney(generated);
+        }
       } else {
+        const generated = await callBackend(endpoint, payload);
         renderGeneratedWorksheet(generated);
       }
       return;
