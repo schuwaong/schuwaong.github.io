@@ -454,6 +454,149 @@
       margin-top: 14px;
     }
 
+    .planner {
+      margin-top: 28px;
+      padding: 20px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .slot {
+      min-height: 120px;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #f8fbf8;
+      box-shadow: 4px 4px 0 rgba(29, 33, 31, .82);
+      color: var(--ink);
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .slot:nth-child(2n) {
+      background: #fff4c8;
+    }
+
+    .slot:nth-child(3n) {
+      background: #e5f4ef;
+    }
+
+    .slot strong {
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    .slot small {
+      color: #4e5b56;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    .slot:hover,
+    .slot.active {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .planner-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .picker {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbf8;
+    }
+
+    .picker-label {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field span {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .field input {
+      min-height: 46px;
+      padding: 0 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 3px 3px 0 rgba(29, 33, 31, .15);
+      font: inherit;
+    }
+
+    .picker-summary {
+      display: grid;
+      gap: 10px;
+      padding: 2px 0;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: baseline;
+    }
+
+    .summary-line span {
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .summary-line strong {
+      text-align: right;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .planner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
     .choice.bold-yes {
       min-height: 148px;
       background: #ffe8e5;
@@ -508,6 +651,14 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .slot-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .planner-grid {
+        grid-template-columns: 1fr;
+      }
+
       .section-head {
         display: block;
       }
@@ -537,12 +688,17 @@
 
       .visual,
       .choice-grid,
+      .slot-grid,
       .split-actions {
         grid-template-columns: 1fr;
       }
 
       .choice {
         min-height: 150px;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
       }
 
       .response-top {
@@ -639,6 +795,75 @@
       </div>
     </section>
 
+    <section class="planner" id="planner" aria-labelledby="planner-title">
+      <div class="section-head">
+        <h2 id="planner-title">Pick a date and time</h2>
+        <p>Tap a slot, or use the exact fields if you want a cleaner invite.</p>
+      </div>
+      <div class="slot-grid">
+        <button class="slot active" type="button" data-slot="sat-brunch">
+          <strong>Saturday, 11:00 AM</strong>
+          <small>Brunch or a slow coffee start.</small>
+        </button>
+        <button class="slot" type="button" data-slot="tonight-coffee">
+          <strong>Tonight, 7:30 PM</strong>
+          <small>Coffee after the day winds down.</small>
+        </button>
+        <button class="slot" type="button" data-slot="tomorrow-dessert">
+          <strong>Tomorrow, 6:30 PM</strong>
+          <small>Dessert and an easy catch-up.</small>
+        </button>
+        <button class="slot" type="button" data-slot="friday-dinner">
+          <strong>Friday, 7:00 PM</strong>
+          <small>Dinner with no extra drama.</small>
+        </button>
+        <button class="slot" type="button" data-slot="sat-walk">
+          <strong>Saturday, 4:30 PM</strong>
+          <small>Walk, smoothie, or gym-lite energy.</small>
+        </button>
+        <button class="slot" type="button" data-slot="sat-tea">
+          <strong>Saturday, 7:30 PM</strong>
+          <small>Tea, dessert, or a calm evening slot.</small>
+        </button>
+        <button class="slot" type="button" data-slot="sun-gym">
+          <strong>Sunday, 5:00 PM</strong>
+          <small>Gym-lite recharge, then a snack.</small>
+        </button>
+        <button class="slot" type="button" data-slot="nextweek-coffee">
+          <strong>Next week, 6:30 PM</strong>
+          <small>Backup if this week is packed.</small>
+        </button>
+      </div>
+      <div class="planner-grid">
+        <div class="picker">
+          <div class="picker-label">Exact date and time</div>
+          <div class="field-row">
+            <label class="field" for="date-input">
+              <span>Date</span>
+              <input id="date-input" type="date">
+            </label>
+            <label class="field" for="time-input">
+              <span>Time</span>
+              <input id="time-input" type="time">
+            </label>
+          </div>
+        </div>
+        <div class="picker">
+          <div class="picker-label">Current slot</div>
+          <div class="picker-summary" id="slotSummary" aria-live="polite">
+            <div class="summary-line"><span>Day</span><strong id="slot-day">Saturday, 20 Jun</strong></div>
+            <div class="summary-line"><span>Time</span><strong id="slot-time">11:00 AM</strong></div>
+            <div class="summary-line"><span>Vibe</span><strong id="slot-vibe">brunch</strong></div>
+            <div class="summary-line"><span>Backup</span><strong id="slot-backup">Saturday 4:30 PM walk</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="planner-actions">
+        <button class="copy-action" id="shuffle-slot" type="button">Shuffle slot</button>
+        <button class="copy-action" id="reset-slot" type="button">Reset slot</button>
+      </div>
+    </section>
+
     <section class="bold-panel" id="bold-panel" aria-labelledby="bold-title">
       <div class="bold-inner">
         <h2 id="bold-title">If we skip the formal date...</h2>
@@ -661,17 +886,16 @@
     <section class="response" id="response" aria-live="polite">
       <div class="response-top">
         <div>
-          <h2 id="result-title">Waiting for a mission</h2>
-          <p class="status" id="result-status">Pick whatever feels most like you.</p>
+          <h2 id="result-title">Ready to schedule</h2>
+          <p class="status" id="result-status">Pick a slot above and I’ll turn it into a clean invite.</p>
         </div>
         <a class="secondary-action" href="https://bumble.com/app/connections">Open Bumble</a>
       </div>
       <p class="draft" id="draft">
-        I was going to ask properly: would you rather keep chatting first, do dessert after teacher mode,
-        try a gym-lite recharge, or take a raincheck?
+        Choose a day, time, and vibe above. I’ll turn it into a clean invite you can send straight away.
       </p>
       <div class="response-actions">
-        <button class="copy-action" id="copy" type="button">Copy reply</button>
+        <button class="copy-action" id="copy" type="button">Copy invite</button>
         <button class="copy-action" type="button" data-pick="maybe">Raincheck</button>
       </div>
     </section>
@@ -690,16 +914,16 @@
         draft: "Let's keep chatting first. I still owe you a better answer than my weird AI-at-night explanation. What usually recharges you after teaching?"
       },
       date: {
-        title: "Dessert after teacher mode",
-        status: "Low-pressure, public, and easy to adjust.",
-        hash: "dessert-date",
-        draft: "Teacher's orders accepted: I will rest properly. If you are free this week, want to do a low-pressure coffee or dessert date after your teacher day calms down?"
+        title: "Pick a slot",
+        status: "Choose a day, time, and vibe from the schedule board below.",
+        hash: "schedule-board",
+        draft: "Pick a slot below, or use the exact date and time fields if you want to make it more specific."
       },
       gym: {
         title: "Gym-lite recharge",
         status: "Active, but not intense. We are not training for a punishment arc.",
         hash: "gym-lite",
-        draft: "Since you have that extrovert-morning / introvert-night energy, we could do an easy walk or gym-lite smoothie mission. Nothing intense, just a fun recharge."
+        draft: "If you want something movement-friendly, use the schedule board below for a walk, smoothie, or gym-lite plan."
       },
       skip: {
         title: "Skip the formal date",
@@ -725,8 +949,177 @@
     const resultStatus = document.querySelector("#result-status");
     const draft = document.querySelector("#draft");
     const boldPanel = document.querySelector("#bold-panel");
-    const response = document.querySelector("#response");
+    const planner = document.querySelector("#planner");
+    const slotDay = document.querySelector("#slot-day");
+    const slotTime = document.querySelector("#slot-time");
+    const slotVibe = document.querySelector("#slot-vibe");
+    const slotBackup = document.querySelector("#slot-backup");
+    const dateInput = document.querySelector("#date-input");
+    const timeInput = document.querySelector("#time-input");
     const copyButton = document.querySelector("#copy");
+    const shuffleButton = document.querySelector("#shuffle-slot");
+    const resetButton = document.querySelector("#reset-slot");
+    const slotButtons = Array.from(document.querySelectorAll("[data-slot]"));
+    const response = document.querySelector("#response");
+
+    const slotData = {
+      "sat-brunch": {
+        dateMode: { type: "weekday", value: 6 },
+        timeValue: "11:00",
+        timeLabel: "11:00 AM",
+        vibeLabel: "brunch",
+        backupLabel: "Saturday 4:30 PM walk"
+      },
+      "tonight-coffee": {
+        dateMode: { type: "offset", value: 0 },
+        timeValue: "19:30",
+        timeLabel: "7:30 PM",
+        vibeLabel: "coffee",
+        backupLabel: "Tomorrow 6:30 PM dessert"
+      },
+      "tomorrow-dessert": {
+        dateMode: { type: "offset", value: 1 },
+        timeValue: "18:30",
+        timeLabel: "6:30 PM",
+        vibeLabel: "dessert",
+        backupLabel: "Friday 7:00 PM dinner"
+      },
+      "friday-dinner": {
+        dateMode: { type: "weekday", value: 5 },
+        timeValue: "19:00",
+        timeLabel: "7:00 PM",
+        vibeLabel: "dinner",
+        backupLabel: "Saturday 11:00 AM brunch"
+      },
+      "sat-walk": {
+        dateMode: { type: "weekday", value: 6 },
+        timeValue: "16:30",
+        timeLabel: "4:30 PM",
+        vibeLabel: "walk",
+        backupLabel: "Sunday 5:00 PM tea"
+      },
+      "sat-tea": {
+        dateMode: { type: "weekday", value: 6 },
+        timeValue: "19:30",
+        timeLabel: "7:30 PM",
+        vibeLabel: "tea",
+        backupLabel: "Next week 6:30 PM coffee"
+      },
+      "sun-gym": {
+        dateMode: { type: "weekday", value: 0 },
+        timeValue: "17:00",
+        timeLabel: "5:00 PM",
+        vibeLabel: "gym-lite",
+        backupLabel: "Monday 7:00 PM coffee"
+      },
+      "nextweek-coffee": {
+        dateMode: { type: "offset", value: 7 },
+        timeValue: "18:30",
+        timeLabel: "6:30 PM",
+        vibeLabel: "coffee",
+        backupLabel: "Friday 7:00 PM dinner"
+      }
+    };
+
+    const slotOrder = Object.keys(slotData);
+    const scheduleState = {
+      activeSlot: "sat-brunch",
+      dateMode: { type: "weekday", value: 6 },
+      dateLabel: "",
+      timeLabel: "11:00 AM",
+      timeValue: "11:00",
+      vibeLabel: "brunch",
+      backupLabel: "Saturday 4:30 PM walk"
+    };
+
+    function toLocalIso(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function shiftDate(days) {
+      const date = new Date();
+      date.setDate(date.getDate() + days);
+      return date;
+    }
+
+    function nextWeekday(dayIndex) {
+      const date = new Date();
+      const delta = (dayIndex - date.getDay() + 7) % 7 || 7;
+      date.setDate(date.getDate() + delta);
+      return date;
+    }
+
+    function formatDate(value) {
+      return new Intl.DateTimeFormat("en-US", {
+        weekday: "long",
+        month: "short",
+        day: "numeric"
+      }).format(new Date(`${value}T12:00:00`));
+    }
+
+    function formatTime(value) {
+      const [hourRaw, minute] = value.split(":");
+      const hour = Number(hourRaw);
+      const suffix = hour >= 12 ? "PM" : "AM";
+      const normalized = ((hour + 11) % 12) + 1;
+      return `${normalized}:${minute} ${suffix}`;
+    }
+
+    function resolveModeDate(mode) {
+      if (!mode) return "";
+      if (mode.type === "offset") return toLocalIso(shiftDate(mode.value));
+      if (mode.type === "weekday") return toLocalIso(nextWeekday(mode.value));
+      return "";
+    }
+
+    function readManualDate() {
+      return dateInput.value ? formatDate(dateInput.value) : scheduleState.dateLabel;
+    }
+
+    function readManualTime() {
+      return timeInput.value ? formatTime(timeInput.value) : scheduleState.timeLabel;
+    }
+
+    function updateSlotButtons() {
+      slotButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.slot === scheduleState.activeSlot);
+      });
+    }
+
+    function updateSummary() {
+      const dayText = readManualDate();
+      const timeText = readManualTime();
+      slotDay.textContent = dayText;
+      slotTime.textContent = timeText;
+      slotVibe.textContent = scheduleState.vibeLabel;
+      slotBackup.textContent = scheduleState.backupLabel;
+      resultTitle.textContent = `${dayText} · ${timeText}`;
+      resultStatus.textContent = `Current vibe: ${scheduleState.vibeLabel}. Backup: ${scheduleState.backupLabel}.`;
+      draft.textContent = `Would you be free ${dayText} at ${timeText} for ${scheduleState.vibeLabel}? If not, I can do ${scheduleState.backupLabel}.`;
+    }
+
+    function applySlot(key) {
+      const slot = slotData[key];
+      if (!slot) return;
+
+      scheduleState.activeSlot = key;
+      scheduleState.dateMode = slot.dateMode;
+      scheduleState.dateLabel = slot.dateMode ? formatDate(resolveModeDate(slot.dateMode)) : "";
+      scheduleState.timeLabel = slot.timeLabel;
+      scheduleState.timeValue = slot.timeValue;
+      scheduleState.vibeLabel = slot.vibeLabel;
+      scheduleState.backupLabel = slot.backupLabel;
+
+      const resolvedDate = resolveModeDate(slot.dateMode);
+      dateInput.value = resolvedDate;
+      timeInput.value = slot.timeValue;
+
+      updateSlotButtons();
+      updateSummary();
+    }
 
     function choose(key) {
       const pick = picks[key];
@@ -737,6 +1130,11 @@
       draft.textContent = pick.draft;
       window.location.hash = pick.hash;
       document.body.classList.toggle("raincheck", key === "maybe");
+
+      if (key === "date" || key === "gym") {
+        planner.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
 
       if (key === "skip") {
         boldPanel.classList.add("active");
@@ -752,9 +1150,27 @@
     }
 
     document.addEventListener("click", (event) => {
+      const slotButton = event.target.closest("[data-slot]");
+      if (slotButton) {
+        applySlot(slotButton.dataset.slot);
+        return;
+      }
+
       const button = event.target.closest("[data-pick]");
       if (!button) return;
       choose(button.dataset.pick);
+    });
+
+    dateInput.addEventListener("input", updateSummary);
+    timeInput.addEventListener("input", updateSummary);
+
+    shuffleButton.addEventListener("click", () => {
+      const nextKey = slotOrder[Math.floor(Math.random() * slotOrder.length)];
+      applySlot(nextKey);
+    });
+
+    resetButton.addEventListener("click", () => {
+      applySlot("sat-brunch");
     });
 
     copyButton.addEventListener("click", async () => {
@@ -766,7 +1182,7 @@
         copyButton.textContent = "Select text above";
       }
       window.setTimeout(() => {
-        copyButton.textContent = "Copy reply";
+        copyButton.textContent = "Copy invite";
       }, 1600);
     });
 
@@ -907,6 +1323,7 @@
     }
 
     drawDateMap();
+    applySlot("sat-brunch");
   </script>
 </body>
 </html>
