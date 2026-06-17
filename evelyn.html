@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evelyn’s Frequency Test 🎈</title>
+  <meta name="description" content="A tiny funny one-shot balloon website for Evelyn." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="evelyn.css" />
+</head>
+<body>
+  <main class="stage">
+    <section class="card">
+      <p class="badge">Best Worst Dad Joke Laboratory</p>
+      <h1>Evelyn, you only get <span>one shot</span>.</h1>
+      <p class="subtitle">A scientific test to see if we vibrate on the same frequency. Warning: balloon may be dramatic.</p>
+      <div class="arena" aria-label="Balloon challenge area">
+        <button class="balloon" id="balloon" type="button" aria-label="Pop the balloon"><span class="shine"></span><span class="face">😌</span></button>
+        <div class="blocker" id="blocker" aria-hidden="true"><span>🚫</span><strong>BLOCKED</strong></div>
+      </div>
+      <div class="string" aria-hidden="true"></div>
+      <div class="message" id="message" aria-live="polite"><p class="small">Current status:</p><p class="big">Balloon intact. Frequency not yet calibrated.</p></div>
+      <button class="reset" id="reset" type="button">secret admin reset, frequency recalibrated</button>
+    </section>
+  </main>
+  <div class="confetti" aria-hidden="true"></div>
+  <script src="evelyn.js"></script>
+</body>
+</html>
