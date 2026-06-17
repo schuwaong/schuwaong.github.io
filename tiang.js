@@ -1,4 +1,4 @@
-const key = "tiang-balloon-one-shot-v1";
+const key = "tiang-noodle-audit-v2";
 const balloon = document.querySelector("#balloon");
 const message = document.querySelector("#message .big");
 const reset = document.querySelector("#reset");
@@ -6,7 +6,7 @@ const reset = document.querySelector("#reset");
 function showFailed() {
   document.body.classList.add("failed");
   balloon.querySelector(".face").textContent = "😵";
-  message.textContent = 'Blocked. Balloon survived. Tiang failed. Recommend a good food spot for another try 🍜';
+  message.textContent = "Blocked by Noodle Court. Tiang failed. Recommend one elite food spot for another try 🍜";
 }
 
 if (localStorage.getItem(key) === "failed") {
@@ -22,6 +22,6 @@ balloon.addEventListener("click", () => {
 reset.addEventListener("click", () => {
   localStorage.removeItem(key);
   document.body.classList.remove("failed");
-  balloon.querySelector(".face").textContent = "😌";
-  message.textContent = 'Balloon intact. Noodle diplomacy pending.';
+  balloon.querySelector(".face").textContent = "🍜";
+  message.textContent = "Balloon intact. Spicy-food diplomacy pending.";
 });

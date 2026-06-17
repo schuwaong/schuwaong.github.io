@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tiang’s Noodle Test 🎈</title>
-  <meta name="description" content="A tiny funny one-shot balloon website for Tiang." />
+  <title>Tiang’s Very Serious Noodle Audit 🍜</title>
+  <meta name="description" content="A funny one-shot noodle compatibility audit for Tiang." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -12,19 +12,41 @@
 </head>
 <body>
   <main class="stage">
-    <section class="card">
+    <section class="card tiang-card">
       <p class="badge">Questionable Late-Night Ideas Department</p>
-      <h1>Tiang, you only get <span>one shot</span>.</h1>
-      <p class="subtitle">Powered by noodles, caffeine, and a suspiciously serious balloon challenge.</p>
-      <div class="arena" aria-label="Balloon challenge area">
-        <button class="balloon" id="balloon" type="button" aria-label="Pop the balloon"><span class="shine"></span><span class="face">😌</span></button>
-        <div class="blocker" id="blocker" aria-hidden="true"><span>🚫</span><strong>BLOCKED</strong></div>
+      <h1>Tiang, this is your <span>noodle audit</span>.</h1>
+      <p class="subtitle">Profile evidence reviewed: noodles, caffeine, spicy food, tennis/gym, building things, depth, humor. Conclusion: suspiciously high compatibility, but the committee demands one final test.</p>
+
+      <div class="audit-board" aria-label="Profile audit notes">
+        <div><strong>Fuel</strong><span>noodles + caffeine</span></div>
+        <div><strong>Risk</strong><span>questionable late-night ideas</span></div>
+        <div><strong>Weakness</strong><span>good food spots</span></div>
       </div>
+
+      <p class="challenge-copy">Pop the balloon to pass. You only get one shot. The balloon has hired legal representation.</p>
+
+      <div class="arena" aria-label="Balloon challenge area">
+        <button class="balloon" id="balloon" type="button" aria-label="Pop the balloon">
+          <span class="shine"></span>
+          <span class="face">🍜</span>
+        </button>
+        <div class="blocker" id="blocker" aria-hidden="true">
+          <span>🚫</span>
+          <strong>NOODLE COURT</strong>
+        </div>
+      </div>
+
       <div class="string" aria-hidden="true"></div>
-      <div class="message" id="message" aria-live="polite"><p class="small">Current status:</p><p class="big">Balloon intact. Noodle diplomacy pending.</p></div>
-      <button class="reset" id="reset" type="button">secret admin reset, definitely a late-night idea</button>
+
+      <div class="message" id="message" aria-live="polite">
+        <p class="small">Audit status:</p>
+        <p class="big">Balloon intact. Spicy-food diplomacy pending.</p>
+      </div>
+
+      <button class="reset" id="reset" type="button">secret reset, filed under questionable ideas</button>
     </section>
   </main>
+
   <div class="confetti" aria-hidden="true"></div>
   <script src="tiang.js"></script>
 </body>
