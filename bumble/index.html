@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Josh Profile - Date Mission</title>
+  <meta name="description" content="A playful, low-pressure date chooser for the Josh profile.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d211f;
+      --muted: #64716c;
+      --paper: #fffdf7;
+      --panel: #ffffff;
+      --honey: #f2c94c;
+      --honey-strong: #d99d00;
+      --leaf: #0f8b6f;
+      --coral: #d9584f;
+      --blue: #2868a8;
+      --line: #d9dfd9;
+      --shadow: 0 18px 55px rgba(29, 33, 31, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(29, 33, 31, .035) 1px, transparent 1px),
+        linear-gradient(rgba(29, 33, 31, .035) 1px, transparent 1px),
+        linear-gradient(180deg, #fff7d9 0, #fffdf7 38%, #f3faf6 100%);
+      background-size: 42px 42px, 42px 42px, auto;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .topbar {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--honey);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: 900;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 40px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 116px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      padding: 10px 0;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 18px;
+      padding: 8px 12px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--honey);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: .82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 18px;
+      font-size: 4rem;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .lede {
+      max-width: 620px;
+      margin-bottom: 24px;
+      color: #39423f;
+      font-size: 1.18rem;
+      line-height: 1.55;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .tags span {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .72);
+      color: #46514d;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .primary-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .main-action,
+    .secondary-action,
+    .copy-action {
+      min-height: 48px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .main-action {
+      background: var(--honey);
+    }
+
+    .secondary-action,
+    .copy-action {
+      background: #fff;
+    }
+
+    .main-action:hover,
+    .secondary-action:hover,
+    .copy-action:hover,
+    .choice:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+    }
+
+    .main-action:focus-visible,
+    .secondary-action:focus-visible,
+    .copy-action:focus-visible,
+    .choice:focus-visible {
+      outline: 4px solid rgba(15, 139, 111, .35);
+      outline-offset: 4px;
+    }
+
+    .visual {
+      display: grid;
+      gap: 16px;
+      align-content: center;
+    }
+
+    .phone {
+      width: min(390px, 100%);
+      margin-left: auto;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fdfefe;
+      box-shadow: var(--shadow), 9px 9px 0 var(--ink);
+      overflow: hidden;
+    }
+
+    .phone-head {
+      padding: 13px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--ink);
+      background: var(--honey);
+      font-weight: 900;
+    }
+
+    .signal {
+      display: flex;
+      gap: 5px;
+      align-items: end;
+    }
+
+    .signal i {
+      width: 5px;
+      border-radius: 4px 4px 0 0;
+      background: var(--ink);
+    }
+
+    .signal i:nth-child(1) { height: 8px; }
+    .signal i:nth-child(2) { height: 12px; }
+    .signal i:nth-child(3) { height: 16px; }
+
+    .chat {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      background:
+        linear-gradient(90deg, rgba(15, 139, 111, .08) 1px, transparent 1px),
+        #fff;
+      background-size: 22px 22px;
+    }
+
+    .bubble {
+      width: fit-content;
+      max-width: 88%;
+      padding: 10px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 3px 3px 0 rgba(29, 33, 31, .14);
+      font-size: .93rem;
+      line-height: 1.35;
+    }
+
+    .bubble.me {
+      justify-self: end;
+      background: #fff0b7;
+    }
+
+    .bubble.her {
+      background: #e9f7f0;
+    }
+
+    .map-panel {
+      width: min(390px, 100%);
+      margin-left: auto;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 8px 8px 0 rgba(29, 33, 31, .22);
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .section-head {
+      margin: 8px 0 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.08;
+    }
+
+    .section-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .choices,
+    .bold-panel,
+    .response {
+      scroll-margin-top: 20px;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .choice {
+      min-height: 184px;
+      padding: 16px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      align-content: start;
+      background: #fff;
+      color: var(--ink);
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 rgba(29, 33, 31, .9);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .choice:nth-child(2) { background: #fff4c8; }
+    .choice:nth-child(3) { background: #e5f4ef; }
+    .choice:nth-child(4) { background: #fce9e6; }
+
+    .choice .icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper);
+      font-weight: 900;
+    }
+
+    .choice strong {
+      font-size: 1.1rem;
+      line-height: 1.15;
+    }
+
+    .choice small {
+      color: #4e5b56;
+      font-size: .92rem;
+      line-height: 1.38;
+    }
+
+    .response {
+      margin-top: 28px;
+      padding: 20px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .response-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .response h2 {
+      margin-bottom: 6px;
+      font-size: 1.55rem;
+    }
+
+    .status {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .draft {
+      min-height: 94px;
+      margin: 0 0 16px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbf8;
+      color: #26302c;
+      font-size: 1.02rem;
+      line-height: 1.5;
+    }
+
+    .response-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .bold-panel {
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: max-height .28s ease, opacity .22s ease, transform .22s ease, margin-top .22s ease;
+    }
+
+    .bold-panel.active {
+      max-height: 420px;
+      margin-top: 20px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bold-inner {
+      padding: 18px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff4c8;
+      box-shadow: 7px 7px 0 rgba(29, 33, 31, .2);
+    }
+
+    .bold-inner h2 {
+      margin-bottom: 8px;
+    }
+
+    .bold-inner p {
+      max-width: 700px;
+      color: #3a4642;
+      line-height: 1.45;
+    }
+
+    .split-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .choice.bold-yes {
+      min-height: 148px;
+      background: #ffe8e5;
+    }
+
+    .choice.maybe {
+      min-height: 148px;
+      background: #edf7ff;
+    }
+
+    body.raincheck .response {
+      background: #edf7ff;
+      animation: gentle-shift .45s ease both;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 28px;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    @keyframes gentle-shift {
+      from {
+        transform: translateY(8px);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 18px;
+      }
+
+      .phone,
+      .map-panel {
+        margin-left: 0;
+      }
+
+      .visual {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+
+      .choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      main {
+        padding-top: 22px;
+      }
+
+      h1 {
+        font-size: 2.35rem;
+      }
+
+      .lede {
+        font-size: 1rem;
+      }
+
+      .visual,
+      .choice-grid,
+      .split-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .choice {
+        min-height: 150px;
+      }
+
+      .response-top {
+        display: block;
+      }
+
+      .primary-row,
+      .response-actions {
+        display: grid;
+      }
+
+      .main-action,
+      .secondary-action,
+      .copy-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Josh profile date mission">
+      <span class="mark">J</span>
+      <span>Josh profile</span>
+    </a>
+    <span>Teacher's orders accepted: rest, respect, then maybe a date.</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow">Bumble follow-up</p>
+        <h1 id="title">Pick the kind of chemistry you trust.</h1>
+        <p class="lede">
+          Character first, labels optional, and no weird personality-type homework. I made this
+          because your "rest more" advice was annoyingly reasonable.
+        </p>
+        <div class="tags" aria-label="Conversation cues">
+          <span>kind heart</span>
+          <span>preschool patience</span>
+          <span>extrovert morning / introvert night</span>
+        </div>
+        <div class="primary-row">
+          <button class="main-action" type="button" data-pick="date">Pick a date</button>
+          <button class="secondary-action" type="button" data-pick="chat">Keep chatting</button>
+        </div>
+      </div>
+
+      <div class="visual" aria-label="Josh profile context preview">
+        <aside class="phone" aria-label="Stylized chat preview">
+          <div class="phone-head">
+            <span>J profile</span>
+            <span class="signal" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+          <div class="chat">
+            <div class="bubble her">"As long as you are a good person..."</div>
+            <div class="bubble me">Character matters more. Agreed.</div>
+            <div class="bubble her">"Just enjoy it and still find some time to rest."</div>
+            <div class="bubble me">Teacher's orders accepted.</div>
+          </div>
+        </aside>
+        <figure class="map-panel">
+          <canvas id="dateMap" width="780" height="560" role="img" aria-label="A playful route map with chat, coffee, gym, and raincheck paths."></canvas>
+        </figure>
+      </div>
+    </section>
+
+    <section class="choices" id="choices" aria-labelledby="choice-title">
+      <div class="section-head">
+        <h2 id="choice-title">Choose the next move</h2>
+        <p>Low pressure. Actual preference beats trying to guess the perfect answer.</p>
+      </div>
+      <div class="choice-grid">
+        <button class="choice" type="button" data-pick="chat">
+          <span class="icon">1</span>
+          <strong>Continue the chat</strong>
+          <small>Slow, normal, no AI-project monologue. I ask better questions and actually sleep.</small>
+        </button>
+        <button class="choice" type="button" data-pick="date">
+          <span class="icon">2</span>
+          <strong>Dessert after teacher mode</strong>
+          <small>Coffee, cake, or a small food mission after your day calms down.</small>
+        </button>
+        <button class="choice" type="button" data-pick="gym">
+          <span class="icon">3</span>
+          <strong>Gym-lite recharge</strong>
+          <small>An easy walk, smoothie, or very unserious workout. Zero burpee energy.</small>
+        </button>
+        <button class="choice" type="button" data-pick="skip">
+          <span class="icon">4</span>
+          <strong>Skip the formal date</strong>
+          <small>For when the vibe is either bold or beautifully not-today.</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="bold-panel" id="bold-panel" aria-labelledby="bold-title">
+      <div class="bold-inner">
+        <h2 id="bold-title">If we skip the formal date...</h2>
+        <p>Only a real yes counts. A maybe, a not-today, or a silence all get treated gently.</p>
+        <div class="split-actions">
+          <button class="choice bold-yes" type="button" data-pick="sexy">
+            <span class="icon">Y</span>
+            <strong>Sexy time?</strong>
+            <small>Clear yes only. Mutual, private, and still respectful.</small>
+          </button>
+          <button class="choice maybe" type="button" data-pick="maybe">
+            <span class="icon">N</span>
+            <strong>Maybe next time</strong>
+            <small>Raincheck accepted. The button stays tappable because consent is hotter than tricks.</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="response" id="response" aria-live="polite">
+      <div class="response-top">
+        <div>
+          <h2 id="result-title">Waiting for a mission</h2>
+          <p class="status" id="result-status">Pick whatever feels most like you.</p>
+        </div>
+        <a class="secondary-action" href="https://bumble.com/app/connections">Open Bumble</a>
+      </div>
+      <p class="draft" id="draft">
+        I was going to ask properly: would you rather keep chatting first, do dessert after teacher mode,
+        try a gym-lite recharge, or take a raincheck?
+      </p>
+      <div class="response-actions">
+        <button class="copy-action" id="copy" type="button">Copy reply</button>
+        <button class="copy-action" type="button" data-pick="maybe">Raincheck</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Character first. Teacher's orders still legally binding.
+  </footer>
+
+  <script>
+    const picks = {
+      chat: {
+        title: "Continue the chat",
+        status: "This is the safest warm-up round.",
+        hash: "continue-chat",
+        draft: "Let's keep chatting first. I still owe you a better answer than my weird AI-at-night explanation. What usually recharges you after teaching?"
+      },
+      date: {
+        title: "Dessert after teacher mode",
+        status: "Low-pressure, public, and easy to adjust.",
+        hash: "dessert-date",
+        draft: "Teacher's orders accepted: I will rest properly. If you are free this week, want to do a low-pressure coffee or dessert date after your teacher day calms down?"
+      },
+      gym: {
+        title: "Gym-lite recharge",
+        status: "Active, but not intense. We are not training for a punishment arc.",
+        hash: "gym-lite",
+        draft: "Since you have that extrovert-morning / introvert-night energy, we could do an easy walk or gym-lite smoothie mission. Nothing intense, just a fun recharge."
+      },
+      skip: {
+        title: "Skip the formal date",
+        status: "Bold panel opened. Choose the honest answer.",
+        hash: "skip-formal-date",
+        draft: "If we skip the formal date, I am only counting clear enthusiasm. Otherwise we can keep this normal and easy."
+      },
+      sexy: {
+        title: "Bold mode",
+        status: "Only if it is mutual. No guessing, no pressure.",
+        hash: "clear-yes-only",
+        draft: "Bold answer noted. Only if it is a clear yes from both of us. If not, no issue. I still vote we keep it easy and respectful."
+      },
+      maybe: {
+        title: "Raincheck accepted",
+        status: "Maybe next time. The page moved to raincheck mode, not pressure mode.",
+        hash: "maybe-next-time",
+        draft: "All good. Maybe next time. I will keep the chat normal and let teacher's orders win: rest, respect, and no pressure."
+      }
+    };
+
+    const resultTitle = document.querySelector("#result-title");
+    const resultStatus = document.querySelector("#result-status");
+    const draft = document.querySelector("#draft");
+    const boldPanel = document.querySelector("#bold-panel");
+    const response = document.querySelector("#response");
+    const copyButton = document.querySelector("#copy");
+
+    function choose(key) {
+      const pick = picks[key];
+      if (!pick) return;
+
+      resultTitle.textContent = pick.title;
+      resultStatus.textContent = pick.status;
+      draft.textContent = pick.draft;
+      window.location.hash = pick.hash;
+      document.body.classList.toggle("raincheck", key === "maybe");
+
+      if (key === "skip") {
+        boldPanel.classList.add("active");
+        boldPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
+      if (key === "sexy" || key === "maybe") {
+        boldPanel.classList.add("active");
+      }
+
+      response.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-pick]");
+      if (!button) return;
+      choose(button.dataset.pick);
+    });
+
+    copyButton.addEventListener("click", async () => {
+      const text = draft.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyButton.textContent = "Copied";
+      } catch (error) {
+        copyButton.textContent = "Select text above";
+      }
+      window.setTimeout(() => {
+        copyButton.textContent = "Copy reply";
+      }, 1600);
+    });
+
+    function drawDateMap() {
+      const canvas = document.querySelector("#dateMap");
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#fffdf7";
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = "rgba(29,33,31,.08)";
+      ctx.lineWidth = 2;
+      for (let x = 0; x <= w; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= h; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = "#1d211f";
+      ctx.lineWidth = 8;
+      ctx.lineCap = "round";
+      ctx.setLineDash([1, 22]);
+      ctx.beginPath();
+      ctx.moveTo(95, 330);
+      ctx.bezierCurveTo(230, 190, 360, 420, 510, 250);
+      ctx.bezierCurveTo(580, 170, 655, 210, 700, 110);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      drawNode(ctx, 100, 335, "#f2c94c", "CHAT");
+      drawNode(ctx, 300, 195, "#e5f4ef", "REST");
+      drawNode(ctx, 500, 260, "#fce9e6", "GYM");
+      drawNode(ctx, 682, 120, "#edf7ff", "YES?");
+
+      drawCoffee(ctx, 245, 405);
+      drawDumbbell(ctx, 560, 390);
+      drawHeart(ctx, 405, 105);
+
+      ctx.fillStyle = "#1d211f";
+      ctx.font = "900 34px system-ui, sans-serif";
+      ctx.fillText("date map", 34, 58);
+      ctx.font = "700 20px system-ui, sans-serif";
+      ctx.fillStyle = "#64716c";
+      ctx.fillText("choose the route with actual enthusiasm", 36, 90);
+    }
+
+    function drawNode(ctx, x, y, fill, label) {
+      ctx.save();
+      ctx.fillStyle = fill;
+      ctx.strokeStyle = "#1d211f";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.arc(x, y, 49, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#1d211f";
+      ctx.font = "900 18px system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label, x, y);
+      ctx.restore();
+    }
+
+    function drawCoffee(ctx, x, y) {
+      ctx.save();
+      ctx.strokeStyle = "#1d211f";
+      ctx.fillStyle = "#fff4c8";
+      ctx.lineWidth = 5;
+      roundedRect(ctx, x, y, 86, 58, 8);
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x + 88, y + 28, 18, -Math.PI / 2, Math.PI / 2);
+      ctx.stroke();
+      ctx.fillStyle = "#1d211f";
+      ctx.fillRect(x + 14, y - 18, 8, 12);
+      ctx.fillRect(x + 36, y - 26, 8, 16);
+      ctx.fillRect(x + 58, y - 18, 8, 12);
+      ctx.restore();
+    }
+
+    function drawDumbbell(ctx, x, y) {
+      ctx.save();
+      ctx.strokeStyle = "#1d211f";
+      ctx.fillStyle = "#e5f4ef";
+      ctx.lineWidth = 7;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + 115, y - 34);
+      ctx.stroke();
+      ctx.lineWidth = 5;
+      [[x - 6, y - 18], [x + 14, y - 24], [x + 98, y - 10], [x + 118, y - 16]].forEach((rect) => {
+        roundedRect(ctx, rect[0], rect[1], 20, 48, 6);
+        ctx.fill();
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    function drawHeart(ctx, x, y) {
+      ctx.save();
+      ctx.fillStyle = "#d9584f";
+      ctx.strokeStyle = "#1d211f";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(x, y + 52);
+      ctx.bezierCurveTo(x - 70, y + 8, x - 38, y - 38, x, y - 6);
+      ctx.bezierCurveTo(x + 38, y - 38, x + 70, y + 8, x, y + 52);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function roundedRect(ctx, x, y, width, height, radius) {
+      const r = Math.min(radius, width / 2, height / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + width - r, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+      ctx.lineTo(x + width, y + height - r);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+      ctx.lineTo(x + r, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    drawDateMap();
+  </script>
+</body>
+</html>
