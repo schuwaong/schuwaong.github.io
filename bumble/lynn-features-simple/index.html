@@ -687,7 +687,7 @@
         <p class="eyebrow">for Lynn Gam</p>
         <h1 id="title">rank your favourite facial feature.</h1>
         <p class="lede">
-          hi haha made a tiny page from your photo because i got bored and decided to practice cropping.
+          since i didn't get an answer previously, i made this tiny page haha.
         </p>
         <div class="actions">
           <a class="button primary" href="#features">Rank features</a>
@@ -783,7 +783,7 @@
       <p class="rank-summary" id="rankSummary">tap #1-#4 to build the feature ranking.</p>
 
       <div class="draft-panel">
-        <p class="draft" id="draftText">hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?</p>
+        <p class="draft" id="draftText">hi haha since i didn't get an answer previously, i made this tiny Lynn Gam ranking page.</p>
         <div class="actions">
           <button class="button primary" type="button" data-submit-rank>Submit</button>
           <button class="button" type="button" data-copy-draft>Copy note</button>
@@ -810,7 +810,7 @@
   </footer>
 
   <script>
-    const intro = "hi haha made you a tiny Lynn Gam feature ranking page: ";
+    const intro = "hi haha since i didn't get an answer previously, i made this tiny Lynn Gam feature ranking page: ";
     const draftText = document.querySelector("#draftText");
     const rankSummary = document.querySelector("#rankSummary");
     const featureCards = Array.from(document.querySelectorAll("[data-feature-card]"));
@@ -898,7 +898,7 @@
 
       if (!ordered.length) {
         rankSummary.textContent = "tap #1-#4 to build the feature ranking.";
-        draftText.textContent = "hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?";
+        draftText.textContent = "hi haha since i didn't get an answer previously, i made this tiny Lynn Gam ranking page.";
         return;
       }
 
@@ -906,7 +906,7 @@
       const winner = ordered[0][0];
       rankSummary.textContent = summary;
       activeFeature = winner;
-      draftText.textContent = `hi haha made you a tiny Lynn Gam ranking page. my current #1 is ${winner}; what's yours?`;
+      draftText.textContent = `hi haha since i didn't get an answer previously, i made this tiny Lynn Gam ranking page. my current #1 is ${winner}; what's yours?`;
     }
 
     function getTopFeature() {
@@ -916,7 +916,7 @@
 
     function buildPrompt() {
       const feature = getTopFeature();
-      return `hi joshua, i ranked the cropped Lynn Gam facial features. perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite feature was ${feature}.`;
+      return `hi joshua, since i didn't get an answer previously, i made this page haha. perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite feature was ${feature}.`;
     }
 
     function openPromptModal() {
