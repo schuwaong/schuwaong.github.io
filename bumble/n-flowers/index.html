@@ -675,8 +675,7 @@
       background: #f9e8ee;
     }
 
-    .ranked-chip.empty {
-      cursor: default;
+    .ranked-chip.unranked {
       opacity: .78;
     }
 
@@ -1222,7 +1221,7 @@
   <div class="prompt-modal" id="promptModal" hidden role="dialog" aria-modal="true" aria-labelledby="promptTitle">
     <div class="prompt-card">
       <h3 id="promptTitle">copy this.</h3>
-      <p id="promptHint">since texting is hard, this is ready for Bumble.</p>
+      <p id="promptHint">since u dont like texting, just copy this and paste to the chat.</p>
       <textarea class="prompt-box" id="promptBox" readonly></textarea>
       <div class="prompt-actions">
         <button class="button primary" type="button" data-copy-prompt>Copy prompt</button>
@@ -1275,7 +1274,7 @@
       }
 
       const rankedChip = event.target.closest("[data-ranked-chip]");
-      if (rankedChip && !rankedChip.classList.contains("empty")) {
+      if (rankedChip) {
         activeFlower = rankedChip.dataset.flower;
         renderRankedTray(rankedChip.dataset.flower);
         return;
@@ -1360,7 +1359,7 @@
 
     document.addEventListener("dragstart", (event) => {
       const rankedChip = event.target.closest("[data-ranked-chip]");
-      if (rankedChip && !rankedChip.classList.contains("empty")) {
+      if (rankedChip) {
         activeFlower = rankedChip.dataset.flower;
         event.dataTransfer.setData("application/json", JSON.stringify({
           type: "flower",
@@ -1456,41 +1455,35 @@
     }
 
     function renderRankedTray(active = activeFlower) {
-      const ordered = Array.from(ranking.entries()).sort((a, b) => Number(a[1]) - Number(b[1]));
-
-      if (!ordered.length) {
-        rankedTray.innerHTML = "";
-        flowerCards.forEach((card) => {
-          const chip = document.createElement("button");
-          chip.className = "ranked-chip empty";
-          chip.type = "button";
-          chip.disabled = true;
-          chip.innerHTML = `
-            <img src="${card.dataset.img}" alt="">
-            <span>? ${card.dataset.flower}<small>rank first</small></span>
-          `;
-          rankedTray.append(chip);
-        });
-        return;
-      }
-
-      rankedTray.innerHTML = "";
-      ordered.forEach(([flower, rank]) => {
-        const card = getFlowerCard(flower);
-        if (!card) {
-          return;
+      const sortedCards = flowerCards.slice().sort((a, b) => {
+        const rankA = ranking.get(a.dataset.flower);
+        const rankB = ranking.get(b.dataset.flower);
+        if (rankA && rankB) {
+          return Number(rankA) - Number(rankB);
         }
+        if (rankA) {
+          return -1;
+        }
+        if (rankB) {
+          return 1;
+        }
+        return flowerCards.indexOf(a) - flowerCards.indexOf(b);
+      });
+      rankedTray.innerHTML = "";
+      sortedCards.forEach((card) => {
+        const flower = card.dataset.flower;
+        const rank = ranking.get(flower);
         const chip = document.createElement("button");
-        chip.className = `ranked-chip${flower === active ? " active" : ""}`;
+        chip.className = `ranked-chip${rank ? "" : " unranked"}${flower === active ? " active" : ""}`;
         chip.type = "button";
         chip.draggable = true;
         chip.dataset.rankedChip = "";
         chip.dataset.flower = flower;
-        chip.dataset.rank = rank;
+        chip.dataset.rank = rank || "";
         chip.dataset.img = card.dataset.img;
         chip.innerHTML = `
           <img src="${card.dataset.img}" alt="">
-          <span>#${rank} ${flower}<small>drag to a time</small></span>
+          <span>${rank ? `#${rank}` : "#?"} ${flower}<small>drag to a time</small></span>
         `;
         rankedTray.append(chip);
       });
@@ -1570,7 +1563,7 @@
       const isReady = Boolean(plan.date && plan.time);
       promptBox.value = buildPrompt();
       promptHint.textContent = isReady
-        ? "since texting is hard, copy this and paste it to the chat."
+        ? "since u dont like texting, just copy this and paste to the chat."
         : "pick a date and time first, or copy this draft and edit the blanks.";
       promptModal.hidden = false;
       promptBox.focus();
