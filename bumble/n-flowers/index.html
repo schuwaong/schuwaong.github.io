@@ -592,6 +592,10 @@
       user-select: none;
     }
 
+    .guide-token {
+      cursor: pointer;
+    }
+
     .flower-token img {
       width: 70px;
       height: 70px;
@@ -701,7 +705,7 @@
 
     .calendar-grid {
       display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -764,29 +768,34 @@
     }
 
     .calendar-slot.selected::after {
-      background-image: url("./assets/ranking/combo-peony-vase.jpg");
+      background-image: var(--slot-flower, url("./assets/ranking/combo-peony-lilac.jpg"));
     }
 
     .time-slot.selected::after {
       background-image: var(--slot-flower, url("./assets/ranking/combo-peony-lilac.jpg"));
     }
 
+    .calendar-slot.selected .slot-choice,
     .time-slot.selected .slot-choice {
       max-width: calc(100% - 54px);
     }
 
+    .calendar-slot[data-rank="1"],
     .time-slot[data-rank="1"] {
       background: #ffe5ed;
     }
 
+    .calendar-slot[data-rank="2"],
     .time-slot[data-rank="2"] {
       background: #fff2d6;
     }
 
+    .calendar-slot[data-rank="3"],
     .time-slot[data-rank="3"] {
       background: #eff8eb;
     }
 
+    .calendar-slot[data-rank="4"],
     .time-slot[data-rank="4"] {
       background: #edf3ff;
     }
@@ -812,7 +821,7 @@
 
     .time-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -1011,7 +1020,11 @@
       }
 
       .calendar-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
+      }
+
+      .time-grid {
+        grid-template-columns: 1fr;
       }
 
       .hook-strip {
@@ -1161,41 +1174,36 @@
     <section class="section" id="meet" aria-labelledby="meet-title">
       <div class="section-head">
         <h2 id="meet-title">flower calendar.</h2>
-        <p>pick a date. drag ranked flowers into time slots.</p>
+        <p>drag ranked flowers onto dates and times.</p>
       </div>
 
       <div class="meet-board">
         <div class="drag-tray" aria-label="Draggable flower choices">
-          <button class="flower-token picked" type="button" draggable="true" data-token="date" aria-pressed="true">
+          <button class="flower-token guide-token picked" type="button" data-scroll-ranked aria-pressed="true">
             <img src="./assets/ranking/combo-peony-vase.jpg" alt="Peony token for choosing a date">
-            <span>peony date<small>tap a calendar day</small></span>
+            <span>date ranking<small>drop #1, #2, #3</small></span>
           </button>
-          <button class="flower-token" type="button" data-scroll-ranked aria-pressed="false">
+          <button class="flower-token guide-token" type="button" data-scroll-ranked aria-pressed="false">
             <img src="./assets/ranking/combo-soft-pink.jpg" alt="Ranked flowers shortcut">
-            <span>ranked flowers<small>drag chips to time</small></span>
+            <span>time ranking<small>drop flowers again</small></span>
           </button>
         </div>
 
-        <div class="ranked-tray" id="rankedTray" aria-label="Ranked flowers to drag into time slots"></div>
+        <div class="ranked-tray" id="rankedTray" aria-label="Ranked flowers to drag into date and time slots"></div>
 
         <div class="planner-grid">
           <div class="planner-card">
-            <strong>June</strong>
+            <strong>date</strong>
             <div class="calendar-grid" aria-label="Pick a date">
               <button class="calendar-slot" type="button" data-date="Friday 19 June"><span>Fri</span>19</button>
               <button class="calendar-slot" type="button" data-date="Saturday 20 June"><span>Sat</span>20</button>
               <button class="calendar-slot" type="button" data-date="Sunday 21 June"><span>Sun</span>21</button>
-              <button class="calendar-slot" type="button" data-date="Monday 22 June"><span>Mon</span>22</button>
-              <button class="calendar-slot" type="button" data-date="Tuesday 23 June"><span>Tue</span>23</button>
-              <button class="calendar-slot" type="button" data-date="Wednesday 24 June"><span>Wed</span>24</button>
-              <button class="calendar-slot" type="button" data-date="Thursday 25 June"><span>Thu</span>25</button>
             </div>
           </div>
 
           <div class="planner-card">
             <strong>time</strong>
             <div class="time-grid" aria-label="Pick a time">
-              <button class="time-slot" type="button" data-time="coffee at 3:00 PM"><span>coffee</span>3:00 PM</button>
               <button class="time-slot" type="button" data-time="tea at 5:00 PM"><span>tea</span>5:00 PM</button>
               <button class="time-slot" type="button" data-time="dessert at 7:30 PM"><span>dessert</span>7:30 PM</button>
               <button class="time-slot" type="button" data-time="walk at 8:30 PM"><span>walk</span>8:30 PM</button>
@@ -1203,17 +1211,17 @@
           </div>
         </div>
 
-        <p class="meet-summary" id="meetSummary">rank flowers, pick a date, then drag #1 flower to the preferred time.</p>
+        <p class="meet-summary" id="meetSummary">rank flowers, then drag #1/#2/#3 onto the date and time options.</p>
       </div>
 
       <div class="draft-panel">
-        <p class="draft" id="meetText">tiny peony scheduling question: rank flowers, then put your favorite on the best time.</p>
+        <p class="draft" id="meetText">tiny peony scheduling question: rank flowers, then put your favorites on the best date and time.</p>
         <div class="reply-actions">
           <button class="button primary" type="button" data-copy-meet>Copy invite</button>
           <button class="button" type="button" data-submit-meet>Submit</button>
           <a class="button" href="#replies">Rank flowers</a>
         </div>
-        <p class="mini-note">desktop: drag flower cards. phone: rank first, then tap a time.</p>
+        <p class="mini-note">desktop: drag ranked flowers. phone: tap a flower, then tap a date or time.</p>
       </div>
     </section>
   </main>
@@ -1241,7 +1249,6 @@
     const flowerCards = Array.from(document.querySelectorAll("[data-flower-card]"));
     const rankedTray = document.querySelector("#rankedTray");
     const ranking = new Map();
-    const tokens = Array.from(document.querySelectorAll("[data-token]"));
     const dateSlots = Array.from(document.querySelectorAll("[data-date]"));
     const timeSlots = Array.from(document.querySelectorAll("[data-time]"));
     const meetSummary = document.querySelector("#meetSummary");
@@ -1249,8 +1256,16 @@
     const promptModal = document.querySelector("#promptModal");
     const promptBox = document.querySelector("#promptBox");
     const promptHint = document.querySelector("#promptHint");
-    const plan = { date: "", time: "", flower: "", rank: "", img: "" };
-    let activeToken = "date";
+    const plan = {
+      date: "",
+      time: "",
+      dateFlower: "",
+      timeFlower: "",
+      dateRank: "",
+      timeRank: ""
+    };
+    const dateChoices = new Map();
+    const timeChoices = new Map();
     let activeFlower = "peony vase";
 
     function copyText(text, button) {
@@ -1267,12 +1282,6 @@
     }
 
     document.addEventListener("click", (event) => {
-      const tokenButton = event.target.closest("[data-token]");
-      if (tokenButton) {
-        setActiveToken(tokenButton.dataset.token);
-        return;
-      }
-
       const rankedChip = event.target.closest("[data-ranked-chip]");
       if (rankedChip) {
         activeFlower = rankedChip.dataset.flower;
@@ -1288,16 +1297,13 @@
 
       const dateSlot = event.target.closest("[data-date]");
       if (dateSlot) {
-        if (activeToken !== "date") {
-          setActiveToken("date");
-        }
-        chooseDate(dateSlot);
+        chooseDate(dateSlot, getActiveFlower());
         return;
       }
 
       const timeSlot = event.target.closest("[data-time]");
       if (timeSlot) {
-        chooseTime(timeSlot, getBestFlower());
+        chooseTime(timeSlot, getActiveFlower());
         return;
       }
 
@@ -1390,14 +1396,6 @@
         return;
       }
 
-      const token = event.target.closest("[data-token]");
-      if (!token) {
-        return;
-      }
-      activeToken = token.dataset.token;
-      setActiveToken(activeToken);
-      event.dataTransfer.setData("text/plain", activeToken);
-      event.dataTransfer.effectAllowed = "move";
     });
 
     [...dateSlots, ...timeSlots].forEach((slot) => {
@@ -1414,13 +1412,12 @@
         event.preventDefault();
         slot.classList.remove("drag-over");
         const payload = readDropPayload(event);
-        if (slot.dataset.time && payload.type === "flower") {
-          chooseTime(slot, payload);
+        if (slot.dataset.date && payload.type === "flower") {
+          chooseDate(slot, payload);
           return;
         }
-        const token = payload.type || event.dataTransfer.getData("text/plain");
-        if (slot.dataset.date && token === "date") {
-          chooseDate(slot);
+        if (slot.dataset.time && payload.type === "flower") {
+          chooseTime(slot, payload);
         }
       });
     });
@@ -1483,35 +1480,38 @@
         chip.dataset.img = card.dataset.img;
         chip.innerHTML = `
           <img src="${card.dataset.img}" alt="">
-          <span>${rank ? `#${rank}` : "#?"} ${flower}<small>drag to a time</small></span>
+          <span>${rank ? `#${rank}` : "#?"} ${flower}<small>drag to date/time</small></span>
         `;
         rankedTray.append(chip);
       });
     }
 
-    function setActiveToken(token) {
-      activeToken = token;
-      tokens.forEach((item) => {
-        const isActive = item.dataset.token === token;
-        item.classList.toggle("picked", isActive);
-        item.setAttribute("aria-pressed", String(isActive));
-      });
-    }
-
-    function chooseDate(slot) {
-      plan.date = slot.dataset.date;
-      dateSlots.forEach((item) => item.classList.toggle("selected", item === slot));
-      setActiveToken("time");
+    function chooseDate(slot, flowerChoice = getBestFlower()) {
+      placeFlower(dateSlots, dateChoices, slot, flowerChoice, "date");
+      updatePlanFromChoices();
       renderPlan();
     }
 
     function chooseTime(slot, flowerChoice = getBestFlower()) {
-      plan.time = slot.dataset.time;
-      plan.flower = flowerChoice.flower;
-      plan.rank = flowerChoice.rank || ranking.get(flowerChoice.flower) || "?";
-      plan.img = flowerChoice.img || getFlowerCard(flowerChoice.flower)?.dataset.img || "";
-      timeSlots.forEach((item) => {
-        const isSelected = item === slot;
+      placeFlower(timeSlots, timeChoices, slot, flowerChoice, "time");
+      updatePlanFromChoices();
+      renderPlan();
+    }
+
+    function placeFlower(slots, choiceMap, slot, flowerChoice, type) {
+      const flower = flowerChoice.flower;
+      const rank = flowerChoice.rank || ranking.get(flower) || "?";
+      const img = flowerChoice.img || getFlowerCard(flower)?.dataset.img || "";
+      choiceMap.forEach((choice, key) => {
+        if (choice.flower === flower) {
+          choiceMap.delete(key);
+        }
+      });
+      choiceMap.set(slot.dataset[type], { flower, rank, img });
+      slots.forEach((item) => {
+        const value = item.dataset[type];
+        const choice = choiceMap.get(value);
+        const isSelected = Boolean(choice);
         item.classList.toggle("selected", isSelected);
         delete item.dataset.rank;
         item.style.removeProperty("--slot-flower");
@@ -1519,34 +1519,60 @@
         if (oldChoice) {
           oldChoice.remove();
         }
-        if (isSelected) {
-          item.dataset.rank = String(plan.rank).replace("#", "");
-          item.style.setProperty("--slot-flower", `url("${plan.img}")`);
+        if (choice) {
+          item.dataset.rank = String(choice.rank).replace("#", "");
+          item.style.setProperty("--slot-flower", `url("${choice.img}")`);
           const label = document.createElement("span");
           label.className = "slot-choice";
-          label.textContent = `#${plan.rank} ${plan.flower}`;
+          label.textContent = `#${choice.rank || "?"} ${choice.flower}`;
           item.append(label);
         }
       });
-      renderPlan();
+    }
+
+    function updatePlanFromChoices() {
+      const topDate = getTopChoice(dateChoices);
+      const topTime = getTopChoice(timeChoices);
+      plan.date = topDate?.value || "";
+      plan.dateFlower = topDate?.flower || "";
+      plan.dateRank = topDate?.rank || "";
+      plan.time = topTime?.value || "";
+      plan.timeFlower = topTime?.flower || "";
+      plan.timeRank = topTime?.rank || "";
+    }
+
+    function getTopChoice(choiceMap) {
+      return Array.from(choiceMap.entries())
+        .map(([value, choice]) => ({ value, ...choice }))
+        .sort((a, b) => getRankNumber(a.rank) - getRankNumber(b.rank))[0];
+    }
+
+    function getRankNumber(rank) {
+      const value = Number(rank);
+      return Number.isFinite(value) ? value : 99;
     }
 
     function renderPlan() {
       if (plan.date && plan.time) {
-        meetSummary.textContent = `${plan.date} + ${plan.time} with #${plan.rank} ${plan.flower}`;
-        meetText.textContent = `tiny peony scheduling question: my #${plan.rank} flower landed on ${plan.time}. would ${plan.date} work?`;
+        meetSummary.textContent = `#${plan.dateRank} date: ${plan.date} + #${plan.timeRank} time: ${plan.time}`;
+        meetText.textContent = `tiny peony scheduling question: #${plan.dateRank} flower chose ${plan.date}, and #${plan.timeRank} flower chose ${plan.time}.`;
         return;
       }
 
       if (plan.date) {
-        const best = getBestFlower();
-        meetSummary.textContent = `${plan.date} picked. now drag #${best.rank || "1"} ${best.flower} to the best time.`;
-        meetText.textContent = `tiny peony scheduling question: ${plan.date} maybe? you can pick the time.`;
+        meetSummary.textContent = `#${plan.dateRank} date: ${plan.date}. now rank the time slots too.`;
+        meetText.textContent = `tiny peony scheduling question: ${plan.date} maybe? now pick the time.`;
         return;
       }
 
-      meetSummary.textContent = "rank flowers, pick a date, then drag #1 flower to the preferred time.";
-      meetText.textContent = "tiny peony scheduling question: rank flowers, then put your favorite on the best time.";
+      if (plan.time) {
+        meetSummary.textContent = `#${plan.timeRank} time: ${plan.time}. now rank the date slots too.`;
+        meetText.textContent = `tiny peony scheduling question: ${plan.time} maybe? now pick the date.`;
+        return;
+      }
+
+      meetSummary.textContent = "rank flowers, then drag #1/#2/#3 onto the date and time options.";
+      meetText.textContent = "tiny peony scheduling question: rank flowers, then put your favorites on the best date and time.";
     }
 
     function buildPrompt() {
@@ -1576,6 +1602,17 @@
 
     function getFlowerCard(flower) {
       return flowerCards.find((card) => card.dataset.flower === flower);
+    }
+
+    function getActiveFlower() {
+      const flower = activeFlower || "peony vase";
+      const card = getFlowerCard(flower) || flowerCards[0];
+      return {
+        type: "flower",
+        flower,
+        rank: ranking.get(flower) || "",
+        img: card.dataset.img
+      };
     }
 
     function getBestFlower() {
