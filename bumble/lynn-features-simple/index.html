@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lynn Gam favourite feature</title>
+  <meta name="description" content="Tiny Lynn Gam facial feature ranking page with a copyable prompt.">
+  <meta property="og:title" content="Lynn Gam favourite feature">
+  <meta property="og:description" content="Rank your favourite cropped facial feature and copy the prompt.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #231f20;
+      --muted: #6c5f65;
+      --paper: #fff9f0;
+      --cream: #fffef8;
+      --pink: #ffb8c8;
+      --coral: #ff6d73;
+      --mint: #8ed6bd;
+      --blue: #9fd5ff;
+      --sun: #ffd65f;
+      --shadow: 0 22px 60px rgba(70, 35, 48, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(255, 214, 95, .26), transparent 25%),
+        radial-gradient(circle at 88% 10%, rgba(159, 213, 255, .32), transparent 24%),
+        linear-gradient(180deg, #fff9f0 0%, #fff0f4 52%, #eefaf5 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: 0;
+      width: 170px;
+      height: 170px;
+      border: 2px solid rgba(35, 31, 32, .18);
+      border-radius: 999px;
+      pointer-events: none;
+      animation: float-ring 8s ease-in-out infinite;
+    }
+
+    body::before {
+      top: 18%;
+      left: -70px;
+      background: rgba(255, 184, 200, .22);
+    }
+
+    body::after {
+      right: -72px;
+      bottom: 12%;
+      background: rgba(142, 214, 189, .22);
+      animation-delay: -3s;
+    }
+
+    @keyframes float-ring {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(8deg);
+      }
+    }
+
+    a,
+    button,
+    textarea {
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .sparkles span {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: var(--s);
+      height: var(--s);
+      border: 2px solid rgba(35, 31, 32, .68);
+      border-radius: 50%;
+      background: var(--c);
+      box-shadow: 3px 3px 0 rgba(35, 31, 32, .8);
+      animation: pop var(--t) ease-in-out infinite;
+      animation-delay: var(--d);
+    }
+
+    @keyframes pop {
+      0%,
+      100% {
+        transform: scale(.72);
+        opacity: .42;
+      }
+
+      50% {
+        transform: scale(1) translateY(-8px);
+        opacity: .92;
+      }
+    }
+
+    .topbar,
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 850;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: 950;
+      animation: mark-bob 3.4s ease-in-out infinite;
+    }
+
+    @keyframes mark-bob {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-4px) rotate(-3deg);
+      }
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 46px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 92px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, .84fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 15px;
+      padding: 8px 11px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--mint);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin-bottom: 18px;
+      font-size: clamp(2.55rem, 8vw, 6.2rem);
+      line-height: .94;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 540px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.17rem);
+      line-height: 1.55;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      text-decoration: none;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+      outline: 0;
+    }
+
+    .button.primary {
+      background: var(--coral);
+      color: #fff;
+    }
+
+    .photo-stage {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .portrait-frame {
+      width: min(360px, 82vw);
+      aspect-ratio: 4 / 5;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 10px 10px 0 var(--ink), var(--shadow);
+      overflow: hidden;
+      transform: rotate(-1deg);
+      animation: portrait-breathe 4s ease-in-out infinite;
+    }
+
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    @keyframes portrait-breathe {
+      0%,
+      100% {
+        transform: rotate(-1deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(1deg) scale(1.015);
+      }
+    }
+
+    .feature-float {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 86px;
+      height: 86px;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      background: var(--cream);
+      box-shadow: 5px 5px 0 var(--ink);
+      animation: token-float 3.6s ease-in-out infinite;
+      font-weight: 950;
+    }
+
+    .feature-float.one {
+      left: 0;
+      top: 28px;
+      background: #ffebf0;
+    }
+
+    .feature-float.two {
+      right: 4px;
+      bottom: 48px;
+      background: #e9f7ff;
+      animation-delay: -1.5s;
+    }
+
+    @keyframes token-float {
+      0%,
+      100% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotate(3deg);
+      }
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 0;
+      font-size: clamp(1.85rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .section-head p {
+      max-width: 420px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .feature-card {
+      min-width: 0;
+      display: grid;
+      gap: 12px;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 254, 248, .88);
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .feature-card:hover,
+    .feature-card:focus-within,
+    .feature-card.active {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+      background: #fff3f6;
+    }
+
+    .feature-photo {
+      position: relative;
+      min-height: 150px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .feature-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 150px;
+      display: block;
+      object-fit: cover;
+      transition: transform .28s ease;
+    }
+
+    .feature-card:hover .feature-photo img,
+    .feature-card:focus-within .feature-photo img,
+    .feature-card.active .feature-photo img {
+      transform: scale(1.05);
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      min-width: 42px;
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--sun);
+      box-shadow: 3px 3px 0 var(--ink);
+      font-weight: 950;
+    }
+
+    .feature-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .feature-copy strong {
+      font-size: 1.08rem;
+    }
+
+    .feature-copy small {
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .rank-controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .rank-button {
+      min-height: 38px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 3px 3px 0 var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .rank-button:hover,
+    .rank-button:focus-visible,
+    .rank-button.selected {
+      background: var(--pink);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--ink);
+      outline: 0;
+    }
+
+    .rank-summary {
+      margin: 18px 0 0;
+      padding: 12px 14px;
+      border: 2px dashed rgba(35, 31, 32, .42);
+      border-radius: 8px;
+      background: rgba(255, 254, 248, .78);
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .draft-panel {
+      margin-top: 18px;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 254, 248, .86);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .draft {
+      min-height: 74px;
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: clamp(1.04rem, 2.2vw, 1.35rem);
+      line-height: 1.45;
+      font-weight: 850;
+    }
+
+    .mini-note {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-weight: 780;
+      line-height: 1.5;
+    }
+
+    .prompt-modal[hidden] {
+      display: none;
+    }
+
+    .prompt-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(35, 31, 32, .36);
+      backdrop-filter: blur(7px);
+      animation: modal-fade .18s ease-out both;
+    }
+
+    .prompt-card {
+      position: relative;
+      width: min(550px, 100%);
+      padding: 20px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 8px 8px 0 var(--ink);
+      animation: modal-pop .22s ease-out both;
+    }
+
+    .prompt-card::before {
+      content: "";
+      position: absolute;
+      top: -22px;
+      right: 24px;
+      width: 58px;
+      height: 58px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: url("./assets/feature-face.jpg") center / cover;
+      box-shadow: 4px 4px 0 var(--ink);
+      animation: modal-bob 2.8s ease-in-out infinite;
+    }
+
+    .prompt-card h3 {
+      margin: 0 76px 8px 0;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      line-height: 1;
+    }
+
+    .prompt-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .prompt-box {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff9f0;
+      color: var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: 1rem;
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .prompt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @keyframes modal-fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modal-pop {
+      from {
+        transform: translateY(10px) scale(.96);
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes modal-bob {
+      0%,
+      100% {
+        transform: rotate(-5deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(4deg) scale(1.06);
+      }
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 760;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: 2.22rem;
+      }
+
+      .photo-stage {
+        min-height: 360px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(244px, 82%);
+        grid-template-columns: none;
+        overflow-x: auto;
+        padding: 0 8px 12px 0;
+        scroll-snap-type: x mandatory;
+      }
+
+      .feature-card {
+        scroll-snap-align: start;
+      }
+
+      .section-head {
+        align-items: start;
+        display: grid;
+      }
+
+      .button {
+        width: calc(100% - 8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true">
+    <span style="--x: 8%; --y: 18%; --s: 16px; --c: #ffb8c8; --t: 4s; --d: -1s;"></span>
+    <span style="--x: 20%; --y: 76%; --s: 12px; --c: #ffd65f; --t: 5s; --d: -3s;"></span>
+    <span style="--x: 46%; --y: 10%; --s: 18px; --c: #8ed6bd; --t: 4.6s; --d: -2s;"></span>
+    <span style="--x: 72%; --y: 62%; --s: 14px; --c: #9fd5ff; --t: 4.2s; --d: -1.5s;"></span>
+    <span style="--x: 91%; --y: 28%; --s: 20px; --c: #ff6d73; --t: 5.4s; --d: -4s;"></span>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Lynn Gam facial feature ranking page">
+      <span class="mark">LG</span>
+      <span>Lynn Gam feature ranking</span>
+    </a>
+    <span>tiny decision lab</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">for Lynn Gam</p>
+        <h1 id="title">rank your favourite facial feature.</h1>
+        <p class="lede">
+          hi haha made a tiny page from your photo because i got bored and decided to practice cropping.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#features">Rank features</a>
+          <button class="button" type="button" data-copy-intro>Copy note</button>
+        </div>
+      </div>
+
+      <div class="photo-stage" aria-label="Cropped Lynn Gam photo preview">
+        <div class="feature-float one"><strong>eyes</strong></div>
+        <div class="feature-float two"><strong>lips</strong></div>
+        <div class="portrait-frame">
+          <img src="./assets/lynn-portrait.jpg" alt="Lynn Gam portrait crop">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="feature-title">
+      <div class="section-head">
+        <h2 id="feature-title">rank your favourite.</h2>
+        <p>pick the winning cropped feature and submit the answer.</p>
+      </div>
+
+      <div class="feature-grid" role="list" aria-label="Facial features to rank">
+        <article class="feature-card active" data-feature-card data-feature="eyes">
+          <div class="feature-photo">
+            <img src="./assets/feature-eyes.jpg" alt="Cropped eyes from Lynn Gam photo">
+            <span class="rank-badge" data-rank-label>?</span>
+          </div>
+          <div class="feature-copy">
+            <strong>eyes</strong>
+            <small>soft eye-contact category.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank eyes">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="feature-card" data-feature-card data-feature="lips">
+          <div class="feature-photo">
+            <img src="./assets/feature-lips.jpg" alt="Cropped lips from Lynn Gam photo">
+            <span class="rank-badge" data-rank-label>?</span>
+          </div>
+          <div class="feature-copy">
+            <strong>lips</strong>
+            <small>glossy crop, very noticeable.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank lips">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="feature-card" data-feature-card data-feature="brows">
+          <div class="feature-photo">
+            <img src="./assets/feature-brows.jpg" alt="Cropped brows from Lynn Gam photo">
+            <span class="rank-badge" data-rank-label>?</span>
+          </div>
+          <div class="feature-copy">
+            <strong>brows</strong>
+            <small>quietly expressive.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank brows">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="feature-card" data-feature-card data-feature="face card">
+          <div class="feature-photo">
+            <img src="./assets/feature-face.jpg" alt="Cropped face from Lynn Gam photo">
+            <span class="rank-badge" data-rank-label>?</span>
+          </div>
+          <div class="feature-copy">
+            <strong>face card</strong>
+            <small>overall main-character crop.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank face card">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+      </div>
+
+      <p class="rank-summary" id="rankSummary">tap #1-#4 to build the feature ranking.</p>
+
+      <div class="draft-panel">
+        <p class="draft" id="draftText">hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?</p>
+        <div class="actions">
+          <button class="button primary" type="button" data-submit-rank>Submit</button>
+          <button class="button" type="button" data-copy-draft>Copy note</button>
+        </div>
+        <p class="mini-note">rank the cropped facial features, then submit for the copyable prompt.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="prompt-modal" id="promptModal" hidden role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+    <div class="prompt-card">
+      <h3 id="promptTitle">copy this.</h3>
+      <p id="promptHint">copy this and paste to the chat.</p>
+      <textarea class="prompt-box" id="promptBox" readonly></textarea>
+      <div class="prompt-actions">
+        <button class="button primary" type="button" data-copy-prompt>Copy prompt</button>
+        <button class="button" type="button" data-close-prompt>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    tiny feature lab, complete.
+  </footer>
+
+  <script>
+    const intro = "hi haha made you a tiny Lynn Gam feature ranking page: ";
+    const draftText = document.querySelector("#draftText");
+    const rankSummary = document.querySelector("#rankSummary");
+    const featureCards = Array.from(document.querySelectorAll("[data-feature-card]"));
+    const promptModal = document.querySelector("#promptModal");
+    const promptBox = document.querySelector("#promptBox");
+    const promptHint = document.querySelector("#promptHint");
+    const ranking = new Map();
+    let activeFeature = "eyes";
+
+    function copyText(text, button) {
+      const original = button.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = "Copied";
+      }).catch(() => {
+        button.textContent = "Select text";
+      }).finally(() => {
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1400);
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const rankButton = event.target.closest("[data-rank]");
+      if (rankButton) {
+        const card = rankButton.closest("[data-feature-card]");
+        const rank = rankButton.dataset.rank;
+        const previousCard = featureCards.find((item) => ranking.get(item.dataset.feature) === rank);
+        if (previousCard && previousCard !== card) {
+          ranking.delete(previousCard.dataset.feature);
+        }
+        ranking.set(card.dataset.feature, rank);
+        activeFeature = card.dataset.feature;
+        renderRanking(card);
+        return;
+      }
+
+      const submitRank = event.target.closest("[data-submit-rank]");
+      if (submitRank) {
+        openPromptModal();
+        return;
+      }
+
+      const copyDraft = event.target.closest("[data-copy-draft]");
+      if (copyDraft) {
+        copyText(draftText.textContent, copyDraft);
+        return;
+      }
+
+      const copyPrompt = event.target.closest("[data-copy-prompt]");
+      if (copyPrompt) {
+        copyText(promptBox.value, copyPrompt);
+        return;
+      }
+
+      const closePrompt = event.target.closest("[data-close-prompt]");
+      if (closePrompt || event.target === promptModal) {
+        closePromptModal();
+        return;
+      }
+
+      const copyIntro = event.target.closest("[data-copy-intro]");
+      if (copyIntro) {
+        copyText(intro + window.location.href, copyIntro);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !promptModal.hidden) {
+        closePromptModal();
+      }
+    });
+
+    function renderRanking(activeCard) {
+      featureCards.forEach((card) => {
+        const rank = ranking.get(card.dataset.feature);
+        card.classList.toggle("active", card === activeCard);
+        card.querySelector("[data-rank-label]").textContent = rank ? `#${rank}` : "?";
+        card.querySelectorAll("[data-rank]").forEach((button) => {
+          button.classList.toggle("selected", button.dataset.rank === rank);
+        });
+      });
+
+      const ordered = Array.from(ranking.entries()).sort((a, b) => Number(a[1]) - Number(b[1]));
+
+      if (!ordered.length) {
+        rankSummary.textContent = "tap #1-#4 to build the feature ranking.";
+        draftText.textContent = "hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?";
+        return;
+      }
+
+      const summary = ordered.map(([name, rank]) => `#${rank} ${name}`).join("  ");
+      const winner = ordered[0][0];
+      rankSummary.textContent = summary;
+      activeFeature = winner;
+      draftText.textContent = `hi haha made you a tiny Lynn Gam ranking page. my current #1 is ${winner}; what's yours?`;
+    }
+
+    function getTopFeature() {
+      const [feature] = Array.from(ranking.entries()).sort((a, b) => Number(a[1]) - Number(b[1]))[0] || [];
+      return feature || activeFeature || "favourite feature";
+    }
+
+    function buildPrompt() {
+      const feature = getTopFeature();
+      return `hi joshua, i ranked the cropped Lynn Gam facial features. perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite feature was ${feature}.`;
+    }
+
+    function openPromptModal() {
+      promptBox.value = buildPrompt();
+      promptHint.textContent = "copy this and paste to the chat.";
+      promptModal.hidden = false;
+      promptBox.focus();
+      promptBox.select();
+    }
+
+    function closePromptModal() {
+      promptModal.hidden = true;
+    }
+  </script>
+</body>
+</html>
