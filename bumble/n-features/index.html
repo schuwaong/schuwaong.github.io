@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lynn Gam feature ranking</title>
-  <meta name="description" content="Tiny Lynn Gam facial feature ranking page with date and time slots.">
-  <meta property="og:title" content="Lynn Gam feature ranking">
-  <meta property="og:description" content="Rank your favourite facial feature, drag it to a date and time, copy the prompt.">
+  <title>Lynn Gam sticker planner</title>
+  <meta name="description" content="Tiny Lynn Gam sticker picker with date and time slots.">
+  <meta property="og:title" content="Lynn Gam sticker planner">
+  <meta property="og:description" content="Pick your favourite tiny sticker vibe, drag it to a date and time, copy the prompt.">
   <style>
     :root {
       color-scheme: light;
@@ -300,6 +300,7 @@
       position: absolute;
       display: grid;
       place-items: center;
+      gap: 4px;
       width: 86px;
       height: 86px;
       border: 2px solid var(--ink);
@@ -307,6 +308,19 @@
       background: var(--cream);
       box-shadow: 5px 5px 0 var(--ink);
       animation: token-float 3.6s ease-in-out infinite;
+      font-weight: 950;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .feature-float svg {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
     }
 
     .feature-float.one {
@@ -389,10 +403,58 @@
     .feature-photo {
       position: relative;
       min-height: 150px;
+      display: grid;
+      place-items: center;
       border: 2px solid var(--ink);
       border-radius: 8px;
       background: var(--cream);
       overflow: hidden;
+    }
+
+    .sticker-symbol {
+      width: 104px;
+      height: 104px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--sticker-bg, var(--pink));
+      box-shadow: 6px 6px 0 var(--ink);
+      color: var(--ink);
+      animation: sticker-wiggle 3.8s ease-in-out infinite;
+    }
+
+    .sticker-symbol svg {
+      width: 56px;
+      height: 56px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
+    }
+
+    .feature-card:nth-child(2) .sticker-symbol {
+      animation-delay: -.7s;
+    }
+
+    .feature-card:nth-child(3) .sticker-symbol {
+      animation-delay: -1.4s;
+    }
+
+    .feature-card:nth-child(4) .sticker-symbol {
+      animation-delay: -2.1s;
+    }
+
+    @keyframes sticker-wiggle {
+      0%,
+      100% {
+        transform: rotate(-3deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(4deg) translateY(-8px);
+      }
     }
 
     .feature-photo img {
@@ -766,7 +828,9 @@
       height: 58px;
       border: 2px solid var(--ink);
       border-radius: 999px;
-      background: url("./assets/feature-face.jpg") center / cover;
+      background:
+        linear-gradient(rgba(255, 184, 200, .18), rgba(255, 214, 95, .18)),
+        url("./assets/lynn-portrait.jpg") center 32% / cover;
       box-shadow: 4px 4px 0 var(--ink);
       animation: modal-bob 2.8s ease-in-out infinite;
     }
@@ -909,9 +973,9 @@
   </div>
 
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="Lynn Gam facial feature ranking page">
+    <a class="brand" href="#top" aria-label="Lynn Gam sticker vibe ranking page">
       <span class="mark">LG</span>
-      <span>Lynn Gam feature ranking</span>
+      <span>Lynn Gam sticker planner</span>
     </a>
     <span>tiny decision lab</span>
   </header>
@@ -920,42 +984,50 @@
     <section class="hero" aria-labelledby="title">
       <div>
         <p class="eyebrow">for Lynn Gam</p>
-        <h1 id="title">rank your favourite facial feature.</h1>
+        <h1 id="title">rank your favourite sticker vibe.</h1>
         <p class="lede">
-          hi haha made a tiny page from your photo because i got bored and decided to practice cropping.
+          hi haha made a tiny sticker game for you because i was practicing my coding.
         </p>
         <div class="actions">
-          <a class="button primary" href="#features">Rank features</a>
+          <a class="button primary" href="#stickers">Pick stickers</a>
           <button class="button" type="button" data-copy-intro>Copy note</button>
         </div>
       </div>
 
-      <div class="photo-stage" aria-label="Cropped Lynn Gam photo preview">
-        <div class="feature-float one"><strong>eyes</strong></div>
-        <div class="feature-float two"><strong>lips</strong></div>
+      <div class="photo-stage" aria-label="Lynn Gam photo with playful sticker icons">
+        <div class="feature-float one" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"></path><path d="M18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8L18 16z"></path></svg>
+          <strong>spark</strong>
+        </div>
+        <div class="feature-float two" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8z"></path><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"></path><path d="M6 4h9"></path></svg>
+          <strong>coffee</strong>
+        </div>
         <div class="portrait-frame">
-          <img src="./assets/lynn-portrait.jpg" alt="Lynn Gam portrait crop">
+          <img src="./assets/lynn-portrait.jpg" alt="Lynn Gam portrait">
         </div>
       </div>
     </section>
 
-    <section class="section" id="features" aria-labelledby="feature-title">
+    <section class="section" id="stickers" aria-labelledby="feature-title">
       <div class="section-head">
-        <h2 id="feature-title">rank your favourite.</h2>
-        <p>pick the winner, then drag the ranked chips to the date and time slots.</p>
+        <h2 id="feature-title">rank the stickers.</h2>
+        <p>pick the sticker mood, then drag the ranked chips to the date and time slots.</p>
       </div>
 
-      <div class="feature-grid" role="list" aria-label="Facial features to rank">
-        <article class="feature-card active" draggable="true" data-feature-card data-feature="eyes" data-initial="E" data-color="#9fd5ff" data-img="./assets/feature-eyes.jpg">
+      <div class="feature-grid" role="list" aria-label="Sticker vibes to rank">
+        <article class="feature-card active" draggable="true" data-feature-card data-feature="spark sticker" data-initial="S" data-color="#ffd65f">
           <div class="feature-photo">
-            <img src="./assets/feature-eyes.jpg" alt="Cropped eyes from Lynn Gam photo">
+            <div class="sticker-symbol" style="--sticker-bg: #ffd65f;" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"></path><path d="M18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8L18 16z"></path></svg>
+            </div>
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
-            <strong>eyes</strong>
-            <small>soft eye-contact category.</small>
+            <strong>spark sticker</strong>
+            <small>tiny chaotic cute energy.</small>
           </div>
-          <div class="rank-controls" aria-label="Rank eyes">
+          <div class="rank-controls" aria-label="Rank spark sticker">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -963,16 +1035,18 @@
           </div>
         </article>
 
-        <article class="feature-card" draggable="true" data-feature-card data-feature="lips" data-initial="L" data-color="#ffb8c8" data-img="./assets/feature-lips.jpg">
+        <article class="feature-card" draggable="true" data-feature-card data-feature="coffee sticker" data-initial="C" data-color="#9fd5ff">
           <div class="feature-photo">
-            <img src="./assets/feature-lips.jpg" alt="Cropped lips from Lynn Gam photo">
+            <div class="sticker-symbol" style="--sticker-bg: #9fd5ff;" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8z"></path><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"></path><path d="M6 4h9"></path></svg>
+            </div>
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
-            <strong>lips</strong>
-            <small>glossy crop, very noticeable.</small>
+            <strong>coffee sticker</strong>
+            <small>small cafe side quest.</small>
           </div>
-          <div class="rank-controls" aria-label="Rank lips">
+          <div class="rank-controls" aria-label="Rank coffee sticker">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -980,16 +1054,18 @@
           </div>
         </article>
 
-        <article class="feature-card" draggable="true" data-feature-card data-feature="brows" data-initial="B" data-color="#ffd65f" data-img="./assets/feature-brows.jpg">
+        <article class="feature-card" draggable="true" data-feature-card data-feature="chat sticker" data-initial="H" data-color="#ffb8c8">
           <div class="feature-photo">
-            <img src="./assets/feature-brows.jpg" alt="Cropped brows from Lynn Gam photo">
+            <div class="sticker-symbol" style="--sticker-bg: #ffb8c8;" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v10H8l-4 4V5z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg>
+            </div>
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
-            <strong>brows</strong>
-            <small>quietly expressive.</small>
+            <strong>chat sticker</strong>
+            <small>for a surprisingly good conversation.</small>
           </div>
-          <div class="rank-controls" aria-label="Rank brows">
+          <div class="rank-controls" aria-label="Rank chat sticker">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -997,16 +1073,18 @@
           </div>
         </article>
 
-        <article class="feature-card" draggable="true" data-feature-card data-feature="face card" data-initial="F" data-color="#8ed6bd" data-img="./assets/feature-face.jpg">
+        <article class="feature-card" draggable="true" data-feature-card data-feature="city stroll sticker" data-initial="W" data-color="#8ed6bd">
           <div class="feature-photo">
-            <img src="./assets/feature-face.jpg" alt="Cropped face from Lynn Gam photo">
+            <div class="sticker-symbol" style="--sticker-bg: #8ed6bd;" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20h16"></path><path d="M6 20V8l5-3v15"></path><path d="M13 20V6h5v14"></path><path d="M8 10h1"></path><path d="M8 13h1"></path><path d="M15 9h1"></path><path d="M15 12h1"></path></svg>
+            </div>
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
-            <strong>face card</strong>
-            <small>overall main-character crop.</small>
+            <strong>city stroll sticker</strong>
+            <small>Hong Kong walk-and-talk mood.</small>
           </div>
-          <div class="rank-controls" aria-label="Rank face card">
+          <div class="rank-controls" aria-label="Rank city stroll sticker">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -1015,22 +1093,22 @@
         </article>
       </div>
 
-      <p class="rank-summary" id="rankSummary">tap #1-#4 to build the feature ranking.</p>
+      <p class="rank-summary" id="rankSummary">tap #1-#4 to build the sticker ranking.</p>
 
       <div class="draft-panel">
-        <p class="draft" id="draftText">hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?</p>
+        <p class="draft" id="draftText">hi haha made you a tiny Lynn Gam sticker page. which tiny vibe wins #1?</p>
         <div class="actions">
           <button class="button primary" type="button" data-copy-draft>Copy</button>
           <a class="button" href="#meet">Plan slot</a>
         </div>
-        <p class="mini-note">tiny coding practice, very serious crop research.</p>
+        <p class="mini-note">tiny coding practice, very serious sticker research.</p>
       </div>
     </section>
 
     <section class="section" id="meet" aria-labelledby="meet-title">
       <div class="section-head">
         <h2 id="meet-title">rank the slots.</h2>
-        <p>drag the ranked feature chips onto three date slots and three time slots.</p>
+        <p>drag the ranked sticker chips onto three date slots and three time slots.</p>
       </div>
 
       <div class="meet-board">
@@ -1041,11 +1119,11 @@
           </button>
           <button class="guide-token" type="button" data-scroll-ranked>
             <span class="chip-face">T</span>
-            <span>time ranking<small>drop features again</small></span>
+            <span>time ranking<small>drop stickers again</small></span>
           </button>
         </div>
 
-        <div class="ranked-tray" id="rankedTray" aria-label="Ranked features to drag into date and time slots"></div>
+        <div class="ranked-tray" id="rankedTray" aria-label="Ranked stickers to drag into date and time slots"></div>
 
         <div class="planner-grid">
           <div class="planner-panel">
@@ -1067,17 +1145,17 @@
           </div>
         </div>
 
-        <p class="meet-summary" id="meetSummary">rank features, then drag #1/#2/#3 onto the date and time options.</p>
+        <p class="meet-summary" id="meetSummary">rank stickers, then drag #1/#2/#3 onto the date and time options.</p>
       </div>
 
       <div class="draft-panel">
-        <p class="draft" id="meetText">feature ranking question: put the favourites on the best date and time.</p>
+        <p class="draft" id="meetText">sticker ranking question: put the favourites on the best date and time.</p>
         <div class="actions">
           <button class="button primary" type="button" data-copy-meet>Copy invite</button>
           <button class="button" type="button" data-submit-meet>Submit</button>
-          <a class="button" href="#features">Rank features</a>
+          <a class="button" href="#stickers">Pick stickers</a>
         </div>
-        <p class="mini-note">desktop: drag ranked features. phone: tap a feature, then tap a date or time.</p>
+        <p class="mini-note">desktop: drag ranked stickers. phone: tap a sticker, then tap a date or time.</p>
       </div>
     </section>
   </main>
@@ -1095,11 +1173,11 @@
   </div>
 
   <footer>
-    tiny feature lab, complete.
+    tiny sticker lab, complete.
   </footer>
 
   <script>
-    const intro = "hi haha made you a tiny Lynn Gam feature ranking page: ";
+    const intro = "hi haha made you a tiny Lynn Gam sticker planner page: ";
     const draftText = document.querySelector("#draftText");
     const rankSummary = document.querySelector("#rankSummary");
     const featureCards = Array.from(document.querySelectorAll("[data-feature-card]"));
@@ -1115,14 +1193,14 @@
     const plan = {
       date: "",
       time: "",
-      dateFeature: "",
-      timeFeature: "",
+      dateSticker: "",
+      timeSticker: "",
       dateRank: "",
       timeRank: ""
     };
     const dateChoices = new Map();
     const timeChoices = new Map();
-    let activeFeature = "eyes";
+    let activeFeature = "spark sticker";
 
     function copyText(text, button) {
       const original = button.textContent;
@@ -1228,8 +1306,7 @@
           feature: rankedChip.dataset.feature,
           rank: rankedChip.dataset.rank,
           initial: rankedChip.dataset.initial,
-          color: rankedChip.dataset.color,
-          img: rankedChip.dataset.img
+          color: rankedChip.dataset.color
         }));
         event.dataTransfer.setData("text/plain", "feature");
         event.dataTransfer.effectAllowed = "move";
@@ -1246,8 +1323,7 @@
           feature,
           rank: ranking.get(feature) || "",
           initial: featureCard.dataset.initial,
-          color: featureCard.dataset.color,
-          img: featureCard.dataset.img
+          color: featureCard.dataset.color
         }));
         event.dataTransfer.setData("text/plain", "feature");
         event.dataTransfer.effectAllowed = "move";
@@ -1293,8 +1369,8 @@
         .sort((a, b) => Number(a[1]) - Number(b[1]));
 
       if (!ordered.length) {
-        rankSummary.textContent = "tap #1-#4 to build the feature ranking.";
-        draftText.textContent = "hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?";
+        rankSummary.textContent = "tap #1-#4 to build the sticker ranking.";
+        draftText.textContent = "hi haha made you a tiny Lynn Gam sticker page. which tiny vibe wins #1?";
         renderRankedTray();
         return;
       }
@@ -1303,7 +1379,7 @@
       const winner = ordered[0][0];
       rankSummary.textContent = summary;
       activeFeature = winner;
-      draftText.textContent = `hi haha made you a tiny Lynn Gam ranking page. my current #1 is ${winner}; what's yours?`;
+      draftText.textContent = `hi haha made you a tiny Lynn Gam sticker page. my current #1 is ${winner}; what's yours?`;
       renderRankedTray(winner);
       renderPlan();
     }
@@ -1337,9 +1413,8 @@
         chip.dataset.rank = rank || "";
         chip.dataset.initial = card.dataset.initial;
         chip.dataset.color = card.dataset.color;
-        chip.dataset.img = card.dataset.img;
         chip.innerHTML = `
-          <img class="chip-face" src="${card.dataset.img}" alt="">
+          <span class="chip-face" style="background: ${card.dataset.color};">${card.dataset.initial}</span>
           <span>${rank ? `#${rank}` : "#?"} ${feature}<small>drag to date/time</small></span>
         `;
         rankedTray.append(chip);
@@ -1364,13 +1439,12 @@
       const rank = featureChoice.rank || ranking.get(feature) || "?";
       const initial = featureChoice.initial || card?.dataset.initial || "?";
       const color = featureChoice.color || card?.dataset.color || "#ffb8c8";
-      const img = featureChoice.img || card?.dataset.img || "";
       choiceMap.forEach((choice, key) => {
         if (choice.feature === feature) {
           choiceMap.delete(key);
         }
       });
-      choiceMap.set(slot.dataset[type], { feature, rank, initial, color, img });
+      choiceMap.set(slot.dataset[type], { feature, rank, initial, color });
 
       slots.forEach((item) => {
         const value = item.dataset[type];
@@ -1389,9 +1463,6 @@
           item.dataset.rank = String(choice.rank).replace("#", "");
           item.dataset.initial = choice.initial;
           item.style.setProperty("--slot-color", choice.color);
-          if (choice.img) {
-            item.style.setProperty("--slot-image", `url("${choice.img}")`);
-          }
           const label = document.createElement("span");
           label.className = "slot-choice";
           label.textContent = `#${choice.rank || "?"} ${choice.feature}`;
@@ -1405,10 +1476,10 @@
       const topTime = getTopChoice(timeChoices);
       const topFeature = getTopFeature();
       plan.date = topDate?.value || "";
-      plan.dateFeature = topDate?.feature || "";
+      plan.dateSticker = topDate?.feature || "";
       plan.dateRank = topDate?.rank || "";
       plan.time = topTime?.value || "";
-      plan.timeFeature = topTime?.feature || "";
+      plan.timeSticker = topTime?.feature || "";
       plan.timeRank = topTime?.rank || "";
       plan.feature = topFeature?.feature || "";
       plan.featureRank = topFeature?.rank || "";
@@ -1434,31 +1505,31 @@
     function renderPlan() {
       if (plan.date && plan.time) {
         meetSummary.textContent = `#${plan.dateRank} date: ${plan.date} + #${plan.timeRank} time: ${plan.time}`;
-        meetText.textContent = `feature ranking question: #${plan.dateRank} chose ${plan.date}, and #${plan.timeRank} chose ${plan.time}.`;
+        meetText.textContent = `sticker ranking question: #${plan.dateRank} chose ${plan.date}, and #${plan.timeRank} chose ${plan.time}.`;
         return;
       }
 
       if (plan.date) {
         meetSummary.textContent = `#${plan.dateRank} date: ${plan.date}. now rank the time slots too.`;
-        meetText.textContent = `feature ranking question: ${plan.date} maybe? now pick the time.`;
+        meetText.textContent = `sticker ranking question: ${plan.date} maybe? now pick the time.`;
         return;
       }
 
       if (plan.time) {
         meetSummary.textContent = `#${plan.timeRank} time: ${plan.time}. now rank the date slots too.`;
-        meetText.textContent = `feature ranking question: ${plan.time} maybe? now pick the date.`;
+        meetText.textContent = `sticker ranking question: ${plan.time} maybe? now pick the date.`;
         return;
       }
 
-      meetSummary.textContent = "rank features, then drag #1/#2/#3 onto the date and time options.";
-      meetText.textContent = "feature ranking question: put the favourites on the best date and time.";
+      meetSummary.textContent = "rank stickers, then drag #1/#2/#3 onto the date and time options.";
+      meetText.textContent = "sticker ranking question: put the favourites on the best date and time.";
     }
 
     function buildPrompt() {
       const date = plan.date || "the day you picked";
       const time = plan.time ? formatPromptTime(plan.time) : "the time you picked";
-      const feature = plan.feature || plan.dateFeature || plan.timeFeature || activeFeature || "favourite feature";
-      return `hi joshua, if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite feature was ${feature}.`;
+      const sticker = plan.feature || plan.dateSticker || plan.timeSticker || activeFeature || "favourite sticker";
+      return `hi joshua, if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite sticker was ${sticker}.`;
     }
 
     function formatPromptTime(time) {
@@ -1486,29 +1557,27 @@
     }
 
     function getActiveFeature() {
-      const feature = activeFeature || "eyes";
+      const feature = activeFeature || "spark sticker";
       const card = getFeatureCard(feature) || featureCards[0];
       return {
         type: "feature",
         feature,
         rank: ranking.get(feature) || "",
         initial: card.dataset.initial,
-        color: card.dataset.color,
-        img: card.dataset.img
+        color: card.dataset.color
       };
     }
 
     function getBestFeature() {
       const ordered = Array.from(ranking.entries()).sort((a, b) => Number(a[1]) - Number(b[1]));
-      const feature = ordered[0]?.[0] || activeFeature || "eyes";
+      const feature = ordered[0]?.[0] || activeFeature || "spark sticker";
       const card = getFeatureCard(feature) || featureCards[0];
       return {
         type: "feature",
         feature,
         rank: ranking.get(feature) || "1",
         initial: card.dataset.initial,
-        color: card.dataset.color,
-        img: card.dataset.img
+        color: card.dataset.color
       };
     }
 
