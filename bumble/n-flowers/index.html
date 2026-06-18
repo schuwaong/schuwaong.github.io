@@ -621,6 +621,65 @@
       background: #f9e8ee;
     }
 
+    .ranked-tray {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .ranked-chip {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      padding: 9px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      cursor: grab;
+      font-weight: 950;
+      text-align: left;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .ranked-chip img {
+      width: 52px;
+      height: 52px;
+      display: block;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      object-fit: cover;
+    }
+
+    .ranked-chip small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .ranked-chip:hover,
+    .ranked-chip:focus-visible,
+    .ranked-chip.active {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+      outline: 0;
+    }
+
+    .ranked-chip.active {
+      background: #f9e8ee;
+    }
+
+    .ranked-chip.empty {
+      cursor: default;
+      opacity: .78;
+    }
+
     .planner-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
@@ -695,8 +754,8 @@
       position: absolute;
       right: 8px;
       bottom: 8px;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border: 2px solid var(--ink);
       border-radius: 999px;
       background-size: cover;
@@ -711,6 +770,10 @@
 
     .time-slot.selected::after {
       background-image: var(--slot-flower, url("./assets/ranking/combo-peony-lilac.jpg"));
+    }
+
+    .time-slot.selected .slot-choice {
+      max-width: calc(100% - 54px);
     }
 
     .time-slot[data-rank="1"] {
@@ -826,6 +889,7 @@
       }
 
       .drag-tray,
+      .ranked-tray,
       .planner-grid {
         grid-template-columns: 1fr;
       }
@@ -999,11 +1063,13 @@
             <img src="./assets/ranking/combo-peony-vase.jpg" alt="Peony token for choosing a date">
             <span>peony date<small>tap a calendar day</small></span>
           </button>
-          <button class="flower-token" type="button" draggable="true" data-token="time" aria-pressed="false">
-            <img src="./assets/ranking/combo-peony-lilac.jpg" alt="Lilac token for choosing a time">
-            <span>ranked flower<small>drag cards to time</small></span>
+          <button class="flower-token" type="button" data-scroll-ranked aria-pressed="false">
+            <img src="./assets/ranking/combo-soft-pink.jpg" alt="Ranked flowers shortcut">
+            <span>ranked flowers<small>drag chips to time</small></span>
           </button>
         </div>
+
+        <div class="ranked-tray" id="rankedTray" aria-label="Ranked flowers to drag into time slots"></div>
 
         <div class="planner-grid">
           <div class="planner-card">
@@ -1053,6 +1119,7 @@
     const draftText = document.querySelector("#draftText");
     const rankSummary = document.querySelector("#rankSummary");
     const flowerCards = Array.from(document.querySelectorAll("[data-flower-card]"));
+    const rankedTray = document.querySelector("#rankedTray");
     const ranking = new Map();
     const tokens = Array.from(document.querySelectorAll("[data-token]"));
     const dateSlots = Array.from(document.querySelectorAll("[data-date]"));
@@ -1080,6 +1147,19 @@
       const tokenButton = event.target.closest("[data-token]");
       if (tokenButton) {
         setActiveToken(tokenButton.dataset.token);
+        return;
+      }
+
+      const rankedChip = event.target.closest("[data-ranked-chip]");
+      if (rankedChip && !rankedChip.classList.contains("empty")) {
+        activeFlower = rankedChip.dataset.flower;
+        renderRankedTray(rankedChip.dataset.flower);
+        return;
+      }
+
+      const scrollRanked = event.target.closest("[data-scroll-ranked]");
+      if (scrollRanked) {
+        rankedTray.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
 
@@ -1131,6 +1211,21 @@
     });
 
     document.addEventListener("dragstart", (event) => {
+      const rankedChip = event.target.closest("[data-ranked-chip]");
+      if (rankedChip && !rankedChip.classList.contains("empty")) {
+        activeFlower = rankedChip.dataset.flower;
+        event.dataTransfer.setData("application/json", JSON.stringify({
+          type: "flower",
+          flower: rankedChip.dataset.flower,
+          rank: rankedChip.dataset.rank,
+          img: rankedChip.dataset.img
+        }));
+        event.dataTransfer.setData("text/plain", "flower");
+        event.dataTransfer.effectAllowed = "move";
+        renderRankedTray(rankedChip.dataset.flower);
+        return;
+      }
+
       const flowerCard = event.target.closest("[data-flower-card]");
       if (flowerCard) {
         const flower = flowerCard.dataset.flower;
@@ -1199,6 +1294,7 @@
       if (!ordered.length) {
         rankSummary.textContent = "tap #1-#4 to build a tiny flower ranking.";
         draftText.textContent = "hi haha made you a tiny peony ranking page. which flower combo wins #1?";
+        renderRankedTray();
         return;
       }
 
@@ -1207,7 +1303,49 @@
       const winner = ordered[0][0];
       activeFlower = winner;
       draftText.textContent = `hi haha made you a tiny peony ranking page. my current #1 is ${winner}; what's yours?`;
+      renderRankedTray(winner);
       renderPlan();
+    }
+
+    function renderRankedTray(active = activeFlower) {
+      const ordered = Array.from(ranking.entries()).sort((a, b) => Number(a[1]) - Number(b[1]));
+
+      if (!ordered.length) {
+        rankedTray.innerHTML = "";
+        flowerCards.forEach((card) => {
+          const chip = document.createElement("button");
+          chip.className = "ranked-chip empty";
+          chip.type = "button";
+          chip.disabled = true;
+          chip.innerHTML = `
+            <img src="${card.dataset.img}" alt="">
+            <span>? ${card.dataset.flower}<small>rank first</small></span>
+          `;
+          rankedTray.append(chip);
+        });
+        return;
+      }
+
+      rankedTray.innerHTML = "";
+      ordered.forEach(([flower, rank]) => {
+        const card = getFlowerCard(flower);
+        if (!card) {
+          return;
+        }
+        const chip = document.createElement("button");
+        chip.className = `ranked-chip${flower === active ? " active" : ""}`;
+        chip.type = "button";
+        chip.draggable = true;
+        chip.dataset.rankedChip = "";
+        chip.dataset.flower = flower;
+        chip.dataset.rank = rank;
+        chip.dataset.img = card.dataset.img;
+        chip.innerHTML = `
+          <img src="${card.dataset.img}" alt="">
+          <span>#${rank} ${flower}<small>drag to a time</small></span>
+        `;
+        rankedTray.append(chip);
+      });
     }
 
     function setActiveToken(token) {
@@ -1297,6 +1435,8 @@
       }
       return { type: event.dataTransfer.getData("text/plain") };
     }
+
+    renderRankedTray();
   </script>
 </body>
 </html>
