@@ -828,6 +828,114 @@
       line-height: 1.4;
     }
 
+    .prompt-modal[hidden] {
+      display: none;
+    }
+
+    .prompt-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(42, 35, 34, .34);
+      backdrop-filter: blur(7px);
+      animation: modal-fade .18s ease-out both;
+    }
+
+    .prompt-card {
+      position: relative;
+      width: min(540px, 100%);
+      padding: 20px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 8px 8px 0 var(--ink);
+      animation: modal-pop .22s ease-out both;
+    }
+
+    .prompt-card::before {
+      content: "";
+      position: absolute;
+      top: -22px;
+      right: 24px;
+      width: 58px;
+      height: 58px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: url("./assets/ranking/combo-peony-vase.jpg") center / cover;
+      box-shadow: 4px 4px 0 var(--ink);
+      animation: modal-bloom 2.6s ease-in-out infinite;
+    }
+
+    .prompt-card h3 {
+      margin: 0 72px 8px 0;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      line-height: 1;
+    }
+
+    .prompt-card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .prompt-box {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff8f1;
+      color: var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 850;
+      line-height: 1.45;
+    }
+
+    .prompt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    @keyframes modal-fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modal-pop {
+      from {
+        transform: translateY(10px) scale(.96);
+      }
+
+      to {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes modal-bloom {
+      0%,
+      100% {
+        transform: rotate(-5deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(4deg) scale(1.06);
+      }
+    }
+
     .draft-panel {
       margin-top: 18px;
       padding: 18px;
@@ -1103,12 +1211,25 @@
         <p class="draft" id="meetText">tiny peony scheduling question: rank flowers, then put your favorite on the best time.</p>
         <div class="reply-actions">
           <button class="button primary" type="button" data-copy-meet>Copy invite</button>
+          <button class="button" type="button" data-submit-meet>Submit</button>
           <a class="button" href="#replies">Rank flowers</a>
         </div>
         <p class="mini-note">desktop: drag flower cards. phone: rank first, then tap a time.</p>
       </div>
     </section>
   </main>
+
+  <div class="prompt-modal" id="promptModal" hidden role="dialog" aria-modal="true" aria-labelledby="promptTitle">
+    <div class="prompt-card">
+      <h3 id="promptTitle">copy this.</h3>
+      <p id="promptHint">since texting is hard, this is ready for Bumble.</p>
+      <textarea class="prompt-box" id="promptBox" readonly></textarea>
+      <div class="prompt-actions">
+        <button class="button primary" type="button" data-copy-prompt>Copy prompt</button>
+        <button class="button" type="button" data-close-prompt>Close</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     soft page, done.
@@ -1126,6 +1247,9 @@
     const timeSlots = Array.from(document.querySelectorAll("[data-time]"));
     const meetSummary = document.querySelector("#meetSummary");
     const meetText = document.querySelector("#meetText");
+    const promptModal = document.querySelector("#promptModal");
+    const promptBox = document.querySelector("#promptBox");
+    const promptHint = document.querySelector("#promptHint");
     const plan = { date: "", time: "", flower: "", rank: "", img: "" };
     let activeToken = "date";
     let activeFlower = "peony vase";
@@ -1204,9 +1328,33 @@
         return;
       }
 
+      const submitMeet = event.target.closest("[data-submit-meet]");
+      if (submitMeet) {
+        openPromptModal();
+        return;
+      }
+
+      const copyPrompt = event.target.closest("[data-copy-prompt]");
+      if (copyPrompt) {
+        copyText(promptBox.value, copyPrompt);
+        return;
+      }
+
+      const closePrompt = event.target.closest("[data-close-prompt]");
+      if (closePrompt || event.target === promptModal) {
+        closePromptModal();
+        return;
+      }
+
       const copyIntro = event.target.closest("[data-copy-intro]");
       if (copyIntro) {
         copyText(intro + window.location.href, copyIntro);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !promptModal.hidden) {
+        closePromptModal();
       }
     });
 
@@ -1406,6 +1554,31 @@
 
       meetSummary.textContent = "rank flowers, pick a date, then drag #1 flower to the preferred time.";
       meetText.textContent = "tiny peony scheduling question: rank flowers, then put your favorite on the best time.";
+    }
+
+    function buildPrompt() {
+      const date = plan.date || "the day you picked";
+      const time = plan.time ? formatPromptTime(plan.time) : "the time you picked";
+      return `hi joshua, if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love with u, just kidding about the last part tho. ;)`;
+    }
+
+    function formatPromptTime(time) {
+      return time.replace(/^([^ ]+) at /i, "$1 @ ");
+    }
+
+    function openPromptModal() {
+      const isReady = Boolean(plan.date && plan.time);
+      promptBox.value = buildPrompt();
+      promptHint.textContent = isReady
+        ? "since texting is hard, copy this and paste it to the chat."
+        : "pick a date and time first, or copy this draft and edit the blanks.";
+      promptModal.hidden = false;
+      promptBox.focus();
+      promptBox.select();
+    }
+
+    function closePromptModal() {
+      promptModal.hidden = true;
     }
 
     function getFlowerCard(flower) {
