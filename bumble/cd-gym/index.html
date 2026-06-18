@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cd gym bloom</title>
+  <meta name="description" content="Tiny AI bloom gym note for Cd.">
+  <meta property="og:title" content="Cd gym bloom">
+  <meta property="og:description" content="One cute rep.">
+  <meta property="og:image" content="./assets/gym-note.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172230;
+      --muted: #536171;
+      --paper: #f5fbff;
+      --panel: #ffffff;
+      --blue: #304e7a;
+      --aqua: #2d8a94;
+      --orange: #ef7b45;
+      --lime: #d6e8de;
+      --sun: #f5c84c;
+      --line: rgba(23, 34, 48, .16);
+      --shadow: 0 24px 60px rgba(18, 46, 65, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(23, 34, 48, .04) 1px, transparent 1px),
+        linear-gradient(rgba(23, 34, 48, .04) 1px, transparent 1px),
+        linear-gradient(180deg, #f5fbff 0%, #edf7ef 100%);
+      background-size: 44px 44px, 44px 44px, auto;
+      overflow-x: hidden;
+    }
+
+    .motion-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .motion-layer span {
+      position: absolute;
+      border: 2px solid rgba(23, 34, 48, .28);
+      border-radius: 8px;
+      opacity: .55;
+      animation: float-rep var(--speed) ease-in-out infinite, fade-rep 4.2s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    .motion-layer span:nth-child(1) {
+      width: 74px;
+      height: 26px;
+      left: 8%;
+      top: 18%;
+      background: rgba(239, 123, 69, .2);
+    }
+
+    .motion-layer span:nth-child(2) {
+      width: 32px;
+      height: 84px;
+      left: 84%;
+      top: 14%;
+      background: rgba(45, 138, 148, .18);
+    }
+
+    .motion-layer span:nth-child(3) {
+      width: 98px;
+      height: 18px;
+      left: 70%;
+      top: 72%;
+      background: rgba(245, 200, 76, .22);
+    }
+
+    .motion-layer span:nth-child(4) {
+      width: 24px;
+      height: 24px;
+      left: 18%;
+      top: 76%;
+      background: rgba(48, 78, 122, .16);
+      transform: rotate(45deg);
+    }
+
+    @keyframes float-rep {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translate3d(12px, -18px, 0) rotate(5deg);
+      }
+    }
+
+    @keyframes fade-rep {
+      0%,
+      100% {
+        opacity: .34;
+      }
+
+      50% {
+        opacity: .7;
+      }
+    }
+
+    .topbar,
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+    }
+
+    .topbar {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 850;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: 950;
+      animation: mark-lift 2.8s ease-in-out infinite;
+    }
+
+    @keyframes mark-lift {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 42px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 98px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, .92fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 16px;
+      padding: 8px 11px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 620px;
+      margin-bottom: 18px;
+      font-size: clamp(2.9rem, 8vw, 6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 500px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.9vw, 1.15rem);
+      line-height: 1.5;
+      overflow-wrap: break-word;
+    }
+
+    .hero > * {
+      min-width: 0;
+    }
+
+    .hero-actions,
+    .reply-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink);
+      background: var(--panel);
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      text-decoration: none;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .button.primary {
+      background: var(--blue);
+      color: #fff;
+      animation: button-rep 2.6s ease-in-out infinite;
+    }
+
+    @keyframes button-rep {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+      outline: 0;
+    }
+
+    .art {
+      position: relative;
+      margin: 0;
+      min-height: 430px;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow), 8px 8px 0 var(--ink);
+    }
+
+    .art::before {
+      content: "HK -> KL";
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 2;
+      padding: 9px 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      font-size: .86rem;
+      font-weight: 950;
+      animation: route-pop 2.6s ease-in-out infinite;
+    }
+
+    .art::after {
+      content: "";
+      position: absolute;
+      left: 15%;
+      right: 15%;
+      top: 22%;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--orange), var(--aqua), transparent);
+      box-shadow: 0 0 18px rgba(45, 138, 148, .35);
+      animation: route-scan 3.2s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes route-scan {
+      0%,
+      100% {
+        transform: translateX(-24px) scaleX(.78);
+        opacity: .35;
+      }
+
+      50% {
+        transform: translateX(24px) scaleX(1);
+        opacity: .95;
+      }
+    }
+
+    @keyframes route-pop {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .art img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      display: block;
+      object-fit: cover;
+      animation: mat-breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes mat-breathe {
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-5px) scale(1.01);
+      }
+    }
+
+    .art-note {
+      position: absolute;
+      z-index: 2;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 5px 5px 0 var(--ink);
+      font-weight: 850;
+      line-height: 1.35;
+      animation: note-lift 4s ease-in-out infinite;
+    }
+
+    @keyframes note-lift {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .hook-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hook-strip span {
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      font-size: .9rem;
+      font-weight: 950;
+      text-align: center;
+      animation: chip-rep 5s ease-in-out infinite;
+    }
+
+    .hook-strip span:nth-child(2) {
+      animation-delay: .25s;
+    }
+
+    .hook-strip span:nth-child(3) {
+      animation-delay: .5s;
+    }
+
+    .hook-strip span:nth-child(4) {
+      animation-delay: .75s;
+    }
+
+    @keyframes chip-rep {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    .section {
+      padding: 42px 0 10px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card,
+    .draft-panel {
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: transform .16s ease;
+    }
+
+    .card:hover,
+    .card:focus-visible,
+    .card.active {
+      transform: translateY(-2px);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .card small {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.45;
+    }
+
+    .card span {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--aqua);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .card.active {
+      background: #e8f3f8;
+    }
+
+    .draft-panel {
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .draft {
+      min-height: 84px;
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+      line-height: 1.42;
+      font-weight: 850;
+    }
+
+    .mini-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    footer {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 750;
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 18px;
+      }
+
+      h1 {
+        font-size: 2.18rem;
+        line-height: .97;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hook-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: calc(100% - 8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="motion-layer" aria-hidden="true">
+    <span style="--speed: 6s; --delay: -1s;"></span>
+    <span style="--speed: 7.5s; --delay: -4s;"></span>
+    <span style="--speed: 6.8s; --delay: -2s;"></span>
+    <span style="--speed: 8s; --delay: -5s;"></span>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Cd AI bloom gym trip">
+      <span class="mark">CD</span>
+      <span>gym bloom</span>
+    </a>
+    <span>AI + KL</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">for Cd</p>
+        <h1 id="title">one cute rep.</h1>
+        <p class="lede">
+          hi, made you a tiny AI-bloom gym page. peaceful, hydrated, low drama :)
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#replies">Pick a reply</a>
+          <button class="button" type="button" data-copy-intro>Copy note</button>
+        </div>
+      </div>
+
+      <figure class="art" aria-label="Gym note illustration">
+        <img src="./assets/gym-note.png" alt="A playful illustrated gym mat with dumbbells, bottle, and timer">
+        <figcaption class="art-note">
+          PR: calm reply.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="replies" aria-labelledby="reply-title">
+      <div class="section-head">
+        <h2 id="reply-title">pick one.</h2>
+        <p>short, playful, easy.</p>
+      </div>
+
+      <div class="hook-strip" aria-label="Chat hooks used for this page">
+        <span>AI bloom</span>
+        <span>physique</span>
+        <span>HK/KL</span>
+        <span>peaceful</span>
+      </div>
+
+      <div class="cards" role="list">
+        <button class="card active" type="button" data-draft="challenge">
+          <span>1</span>
+          <div>
+            <strong>send page</strong>
+            <small>cute coding excuse.</small>
+          </div>
+        </button>
+        <button class="card" type="button" data-draft="smoothie">
+          <span>2</span>
+          <div>
+            <strong>AI question</strong>
+            <small>simple callback.</small>
+          </div>
+        </button>
+        <button class="card" type="button" data-draft="rest">
+          <span>3</span>
+          <div>
+            <strong>rest day</strong>
+            <small>softest one.</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="draft-panel">
+        <p class="draft" id="draftText">hi haha made you a tiny AI-bloom gym page because your chat had physique, AI, and KL energy :)</p>
+        <div class="reply-actions">
+          <button class="button primary" type="button" data-copy-draft>Copy</button>
+          <a class="button" href="https://bumble.com/app/connections">Open Bumble</a>
+        </div>
+        <p class="mini-note">one rep only.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    gym bloom, done.
+  </footer>
+
+  <script>
+    const drafts = {
+      challenge: "hi haha made you a tiny AI-bloom gym page because your chat had physique, AI, and KL energy :)",
+      smoothie: "tiny AI-bloom question: are you using AI in life/work yet, or still testing the reps?",
+      rest: "rest day accepted haha. leaving this tiny gym + KL hello here."
+    };
+
+    const intro = "hi haha made you a tiny AI-bloom gym page: ";
+    const draftText = document.querySelector("#draftText");
+    const cards = Array.from(document.querySelectorAll("[data-draft]"));
+
+    function copyText(text, button) {
+      const original = button.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = "Copied";
+      }).catch(() => {
+        button.textContent = "Select text";
+      }).finally(() => {
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1400);
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-draft]");
+      if (card) {
+        cards.forEach((item) => item.classList.toggle("active", item === card));
+        draftText.textContent = drafts[card.dataset.draft];
+        return;
+      }
+
+      const copyDraft = event.target.closest("[data-copy-draft]");
+      if (copyDraft) {
+        copyText(draftText.textContent, copyDraft);
+        return;
+      }
+
+      const copyIntro = event.target.closest("[data-copy-intro]");
+      if (copyIntro) {
+        copyText(intro + window.location.href, copyIntro);
+      }
+    });
+  </script>
+</body>
+</html>

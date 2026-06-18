@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>N peony page</title>
+  <meta name="description" content="Tiny peony note for a read-and-journal chat.">
+  <meta property="og:title" content="N peony page">
+  <meta property="og:description" content="Soft hello, no pressure.">
+  <meta property="og:image" content="./assets/flower-note.png">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #2a2322;
+      --muted: #725f5b;
+      --paper: #fff8f1;
+      --petal: #f6bac9;
+      --rose: #e9586f;
+      --leaf: #4f8c69;
+      --sun: #f7cf57;
+      --cream: #fffdf7;
+      --line: rgba(42, 35, 34, .16);
+      --shadow: 0 24px 60px rgba(90, 55, 60, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(247, 207, 87, .22), transparent 28%),
+        linear-gradient(180deg, #fff8f1 0%, #f6f3e7 58%, #eaf5ee 100%);
+      overflow-x: hidden;
+    }
+
+    .petals {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .petals span {
+      position: absolute;
+      top: -12vh;
+      left: var(--x);
+      width: var(--size);
+      height: calc(var(--size) * 1.28);
+      border-radius: 68% 32% 72% 28%;
+      background: linear-gradient(145deg, rgba(255, 244, 248, .96), rgba(233, 88, 111, .72));
+      box-shadow: 0 8px 20px rgba(233, 88, 111, .18);
+      opacity: .74;
+      animation: petal-drift var(--speed) linear infinite, petal-sway 4s ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes petal-drift {
+      0% {
+        transform: translate3d(0, -12vh, 0) rotate(0deg);
+      }
+
+      45% {
+        transform: translate3d(26px, 48vh, 0) rotate(170deg);
+      }
+
+      100% {
+        transform: translate3d(-22px, 112vh, 0) rotate(330deg);
+      }
+    }
+
+    @keyframes petal-sway {
+      0%,
+      100% {
+        margin-left: 0;
+      }
+
+      50% {
+        margin-left: 14px;
+      }
+    }
+
+    .topbar,
+    main,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+    }
+
+    .topbar {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--petal);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: 950;
+      animation: mark-bob 3s ease-in-out infinite;
+    }
+
+    @keyframes mark-bob {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-3px) rotate(-2deg);
+      }
+    }
+
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 42px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 98px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, .9fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 16px;
+      padding: 8px 11px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--sun);
+      box-shadow: 4px 4px 0 var(--ink);
+      font-size: .78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      transition: transform .16s ease;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 620px;
+      margin-bottom: 18px;
+      font-size: clamp(2.9rem, 8vw, 6rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 520px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.9vw, 1.15rem);
+      line-height: 1.5;
+      overflow-wrap: break-word;
+    }
+
+    .hero > * {
+      min-width: 0;
+    }
+
+    .hero-actions,
+    .reply-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      color: var(--ink);
+      background: var(--cream);
+      box-shadow: 5px 5px 0 var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      text-decoration: none;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+
+    .button.primary {
+      background: var(--rose);
+      color: #fffdf7;
+      animation: button-bloom 2.8s ease-in-out infinite;
+    }
+
+    @keyframes button-bloom {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--ink);
+      outline: 0;
+    }
+
+    .art {
+      position: relative;
+      margin: 0;
+      min-height: 430px;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: var(--shadow), 8px 8px 0 var(--ink);
+    }
+
+    .art::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 2px dashed rgba(233, 88, 111, .4);
+      border-radius: 8px;
+      pointer-events: none;
+      animation: soft-pulse 3.8s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .art::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      top: 14px;
+      right: 22px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 253, 247, .95) 0 13%, transparent 14%),
+        radial-gradient(circle at 50% 18%, rgba(246, 186, 201, .9) 0 18%, transparent 19%),
+        radial-gradient(circle at 82% 50%, rgba(246, 186, 201, .82) 0 18%, transparent 19%),
+        radial-gradient(circle at 50% 82%, rgba(246, 186, 201, .9) 0 18%, transparent 19%),
+        radial-gradient(circle at 18% 50%, rgba(246, 186, 201, .82) 0 18%, transparent 19%);
+      opacity: .38;
+      filter: blur(.2px);
+      animation: bloom-spin 12s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes bloom-spin {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+
+    @keyframes soft-pulse {
+      0%,
+      100% {
+        opacity: .35;
+        transform: scale(.985);
+      }
+
+      50% {
+        opacity: .85;
+        transform: scale(1);
+      }
+    }
+
+    .art img {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      display: block;
+      object-fit: cover;
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .art-note {
+      position: absolute;
+      z-index: 2;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .92);
+      box-shadow: 5px 5px 0 var(--ink);
+      font-weight: 850;
+      line-height: 1.35;
+      animation: note-bob 4.2s ease-in-out infinite;
+    }
+
+    @keyframes note-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    .hook-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hook-strip span {
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .9);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      font-size: .93rem;
+      font-weight: 950;
+      text-align: center;
+      animation: chip-bob 5s ease-in-out infinite;
+    }
+
+    .hook-strip span:nth-child(2) {
+      animation-delay: .35s;
+    }
+
+    .hook-strip span:nth-child(3) {
+      animation-delay: .7s;
+    }
+
+    @keyframes chip-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-3px);
+      }
+    }
+
+    .section {
+      padding: 42px 0 10px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card,
+    .draft-panel {
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .9);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .card {
+      min-height: 210px;
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .card:hover,
+    .card:focus-visible,
+    .card.active {
+      transform: translateY(-2px);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .card small {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.45;
+    }
+
+    .card span {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--petal);
+      font-weight: 950;
+    }
+
+    .card.active {
+      background: #f9e8ee;
+    }
+
+    .draft-panel {
+      margin-top: 18px;
+      padding: 18px;
+    }
+
+    .draft {
+      min-height: 84px;
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+      line-height: 1.42;
+      font-weight: 850;
+    }
+
+    .mini-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    footer {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 34px;
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 750;
+    }
+
+    @media (max-width: 820px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 18px;
+      }
+
+      h1 {
+        font-size: 2.18rem;
+        line-height: .97;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hook-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .button {
+        width: calc(100% - 8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="petals" aria-hidden="true">
+    <span style="--x: 8%; --size: 16px; --speed: 13s; --delay: -1s;"></span>
+    <span style="--x: 24%; --size: 22px; --speed: 15s; --delay: -6s;"></span>
+    <span style="--x: 43%; --size: 14px; --speed: 12s; --delay: -3s;"></span>
+    <span style="--x: 62%; --size: 20px; --speed: 16s; --delay: -8s;"></span>
+    <span style="--x: 80%; --size: 18px; --speed: 14s; --delay: -5s;"></span>
+    <span style="--x: 94%; --size: 24px; --speed: 17s; --delay: -10s;"></span>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="N peony journal page">
+      <span class="mark">N</span>
+      <span>peony journal page</span>
+    </a>
+    <span>read + journal</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="eyebrow">for N</p>
+        <h1 id="title">tiny peony note.</h1>
+        <p class="lede">
+          hi, i made you a tiny peony page because you said you read and journal :)
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#replies">Pick a reply</a>
+          <button class="button" type="button" data-copy-intro>Copy note</button>
+        </div>
+      </div>
+
+      <figure class="art" aria-label="Flower note illustration">
+        <img src="./assets/flower-note.png" alt="A colorful illustrated vase of flowers beside an open journal">
+        <figcaption class="art-note">
+          peony petals + quiet pages.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="replies" aria-labelledby="reply-title">
+      <div class="section-head">
+        <h2 id="reply-title">pick one.</h2>
+        <p>soft, easy, no rush.</p>
+      </div>
+
+      <div class="hook-strip" aria-label="Chat hooks used for this page">
+        <span>read + journal</span>
+        <span>peony</span>
+        <span>soft</span>
+      </div>
+
+      <div class="cards" role="list">
+        <button class="card active" type="button" data-draft="flower">
+          <span>1</span>
+          <div>
+            <strong>peony ping</strong>
+            <small>cute and specific.</small>
+          </div>
+        </button>
+        <button class="card" type="button" data-draft="journal">
+          <span>2</span>
+          <div>
+            <strong>journal line</strong>
+            <small>uses the read + journal clue.</small>
+          </div>
+        </button>
+        <button class="card" type="button" data-draft="soft">
+          <span>3</span>
+          <div>
+            <strong>tiny hi</strong>
+            <small>the gentlest one.</small>
+          </div>
+        </button>
+      </div>
+
+      <div class="draft-panel">
+        <p class="draft" id="draftText">hi haha i made you a tiny peony page because you said you read and journal :)</p>
+        <div class="reply-actions">
+          <button class="button primary" type="button" data-copy-draft>Copy</button>
+          <a class="button" href="https://bumble.com/app/connections">Open Bumble</a>
+        </div>
+        <p class="mini-note">no rush.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    soft page, done.
+  </footer>
+
+  <script>
+    const drafts = {
+      flower: "hi haha i made you a tiny peony page because you said you read and journal :)",
+      journal: "if today was a journal page, would it be peony field, rainy window, or blank page?",
+      soft: "leaving a tiny peony hello here. no rush."
+    };
+
+    const intro = "hi haha i made you a tiny peony page: ";
+    const draftText = document.querySelector("#draftText");
+    const cards = Array.from(document.querySelectorAll("[data-draft]"));
+
+    function copyText(text, button) {
+      const original = button.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = "Copied";
+      }).catch(() => {
+        button.textContent = "Select text";
+      }).finally(() => {
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1400);
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-draft]");
+      if (card) {
+        cards.forEach((item) => item.classList.toggle("active", item === card));
+        draftText.textContent = drafts[card.dataset.draft];
+        return;
+      }
+
+      const copyDraft = event.target.closest("[data-copy-draft]");
+      if (copyDraft) {
+        copyText(draftText.textContent, copyDraft);
+        return;
+      }
+
+      const copyIntro = event.target.closest("[data-copy-intro]");
+      if (copyIntro) {
+        copyText(intro + window.location.href, copyIntro);
+      }
+    });
+  </script>
+</body>
+</html>
