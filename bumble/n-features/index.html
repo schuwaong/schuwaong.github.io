@@ -1071,7 +1071,7 @@
       </div>
 
       <div class="draft-panel">
-        <p class="draft" id="meetText">feature ranking question: put the favorites on the best date and time.</p>
+        <p class="draft" id="meetText">feature ranking question: put the favourites on the best date and time.</p>
         <div class="actions">
           <button class="button primary" type="button" data-copy-meet>Copy invite</button>
           <button class="button" type="button" data-submit-meet>Submit</button>
@@ -1085,7 +1085,7 @@
   <div class="prompt-modal" id="promptModal" hidden role="dialog" aria-modal="true" aria-labelledby="promptTitle">
     <div class="prompt-card">
       <h3 id="promptTitle">copy this.</h3>
-      <p id="promptHint">since u dont like texting, just copy this and paste to the chat.</p>
+      <p id="promptHint">copy this and paste to the chat.</p>
       <textarea class="prompt-box" id="promptBox" readonly></textarea>
       <div class="prompt-actions">
         <button class="button primary" type="button" data-copy-prompt>Copy prompt</button>
@@ -1451,14 +1451,14 @@
       }
 
       meetSummary.textContent = "rank features, then drag #1/#2/#3 onto the date and time options.";
-      meetText.textContent = "feature ranking question: put the favorites on the best date and time.";
+      meetText.textContent = "feature ranking question: put the favourites on the best date and time.";
     }
 
     function buildPrompt() {
       const date = plan.date || "the day you picked";
       const time = plan.time ? formatPromptTime(plan.time) : "the time you picked";
-      const feature = plan.feature || plan.dateFeature || plan.timeFeature || activeFeature || "favorite feature";
-      return `hi joshua, since u made me rank Lynn Gam's facial features, my #1 is ${feature}. if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love with u, just kidding about the last part tho. ;)`;
+      const feature = plan.feature || plan.dateFeature || plan.timeFeature || activeFeature || "favourite feature";
+      return `hi joshua, if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love, just kidding about the last part. PS: to answer your previous question, the favourite feature was ${feature}.`;
     }
 
     function formatPromptTime(time) {
@@ -1470,7 +1470,7 @@
       const isReady = Boolean(plan.date && plan.time);
       promptBox.value = buildPrompt();
       promptHint.textContent = isReady
-        ? "since u dont like texting, just copy this and paste to the chat."
+        ? "copy this and paste to the chat."
         : "pick a date and time first, or copy this draft and edit the blanks.";
       promptModal.hidden = false;
       promptBox.focus();
