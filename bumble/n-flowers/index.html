@@ -423,13 +423,13 @@
       line-height: 1.55;
     }
 
-    .cards {
+    .rank-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
     }
 
-    .card,
+    .flower-card,
     .draft-panel {
       border: 2px solid var(--ink);
       border-radius: 8px;
@@ -437,47 +437,119 @@
       box-shadow: 6px 6px 0 var(--ink);
     }
 
-    .card {
-      min-height: 210px;
-      padding: 18px;
+    .flower-card {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
       display: grid;
-      align-content: space-between;
-      gap: 16px;
-      cursor: pointer;
+      gap: 12px;
+      padding: 12px;
       text-align: left;
+      transition: transform .18s ease, box-shadow .18s ease;
     }
 
-    .card:hover,
-    .card:focus-visible,
-    .card.active {
+    .flower-card:hover,
+    .flower-card:focus-within,
+    .flower-card.active {
       transform: translateY(-2px);
+      box-shadow: 8px 8px 0 var(--ink);
     }
 
-    .card strong {
+    .flower-card.active {
+      background: #f9e8ee;
+    }
+
+    .flower-photo {
+      position: relative;
+      margin: 0;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+    }
+
+    .flower-photo img {
+      width: 100%;
+      height: 100%;
       display: block;
-      margin-bottom: 8px;
+      object-fit: cover;
+      transition: transform .24s ease;
+    }
+
+    .flower-card:hover .flower-photo img,
+    .flower-card:focus-within .flower-photo img {
+      transform: scale(1.04);
+    }
+
+    .rank-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      min-width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: var(--sun);
+      box-shadow: 3px 3px 0 var(--ink);
+      color: var(--ink);
+      font-weight: 950;
+    }
+
+    .flower-copy {
+      display: grid;
+      gap: 4px;
+    }
+
+    .flower-copy strong {
+      display: block;
       font-size: 1.2rem;
     }
 
-    .card small {
+    .flower-copy small {
       color: var(--muted);
       font-size: .95rem;
       line-height: 1.45;
     }
 
-    .card span {
-      width: 38px;
-      height: 38px;
+    .rank-controls {
       display: grid;
-      place-items: center;
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      background: var(--petal);
-      font-weight: 950;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
     }
 
-    .card.active {
-      background: #f9e8ee;
+    .rank-button {
+      min-height: 38px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 3px 3px 0 var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .rank-button:hover,
+    .rank-button:focus-visible,
+    .rank-button.selected {
+      background: var(--petal);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--ink);
+      outline: 0;
+    }
+
+    .rank-summary {
+      margin: 18px 0 0;
+      padding: 12px 14px;
+      border: 2px dashed rgba(42, 35, 34, .42);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .72);
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.4;
     }
 
     .draft-panel {
@@ -526,8 +598,18 @@
         line-height: .97;
       }
 
-      .cards {
-        grid-template-columns: 1fr;
+      .rank-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(240px, 82%);
+        grid-template-columns: none;
+        overflow-x: auto;
+        padding: 0 8px 12px 0;
+        scroll-snap-type: x mandatory;
+      }
+
+      .flower-card {
+        scroll-snap-align: start;
       }
 
       .hook-strip {
@@ -567,7 +649,7 @@
           hi, i made you a tiny peony page because you said you read and journal :)
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#replies">Pick a reply</a>
+          <a class="button primary" href="#replies">Rank flowers</a>
           <button class="button" type="button" data-copy-intro>Copy note</button>
         </div>
       </div>
@@ -582,47 +664,95 @@
 
     <section class="section" id="replies" aria-labelledby="reply-title">
       <div class="section-head">
-        <h2 id="reply-title">pick one.</h2>
-        <p>soft, easy, no rush.</p>
+        <h2 id="reply-title">rank the flowers.</h2>
+        <p>peony combo tournament.</p>
       </div>
 
       <div class="hook-strip" aria-label="Chat hooks used for this page">
         <span>read + journal</span>
         <span>peony</span>
-        <span>soft</span>
+        <span>rank them</span>
       </div>
 
-      <div class="cards" role="list">
-        <button class="card active" type="button" data-draft="flower">
-          <span>1</span>
-          <div>
-            <strong>peony ping</strong>
-            <small>cute and specific.</small>
+      <div class="rank-grid" role="list" aria-label="Flower combinations to rank">
+        <article class="flower-card active" data-flower-card data-flower="peony vase">
+          <figure class="flower-photo">
+            <img src="./assets/ranking/combo-peony-vase.jpg" alt="Soft pink peonies arranged in a vase">
+            <span class="rank-badge" data-rank-label>?</span>
+          </figure>
+          <div class="flower-copy">
+            <strong>peony vase</strong>
+            <small>soft journal desk energy.</small>
           </div>
-        </button>
-        <button class="card" type="button" data-draft="journal">
-          <span>2</span>
-          <div>
-            <strong>journal line</strong>
-            <small>uses the read + journal clue.</small>
+          <div class="rank-controls" aria-label="Rank peony vase">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
           </div>
-        </button>
-        <button class="card" type="button" data-draft="soft">
-          <span>3</span>
-          <div>
-            <strong>tiny hi</strong>
-            <small>the gentlest one.</small>
+        </article>
+
+        <article class="flower-card" data-flower-card data-flower="peony + rose">
+          <figure class="flower-photo">
+            <img src="./assets/ranking/combo-peony-rose.jpg" alt="A pale bouquet with peony and rose tones">
+            <span class="rank-badge" data-rank-label>?</span>
+          </figure>
+          <div class="flower-copy">
+            <strong>peony + rose</strong>
+            <small>classic soft-girl combo.</small>
           </div>
-        </button>
+          <div class="rank-controls" aria-label="Rank peony and rose">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="flower-card" data-flower-card data-flower="peony + lilac">
+          <figure class="flower-photo">
+            <img src="./assets/ranking/combo-peony-lilac.jpg" alt="A colorful bouquet on a purple background">
+            <span class="rank-badge" data-rank-label>?</span>
+          </figure>
+          <div class="flower-copy">
+            <strong>peony + lilac</strong>
+            <small>dramatic but cute.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank peony and lilac">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="flower-card" data-flower-card data-flower="soft pink mix">
+          <figure class="flower-photo">
+            <img src="./assets/ranking/combo-soft-pink.jpg" alt="A soft pink bouquet with layered flowers">
+            <span class="rank-badge" data-rank-label>?</span>
+          </figure>
+          <div class="flower-copy">
+            <strong>soft pink mix</strong>
+            <small>sweet, calm, very replyable.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank soft pink mix">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
       </div>
+
+      <p class="rank-summary" id="rankSummary">tap #1-#4 to build a tiny flower ranking.</p>
 
       <div class="draft-panel">
-        <p class="draft" id="draftText">hi haha i made you a tiny peony page because you said you read and journal :)</p>
+        <p class="draft" id="draftText">hi haha made you a tiny peony ranking page. which flower combo wins #1?</p>
         <div class="reply-actions">
           <button class="button primary" type="button" data-copy-draft>Copy</button>
           <a class="button" href="https://bumble.com/app/connections">Open Bumble</a>
         </div>
-        <p class="mini-note">no rush.</p>
+        <p class="mini-note">real flower photos, tiny serious research.</p>
       </div>
     </section>
   </main>
@@ -632,15 +762,11 @@
   </footer>
 
   <script>
-    const drafts = {
-      flower: "hi haha i made you a tiny peony page because you said you read and journal :)",
-      journal: "if today was a journal page, would it be peony field, rainy window, or blank page?",
-      soft: "leaving a tiny peony hello here. no rush."
-    };
-
-    const intro = "hi haha i made you a tiny peony page: ";
+    const intro = "hi haha made you a tiny peony ranking page: ";
     const draftText = document.querySelector("#draftText");
-    const cards = Array.from(document.querySelectorAll("[data-draft]"));
+    const rankSummary = document.querySelector("#rankSummary");
+    const flowerCards = Array.from(document.querySelectorAll("[data-flower-card]"));
+    const ranking = new Map();
 
     function copyText(text, button) {
       const original = button.textContent;
@@ -656,10 +782,16 @@
     }
 
     document.addEventListener("click", (event) => {
-      const card = event.target.closest("[data-draft]");
-      if (card) {
-        cards.forEach((item) => item.classList.toggle("active", item === card));
-        draftText.textContent = drafts[card.dataset.draft];
+      const rankButton = event.target.closest("[data-rank]");
+      if (rankButton) {
+        const card = rankButton.closest("[data-flower-card]");
+        const rank = rankButton.dataset.rank;
+        const previousCard = flowerCards.find((item) => ranking.get(item.dataset.flower) === rank);
+        if (previousCard && previousCard !== card) {
+          ranking.delete(previousCard.dataset.flower);
+        }
+        ranking.set(card.dataset.flower, rank);
+        renderRanking(card);
         return;
       }
 
@@ -674,6 +806,31 @@
         copyText(intro + window.location.href, copyIntro);
       }
     });
+
+    function renderRanking(activeCard) {
+      flowerCards.forEach((card) => {
+        const rank = ranking.get(card.dataset.flower);
+        card.classList.toggle("active", card === activeCard);
+        card.querySelector("[data-rank-label]").textContent = rank ? `#${rank}` : "?";
+        card.querySelectorAll("[data-rank]").forEach((button) => {
+          button.classList.toggle("selected", button.dataset.rank === rank);
+        });
+      });
+
+      const ordered = Array.from(ranking.entries())
+        .sort((a, b) => Number(a[1]) - Number(b[1]));
+
+      if (!ordered.length) {
+        rankSummary.textContent = "tap #1-#4 to build a tiny flower ranking.";
+        draftText.textContent = "hi haha made you a tiny peony ranking page. which flower combo wins #1?";
+        return;
+      }
+
+      const summary = ordered.map(([name, rank]) => `#${rank} ${name}`).join("  ");
+      rankSummary.textContent = summary;
+      const winner = ordered[0][0];
+      draftText.textContent = `hi haha made you a tiny peony ranking page. my current #1 is ${winner}; what's yours?`;
+    }
   </script>
 </body>
 </html>
