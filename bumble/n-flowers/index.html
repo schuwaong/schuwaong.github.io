@@ -552,6 +552,189 @@
       line-height: 1.4;
     }
 
+    .meet-board {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .9);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .drag-tray {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .flower-token {
+      min-width: 0;
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 4px 4px 0 var(--ink);
+      color: var(--ink);
+      cursor: grab;
+      font-weight: 950;
+      text-align: left;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      user-select: none;
+    }
+
+    .flower-token img {
+      width: 70px;
+      height: 70px;
+      display: block;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      object-fit: cover;
+    }
+
+    .flower-token small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .85rem;
+      font-weight: 850;
+    }
+
+    .flower-token:hover,
+    .flower-token:focus-visible,
+    .flower-token.picked {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+      outline: 0;
+    }
+
+    .flower-token.picked {
+      background: #f9e8ee;
+    }
+
+    .planner-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+      gap: 16px;
+    }
+
+    .planner-card {
+      min-width: 0;
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .74);
+    }
+
+    .planner-card > strong {
+      font-size: 1.15rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .calendar-slot,
+    .time-slot {
+      position: relative;
+      min-width: 0;
+      min-height: 78px;
+      padding: 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 3px 3px 0 var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 950;
+      text-align: left;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .calendar-slot span,
+    .time-slot span {
+      display: block;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .calendar-slot:hover,
+    .calendar-slot:focus-visible,
+    .calendar-slot.drag-over,
+    .time-slot:hover,
+    .time-slot:focus-visible,
+    .time-slot.drag-over {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--ink);
+      outline: 0;
+    }
+
+    .calendar-slot.selected,
+    .time-slot.selected {
+      background: #f9e8ee;
+    }
+
+    .calendar-slot.selected::after,
+    .time-slot.selected::after {
+      content: "";
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 2px 2px 0 var(--ink);
+      animation: placed-bloom .35s ease-out both;
+    }
+
+    .calendar-slot.selected::after {
+      background-image: url("./assets/ranking/combo-peony-vase.jpg");
+    }
+
+    .time-slot.selected::after {
+      background-image: url("./assets/ranking/combo-peony-lilac.jpg");
+    }
+
+    @keyframes placed-bloom {
+      from {
+        transform: scale(.2) rotate(-18deg);
+      }
+
+      to {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .meet-summary {
+      margin: 0;
+      padding: 12px 14px;
+      border: 2px dashed rgba(42, 35, 34, .42);
+      border-radius: 8px;
+      background: rgba(255, 253, 247, .72);
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.4;
+    }
+
     .draft-panel {
       margin-top: 18px;
       padding: 18px;
@@ -610,6 +793,24 @@
 
       .flower-card {
         scroll-snap-align: start;
+      }
+
+      .drag-tray,
+      .planner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flower-token {
+        grid-template-columns: 62px minmax(0, 1fr);
+      }
+
+      .flower-token img {
+        width: 62px;
+        height: 62px;
+      }
+
+      .calendar-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .hook-strip {
@@ -755,6 +956,62 @@
         <p class="mini-note">real flower photos, tiny serious research.</p>
       </div>
     </section>
+
+    <section class="section" id="meet" aria-labelledby="meet-title">
+      <div class="section-head">
+        <h2 id="meet-title">flower calendar.</h2>
+        <p>drag peony to a date. drag lilac to a time.</p>
+      </div>
+
+      <div class="meet-board">
+        <div class="drag-tray" aria-label="Draggable flower choices">
+          <button class="flower-token picked" type="button" draggable="true" data-token="date" aria-pressed="true">
+            <img src="./assets/ranking/combo-peony-vase.jpg" alt="Peony token for choosing a date">
+            <span>peony date<small>drop on calendar</small></span>
+          </button>
+          <button class="flower-token" type="button" draggable="true" data-token="time" aria-pressed="false">
+            <img src="./assets/ranking/combo-peony-lilac.jpg" alt="Lilac token for choosing a time">
+            <span>lilac time<small>drop on time</small></span>
+          </button>
+        </div>
+
+        <div class="planner-grid">
+          <div class="planner-card">
+            <strong>June</strong>
+            <div class="calendar-grid" aria-label="Pick a date">
+              <button class="calendar-slot" type="button" data-date="Friday 19 June"><span>Fri</span>19</button>
+              <button class="calendar-slot" type="button" data-date="Saturday 20 June"><span>Sat</span>20</button>
+              <button class="calendar-slot" type="button" data-date="Sunday 21 June"><span>Sun</span>21</button>
+              <button class="calendar-slot" type="button" data-date="Monday 22 June"><span>Mon</span>22</button>
+              <button class="calendar-slot" type="button" data-date="Tuesday 23 June"><span>Tue</span>23</button>
+              <button class="calendar-slot" type="button" data-date="Wednesday 24 June"><span>Wed</span>24</button>
+              <button class="calendar-slot" type="button" data-date="Thursday 25 June"><span>Thu</span>25</button>
+            </div>
+          </div>
+
+          <div class="planner-card">
+            <strong>time</strong>
+            <div class="time-grid" aria-label="Pick a time">
+              <button class="time-slot" type="button" data-time="coffee at 3:00 PM"><span>coffee</span>3:00 PM</button>
+              <button class="time-slot" type="button" data-time="tea at 5:00 PM"><span>tea</span>5:00 PM</button>
+              <button class="time-slot" type="button" data-time="dessert at 7:30 PM"><span>dessert</span>7:30 PM</button>
+              <button class="time-slot" type="button" data-time="walk at 8:30 PM"><span>walk</span>8:30 PM</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="meet-summary" id="meetSummary">pick date + time, then copy the tiny invite.</p>
+      </div>
+
+      <div class="draft-panel">
+        <p class="draft" id="meetText">tiny peony scheduling question: which day/time should the flower land on?</p>
+        <div class="reply-actions">
+          <button class="button primary" type="button" data-copy-meet>Copy invite</button>
+          <a class="button" href="#replies">Rank flowers</a>
+        </div>
+        <p class="mini-note">drag works on desktop; tap works too.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -767,6 +1024,13 @@
     const rankSummary = document.querySelector("#rankSummary");
     const flowerCards = Array.from(document.querySelectorAll("[data-flower-card]"));
     const ranking = new Map();
+    const tokens = Array.from(document.querySelectorAll("[data-token]"));
+    const dateSlots = Array.from(document.querySelectorAll("[data-date]"));
+    const timeSlots = Array.from(document.querySelectorAll("[data-time]"));
+    const meetSummary = document.querySelector("#meetSummary");
+    const meetText = document.querySelector("#meetText");
+    const plan = { date: "", time: "" };
+    let activeToken = "date";
 
     function copyText(text, button) {
       const original = button.textContent;
@@ -782,6 +1046,30 @@
     }
 
     document.addEventListener("click", (event) => {
+      const tokenButton = event.target.closest("[data-token]");
+      if (tokenButton) {
+        setActiveToken(tokenButton.dataset.token);
+        return;
+      }
+
+      const dateSlot = event.target.closest("[data-date]");
+      if (dateSlot) {
+        if (activeToken !== "date") {
+          setActiveToken("date");
+        }
+        chooseDate(dateSlot);
+        return;
+      }
+
+      const timeSlot = event.target.closest("[data-time]");
+      if (timeSlot) {
+        if (activeToken !== "time") {
+          setActiveToken("time");
+        }
+        chooseTime(timeSlot);
+        return;
+      }
+
       const rankButton = event.target.closest("[data-rank]");
       if (rankButton) {
         const card = rankButton.closest("[data-flower-card]");
@@ -801,10 +1089,50 @@
         return;
       }
 
+      const copyMeet = event.target.closest("[data-copy-meet]");
+      if (copyMeet) {
+        copyText(meetText.textContent, copyMeet);
+        return;
+      }
+
       const copyIntro = event.target.closest("[data-copy-intro]");
       if (copyIntro) {
         copyText(intro + window.location.href, copyIntro);
       }
+    });
+
+    document.addEventListener("dragstart", (event) => {
+      const token = event.target.closest("[data-token]");
+      if (!token) {
+        return;
+      }
+      activeToken = token.dataset.token;
+      setActiveToken(activeToken);
+      event.dataTransfer.setData("text/plain", activeToken);
+      event.dataTransfer.effectAllowed = "move";
+    });
+
+    [...dateSlots, ...timeSlots].forEach((slot) => {
+      slot.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        slot.classList.add("drag-over");
+      });
+
+      slot.addEventListener("dragleave", () => {
+        slot.classList.remove("drag-over");
+      });
+
+      slot.addEventListener("drop", (event) => {
+        event.preventDefault();
+        slot.classList.remove("drag-over");
+        const token = event.dataTransfer.getData("text/plain");
+        if (slot.dataset.date && token === "date") {
+          chooseDate(slot);
+        }
+        if (slot.dataset.time && token === "time") {
+          chooseTime(slot);
+        }
+      });
     });
 
     function renderRanking(activeCard) {
@@ -830,6 +1158,45 @@
       rankSummary.textContent = summary;
       const winner = ordered[0][0];
       draftText.textContent = `hi haha made you a tiny peony ranking page. my current #1 is ${winner}; what's yours?`;
+    }
+
+    function setActiveToken(token) {
+      activeToken = token;
+      tokens.forEach((item) => {
+        const isActive = item.dataset.token === token;
+        item.classList.toggle("picked", isActive);
+        item.setAttribute("aria-pressed", String(isActive));
+      });
+    }
+
+    function chooseDate(slot) {
+      plan.date = slot.dataset.date;
+      dateSlots.forEach((item) => item.classList.toggle("selected", item === slot));
+      setActiveToken("time");
+      renderPlan();
+    }
+
+    function chooseTime(slot) {
+      plan.time = slot.dataset.time;
+      timeSlots.forEach((item) => item.classList.toggle("selected", item === slot));
+      renderPlan();
+    }
+
+    function renderPlan() {
+      if (plan.date && plan.time) {
+        meetSummary.textContent = `${plan.date} + ${plan.time}`;
+        meetText.textContent = `tiny peony scheduling question: would ${plan.date}, ${plan.time} work for you?`;
+        return;
+      }
+
+      if (plan.date) {
+        meetSummary.textContent = `${plan.date} picked. now drop lilac on a time.`;
+        meetText.textContent = `tiny peony scheduling question: ${plan.date} maybe? you can pick the time.`;
+        return;
+      }
+
+      meetSummary.textContent = "pick date + time, then copy the tiny invite.";
+      meetText.textContent = "tiny peony scheduling question: which day/time should the flower land on?";
     }
   </script>
 </body>
