@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>N feature ranking</title>
-  <meta name="description" content="Tiny facial feature ranking page with date and time slots.">
-  <meta property="og:title" content="N feature ranking">
-  <meta property="og:description" content="Rank a feature, drag it to a date and time, copy the prompt.">
+  <title>Lynn Gam feature ranking</title>
+  <meta name="description" content="Tiny Lynn Gam facial feature ranking page with date and time slots.">
+  <meta property="og:title" content="Lynn Gam feature ranking">
+  <meta property="og:description" content="Rank your favourite facial feature, drag it to a date and time, copy the prompt.">
   <style>
     :root {
       color-scheme: light;
@@ -259,114 +259,41 @@
       color: #fff;
     }
 
-    .face-stage {
+    .photo-stage {
       min-height: 430px;
       display: grid;
       place-items: center;
       position: relative;
     }
 
-    .face {
-      position: relative;
+    .portrait-frame {
       width: min(360px, 82vw);
-      aspect-ratio: 1;
+      aspect-ratio: 4 / 5;
       border: 3px solid var(--ink);
-      border-radius: 42% 58% 52% 48%;
-      background:
-        radial-gradient(circle at 32% 42%, rgba(255, 255, 255, .9) 0 4px, transparent 5px),
-        radial-gradient(circle at 68% 42%, rgba(255, 255, 255, .9) 0 4px, transparent 5px),
-        linear-gradient(145deg, #ffd3be, #ffefe4 58%, #ffd0d8);
+      border-radius: 8px;
+      background: var(--cream);
       box-shadow: 10px 10px 0 var(--ink), var(--shadow);
-      animation: face-breathe 4s ease-in-out infinite;
+      overflow: hidden;
+      transform: rotate(-1deg);
+      animation: portrait-breathe 4s ease-in-out infinite;
     }
 
-    @keyframes face-breathe {
+    .portrait-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    @keyframes portrait-breathe {
       0%,
       100% {
         transform: rotate(-1deg) scale(1);
       }
 
       50% {
-        transform: rotate(1deg) scale(1.02);
+        transform: rotate(1deg) scale(1.015);
       }
-    }
-
-    .face .eye {
-      position: absolute;
-      top: 38%;
-      width: 48px;
-      height: 28px;
-      border-bottom: 6px solid var(--ink);
-      border-radius: 0 0 999px 999px;
-      animation: blink 5s ease-in-out infinite;
-    }
-
-    .face .eye.left {
-      left: 28%;
-    }
-
-    .face .eye.right {
-      right: 28%;
-    }
-
-    @keyframes blink {
-      0%,
-      92%,
-      100% {
-        transform: scaleY(1);
-      }
-
-      95% {
-        transform: scaleY(.18);
-      }
-    }
-
-    .face .brow {
-      position: absolute;
-      top: 31%;
-      width: 56px;
-      height: 18px;
-      border-top: 6px solid var(--ink);
-      border-radius: 999px 999px 0 0;
-    }
-
-    .face .brow.left {
-      left: 25%;
-      transform: rotate(-8deg);
-    }
-
-    .face .brow.right {
-      right: 25%;
-      transform: rotate(8deg);
-    }
-
-    .face .smile {
-      position: absolute;
-      left: 50%;
-      top: 60%;
-      width: 116px;
-      height: 56px;
-      border-bottom: 7px solid var(--ink);
-      border-radius: 0 0 999px 999px;
-      transform: translateX(-50%);
-    }
-
-    .face .dimple {
-      position: absolute;
-      top: 61%;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 3px solid rgba(35, 31, 32, .56);
-      background: rgba(255, 109, 115, .22);
-    }
-
-    .face .dimple.left {
-      left: 25%;
-    }
-
-    .face .dimple.right {
-      right: 25%;
     }
 
     .feature-float {
@@ -459,136 +386,28 @@
       background: #fff3f6;
     }
 
-    .feature-icon {
+    .feature-photo {
       position: relative;
       min-height: 150px;
-      display: grid;
-      place-items: center;
       border: 2px solid var(--ink);
       border-radius: 8px;
-      background:
-        radial-gradient(circle at 22% 18%, rgba(255, 214, 95, .55), transparent 22%),
-        linear-gradient(145deg, #fff, #ffe2e9);
+      background: var(--cream);
       overflow: hidden;
     }
 
-    .feature-icon::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border: 2px dashed rgba(35, 31, 32, .18);
-      border-radius: 999px;
-      animation: spin-soft 9s linear infinite;
+    .feature-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 150px;
+      display: block;
+      object-fit: cover;
+      transition: transform .28s ease;
     }
 
-    @keyframes spin-soft {
-      to {
-        transform: rotate(1turn);
-      }
-    }
-
-    .mini-face {
-      position: relative;
-      z-index: 1;
-      width: 104px;
-      height: 104px;
-      border: 2px solid var(--ink);
-      border-radius: 38% 62% 55% 45%;
-      background: linear-gradient(145deg, #ffd6c6, #fff2eb);
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-
-    .mini-face::before,
-    .mini-face::after {
-      content: "";
-      position: absolute;
-      background: var(--ink);
-    }
-
-    .feature-eyes .mini-face::before,
-    .feature-eyes .mini-face::after {
-      top: 38px;
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      animation: dot-blink 4s ease-in-out infinite;
-    }
-
-    .feature-eyes .mini-face::before {
-      left: 25px;
-    }
-
-    .feature-eyes .mini-face::after {
-      right: 25px;
-    }
-
-    @keyframes dot-blink {
-      0%,
-      92%,
-      100% {
-        transform: scaleY(1);
-      }
-
-      95% {
-        transform: scaleY(.18);
-      }
-    }
-
-    .feature-smile .mini-face::before {
-      left: 28px;
-      top: 59px;
-      width: 48px;
-      height: 22px;
-      border-bottom: 5px solid var(--ink);
-      border-radius: 0 0 999px 999px;
-      background: transparent;
-    }
-
-    .feature-smile .mini-face::after {
-      left: 30px;
-      top: 37px;
-      width: 44px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(35, 31, 32, .18);
-    }
-
-    .feature-dimples .mini-face::before,
-    .feature-dimples .mini-face::after {
-      top: 59px;
-      width: 16px;
-      height: 16px;
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      background: rgba(255, 109, 115, .34);
-    }
-
-    .feature-dimples .mini-face::before {
-      left: 18px;
-    }
-
-    .feature-dimples .mini-face::after {
-      right: 18px;
-    }
-
-    .feature-brows .mini-face::before,
-    .feature-brows .mini-face::after {
-      top: 31px;
-      width: 30px;
-      height: 12px;
-      border-top: 5px solid var(--ink);
-      border-radius: 999px 999px 0 0;
-      background: transparent;
-    }
-
-    .feature-brows .mini-face::before {
-      left: 18px;
-      transform: rotate(-9deg);
-    }
-
-    .feature-brows .mini-face::after {
-      right: 18px;
-      transform: rotate(9deg);
+    .feature-card:hover .feature-photo img,
+    .feature-card:focus-within .feature-photo img,
+    .feature-card.active .feature-photo img {
+      transform: scale(1.05);
     }
 
     .rank-badge {
@@ -751,20 +570,22 @@
     .chip-face {
       width: 46px;
       height: 46px;
-      display: grid;
-      place-items: center;
       border: 2px solid var(--ink);
       border-radius: 999px;
       background: linear-gradient(145deg, #ffd8c9, #fff2ec);
       box-shadow: 2px 2px 0 var(--ink);
-      font-size: 1.12rem;
-      font-weight: 950;
+      object-fit: cover;
+      overflow: hidden;
     }
 
     .guide-token .chip-face {
       width: 54px;
       height: 54px;
+      display: grid;
+      place-items: center;
       background: var(--blue);
+      font-size: 1.12rem;
+      font-weight: 950;
     }
 
     .ranked-chip small,
@@ -851,7 +672,7 @@
 
     .date-slot.selected::after,
     .time-slot.selected::after {
-      content: attr(data-initial);
+      content: "";
       position: absolute;
       right: 8px;
       bottom: 8px;
@@ -861,7 +682,7 @@
       place-items: center;
       border: 2px solid var(--ink);
       border-radius: 999px;
-      background: var(--slot-color, var(--pink));
+      background: var(--slot-image, var(--slot-color, var(--pink))) center / cover;
       box-shadow: 2px 2px 0 var(--ink);
       color: var(--ink);
       font-size: .88rem;
@@ -945,7 +766,7 @@
       height: 58px;
       border: 2px solid var(--ink);
       border-radius: 999px;
-      background: var(--pink);
+      background: url("./assets/feature-face.jpg") center / cover;
       box-shadow: 4px 4px 0 var(--ink);
       animation: modal-bob 2.8s ease-in-out infinite;
     }
@@ -1041,7 +862,7 @@
         font-size: 2.22rem;
       }
 
-      .face-stage {
+      .photo-stage {
         min-height: 360px;
       }
 
@@ -1088,9 +909,9 @@
   </div>
 
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="N facial feature ranking page">
-      <span class="mark">N</span>
-      <span>feature ranking page</span>
+    <a class="brand" href="#top" aria-label="Lynn Gam facial feature ranking page">
+      <span class="mark">LG</span>
+      <span>Lynn Gam feature ranking</span>
     </a>
     <span>tiny decision lab</span>
   </header>
@@ -1098,10 +919,10 @@
   <main id="top">
     <section class="hero" aria-labelledby="title">
       <div>
-        <p class="eyebrow">for N</p>
-        <h1 id="title">which facial feature wins?</h1>
+        <p class="eyebrow">for Lynn Gam</p>
+        <h1 id="title">rank your favourite facial feature.</h1>
         <p class="lede">
-          hi haha made another tiny page because apparently ranking flowers was not enough science.
+          hi haha made a tiny page from your photo because i got bored and decided to practice cropping.
         </p>
         <div class="actions">
           <a class="button primary" href="#features">Rank features</a>
@@ -1109,36 +930,30 @@
         </div>
       </div>
 
-      <div class="face-stage" aria-label="Cute animated face illustration">
+      <div class="photo-stage" aria-label="Cropped Lynn Gam photo preview">
         <div class="feature-float one"><strong>eyes</strong></div>
-        <div class="feature-float two"><strong>smile</strong></div>
-        <div class="face">
-          <span class="brow left"></span>
-          <span class="brow right"></span>
-          <span class="eye left"></span>
-          <span class="eye right"></span>
-          <span class="smile"></span>
-          <span class="dimple left"></span>
-          <span class="dimple right"></span>
+        <div class="feature-float two"><strong>lips</strong></div>
+        <div class="portrait-frame">
+          <img src="./assets/lynn-portrait.jpg" alt="Lynn Gam portrait crop">
         </div>
       </div>
     </section>
 
     <section class="section" id="features" aria-labelledby="feature-title">
       <div class="section-head">
-        <h2 id="feature-title">rank the features.</h2>
+        <h2 id="feature-title">rank your favourite.</h2>
         <p>pick the winner, then drag the ranked chips to the date and time slots.</p>
       </div>
 
       <div class="feature-grid" role="list" aria-label="Facial features to rank">
-        <article class="feature-card feature-eyes active" draggable="true" data-feature-card data-feature="eyes" data-initial="E" data-color="#9fd5ff">
-          <div class="feature-icon">
-            <div class="mini-face"></div>
+        <article class="feature-card active" draggable="true" data-feature-card data-feature="eyes" data-initial="E" data-color="#9fd5ff" data-img="./assets/feature-eyes.jpg">
+          <div class="feature-photo">
+            <img src="./assets/feature-eyes.jpg" alt="Cropped eyes from Lynn Gam photo">
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
             <strong>eyes</strong>
-            <small>the intense eye-contact category.</small>
+            <small>soft eye-contact category.</small>
           </div>
           <div class="rank-controls" aria-label="Rank eyes">
             <button class="rank-button" type="button" data-rank="1">#1</button>
@@ -1148,16 +963,16 @@
           </div>
         </article>
 
-        <article class="feature-card feature-smile" draggable="true" data-feature-card data-feature="smile" data-initial="S" data-color="#ffb8c8">
-          <div class="feature-icon">
-            <div class="mini-face"></div>
+        <article class="feature-card" draggable="true" data-feature-card data-feature="lips" data-initial="L" data-color="#ffb8c8" data-img="./assets/feature-lips.jpg">
+          <div class="feature-photo">
+            <img src="./assets/feature-lips.jpg" alt="Cropped lips from Lynn Gam photo">
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
-            <strong>smile</strong>
-            <small>dangerously replyable, honestly.</small>
+            <strong>lips</strong>
+            <small>glossy crop, very noticeable.</small>
           </div>
-          <div class="rank-controls" aria-label="Rank smile">
+          <div class="rank-controls" aria-label="Rank lips">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -1165,33 +980,33 @@
           </div>
         </article>
 
-        <article class="feature-card feature-dimples" draggable="true" data-feature-card data-feature="dimples" data-initial="D" data-color="#ffd65f">
-          <div class="feature-icon">
-            <div class="mini-face"></div>
-            <span class="rank-badge" data-rank-label>?</span>
-          </div>
-          <div class="feature-copy">
-            <strong>dimples</strong>
-            <small>small detail, suspiciously powerful.</small>
-          </div>
-          <div class="rank-controls" aria-label="Rank dimples">
-            <button class="rank-button" type="button" data-rank="1">#1</button>
-            <button class="rank-button" type="button" data-rank="2">#2</button>
-            <button class="rank-button" type="button" data-rank="3">#3</button>
-            <button class="rank-button" type="button" data-rank="4">#4</button>
-          </div>
-        </article>
-
-        <article class="feature-card feature-brows" draggable="true" data-feature-card data-feature="brows" data-initial="B" data-color="#8ed6bd">
-          <div class="feature-icon">
-            <div class="mini-face"></div>
+        <article class="feature-card" draggable="true" data-feature-card data-feature="brows" data-initial="B" data-color="#ffd65f" data-img="./assets/feature-brows.jpg">
+          <div class="feature-photo">
+            <img src="./assets/feature-brows.jpg" alt="Cropped brows from Lynn Gam photo">
             <span class="rank-badge" data-rank-label>?</span>
           </div>
           <div class="feature-copy">
             <strong>brows</strong>
-            <small>quietly expressive, slightly unfair.</small>
+            <small>quietly expressive.</small>
           </div>
           <div class="rank-controls" aria-label="Rank brows">
+            <button class="rank-button" type="button" data-rank="1">#1</button>
+            <button class="rank-button" type="button" data-rank="2">#2</button>
+            <button class="rank-button" type="button" data-rank="3">#3</button>
+            <button class="rank-button" type="button" data-rank="4">#4</button>
+          </div>
+        </article>
+
+        <article class="feature-card" draggable="true" data-feature-card data-feature="face card" data-initial="F" data-color="#8ed6bd" data-img="./assets/feature-face.jpg">
+          <div class="feature-photo">
+            <img src="./assets/feature-face.jpg" alt="Cropped face from Lynn Gam photo">
+            <span class="rank-badge" data-rank-label>?</span>
+          </div>
+          <div class="feature-copy">
+            <strong>face card</strong>
+            <small>overall main-character crop.</small>
+          </div>
+          <div class="rank-controls" aria-label="Rank face card">
             <button class="rank-button" type="button" data-rank="1">#1</button>
             <button class="rank-button" type="button" data-rank="2">#2</button>
             <button class="rank-button" type="button" data-rank="3">#3</button>
@@ -1203,12 +1018,12 @@
       <p class="rank-summary" id="rankSummary">tap #1-#4 to build the feature ranking.</p>
 
       <div class="draft-panel">
-        <p class="draft" id="draftText">hi haha made you a tiny facial-feature ranking page. which feature wins #1?</p>
+        <p class="draft" id="draftText">hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?</p>
         <div class="actions">
           <button class="button primary" type="button" data-copy-draft>Copy</button>
           <a class="button" href="#meet">Plan slot</a>
         </div>
-        <p class="mini-note">tiny coding practice, very serious facial-feature research.</p>
+        <p class="mini-note">tiny coding practice, very serious crop research.</p>
       </div>
     </section>
 
@@ -1284,7 +1099,7 @@
   </footer>
 
   <script>
-    const intro = "hi haha made you a tiny facial-feature ranking page: ";
+    const intro = "hi haha made you a tiny Lynn Gam feature ranking page: ";
     const draftText = document.querySelector("#draftText");
     const rankSummary = document.querySelector("#rankSummary");
     const featureCards = Array.from(document.querySelectorAll("[data-feature-card]"));
@@ -1413,7 +1228,8 @@
           feature: rankedChip.dataset.feature,
           rank: rankedChip.dataset.rank,
           initial: rankedChip.dataset.initial,
-          color: rankedChip.dataset.color
+          color: rankedChip.dataset.color,
+          img: rankedChip.dataset.img
         }));
         event.dataTransfer.setData("text/plain", "feature");
         event.dataTransfer.effectAllowed = "move";
@@ -1430,7 +1246,8 @@
           feature,
           rank: ranking.get(feature) || "",
           initial: featureCard.dataset.initial,
-          color: featureCard.dataset.color
+          color: featureCard.dataset.color,
+          img: featureCard.dataset.img
         }));
         event.dataTransfer.setData("text/plain", "feature");
         event.dataTransfer.effectAllowed = "move";
@@ -1477,7 +1294,7 @@
 
       if (!ordered.length) {
         rankSummary.textContent = "tap #1-#4 to build the feature ranking.";
-        draftText.textContent = "hi haha made you a tiny facial-feature ranking page. which feature wins #1?";
+        draftText.textContent = "hi haha made you a tiny Lynn Gam ranking page. which cropped feature wins #1?";
         renderRankedTray();
         return;
       }
@@ -1486,7 +1303,7 @@
       const winner = ordered[0][0];
       rankSummary.textContent = summary;
       activeFeature = winner;
-      draftText.textContent = `hi haha made you a tiny facial-feature ranking page. my current #1 is ${winner}; what's yours?`;
+      draftText.textContent = `hi haha made you a tiny Lynn Gam ranking page. my current #1 is ${winner}; what's yours?`;
       renderRankedTray(winner);
       renderPlan();
     }
@@ -1520,8 +1337,9 @@
         chip.dataset.rank = rank || "";
         chip.dataset.initial = card.dataset.initial;
         chip.dataset.color = card.dataset.color;
+        chip.dataset.img = card.dataset.img;
         chip.innerHTML = `
-          <span class="chip-face" style="background: ${card.dataset.color};">${card.dataset.initial}</span>
+          <img class="chip-face" src="${card.dataset.img}" alt="">
           <span>${rank ? `#${rank}` : "#?"} ${feature}<small>drag to date/time</small></span>
         `;
         rankedTray.append(chip);
@@ -1546,12 +1364,13 @@
       const rank = featureChoice.rank || ranking.get(feature) || "?";
       const initial = featureChoice.initial || card?.dataset.initial || "?";
       const color = featureChoice.color || card?.dataset.color || "#ffb8c8";
+      const img = featureChoice.img || card?.dataset.img || "";
       choiceMap.forEach((choice, key) => {
         if (choice.feature === feature) {
           choiceMap.delete(key);
         }
       });
-      choiceMap.set(slot.dataset[type], { feature, rank, initial, color });
+      choiceMap.set(slot.dataset[type], { feature, rank, initial, color, img });
 
       slots.forEach((item) => {
         const value = item.dataset[type];
@@ -1560,6 +1379,7 @@
         item.classList.toggle("selected", isSelected);
         delete item.dataset.rank;
         item.style.removeProperty("--slot-color");
+        item.style.removeProperty("--slot-image");
         item.removeAttribute("data-initial");
         const oldChoice = item.querySelector(".slot-choice");
         if (oldChoice) {
@@ -1569,6 +1389,9 @@
           item.dataset.rank = String(choice.rank).replace("#", "");
           item.dataset.initial = choice.initial;
           item.style.setProperty("--slot-color", choice.color);
+          if (choice.img) {
+            item.style.setProperty("--slot-image", `url("${choice.img}")`);
+          }
           const label = document.createElement("span");
           label.className = "slot-choice";
           label.textContent = `#${choice.rank || "?"} ${choice.feature}`;
@@ -1635,7 +1458,7 @@
       const date = plan.date || "the day you picked";
       const time = plan.time ? formatPromptTime(plan.time) : "the time you picked";
       const feature = plan.feature || plan.dateFeature || plan.timeFeature || activeFeature || "favorite feature";
-      return `hi joshua, since u made me rank facial features, my #1 is your ${feature}. if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love with u, just kidding about the last part tho. ;)`;
+      return `hi joshua, since u made me rank Lynn Gam's facial features, my #1 is ${feature}. if you're down to spend time with me on ${date}, ${time}, i would love to engage in a deep conversation and perhaps fall in love with u, just kidding about the last part tho. ;)`;
     }
 
     function formatPromptTime(time) {
@@ -1670,7 +1493,8 @@
         feature,
         rank: ranking.get(feature) || "",
         initial: card.dataset.initial,
-        color: card.dataset.color
+        color: card.dataset.color,
+        img: card.dataset.img
       };
     }
 
@@ -1683,7 +1507,8 @@
         feature,
         rank: ranking.get(feature) || "1",
         initial: card.dataset.initial,
-        color: card.dataset.color
+        color: card.dataset.color,
+        img: card.dataset.img
       };
     }
 
