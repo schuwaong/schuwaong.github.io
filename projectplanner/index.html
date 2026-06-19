@@ -712,14 +712,14 @@
     const saveSyncUrlButton = document.querySelector("#save-sync-url");
     const updatePopout = document.querySelector("#update-popout");
     const updateTitle = document.querySelector("#update-title");
-    const updateMeta = document.querySelector("#update-meta");
+    const updateMetaText = document.querySelector("#update-meta");
     const updateList = document.querySelector("#update-list");
     const closeUpdates = document.querySelector("#close-updates");
     let active = "all";
 
     syncUrlInput.value = localStorage.getItem("planner:sync-url") || "";
 
-    function updateMeta() {
+    function renderMeta() {
       meta.textContent = `Updated ${state.updated_at || "not yet"} · Run #${state.automation_runs || 0}`;
     }
 
@@ -1104,7 +1104,7 @@
     }
 
     function render() {
-      updateMeta();
+      renderMeta();
       document.querySelectorAll(".tab").forEach(tab => {
         tab.classList.toggle("active", tab.dataset.id === active);
       });
@@ -1161,7 +1161,7 @@
       const dismissed = localStorage.getItem("planner:dismissed-update-version");
       if (dismissed === notes.version) return;
       updateTitle.textContent = notes.title || "Latest run";
-      updateMeta.textContent = notes.finished_at ? `Finished ${notes.finished_at} · ${notes.version}` : notes.version;
+      updateMetaText.textContent = notes.finished_at ? `Finished ${notes.finished_at} · ${notes.version}` : notes.version;
       updateList.innerHTML = (notes.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
       if (!updateList.innerHTML) return;
       updatePopout.hidden = false;
@@ -1197,7 +1197,7 @@
       }
     });
     closeUpdates.addEventListener("click", () => {
-      const version = updateMeta.textContent.split(" · ").pop() || `run-${state.automation_runs || 0}`;
+      const version = updateMetaText.textContent.split(" · ").pop() || `run-${state.automation_runs || 0}`;
       localStorage.setItem("planner:dismissed-update-version", version);
       updatePopout.hidden = true;
     });

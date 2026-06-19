@@ -1,4 +1,4 @@
-const CACHE_NAME = "project-planner-v4";
+const CACHE_NAME = "project-planner-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -28,6 +28,19 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   const request = event.request;
   if (request.method !== "GET") return;
+
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put("./index.html", copy));
+          return response;
+        })
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
 
   if (new URL(request.url).pathname.endsWith("/planner-data.js") || new URL(request.url).pathname.endsWith("/update-notes.json")) {
     event.respondWith(
