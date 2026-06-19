@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IC Investing - Local Agent Desk</title>
+    <meta name="description" content="IC Investing is a simplified market education desk powered by watchlist, risk, valuation, news, and redteam research agents.">
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f4fff9;
+        --muted: #a7bbb3;
+        --paper: #040706;
+        --panel: rgba(8, 18, 15, 0.82);
+        --line: rgba(236, 245, 238, 0.13);
+        --teal: #00e6a7;
+        --teal-soft: rgba(0, 230, 167, 0.11);
+        --amber: #f4c152;
+        --shadow: 0 26px 86px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 78% 10%, rgba(0, 230, 167, 0.16), transparent 28%),
+          radial-gradient(circle at 10% 14%, rgba(244, 193, 82, 0.11), transparent 24%),
+          linear-gradient(180deg, #040706 0%, #0d1714 46%, #040706 100%);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          repeating-linear-gradient(90deg, rgba(236, 245, 238, 0.034) 0 1px, transparent 1px 76px),
+          repeating-linear-gradient(0deg, rgba(236, 245, 238, 0.026) 0 1px, transparent 1px 76px);
+        -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+        mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+      }
+
+      body.agent-popout-open {
+        overflow: hidden;
+      }
+
+      a,
+      button {
+        font: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid rgba(0, 230, 167, 0.38);
+        outline-offset: 4px;
+      }
+
+      .site-shell {
+        position: relative;
+        z-index: 1;
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 20px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .brand-mark,
+      .agent-logo {
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(0, 230, 167, 0.4);
+        border-radius: 8px;
+        color: #03100d;
+        background: linear-gradient(135deg, var(--teal), var(--amber));
+        font-weight: 900;
+        box-shadow: 0 0 34px rgba(0, 230, 167, 0.22);
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand strong,
+      .nav-link {
+        font-weight: 850;
+      }
+
+      .brand span,
+      .nav-link {
+        color: var(--muted);
+      }
+
+      .nav-link {
+        text-decoration: none;
+      }
+
+      main {
+        display: grid;
+        gap: 22px;
+        padding: 30px 0 54px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+        gap: 26px;
+        align-items: stretch;
+        min-height: calc(100vh - 138px);
+      }
+
+      .hero-copy,
+      .agent-preview,
+      .note-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+      }
+
+      .hero-copy {
+        display: grid;
+        align-content: center;
+        padding: clamp(24px, 5vw, 48px);
+        overflow: hidden;
+      }
+
+      .kicker,
+      .agent-kicker,
+      .agent-brand-subtitle {
+        color: var(--teal);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin-bottom: 18px;
+        font-size: clamp(44px, 7vw, 88px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 680px;
+        margin-bottom: 26px;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 21px);
+        line-height: 1.55;
+      }
+
+      .hero-actions,
+      .agent-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .primary-action,
+      .secondary-action,
+      .agent-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 18px;
+        border: 1px solid var(--teal);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .primary-action,
+      .agent-cta {
+        color: #03100d;
+        background: var(--teal);
+        box-shadow: 0 18px 40px rgba(0, 230, 167, 0.16);
+      }
+
+      .secondary-action {
+        color: var(--ink);
+        background: rgba(236, 245, 238, 0.055);
+      }
+
+      .primary-action:hover,
+      .agent-cta:hover {
+        background: #58ffd0;
+      }
+
+      .agent-preview {
+        display: grid;
+        align-content: center;
+        padding: clamp(18px, 4vw, 30px);
+      }
+
+      .preview-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 999px;
+        color: #03100d;
+        background: var(--teal);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .agent-mini-list,
+      .note-grid {
+        display: grid;
+        gap: 10px;
+      }
+
+      .agent-mini {
+        padding: 13px;
+        border: 1px solid rgba(236, 245, 238, 0.1);
+        border-radius: 8px;
+        background: rgba(236, 245, 238, 0.045);
+      }
+
+      .agent-mini h3 {
+        margin-bottom: 5px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
+      .agent-mini p {
+        margin-bottom: 0;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .note-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .note-card {
+        padding: 18px;
+      }
+
+      .note-card h2 {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .note-card p {
+        margin-bottom: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .agent-popout {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background:
+          radial-gradient(circle at 50% 12%, rgba(0, 230, 167, 0.13), transparent 32%),
+          rgba(0, 0, 0, 0.78);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+      }
+
+      .agent-popout[hidden] {
+        display: none;
+      }
+
+      .agent-panel {
+        position: relative;
+        width: min(520px, 100%);
+        max-height: min(900px, calc(100dvh - 40px));
+        overflow: auto;
+        padding: 28px 28px 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 18%),
+          radial-gradient(circle at 50% 0%, rgba(0, 230, 167, 0.11), transparent 34%),
+          #040706;
+        box-shadow: 0 30px 110px rgba(0, 0, 0, 0.78);
+      }
+
+      .agent-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.22) 100%),
+          repeating-linear-gradient(90deg, rgba(236, 245, 238, 0.028) 0 1px, transparent 1px 52px);
+      }
+
+      .agent-close {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        margin: -12px 0 24px -12px;
+        border: 1px solid rgba(0, 230, 167, 0.24);
+        border-radius: 8px;
+        color: #ffffff;
+        background: rgba(236, 245, 238, 0.035);
+        cursor: pointer;
+        font-size: 40px;
+        font-weight: 200;
+        line-height: 1;
+      }
+
+      .agent-close:hover {
+        color: var(--teal);
+      }
+
+      .agent-brand,
+      .agent-copy,
+      .agent-list,
+      .agent-chip-cloud,
+      .agent-cta,
+      .agent-links {
+        position: relative;
+        z-index: 1;
+      }
+
+      .agent-brand {
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+
+      .agent-logo {
+        width: 66px;
+        height: 66px;
+        font-size: 26px;
+      }
+
+      .agent-brand-word {
+        font-size: clamp(38px, 9vw, 60px);
+        font-weight: 950;
+        line-height: 0.92;
+      }
+
+      .agent-brand-subtitle {
+        color: rgba(210, 232, 224, 0.72);
+      }
+
+      .agent-copy {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+
+      .agent-copy h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .agent-copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .agent-list {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .agent-row {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 14px;
+        align-items: center;
+        min-height: 56px;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(236, 245, 238, 0.1);
+      }
+
+      .agent-row:last-child {
+        border-bottom: 0;
+      }
+
+      .agent-icon {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        color: #ffffff;
+      }
+
+      .agent-icon svg {
+        width: 34px;
+        height: 34px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.2;
+      }
+
+      .agent-row h3 {
+        margin: 0 0 4px;
+        color: #ffffff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: clamp(17px, 4.4vw, 20px);
+        text-transform: uppercase;
+      }
+
+      .agent-row p {
+        margin: 0;
+        color: rgba(210, 232, 224, 0.64);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .agent-chip-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .agent-chip-cloud span {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        padding: 0 10px;
+        border: 1px solid rgba(0, 230, 167, 0.18);
+        border-radius: 999px;
+        color: rgba(217, 255, 241, 0.82);
+        background: rgba(0, 230, 167, 0.06);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .agent-cta {
+        width: 100%;
+        min-height: 56px;
+        font-size: 20px;
+      }
+
+      .agent-links {
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .agent-links a {
+        color: rgba(210, 232, 224, 0.68);
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .agent-links a:hover {
+        color: #ffffff;
+      }
+
+      @media (max-width: 820px) {
+        .hero,
+        .note-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .agent-popout {
+          align-items: stretch;
+          padding: 0;
+        }
+
+        .agent-panel {
+          width: 100%;
+          max-height: 100dvh;
+          border-width: 0;
+          border-radius: 0;
+          padding: 30px 20px 22px;
+        }
+
+        .agent-close {
+          margin-bottom: 18px;
+        }
+
+        .agent-brand {
+          margin-bottom: 20px;
+        }
+
+        .agent-copy {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          white-space: nowrap;
+        }
+
+        .agent-list {
+          gap: 11px;
+          margin-bottom: 20px;
+        }
+
+        .agent-row {
+          gap: 12px;
+          min-height: 58px;
+          padding: 7px 0;
+        }
+
+        .agent-icon,
+        .agent-icon svg {
+          width: 34px;
+          height: 34px;
+        }
+
+        .agent-row h3 {
+          font-size: 18px;
+        }
+
+        .agent-row p {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body class="agent-popout-open">
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="IC Investing home">
+          <span class="brand-mark">IC</span>
+          <span><strong>IC Investing</strong><br>Local Agent Desk</span>
+        </a>
+        <a class="nav-link" href="#agents">Agents</a>
+      </header>
+
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="kicker">Research-only investing education</p>
+            <h1>Market notes for traders and investors.</h1>
+            <p class="lede">IC Investing turns local cache data into a calmer workflow: setup scans, trend checks, value checks, news context, and risk challenge notes.</p>
+            <div class="hero-actions">
+              <button class="primary-action" id="heroOpenAgents" type="button">See plain-English breakdown</button>
+              <a class="secondary-action" href="https://github.com/schuwaong/ic-investing-cache-desk">Source repo</a>
+            </div>
+          </div>
+
+          <aside class="agent-preview" id="agents" aria-label="Agent preview">
+            <div class="preview-top">
+              <div>
+                <p class="agent-kicker">Live workflow</p>
+                <h2>How it helps</h2>
+              </div>
+              <span class="status-pill">Education only</span>
+            </div>
+            <div class="agent-mini-list">
+              <article class="agent-mini">
+                <h3>Setup Finder</h3>
+                <p>Helps traders start with a shorter watchlist.</p>
+              </article>
+              <article class="agent-mini">
+                <h3>Trend Check</h3>
+                <p>Shows whether momentum is helping or fading.</p>
+              </article>
+              <article class="agent-mini">
+                <h3>Risk Challenge</h3>
+                <p>Catches weak ideas before you size up.</p>
+              </article>
+            </div>
+          </aside>
+        </section>
+
+        <section class="note-grid" aria-label="Landing page notes">
+          <article class="note-card">
+            <h2>For traders</h2>
+            <p>Finds cleaner entries and keeps the list focused.</p>
+          </article>
+          <article class="note-card">
+            <h2>For investors</h2>
+            <p>Adds valuation and news context before you buy.</p>
+          </article>
+          <article class="note-card">
+            <h2>For both</h2>
+            <p>Keeps your notes and risk checks consistent.</p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="agent-popout" id="agentPopout" role="dialog" aria-modal="true" aria-labelledby="agentPopoutTitle" aria-describedby="agentPopoutIntro">
+      <div class="agent-panel" role="document">
+        <button class="agent-close" id="closeAgentPopout" type="button" aria-label="Close agent briefing">×</button>
+
+        <div class="agent-brand" aria-hidden="true">
+          <div class="agent-logo">IC</div>
+          <div class="agent-brand-word">INVESTING</div>
+          <div class="agent-brand-subtitle">WHAT THE AGENTS DO</div>
+        </div>
+
+        <div class="agent-copy">
+          <p class="agent-kicker">Plain English</p>
+          <h2 id="agentPopoutTitle">What each agent does.</h2>
+          <p id="agentPopoutIntro">Each agent does one job, so you can scan faster, avoid obvious mistakes, and compare ideas the same way.</p>
+        </div>
+
+        <div class="agent-list" aria-label="Investing agents">
+          <div class="agent-row">
+            <span class="agent-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M13 2 4 14h7l-1 8 10-13h-7l1-7Z"></path></svg>
+            </span>
+            <div>
+              <h3>Setup Finder</h3>
+              <p>Finds stocks near an entry, add-on, or pullback zone so traders can start with a shorter watchlist.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="agent-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M4 18V6m0 12h16M8 15l3-4 3 2 5-7"></path></svg>
+            </span>
+            <div>
+              <h3>Trend Check</h3>
+              <p>Shows whether momentum and price action are helping or fading, so you do not chase weak moves.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="agent-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M4 19h16M7 16l3-8 4 5 3-7"></path><path d="M7 16h10"></path></svg>
+            </span>
+            <div>
+              <h3>Value Check</h3>
+              <p>Compares price with valuation context so investors can avoid overpaying.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="agent-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M4 4h12v16H4V4Zm14 3h2v12h-2V7ZM7 8h6M7 12h6M7 16h4"></path></svg>
+            </span>
+            <div>
+              <h3>News Watch</h3>
+              <p>Flags headlines, policy, and macro shifts so you can explain sudden moves before you size up.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="agent-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 4 6v6c0 5 3.4 7.6 8 9 4.6-1.4 8-4 8-9V6l-8-3Z"></path><path d="m9 12 2 2 4-5"></path></svg>
+            </span>
+            <div>
+              <h3>Risk Challenge</h3>
+              <p>Looks for the weakest part of the idea before you act, so shaky setups get challenged early.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-chip-cloud" aria-label="Active agent names">
+          <span>setup finder</span>
+          <span>trend check</span>
+          <span>value check</span>
+          <span>news watch</span>
+          <span>risk challenge</span>
+        </div>
+
+        <button class="agent-cta" id="openAgentDesk" type="button">Open the desk</button>
+
+        <div class="agent-links">
+          <a href="#agents">Agents</a>
+          <a href="https://github.com/schuwaong/ic-investing-cache-desk">Source</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const popout = document.querySelector("#agentPopout");
+      const closeButton = document.querySelector("#closeAgentPopout");
+      const openButton = document.querySelector("#openAgentDesk");
+      const heroOpenButton = document.querySelector("#heroOpenAgents");
+
+      function openPopout() {
+        popout.hidden = false;
+        document.body.classList.add("agent-popout-open");
+        setTimeout(() => closeButton.focus(), 60);
+      }
+
+      function closePopout() {
+        popout.hidden = true;
+        document.body.classList.remove("agent-popout-open");
+      }
+
+      closeButton.addEventListener("click", closePopout);
+      heroOpenButton.addEventListener("click", openPopout);
+      openButton.addEventListener("click", () => {
+        closePopout();
+        document.querySelector("#agents").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      popout.addEventListener("click", (event) => {
+        if (event.target === popout || event.target.closest(".agent-links a")) {
+          closePopout();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !popout.hidden) closePopout();
+      });
+    </script>
+  </body>
+</html>
