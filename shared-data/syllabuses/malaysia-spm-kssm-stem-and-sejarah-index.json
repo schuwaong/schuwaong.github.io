@@ -1,0 +1,86 @@
+{
+  "id": "my-spm-kssm-stem-and-sejarah-index",
+  "curriculumId": "my-spm-kssm-form-4-5",
+  "syllabus": "Malaysia SPM KSSM",
+  "level": "Form 4 and Form 5",
+  "retrievedAt": "2026-06-19",
+  "subjects": [
+    {
+      "id": "additional-mathematics",
+      "title": "Additional Mathematics",
+      "source": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/440-dskp-kssm-additional-mathematics-form-4-and-5/file",
+      "topics": [
+        { "level": "Form 4", "items": ["Functions", "Quadratic Functions", "Systems of Equations", "Indices, Surds and Logarithms", "Progressions", "Linear Law", "Coordinate Geometry", "Vectors", "Solution of Triangles", "Index Numbers"] },
+        { "level": "Form 5", "items": ["Circular Measure", "Differentiation", "Integration", "Permutation and Combination", "Probability Distribution", "Trigonometric Functions", "Linear Programming", "Kinematics of Linear Motion"] }
+      ]
+    },
+    {
+      "id": "physics",
+      "title": "Physics",
+      "source": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/445-dskp-kssm-physics-form-4-and-5/file",
+      "topics": [
+        { "level": "Form 4", "items": ["Elementary Physics", "Newtonian Mechanics", "Heat", "Waves, Light and Optics"] },
+        { "level": "Form 5", "items": ["Newtonian Mechanics", "Electric and Electromagnetism", "Applied Physics", "Modern Physics"] }
+      ]
+    },
+    {
+      "id": "chemistry",
+      "title": "Chemistry",
+      "source": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/443-dskp-kssm-chemistry-form-4-and-5/file",
+      "topics": [
+        { "level": "Form 4", "items": ["The Importance of Chemistry", "Fundamentals of Chemistry", "Interaction Between Matter", "Industrial Chemistry"] },
+        { "level": "Form 5", "items": ["Chemical Process", "Organic Chemistry", "Heat", "Technology in Chemistry"] }
+      ]
+    },
+    {
+      "id": "biology",
+      "title": "Biology",
+      "source": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/442-dskp-kssm-biology-form-4-and-5/file",
+      "topics": [
+        { "level": "Form 4", "items": ["Fundamentals of Biology", "Physiology of Humans and Animals"] },
+        { "level": "Form 5", "items": ["Physiology of Flowering Plants", "Ecosystem and Environmental Sustainability", "Inheritance and Genetic Technology"] }
+      ]
+    },
+    {
+      "id": "sejarah",
+      "title": "Sejarah",
+      "source": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/416-dskp-kssm-sejarah-tingkatan-4-5/file",
+      "topics": [
+        { "level": "Form 4", "items": ["Nation building", "Nationalism", "Constitutional development", "Federation and independence"] },
+        { "level": "Form 5", "items": ["Sovereignty", "Federal constitution", "Parliamentary democracy", "National identity", "Malaysia and the world"] }
+      ],
+      "note": "Sejarah topics are stored as a first-pass scaffold; do a second PDF extraction pass before generating high-stakes exam papers."
+    }
+  ],
+  "reusableLearningObjects": {
+    "noteCards": [
+      {
+        "id": "spm-stem-command-words",
+        "title": "Answer command words precisely",
+        "body": "Define, explain, compare, calculate and justify require different response shapes.",
+        "workedExample": "For 'justify', give a decision plus evidence; for 'calculate', show formula, substitution and unit.",
+        "commonMistake": "Giving a definition when the question asks for justification.",
+        "memoryHook": "Match the answer to the verb."
+      }
+    ],
+    "quizCards": [
+      {
+        "id": "spm-command-word-check",
+        "type": "mcq",
+        "difficulty": "core",
+        "prompt": "Which command word usually needs evidence for a decision?",
+        "answers": ["State", "List", "Justify", "Name"],
+        "correctIndex": 2,
+        "explanation": "Justify requires reasons or evidence to support the answer."
+      }
+    ],
+    "scriptedPaperTemplates": [
+      {
+        "id": "spm-stem-topic-practice",
+        "title": "SPM STEM Topic Practice",
+        "sections": ["objective", "structured", "calculation/investigation"],
+        "subjectMix": ["additional-mathematics", "physics", "chemistry", "biology"]
+      }
+    ]
+  }
+}

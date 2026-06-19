@@ -6,6 +6,7 @@ const defaultApiBase = (() => {
 })();
 
 const API_BASE = defaultApiBase.replace(/\/$/, "");
+const SHARED_SYLLABUS_BASE = "../shared-data/syllabuses/";
 
 const fallbackCatalog = {
   "Cambridge IGCSE": {
@@ -57,6 +58,168 @@ const MAX_UPLOAD_BYTES = 12 * 1024 * 1024;
 let currentMode = "create";
 let latestTutorPrompt = "";
 let latestGeminiUrl = "https://gemini.google.com/app";
+
+const mergeCatalogs = (base, extra) => {
+  const merged = structuredClone(base);
+  Object.entries(extra || {}).forEach(([syllabus, levels]) => {
+    merged[syllabus] = merged[syllabus] || {};
+    Object.entries(levels || {}).forEach(([level, topics]) => {
+      merged[syllabus][level] = {
+        ...(merged[syllabus][level] || {}),
+        ...(topics || {}),
+      };
+    });
+  });
+  return merged;
+};
+
+const psleBaseSubject = (title = "") =>
+  title.replace(/^Foundation\s+/i, "").replace(/^Higher\s+/i, "");
+
+const optionFromSubject = (subject, prefix = "") => ({
+  value: subject.title,
+  label: prefix ? `${prefix} ${subject.title}` : subject.title,
+  content: [
+    subject.code ? `Code ${subject.code}` : "",
+    subject.medium ? `Medium: ${subject.medium}` : "",
+    subject.category ? `Category: ${subject.category}` : "",
+  ]
+    .filter(Boolean)
+    .join(". "),
+  dataset: { topicId: subject.id || subject.title },
+});
+
+const catalogFromSharedSyllabus = (data) => {
+  if (data.id === "sg-psle-2026") {
+    const topics = Object.fromEntries((data.curriculumSubjects || []).map((subject) => [subject, []]));
+    (data.examSubjects || []).forEach((subject) => {
+      const topicTitle = psleBaseSubject(subject.title);
+      topics[topicTitle] = topics[topicTitle] || [];
+      topics[topicTitle].push(optionFromSubject(subject, subject.levels?.[0] || ""));
+    });
+    return { [data.name]: { [data.level]: topics } };
+  }
+
+  if (data.id === "my-spm-kssm-form-4-5") {
+    const academic = Object.fromEntries(
+      (data.subjects || []).map((subject) => [
+        subject.title,
+        [
+          {
+            value: `${subject.title} DSKP`,
+            label: `${subject.title} DSKP`,
+            content: `KSSM Form 4/5 syllabus content. Category: ${subject.category || "subject"}.`,
+            dataset: { topicId: subject.id },
+          },
+        ],
+      ])
+    );
+    const vocational = Object.fromEntries(
+      (data.vocationalSubjects || []).map((title) => [
+        title,
+        [{ value: `${title} DSKP`, label: `${title} DSKP`, content: "KSSM MPV Form 4/5 vocational syllabus content." }],
+      ])
+    );
+    const specialEducation = Object.fromEntries(
+      (data.specialEducationSubjects || []).map((title) => [
+        title,
+        [{ value: `${title} DSKP`, label: `${title} DSKP`, content: "KSSMPK Form 4/5 special education syllabus content." }],
+      ])
+    );
+    return {
+      [data.name]: {
+        [data.level]: academic,
+        "SPM Vocational MPV": vocational,
+        "KSSMPK Form 4 and 5": specialEducation,
+      },
+    };
+  }
+
+  return {};
+};
+
+const optionFromSubtopic = (item, prefix = "") => ({
+  value: item.title,
+  label: prefix ? `${prefix}: ${item.title}` : item.title,
+  content: item.content || item.children?.join(", ") || `Syllabus focus: ${item.title}.`,
+  dataset: { topicId: item.id || item.title },
+});
+
+const catalogFromSubjectDetail = (data) => {
+  if (data.curriculumId === "sg-psle-2026") {
+    return {
+      "Singapore PSLE": {
+        [data.level || "Primary 6"]: {
+          [data.subject]: (data.topics || []).flatMap((topic) =>
+            (topic.subtopics || []).map((subtopic) => optionFromSubtopic(subtopic, topic.title))
+          ),
+        },
+      },
+    };
+  }
+
+  if (data.curriculumId === "my-spm-kssm-form-4-5" && data.subject) {
+    return {
+      "Malaysia SPM KSSM": {
+        [data.level || "Form 4 and Form 5"]: {
+          [data.subject]: (data.topics || []).flatMap((topic) =>
+            (topic.subtopics || []).map((subtopic) => optionFromSubtopic(subtopic, topic.title))
+          ),
+        },
+      },
+    };
+  }
+
+  if (data.id === "my-spm-kssm-stem-and-sejarah-index") {
+    const topics = Object.fromEntries(
+      (data.subjects || []).map((subject) => [
+        subject.title,
+        (subject.topics || []).flatMap((topic) =>
+          (topic.items || []).map((title) =>
+            optionFromSubtopic(
+              {
+                id: `${subject.id}-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
+                title,
+                content: `${subject.title} ${topic.level} syllabus topic.`,
+              },
+              topic.level
+            )
+          )
+        ),
+      ])
+    );
+    return { "Malaysia SPM KSSM": { [data.level || "Form 4 and Form 5"]: topics } };
+  }
+
+  return {};
+};
+
+const loadSharedSyllabusCatalog = async () => {
+  const registryResponse = await fetch(`${SHARED_SYLLABUS_BASE}registry.json`);
+  if (!registryResponse.ok) throw new Error("Shared syllabus registry not available.");
+  const registry = await registryResponse.json();
+  const files = (registry.curricula || []).map((item) => item.dataFile).filter(Boolean);
+  const dataFiles = await Promise.all(
+    files.map(async (file) => {
+      const response = await fetch(`${SHARED_SYLLABUS_BASE}${file}`);
+      if (!response.ok) throw new Error(`Could not load ${file}.`);
+      return response.json();
+    })
+  );
+  const subjectFiles = dataFiles.flatMap((data) => data.subjectFiles || []);
+  const subjectDataFiles = await Promise.all(
+    subjectFiles.map(async (file) => {
+      const response = await fetch(`${SHARED_SYLLABUS_BASE}${file}`);
+      if (!response.ok) throw new Error(`Could not load ${file}.`);
+      return response.json();
+    })
+  );
+  return [...dataFiles, ...subjectDataFiles].reduce((catalog, data) => {
+    const indexed = catalogFromSharedSyllabus(data);
+    const detailed = catalogFromSubjectDetail(data);
+    return mergeCatalogs(mergeCatalogs(catalog, indexed), detailed);
+  }, {});
+};
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -134,7 +297,98 @@ const fillSelect = (select, items, placeholder = "Select") => {
         });
       }
     }
+    select.appendChild(option);
   });
+};
+
+const getOptionLabel = (item) => (typeof item === "string" ? item : item?.label || item?.value || "");
+
+const getOptionContent = (item) => {
+  if (typeof item === "string") return `Syllabus focus: ${item}.`;
+  return item?.content || item?.description || item?.summary || `Syllabus focus: ${getOptionLabel(item)}.`;
+};
+
+const buildSyllabusOutline = (payload = asPayload()) => {
+  const syllabus = catalogData[payload.syllabus] || {};
+  const levelMap = syllabus[payload.level] || {};
+  const subtopicItems = levelMap[payload.topic] || [];
+  const selectedTitle = payload.subtopic || payload.topic || "Selected topic";
+  const normalizedSelected = selectedTitle.toLowerCase();
+  const mappedItems = subtopicItems
+    .map((item) => ({
+      title: getOptionLabel(item),
+      content: getOptionContent(item),
+      topicId: typeof item === "object" ? item.dataset?.topicId || item.value || "" : "",
+    }))
+    .filter((item) => item.title);
+  const selectedItem =
+    mappedItems.find((item) => item.title.toLowerCase() === normalizedSelected) || {
+      title: selectedTitle,
+      content: `Syllabus focus: ${selectedTitle}.`,
+      topicId: payload.topicId || "",
+    };
+  const relatedItems = mappedItems.filter((item) => item.title !== selectedItem.title);
+
+  return {
+    syllabus: payload.syllabus,
+    level: payload.level,
+    subject: payload.topic,
+    selectedSubtopic: selectedItem,
+    items: [selectedItem, ...relatedItems].slice(0, 12),
+  };
+};
+
+const buildSevenDayStudyPlan = (payload = asPayload()) => {
+  const outline = payload.syllabusOutline || buildSyllabusOutline(payload);
+  const items = outline.items?.length
+    ? outline.items
+    : [{ title: payload.subtopic || payload.topic || "Selected topic", content: "Review the selected syllabus area." }];
+  const pick = (index) => items[index % items.length];
+  const selected = outline.selectedSubtopic || pick(0);
+  return [
+    {
+      day: 1,
+      title: `Map the syllabus for ${selected.title}`,
+      focus: selected.content,
+      task: `Read the ${outline.syllabus} ${outline.level} expectations for ${outline.subject}, then list the key terms and formulas in ${selected.title}.`,
+    },
+    {
+      day: 2,
+      title: `Build core understanding: ${pick(0).title}`,
+      focus: pick(0).content,
+      task: "Make short notes from the syllabus content, then explain each idea aloud without looking.",
+    },
+    {
+      day: 3,
+      title: `Connect related subtopic: ${pick(1).title}`,
+      focus: pick(1).content,
+      task: `Compare ${pick(1).title} with ${selected.title}; write two similarities, two differences, and one exam trap.`,
+    },
+    {
+      day: 4,
+      title: `Worked examples: ${pick(2).title}`,
+      focus: pick(2).content,
+      task: "Do three worked examples, showing every method line and annotating where each syllabus point is used.",
+    },
+    {
+      day: 5,
+      title: `Mixed practice across ${outline.subject}`,
+      focus: [pick(0), pick(1), pick(2)].map((item) => item.title).join(", "),
+      task: "Complete mixed short-answer questions across these subtopics, then mark errors by syllabus point.",
+    },
+    {
+      day: 6,
+      title: `Exam application: ${pick(3).title}`,
+      focus: pick(3).content,
+      task: "Attempt timed exam-style questions and rewrite weak answers using precise syllabus language.",
+    },
+    {
+      day: 7,
+      title: `Review and close gaps`,
+      focus: items.slice(0, 6).map((item) => item.title).join(", "),
+      task: "Redo missed questions, update a one-page summary, and generate a final worksheet for the weakest subtopic.",
+    },
+  ];
 };
 
 const setBackendStatus = (online) => {
@@ -273,7 +527,7 @@ const asPayload = () => {
   const fileInput = document.getElementById("uploadFile");
   const file = fileInput.files[0];
   const selectedSubtopic = subtopicSelect.options[subtopicSelect.selectedIndex];
-  return {
+  const payload = {
     sourceType: "ic-educate-standalone",
     syllabus: syllabusSelect.value,
     curriculum: syllabusSelect.value,
@@ -290,6 +544,8 @@ const asPayload = () => {
     deadline: null,
     uploadedAsset: file ? { name: file.name, type: file.type || "application/octet-stream", size: file.size } : null,
   };
+  payload.syllabusOutline = buildSyllabusOutline(payload);
+  return payload;
 };
 
 const asMarkingPayload = async (payload) => {
@@ -354,6 +610,8 @@ const renderStudyPack = (payload) => {
   const notes = payload.notes || {};
   const lanes = payload.quiz?.lanes || {};
   const worksheetQuestions = payload.worksheet?.questions || [];
+  const requestPayload = payload.request || asPayload();
+  const sevenDayPlan = payload.sevenDayPlan || payload.studyPlan || buildSevenDayStudyPlan(requestPayload);
   const cacheChip = payload.cacheHit
     ? `<span class="chip">Saved question bank reused</span>`
     : payload.cacheKey
@@ -388,6 +646,21 @@ const renderStudyPack = (payload) => {
     .map((item, index) => `<li><strong>Q${index + 1}.</strong> ${escapeHtml(item.prompt || item.question || item)}</li>`)
     .join("");
 
+  const planHtml = sevenDayPlan
+    .map(
+      (day) => `
+        <li class="journey-step">
+          <span class="step-dot">${escapeHtml(day.day)}</span>
+          <span>
+            <strong>${escapeHtml(day.title)}</strong>
+            <small>${escapeHtml(day.focus || "")}</small>
+            <p>${escapeHtml(day.task || "")}</p>
+          </span>
+        </li>
+      `
+    )
+    .join("");
+
   resultEl.innerHTML = `
     <p><strong>${escapeHtml(payload.title || "Study pack generated")}</strong></p>
     <div class="result-links">
@@ -399,6 +672,8 @@ const renderStudyPack = (payload) => {
     <div class="lesson-grid">${noteCards || "<p class='muted'>No notes returned.</p>"}</div>
     <h3>Important points</h3>
     <ul>${importantPoints || "<li class='muted'>No points returned.</li>"}</ul>
+    <h3>7 day syllabus study plan</h3>
+    <ol class="journey-list">${planHtml}</ol>
     <h3>Flashcard / quiz bank</h3>
     <div class="quiz-grid">${quizHtml || "<p class='muted'>No quiz questions returned.</p>"}</div>
     <h3>Worksheet practice</h3>
@@ -412,6 +687,8 @@ const renderLearningJourney = (payload) => {
   const sections = payload.lesson?.sections || [];
   const quiz = payload.quiz?.questions || payload.quiz || [];
   const worksheetResult = payload.worksheet?.result || {};
+  const requestPayload = payload.request || asPayload();
+  const sevenDayPlan = payload.sevenDayPlan || payload.studyPlan || buildSevenDayStudyPlan(requestPayload);
 
   const journeyHtml = checklist
     .map(
@@ -432,11 +709,28 @@ const renderLearningJourney = (payload) => {
     .map((q, i) => `<article class="quiz-card"><h3>Q${i + 1}. ${q.prompt || q}</h3><p>${q.explanation || ""}</p></article>`)
     .join("");
 
+  const studyPlanHtml = sevenDayPlan
+    .map(
+      (day) => `
+      <li class="journey-step">
+        <span class="step-dot">${escapeHtml(day.day)}</span>
+        <span>
+          <strong>${escapeHtml(day.title)}</strong>
+          <small>${escapeHtml(day.focus || "")}</small>
+          <p>${escapeHtml(day.task || "")}</p>
+        </span>
+      </li>
+    `
+    )
+    .join("");
+
   resultEl.innerHTML = `
     <p><strong>${payload.title || "Learning journey created"}</strong></p>
     <p class="hint">${payload.lesson?.objective || ""}</p>
     <div class="hint">Total XP: ${(checklist || []).reduce((sum, item) => sum + Number(item.xp || 0), 0)} XP</div>
     <ol class="journey-list">${journeyHtml}</ol>
+    <h3>7 day syllabus study plan</h3>
+    <ol class="journey-list">${studyPlanHtml}</ol>
     <h3>Lesson</h3>
     <div class="lesson-grid">${lessonHtml}</div>
     <h3>Workbook to practice</h3>
@@ -499,6 +793,7 @@ const renderMarkFeedback = (payload) => {
 
 const simulateWorksheet = (payload, mode) => {
   const safeTopic = payload.subtopic || payload.topic || "topic";
+  const sevenDayPlan = buildSevenDayStudyPlan(payload);
   const id = `${mode}-${Date.now()}`;
   const title = `${payload.level} ${payload.syllabus}: ${safeTopic}`;
   const output = {
@@ -531,6 +826,7 @@ const simulateWorksheet = (payload, mode) => {
           { prompt: `Choose the best revision approach for ${safeTopic}.`, explanation: "Use examples + mixed questions." },
         ],
       },
+      sevenDayPlan,
       worksheet: {
         result: {
           output,
@@ -599,6 +895,11 @@ const loadBackendCatalog = async () => {
     catalogData = structuredClone(fallbackCatalog);
     latestLibraryItems = [];
     setBackendStatus(false);
+  }
+  try {
+    catalogData = mergeCatalogs(catalogData, await loadSharedSyllabusCatalog());
+  } catch (error) {
+    console.warn("Shared syllabus catalog unavailable", error);
   }
   fillCascade();
   renderCatalog();

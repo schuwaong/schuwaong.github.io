@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bottleneck Arbitrage Pilot Dashboard</title>
+    <meta name="description" content="Investor dashboard for a China-sourced bottleneck arbitrage pilot focused on small replacement parts, ROI discipline, and domestic fulfillment.">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f6f8;
+        --paper: #ffffff;
+        --paper-soft: #f9fafb;
+        --ink: #101418;
+        --muted: #58616c;
+        --line: #d9dee5;
+        --green: #14714f;
+        --green-soft: #e6f4ed;
+        --blue: #1d5f9f;
+        --blue-soft: #e8f1fb;
+        --amber: #ad6f15;
+        --amber-soft: #fff4db;
+        --red: #b42318;
+        --red-soft: #fee4e2;
+        --shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(90deg, rgba(29, 95, 159, 0.05) 0 1px, transparent 1px 100%),
+          linear-gradient(180deg, rgba(20, 113, 79, 0.045) 0 1px, transparent 1px 100%),
+          var(--bg);
+        background-size: 44px 44px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1380px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 18px 0 42px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 58px;
+        margin-bottom: 12px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border-radius: var(--radius);
+        color: #fff;
+        background: linear-gradient(135deg, var(--blue), var(--green));
+        font-weight: 900;
+      }
+
+      .brand strong,
+      .brand span {
+        display: block;
+      }
+
+      .brand strong {
+        line-height: 1.1;
+      }
+
+      .brand span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 750;
+      }
+
+      .nav-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        color: var(--ink);
+        padding: 8px 12px;
+        text-decoration: none;
+        font-weight: 850;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .button.primary {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .button.success {
+        border-color: var(--green);
+        background: var(--green);
+        color: #fff;
+      }
+
+      .summary-band,
+      .panel,
+      .metric,
+      .mini-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+        gap: 16px;
+        align-items: stretch;
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+
+      .summary-copy {
+        display: grid;
+        align-content: center;
+        gap: 12px;
+        min-height: 270px;
+      }
+
+      .kicker,
+      .eyebrow,
+      label span {
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin-bottom: 0;
+        font-size: clamp(32px, 5vw, 62px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .summary-copy p {
+        max-width: 840px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .thesis-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .thesis-list div {
+        min-height: 76px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+      }
+
+      .thesis-list strong,
+      .thesis-list span {
+        display: block;
+      }
+
+      .thesis-list span {
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        min-height: 130px;
+        display: grid;
+        align-content: space-between;
+        padding: 14px;
+        box-shadow: none;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 8px;
+        font-size: clamp(24px, 3vw, 38px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .metric small {
+        color: var(--muted);
+        font-weight: 750;
+      }
+
+      .metric.green {
+        border-color: rgba(20, 113, 79, 0.26);
+        background: var(--green-soft);
+      }
+
+      .metric.blue {
+        border-color: rgba(29, 95, 159, 0.24);
+        background: var(--blue-soft);
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(360px, 0.76fr) minmax(0, 1.24fr);
+        gap: 16px;
+        align-items: start;
+      }
+
+      .left-stack,
+      .right-stack {
+        display: grid;
+        gap: 16px;
+      }
+
+      .panel {
+        overflow: hidden;
+      }
+
+      .panel-head {
+        padding: 15px 16px 12px;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper-soft);
+      }
+
+      .panel-head h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .panel-head p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .panel-body {
+        padding: 16px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        color: var(--ink);
+        padding: 8px 10px;
+        font-weight: 750;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 3px solid rgba(29, 95, 159, 0.16);
+        border-color: var(--blue);
+      }
+
+      .calculator-result {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .mini-card {
+        min-height: 106px;
+        display: grid;
+        align-content: space-between;
+        padding: 12px;
+        box-shadow: none;
+      }
+
+      .mini-card span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .mini-card strong {
+        font-size: 26px;
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .decision-card {
+        margin-top: 10px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+      }
+
+      .decision-card strong,
+      .decision-card span {
+        display: block;
+      }
+
+      .decision-card span {
+        color: var(--muted);
+        margin-top: 4px;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 28px;
+        border-radius: 999px;
+        padding: 4px 9px;
+        font-size: 12px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .status-scale {
+        color: var(--green);
+        background: var(--green-soft);
+      }
+
+      .status-test {
+        color: var(--blue);
+        background: var(--blue-soft);
+      }
+
+      .status-watch {
+        color: var(--amber);
+        background: var(--amber-soft);
+      }
+
+      .status-reject {
+        color: var(--red);
+        background: var(--red-soft);
+      }
+
+      .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        min-width: 900px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 11px 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        font-size: 13px;
+      }
+
+      th {
+        color: var(--muted);
+        background: var(--paper-soft);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      td strong,
+      td span {
+        display: block;
+      }
+
+      td span {
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .number {
+        font-variant-numeric: tabular-nums;
+        font-weight: 850;
+      }
+
+      .profit-positive {
+        color: var(--green);
+      }
+
+      .profit-negative {
+        color: var(--red);
+      }
+
+      .budget-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .budget-row {
+        display: grid;
+        grid-template-columns: 150px minmax(0, 1fr) 74px;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .budget-row span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .bar {
+        height: 13px;
+        border-radius: 999px;
+        background: #e8edf2;
+        overflow: hidden;
+      }
+
+      .bar div {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--blue), var(--green));
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .timeline-step {
+        min-height: 154px;
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+      }
+
+      .timeline-step b {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--blue);
+      }
+
+      .timeline-step strong,
+      .timeline-step span {
+        display: block;
+      }
+
+      .timeline-step span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .inventory-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .inventory-card {
+        min-height: 166px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+      }
+
+      .inventory-card header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .inventory-card strong,
+      .inventory-card span {
+        display: block;
+      }
+
+      .inventory-card span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .progress-track {
+        height: 10px;
+        border-radius: 999px;
+        background: #e8edf2;
+        overflow: hidden;
+        margin: 12px 0 8px;
+      }
+
+      .progress-track div {
+        height: 100%;
+        border-radius: inherit;
+        background: var(--green);
+      }
+
+      .assumption-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .assumption {
+        min-height: 106px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper-soft);
+      }
+
+      .assumption strong,
+      .assumption span {
+        display: block;
+      }
+
+      .assumption span {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footnote {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media (max-width: 1120px) {
+        .summary-band,
+        .dashboard-grid,
+        .timeline,
+        .inventory-grid,
+        .assumption-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-copy {
+          min-height: 0;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(100% - 20px, 1380px);
+          padding-top: 10px;
+        }
+
+        .topbar,
+        .nav-actions {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .summary-band {
+          padding: 14px;
+        }
+
+        .thesis-list,
+        .metric-grid,
+        .field-grid,
+        .calculator-result {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+
+        .panel-body,
+        .panel-head {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <nav class="topbar" aria-label="Resale ops navigation">
+        <a class="brand" href="./">
+          <span class="brand-mark">BA</span>
+          <span>
+            <strong>Bottleneck Arbitrage Pilot</strong>
+            <span>Investor dashboard and operating model</span>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <a class="button" href="#scanner">Scanner</a>
+          <a class="button" href="#inventory">Inventory</a>
+          <a class="button primary" href="investor-deck.html">Deck HTML</a>
+          <a class="button success" href="investor-deck.pdf">Investor PDF</a>
+        </div>
+      </nav>
+
+      <section class="summary-band" aria-labelledby="dashboard-title">
+        <div class="summary-copy">
+          <span class="kicker">China-sourced bottleneck arbitrage</span>
+          <h1 id="dashboard-title">Small replacement parts, tested with micro-batches and ruthless ROI rules.</h1>
+          <p>We scan for parts that are cheap to manufacture in China but overvalued in a specific country because local supply is thin, delivery is slow, or buyers need an exact-fit repair. The first lane is non-safety automotive/interior repair micro-parts sold through US eBay.</p>
+          <div class="thesis-list" aria-label="Operating principles">
+            <div>
+              <strong>No random products</strong>
+              <span>Every SKU must show buyer intent, scarcity, and a clear fitment story.</span>
+            </div>
+            <div>
+              <strong>No direct China dropship</strong>
+              <span>Hold micro-bulk stock domestically for speed, inspection, and seller metrics.</span>
+            </div>
+            <div>
+              <strong>Kill weak SKUs fast</strong>
+              <span>Reject or liquidate anything below the profit and sell-through thresholds.</span>
+            </div>
+          </div>
+        </div>
+        <div class="metric-grid" aria-label="Pilot summary metrics">
+          <div class="metric green">
+            <span>Pilot ask</span>
+            <strong>$5k</strong>
+            <small>Samples, first inventory, freight, listing tests, and dashboard tooling.</small>
+          </div>
+          <div class="metric blue">
+            <span>Validation window</span>
+            <strong>90 days</strong>
+            <small>Source, sample, list, measure, reorder or stop.</small>
+          </div>
+          <div class="metric">
+            <span>Default channel</span>
+            <strong>US eBay</strong>
+            <small>Best first marketplace for exact-search replacement parts.</small>
+          </div>
+          <div class="metric">
+            <span>Target net profit</span>
+            <strong>$5+</strong>
+            <small>Minimum target per order before scaling any SKU.</small>
+          </div>
+        </div>
+      </section>
+
+      <main class="dashboard-grid">
+        <div class="left-stack">
+          <section class="panel" aria-labelledby="calculator-title">
+            <div class="panel-head">
+              <span class="eyebrow">Live calculator</span>
+              <h2 id="calculator-title">ROI model</h2>
+              <p>Edit the unit economics and the decision label updates immediately.</p>
+            </div>
+            <div class="panel-body">
+              <div class="field-grid">
+                <label>
+                  <span>Sale price</span>
+                  <input id="salePrice" type="number" min="0" step="0.01" value="18.99">
+                </label>
+                <label>
+                  <span>Landed cost</span>
+                  <input id="landedCost" type="number" min="0.01" step="0.01" value="3.20">
+                </label>
+                <label>
+                  <span>Platform fee %</span>
+                  <input id="feePct" type="number" min="0" step="0.1" value="14">
+                </label>
+                <label>
+                  <span>Ad %</span>
+                  <input id="adPct" type="number" min="0" step="0.1" value="4">
+                </label>
+                <label>
+                  <span>US shipping</span>
+                  <input id="shippingCost" type="number" min="0" step="0.01" value="4.45">
+                </label>
+                <label>
+                  <span>Packaging</span>
+                  <input id="packagingCost" type="number" min="0" step="0.01" value="0.55">
+                </label>
+                <label>
+                  <span>Returns buffer</span>
+                  <input id="returnsBuffer" type="number" min="0" step="0.01" value="1.00">
+                </label>
+                <label>
+                  <span>60-day sell-through %</span>
+                  <input id="sellThrough" type="number" min="0" max="100" step="1" value="68">
+                </label>
+              </div>
+
+              <div class="calculator-result" aria-live="polite">
+                <div class="mini-card">
+                  <span>Net profit</span>
+                  <strong id="netProfit">$0.00</strong>
+                </div>
+                <div class="mini-card">
+                  <span>ROI on landed cost</span>
+                  <strong id="roiPct">0%</strong>
+                </div>
+                <div class="mini-card">
+                  <span>Break-even price</span>
+                  <strong id="breakEven">$0.00</strong>
+                </div>
+              </div>
+
+              <div class="decision-card">
+                <strong><span id="decisionPill" class="status-pill status-watch">Watch</span></strong>
+                <span id="decisionReason">Waiting for calculator input.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="budget-title">
+            <div class="panel-head">
+              <span class="eyebrow">Pilot capital</span>
+              <h2 id="budget-title">$5,000 use of funds</h2>
+              <p>Enough to learn without committing to a container-load mistake.</p>
+            </div>
+            <div class="panel-body">
+              <div class="budget-list" id="budgetList"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="right-stack">
+          <section class="panel" id="scanner" aria-labelledby="scanner-title">
+            <div class="panel-head">
+              <span class="eyebrow">Bottleneck scanner</span>
+              <h2 id="scanner-title">Candidate SKU comparison by country and platform</h2>
+              <p>Seed data is intentionally conservative. Replace assumptions with observed listing and supplier data during the pilot.</p>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Country / platform</th>
+                    <th>Price</th>
+                    <th>Landed</th>
+                    <th>Fees + ads</th>
+                    <th>Ship + pack</th>
+                    <th>Net</th>
+                    <th>ROI</th>
+                    <th>Sell-through</th>
+                    <th>Decision</th>
+                  </tr>
+                </thead>
+                <tbody id="skuRows"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel" id="inventory" aria-labelledby="inventory-title">
+            <div class="panel-head">
+              <span class="eyebrow">Inventory discipline</span>
+              <h2 id="inventory-title">Hold-time tracker</h2>
+              <p>Micro-bulk only works if slow movers are identified and cleared early.</p>
+            </div>
+            <div class="panel-body">
+              <div class="inventory-grid" id="inventoryGrid"></div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="timeline-title">
+            <div class="panel-head">
+              <span class="eyebrow">90-day validation</span>
+              <h2 id="timeline-title">Pilot milestones</h2>
+              <p>The investor decision is made from sell-through, profit, returns, and reorder confidence.</p>
+            </div>
+            <div class="panel-body">
+              <div class="timeline">
+                <div class="timeline-step">
+                  <b>1</b>
+                  <strong>Weeks 1-2: scan</strong>
+                  <span>Compare country price gaps, supplier costs, competitor count, and delivery promises.</span>
+                </div>
+                <div class="timeline-step">
+                  <b>2</b>
+                  <strong>Weeks 3-5: sample</strong>
+                  <span>Order from 3-5 suppliers and reject parts with poor fit, packaging, or IP risk.</span>
+                </div>
+                <div class="timeline-step">
+                  <b>3</b>
+                  <strong>Weeks 6-8: list</strong>
+                  <span>Receive micro-bulk stock, photograph, list 3-5 SKUs, and run light ad tests.</span>
+                </div>
+                <div class="timeline-step">
+                  <b>4</b>
+                  <strong>Weeks 9-12: decide</strong>
+                  <span>Scale, reorder, watch, or liquidate based on profit, sell-through, and returns.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="assumptions-title">
+            <div class="panel-head">
+              <span class="eyebrow">Investor controls</span>
+              <h2 id="assumptions-title">Risk boundaries</h2>
+              <p>This pitch is built around evidence gathering, not guaranteed returns.</p>
+            </div>
+            <div class="panel-body">
+              <div class="assumption-grid">
+                <div class="assumption">
+                  <strong>Default market</strong>
+                  <span>US eBay first. Australia, UK, Singapore, and Mercado Livre remain comparison markets.</span>
+                </div>
+                <div class="assumption">
+                  <strong>Fulfillment</strong>
+                  <span>Micro-bulk stock held domestically. No retail dropshipping from China to buyers.</span>
+                </div>
+                <div class="assumption">
+                  <strong>Product lane</strong>
+                  <span>Non-safety repair micro-parts with exact-search demand and low shipping weight.</span>
+                </div>
+                <div class="assumption">
+                  <strong>Excluded categories</strong>
+                  <span>No safety-critical parts, replicas, branded counterfeits, batteries, medical, food, cosmetics, or children’s products.</span>
+                </div>
+              </div>
+              <p class="footnote">Pilot assumptions are for planning only and are not a guarantee of investor return. Live supplier quotes, marketplace fees, import costs, and sell-through data must replace seed assumptions before scale-up.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
+      const pct = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+      const budget = [
+        ["Market research", 500],
+        ["Samples", 500],
+        ["Micro-bulk inventory", 1500],
+        ["Inbound freight buffer", 700],
+        ["Fulfillment supplies", 400],
+        ["eBay listing tests", 500],
+        ["Contingency", 900]
+      ];
+
+      const skus = [
+        {
+          name: "VW A/C vent tab repair kit",
+          note: "Exact-fit, high-intent repair search",
+          country: "United States",
+          platform: "eBay",
+          price: 18.99,
+          landed: 3.2,
+          feePct: 14,
+          adPct: 4,
+          shipping: 4.45,
+          packaging: 0.55,
+          returns: 1,
+          sellThrough: 68,
+          risk: "Low"
+        },
+        {
+          name: "Glovebox latch repair kit",
+          note: "Small plastic part, compatibility sensitive",
+          country: "Australia",
+          platform: "eBay AU",
+          price: 24.99,
+          landed: 4.1,
+          feePct: 14,
+          adPct: 4,
+          shipping: 5.4,
+          packaging: 0.65,
+          returns: 1.25,
+          sellThrough: 52,
+          risk: "Medium"
+        },
+        {
+          name: "Sun visor clip pair",
+          note: "Tiny part, clear model-year listings",
+          country: "United Kingdom",
+          platform: "eBay UK",
+          price: 14.99,
+          landed: 2.65,
+          feePct: 15,
+          adPct: 3,
+          shipping: 3.85,
+          packaging: 0.45,
+          returns: 0.8,
+          sellThrough: 44,
+          risk: "Medium"
+        },
+        {
+          name: "Interior trim clip pack",
+          note: "Bundleable, but more commodity pressure",
+          country: "United States",
+          platform: "eBay",
+          price: 12.99,
+          landed: 3.15,
+          feePct: 14,
+          adPct: 5,
+          shipping: 4.45,
+          packaging: 0.55,
+          returns: 0.75,
+          sellThrough: 32,
+          risk: "Medium"
+        },
+        {
+          name: "Dashboard knob cap replacement",
+          note: "High value per gram, fitment must be exact",
+          country: "Singapore",
+          platform: "Shopee / Lazada",
+          price: 16.5,
+          landed: 2.4,
+          feePct: 12,
+          adPct: 5,
+          shipping: 2.3,
+          packaging: 0.35,
+          returns: 0.8,
+          sellThrough: 58,
+          risk: "Medium"
+        },
+        {
+          name: "Door lock pin cap set",
+          note: "Low safety risk, possible weak demand",
+          country: "Brazil",
+          platform: "Mercado Livre",
+          price: 19.5,
+          landed: 3.8,
+          feePct: 16,
+          adPct: 5,
+          shipping: 4.9,
+          packaging: 0.6,
+          returns: 1.2,
+          sellThrough: 24,
+          risk: "High"
+        }
+      ];
+
+      const inventory = [
+        { name: "VW A/C vent tab repair kit", bought: 50, sold: 34, days: 42 },
+        { name: "Glovebox latch repair kit", bought: 35, sold: 18, days: 49 },
+        { name: "Interior trim clip pack", bought: 60, sold: 15, days: 64 }
+      ];
+
+      function calcRow(row) {
+        const platformFee = row.price * (row.feePct / 100);
+        const adCost = row.price * (row.adPct / 100);
+        const shipPack = row.shipping + row.packaging;
+        const net = row.price - row.landed - platformFee - adCost - shipPack - row.returns;
+        const roi = net / row.landed;
+        const breakEven = row.landed + row.shipping + row.packaging + row.returns;
+        return { platformFee, adCost, shipPack, net, roi, breakEven };
+      }
+
+      function decision(row, metrics) {
+        if (row.risk === "High") {
+          return {
+            label: "Reject",
+            cls: "status-reject",
+            reason: "High country/platform risk or fulfillment uncertainty."
+          };
+        }
+
+        if (metrics.net < 4) {
+          return {
+            label: "Reject",
+            cls: "status-reject",
+            reason: "Net profit is below the $4 minimum."
+          };
+        }
+
+        if (metrics.net >= 5 && metrics.roi >= 0.8 && row.sellThrough >= 60) {
+          return {
+            label: "Scale",
+            cls: "status-scale",
+            reason: "Profit, ROI, and sell-through clear the scale threshold."
+          };
+        }
+
+        if (metrics.net >= 4 && metrics.roi >= 0.5) {
+          return {
+            label: "Test",
+            cls: "status-test",
+            reason: "Economics are strong enough for a micro-batch test."
+          };
+        }
+
+        return {
+          label: "Watch",
+          cls: "status-watch",
+          reason: "Profitable, but not enough margin or velocity to scale."
+        };
+      }
+
+      function renderBudget() {
+        const list = document.getElementById("budgetList");
+        const total = budget.reduce((sum, item) => sum + item[1], 0);
+        list.innerHTML = budget.map(([label, value]) => {
+          const width = (value / total) * 100;
+          return `
+            <div class="budget-row">
+              <span>${label}</span>
+              <div class="bar" aria-label="${label} ${money.format(value)}">
+                <div style="width:${width}%"></div>
+              </div>
+              <strong class="number">${money.format(value)}</strong>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function renderSkuRows() {
+        const rows = document.getElementById("skuRows");
+        rows.innerHTML = skus.map((row) => {
+          const metrics = calcRow(row);
+          const verdict = decision(row, metrics);
+          const feeAd = metrics.platformFee + metrics.adCost;
+          const profitClass = metrics.net >= 0 ? "profit-positive" : "profit-negative";
+          return `
+            <tr>
+              <td><strong>${row.name}</strong><span>${row.note}</span></td>
+              <td><strong>${row.country}</strong><span>${row.platform} · ${row.risk} risk</span></td>
+              <td class="number">${money.format(row.price)}</td>
+              <td class="number">${money.format(row.landed)}</td>
+              <td class="number">${money.format(feeAd)}</td>
+              <td class="number">${money.format(metrics.shipPack)}</td>
+              <td class="number ${profitClass}">${money.format(metrics.net)}</td>
+              <td class="number ${profitClass}">${pct.format(metrics.roi * 100)}%</td>
+              <td class="number">${row.sellThrough}%</td>
+              <td><span class="status-pill ${verdict.cls}">${verdict.label}</span></td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function inventoryVerdict(item) {
+        const sellThrough = item.sold / item.bought;
+        if (sellThrough >= 0.6 && item.days <= 60) {
+          return { label: "Reorder", cls: "status-scale", note: "Velocity clears the 60-day reorder threshold." };
+        }
+
+        if (item.days > 60 && sellThrough < 0.3) {
+          return { label: "Liquidate", cls: "status-reject", note: "Slow mover. Discount and recover cash." };
+        }
+
+        if (sellThrough >= 0.3) {
+          return { label: "Wait", cls: "status-test", note: "Keep listing active and review at the next checkpoint." };
+        }
+
+        return { label: "Watch", cls: "status-watch", note: "Needs better price, photos, listing copy, or liquidation plan." };
+      }
+
+      function renderInventory() {
+        const grid = document.getElementById("inventoryGrid");
+        grid.innerHTML = inventory.map((item) => {
+          const soldPct = Math.round((item.sold / item.bought) * 100);
+          const verdict = inventoryVerdict(item);
+          return `
+            <article class="inventory-card">
+              <header>
+                <div>
+                  <strong>${item.name}</strong>
+                  <span>${item.sold} of ${item.bought} sold · ${item.days} days held</span>
+                </div>
+                <span class="status-pill ${verdict.cls}">${verdict.label}</span>
+              </header>
+              <div class="progress-track" aria-label="${soldPct}% sold">
+                <div style="width:${Math.min(soldPct, 100)}%"></div>
+              </div>
+              <strong class="number">${soldPct}% sold</strong>
+              <span>${verdict.note}</span>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderCalculator() {
+        const row = {
+          price: Number(document.getElementById("salePrice").value),
+          landed: Number(document.getElementById("landedCost").value),
+          feePct: Number(document.getElementById("feePct").value),
+          adPct: Number(document.getElementById("adPct").value),
+          shipping: Number(document.getElementById("shippingCost").value),
+          packaging: Number(document.getElementById("packagingCost").value),
+          returns: Number(document.getElementById("returnsBuffer").value),
+          sellThrough: Number(document.getElementById("sellThrough").value),
+          risk: "Low"
+        };
+
+        const metrics = calcRow(row);
+        const verdict = decision(row, metrics);
+        const feeRate = (row.feePct + row.adPct) / 100;
+        const breakEven = feeRate >= 1 ? 0 : metrics.breakEven / (1 - feeRate);
+        const netProfit = document.getElementById("netProfit");
+        const roiPct = document.getElementById("roiPct");
+        const breakEvenEl = document.getElementById("breakEven");
+        const pill = document.getElementById("decisionPill");
+        const reason = document.getElementById("decisionReason");
+
+        netProfit.textContent = money.format(metrics.net);
+        netProfit.className = metrics.net >= 0 ? "profit-positive" : "profit-negative";
+        roiPct.textContent = `${pct.format(metrics.roi * 100)}%`;
+        roiPct.className = metrics.roi >= 0 ? "profit-positive" : "profit-negative";
+        breakEvenEl.textContent = money.format(breakEven);
+        pill.textContent = verdict.label;
+        pill.className = `status-pill ${verdict.cls}`;
+        reason.textContent = verdict.reason;
+      }
+
+      renderBudget();
+      renderSkuRows();
+      renderInventory();
+      renderCalculator();
+
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("input", renderCalculator);
+      });
+    </script>
+  </body>
+</html>

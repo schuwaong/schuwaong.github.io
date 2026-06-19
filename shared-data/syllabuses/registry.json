@@ -1,0 +1,43 @@
+{
+  "version": "2026-06-19",
+  "retrievedAt": "2026-06-19",
+  "curricula": [
+    {
+      "id": "sg-psle-2026",
+      "name": "Singapore PSLE",
+      "country": "Singapore",
+      "level": "Primary 6",
+      "status": "source-indexed",
+      "sourceRefs": [
+        {
+          "label": "SEAB PSLE formats examined in 2026",
+          "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/"
+        },
+        {
+          "label": "MOE primary school subjects and syllabuses",
+          "url": "https://www.moe.gov.sg/primary/curriculum/syllabus"
+        }
+      ],
+      "dataFile": "singapore-psle-2026.json"
+    },
+    {
+      "id": "my-spm-kssm-form-4-5",
+      "name": "Malaysia SPM KSSM",
+      "country": "Malaysia",
+      "level": "Form 4 and Form 5",
+      "status": "source-indexed",
+      "sourceRefs": [
+        {
+          "label": "BPK KSSM Tingkatan 4 dan 5 DSKP folder",
+          "url": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5"
+        },
+        {
+          "label": "Lembaga Peperiksaan SPM page",
+          "url": "https://lp.moe.gov.my/index.php/peperiksaan-pentaksiran/peringkat-menengah-atas/sijil-pelajaran-malaysia-spm"
+        }
+      ],
+      "dataFile": "malaysia-spm-kssm-form-4-5-registry.json"
+    }
+  ]
+}
+

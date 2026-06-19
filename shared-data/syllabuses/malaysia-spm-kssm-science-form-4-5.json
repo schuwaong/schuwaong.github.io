@@ -1,0 +1,80 @@
+{
+  "id": "my-spm-kssm-science-form-4-5",
+  "curriculumId": "my-spm-kssm-form-4-5",
+  "syllabus": "Malaysia SPM KSSM",
+  "subject": "Science",
+  "level": "Form 4 and Form 5",
+  "retrievedAt": "2026-06-19",
+  "sources": [
+    {
+      "publisher": "Bahagian Pembangunan Kurikulum, Kementerian Pendidikan Malaysia",
+      "title": "DSKP KSSM Science Form 4 and 5",
+      "url": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/446-dskp-kssm-science-form-4-and-5/file",
+      "pageRefs": ["Content Organisation", "Form 4", "Form 5"]
+    }
+  ],
+  "topics": [
+    {
+      "id": "form-4",
+      "title": "Form 4",
+      "subtopics": [
+        { "id": "safety-measures-in-laboratory", "title": "Safety Measures in Laboratory" },
+        { "id": "emergency-help", "title": "Emergency Help" },
+        { "id": "health-parameters", "title": "Techniques of Measuring Health Parameters" },
+        { "id": "green-technology", "title": "Green Technology for Environmental Sustainability" },
+        { "id": "genetics", "title": "Genetics", "children": ["Cell Division", "Inheritance", "Mutation", "Genetic Engineering", "Variation"] },
+        { "id": "support-movement-growth", "title": "Support, Movement and Growth" },
+        { "id": "body-coordination", "title": "Body Coordination" },
+        { "id": "elements-and-substances", "title": "Elements and Substances" },
+        { "id": "chemicals-in-industry", "title": "Chemicals in Industry" },
+        { "id": "chemicals-in-medicine-and-health", "title": "Chemicals in Medicine and Health" },
+        { "id": "force-and-motion", "title": "Force and Motion" },
+        { "id": "nuclear-energy", "title": "Nuclear Energy" }
+      ]
+    },
+    {
+      "id": "form-5",
+      "title": "Form 5",
+      "subtopics": [
+        { "id": "microorganisms", "title": "Microorganisms", "children": ["World of Microorganisms", "Useful Microorganisms", "Prevention and Treatment of Diseases"] },
+        { "id": "nutrition-and-food-technology", "title": "Nutrition and Food Technology" },
+        { "id": "sustainability-of-environment", "title": "Sustainability of the Environment" },
+        { "id": "rate-of-reaction", "title": "Rate of Reaction" },
+        { "id": "carbon-compounds", "title": "Carbon Compounds" },
+        { "id": "electrochemistry", "title": "Electrochemistry" },
+        { "id": "light-and-optics", "title": "Light and Optics" },
+        { "id": "force-and-pressure", "title": "Force and Pressure" }
+      ]
+    }
+  ],
+  "reusableLearningObjects": {
+    "noteCards": [
+      {
+        "id": "science-investigation-frame",
+        "title": "Investigation answer frame",
+        "body": "Identify manipulated, responding and constant variables before explaining the result.",
+        "workedExample": "If temperature is changed to test rate of reaction, temperature is manipulated and reaction rate is responding.",
+        "commonMistake": "Confusing responding variable with constant variables.",
+        "memoryHook": "Change, measure, keep."
+      }
+    ],
+    "quizCards": [
+      {
+        "id": "variable-type-check",
+        "type": "short-answer",
+        "difficulty": "form-4",
+        "prompt": "In an experiment, what is the variable deliberately changed by the student?",
+        "answer": "Manipulated variable.",
+        "explanation": "The manipulated variable is changed to observe its effect on the responding variable."
+      }
+    ],
+    "scriptedPaperTemplates": [
+      {
+        "id": "spm-science-form4-form5-mixed",
+        "title": "SPM Science Mixed Practice",
+        "sections": ["objective", "structured", "experiment/planning"],
+        "subtopicMix": ["form-4", "form-5"]
+      }
+    ]
+  }
+}

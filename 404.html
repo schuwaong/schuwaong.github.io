@@ -7,20 +7,22 @@
     <script>
       const path = window.location.pathname;
       const normalized = path.toLowerCase();
-      let target = "/IC_wearables/men/";
+      let target = "/ic_wearables/men/";
 
-      if (normalized.startsWith("/ic_avatar/female")) {
-        target = "/IC_avatar/female/";
+      if (normalized.startsWith("/projectplanner")) {
+        target = "/projectplanner/";
+      } else if (normalized.startsWith("/ic_avatar/female")) {
+        target = "/ic_avatar/female/";
       } else if (normalized.startsWith("/ic_avatar/male")) {
-        target = "/IC_avatar/male/";
+        target = "/ic_avatar/male/";
       } else if (normalized.startsWith("/ic_avatar")) {
-        target = "/IC_avatar/";
+        target = "/ic_avatar/";
       } else if (normalized.startsWith("/ic_wearables/female")) {
-        target = "/IC_wearables/female/";
+        target = "/ic_wearables/female/";
       } else if (normalized.startsWith("/ic_wearables/men")) {
-        target = "/IC_wearables/men/";
+        target = "/ic_wearables/men/";
       } else if (normalized.startsWith("/ic_wearables")) {
-        target = "/IC_wearables/men/";
+        target = "/ic_wearables/men/";
       }
 
       window.location.replace(target + window.location.search + window.location.hash);

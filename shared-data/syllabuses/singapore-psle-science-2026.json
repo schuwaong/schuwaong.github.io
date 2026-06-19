@@ -1,0 +1,112 @@
+{
+  "id": "sg-psle-science-2026",
+  "curriculumId": "sg-psle-2026",
+  "syllabus": "Singapore PSLE",
+  "subject": "Science",
+  "code": "0009",
+  "foundationCode": "0039",
+  "level": "Primary 6",
+  "examYear": 2026,
+  "retrievedAt": "2026-06-19",
+  "sources": [
+    {
+      "publisher": "Singapore Ministry of Education",
+      "title": "Primary Science Syllabus 2023",
+      "url": "https://www.moe.gov.sg/api/media/ba3562d3-5b31-4459-8693-45cde7b97273/Primary-Science-Syllabus-2023.pdf",
+      "pageRefs": ["Section 2: Content", "Section 5: Syllabus Learning Outcomes"]
+    },
+    {
+      "publisher": "Singapore Examinations and Assessment Board",
+      "title": "PSLE formats examined in 2026",
+      "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+      "pageRefs": ["Science 0009", "Foundation Science 0039"]
+    }
+  ],
+  "paperSpecs": [
+    {
+      "paper": "Science paper",
+      "marks": 100,
+      "questionTypes": ["multiple-choice", "open-ended"],
+      "skills": ["knowledge with understanding", "application", "process skills", "scientific explanation"]
+    }
+  ],
+  "topics": [
+    {
+      "id": "diversity",
+      "title": "Diversity",
+      "subtopics": [
+        { "id": "diversity-living-and-non-living", "title": "Living and non-living things", "content": "Observe, compare and classify living and non-living things." },
+        { "id": "diversity-plants-and-animals", "title": "Diversity of plants and animals", "content": "Classify plants and animals based on observable similarities and differences." },
+        { "id": "diversity-materials", "title": "Diversity of materials", "content": "Classify materials by properties and relate properties to uses." }
+      ]
+    },
+    {
+      "id": "cycles",
+      "title": "Cycles",
+      "subtopics": [
+        { "id": "life-cycles", "title": "Life cycles of plants and animals", "content": "Compare stages of life cycles and explain continuity of life." },
+        { "id": "matter-and-water-cycle", "title": "Matter, water and changes of state", "content": "Describe states of matter, changes of state and the water cycle." },
+        { "id": "reproduction", "title": "Reproduction in plants and animals", "content": "Explain reproduction as a process that ensures continuity of species." }
+      ]
+    },
+    {
+      "id": "systems",
+      "title": "Systems",
+      "subtopics": [
+        { "id": "plant-systems", "title": "Plant parts and functions", "content": "Relate plant parts to functions such as transport, reproduction and making food." },
+        { "id": "human-systems", "title": "Human respiratory, circulatory and digestive systems", "content": "Describe major organs, functions and how body systems work together." },
+        { "id": "electrical-systems", "title": "Electrical systems", "content": "Build and explain simple electrical circuits and component functions." }
+      ]
+    },
+    {
+      "id": "interactions",
+      "title": "Interactions",
+      "subtopics": [
+        { "id": "forces", "title": "Forces", "content": "Identify forces and explain their effects on motion, shape and position." },
+        { "id": "interactions-within-environment", "title": "Interactions within the environment", "content": "Explain food chains, adaptations and effects of changes in an environment." }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Energy",
+      "subtopics": [
+        { "id": "light", "title": "Light", "content": "Explain sources of light, shadows, reflection and how light travels." },
+        { "id": "heat", "title": "Heat", "content": "Explain temperature, heat transfer, expansion/contraction and everyday applications." },
+        { "id": "photosynthesis", "title": "Photosynthesis", "content": "Explain the role of light, water and carbon dioxide in food-making by plants." },
+        { "id": "energy-conversion", "title": "Energy conversion", "content": "Identify energy forms and describe how energy changes from one form to another." }
+      ]
+    }
+  ],
+  "reusableLearningObjects": {
+    "noteCards": [
+      {
+        "id": "cer-answer-frame",
+        "title": "Claim, evidence, reason",
+        "body": "Open-ended PSLE Science answers should state the claim, point to evidence in the question, then explain the science reason.",
+        "workedExample": "Claim: The plant will grow less well. Evidence: It receives less light. Reason: Plants need light for photosynthesis to make food.",
+        "commonMistake": "Giving a fact without linking it to the question evidence.",
+        "memoryHook": "Claim + evidence + because."
+      }
+    ],
+    "quizCards": [
+      {
+        "id": "photosynthesis-variable-check",
+        "type": "short-answer",
+        "difficulty": "standard",
+        "prompt": "A plant receives less light but the same amount of water. Which variable was changed?",
+        "answer": "Amount of light.",
+        "explanation": "Only light changed; water was kept constant."
+      }
+    ],
+    "scriptedPaperTemplates": [
+      {
+        "id": "psle-science-mixed-100",
+        "title": "PSLE Science Mixed Practice",
+        "marks": 100,
+        "sections": ["MCQ", "Open-ended"],
+        "themeMix": ["diversity", "cycles", "systems", "interactions", "energy"]
+      }
+    ]
+  }
+}
+

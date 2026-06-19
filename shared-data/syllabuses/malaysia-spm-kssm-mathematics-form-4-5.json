@@ -1,0 +1,80 @@
+{
+  "id": "my-spm-kssm-mathematics-form-4-5",
+  "curriculumId": "my-spm-kssm-form-4-5",
+  "syllabus": "Malaysia SPM KSSM",
+  "subject": "Mathematics",
+  "level": "Form 4 and Form 5",
+  "retrievedAt": "2026-06-19",
+  "sources": [
+    {
+      "publisher": "Bahagian Pembangunan Kurikulum, Kementerian Pendidikan Malaysia",
+      "title": "DSKP KSSM Mathematics Form 4 and 5, English version",
+      "url": "https://bpk.moe.gov.my/kurikulum/kssm/kssm-tingkatan-4-dan-5/444-dskp-kssm-mathematics-form-4-and-5-versi-english/file",
+      "pageRefs": ["Content Organisation", "Form 4", "Form 5"]
+    }
+  ],
+  "learningAreas": ["Number and Operations", "Measurement and Geometry", "Relationship and Algebra", "Statistics and Probability", "Discrete Mathematics"],
+  "topics": [
+    {
+      "id": "form-4",
+      "title": "Form 4",
+      "subtopics": [
+        { "id": "quadratic-functions-and-equations", "title": "Quadratic Functions and Equations in One Variable" },
+        { "id": "number-bases", "title": "Number Bases" },
+        { "id": "logical-reasoning", "title": "Logical Reasoning" },
+        { "id": "operations-on-sets", "title": "Operations on Sets" },
+        { "id": "network-in-graph-theory", "title": "Network in Graph Theory" },
+        { "id": "linear-inequalities-two-variables", "title": "Linear Inequalities in Two Variables" },
+        { "id": "graphs-of-motion", "title": "Graphs of Motion" },
+        { "id": "dispersion-ungrouped-data", "title": "Measures of Dispersion for Ungrouped Data" },
+        { "id": "probability-combined-events", "title": "Probability of Combined Events" },
+        { "id": "financial-management", "title": "Consumer Mathematics: Financial Management" }
+      ]
+    },
+    {
+      "id": "form-5",
+      "title": "Form 5",
+      "subtopics": [
+        { "id": "variation", "title": "Variation" },
+        { "id": "matrices", "title": "Matrices" },
+        { "id": "consumer-mathematics-insurance", "title": "Consumer Mathematics: Insurance" },
+        { "id": "consumer-mathematics-taxation", "title": "Consumer Mathematics: Taxation" },
+        { "id": "congruency-enlargement-combined-transformations", "title": "Congruency, Enlargement and Combined Transformations" },
+        { "id": "ratios-and-graphs-trigonometric-functions", "title": "Ratios and Graphs of Trigonometric Functions" },
+        { "id": "measures-of-dispersion-grouped-data", "title": "Measures of Dispersion for Grouped Data" },
+        { "id": "mathematical-modelling", "title": "Mathematical Modelling" }
+      ]
+    }
+  ],
+  "reusableLearningObjects": {
+    "noteCards": [
+      {
+        "id": "spm-math-process",
+        "title": "SPM mathematical process",
+        "body": "Show the model, formula or reasoning before calculating so answers are markable.",
+        "workedExample": "For financial mathematics, state the formula, substitute values, calculate, then interpret the answer in context.",
+        "commonMistake": "Writing only the final number without method.",
+        "memoryHook": "Formula, substitute, solve, interpret."
+      }
+    ],
+    "quizCards": [
+      {
+        "id": "quadratic-roots-check",
+        "type": "short-answer",
+        "difficulty": "form-4",
+        "prompt": "What do the roots of a quadratic equation represent on its graph?",
+        "answer": "The x-intercepts.",
+        "explanation": "Roots are values of x where y equals zero."
+      }
+    ],
+    "scriptedPaperTemplates": [
+      {
+        "id": "spm-math-form4-form5-mixed",
+        "title": "SPM Mathematics Mixed Form 4/Form 5 Practice",
+        "sections": ["objective/short-answer", "structured problem-solving"],
+        "subtopicMix": ["form-4", "form-5"]
+      }
+    ]
+  }
+}
+

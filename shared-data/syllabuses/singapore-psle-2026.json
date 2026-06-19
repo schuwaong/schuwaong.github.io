@@ -1,0 +1,87 @@
+{
+  "id": "sg-psle-2026",
+  "name": "Singapore PSLE",
+  "country": "Singapore",
+  "level": "Primary 6",
+  "retrievedAt": "2026-06-19",
+  "sources": [
+    {
+      "type": "exam-format",
+      "publisher": "Singapore Examinations and Assessment Board",
+      "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+      "notes": "Subject titles, language media, and 2026 subject codes."
+    },
+    {
+      "type": "curriculum",
+      "publisher": "Ministry of Education Singapore",
+      "url": "https://www.moe.gov.sg/primary/curriculum/syllabus",
+      "notes": "Primary subjects and official syllabus document links."
+    }
+  ],
+  "examSubjects": [
+    { "id": "english-language", "title": "English Language", "code": "0001", "medium": "English", "levels": ["Standard"] },
+    { "id": "chinese-language", "title": "Chinese Language", "code": "0005", "medium": "Chinese", "levels": ["Standard"] },
+    { "id": "malay-language", "title": "Malay Language", "code": "0006", "medium": "Malay", "levels": ["Standard"] },
+    { "id": "tamil-language", "title": "Tamil Language", "code": "0007", "medium": "Tamil", "levels": ["Standard"] },
+    { "id": "mathematics", "title": "Mathematics", "code": "0008", "medium": "English", "levels": ["Standard"], "revised": true },
+    { "id": "science", "title": "Science", "code": "0009", "medium": "English", "levels": ["Standard"], "revised": true },
+    { "id": "panjabi", "title": "Panjabi", "code": "0010", "medium": "Panjabi", "levels": ["Standard"] },
+    { "id": "hindi", "title": "Hindi", "code": "0011", "medium": "Hindi", "levels": ["Standard"] },
+    { "id": "gujarati", "title": "Gujarati", "code": "0012", "medium": "Gujarati", "levels": ["Standard"] },
+    { "id": "bengali", "title": "Bengali", "code": "0013", "medium": "Bengali", "levels": ["Standard"] },
+    { "id": "urdu", "title": "Urdu", "code": "0014", "medium": "Urdu", "levels": ["Standard"] },
+    { "id": "higher-chinese-language", "title": "Higher Chinese Language", "code": "0015", "medium": "Chinese", "levels": ["Higher"] },
+    { "id": "higher-malay-language", "title": "Higher Malay Language", "code": "0016", "medium": "Malay", "levels": ["Higher"] },
+    { "id": "higher-tamil-language", "title": "Higher Tamil Language", "code": "0017", "medium": "Tamil", "levels": ["Higher"] },
+    { "id": "foundation-panjabi", "title": "Foundation Panjabi", "code": "0020", "medium": "Panjabi", "levels": ["Foundation"] },
+    { "id": "foundation-hindi", "title": "Foundation Hindi", "code": "0021", "medium": "Hindi", "levels": ["Foundation"] },
+    { "id": "foundation-gujarati", "title": "Foundation Gujarati", "code": "0022", "medium": "Gujarati", "levels": ["Foundation"] },
+    { "id": "foundation-bengali", "title": "Foundation Bengali", "code": "0023", "medium": "Bengali", "levels": ["Foundation"] },
+    { "id": "foundation-urdu", "title": "Foundation Urdu", "code": "0024", "medium": "Urdu", "levels": ["Foundation"] },
+    { "id": "foundation-chinese-language", "title": "Foundation Chinese Language", "code": "0025", "medium": "Chinese", "levels": ["Foundation"] },
+    { "id": "foundation-malay-language", "title": "Foundation Malay Language", "code": "0026", "medium": "Malay", "levels": ["Foundation"] },
+    { "id": "foundation-tamil-language", "title": "Foundation Tamil Language", "code": "0027", "medium": "Tamil", "levels": ["Foundation"] },
+    { "id": "foundation-english-language", "title": "Foundation English Language", "code": "0031", "medium": "English", "levels": ["Foundation"] },
+    { "id": "foundation-mathematics", "title": "Foundation Mathematics", "code": "0038", "medium": "English", "levels": ["Foundation"], "revised": true },
+    { "id": "foundation-science", "title": "Foundation Science", "code": "0039", "medium": "English", "levels": ["Foundation"], "revised": true }
+  ],
+  "curriculumSubjects": [
+    "English Language",
+    "Mother Tongue Language",
+    "Mathematics",
+    "Science",
+    "Art",
+    "Music",
+    "Physical Education",
+    "Social Studies",
+    "Character and Citizenship Education"
+  ],
+  "deepExtractionNext": [
+    {
+      "subject": "Mathematics",
+      "officialDocument": "2021 Primary Mathematics Syllabus P1 to P6, updated October 2025",
+      "targetFile": "singapore-psle-mathematics-2026.json",
+      "extract": ["strands", "P5-P6 learning outcomes", "standard/foundation differences", "paper format", "question type distribution"]
+    },
+    {
+      "subject": "Science",
+      "officialDocument": "2023 Primary Science Syllabus",
+      "targetFile": "singapore-psle-science-2026.json",
+      "extract": ["themes", "topics", "learning outcomes", "inquiry skills", "paper format", "open-ended answer rubrics"]
+    },
+    {
+      "subject": "English Language",
+      "targetFile": "singapore-psle-english-2026.json",
+      "extract": ["writing", "language use and comprehension", "listening", "oral", "paper format"]
+    },
+    {
+      "subject": "Mother Tongue Languages",
+      "targetFile": "singapore-psle-mtl-2026.json",
+      "extract": ["standard", "foundation", "higher", "oral e-exam format", "paper format"]
+    }
+  ],
+  "subjectFiles": [
+    "singapore-psle-mathematics-2026.json",
+    "singapore-psle-science-2026.json"
+  ]
+}

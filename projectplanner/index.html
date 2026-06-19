@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101413">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Planner">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Project Planner</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <script src="planner-data.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #141715;
+      --muted: #666b63;
+      --paper: #fffdf7;
+      --soft: #f1eee5;
+      --line: #ddd6c9;
+      --next: #0d6b57;
+      --blocked: #a33a22;
+      --blue: #175cd3;
+      --amber: #9a5b00;
+      --purple: #6d48c6;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--soft);
+      color: var(--ink);
+      font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #101413;
+      color: #fffdf7;
+      padding: calc(14px + env(safe-area-inset-top)) 16px 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+    }
+
+    .sync-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sync-row button,
+    .sync-row input {
+      min-height: 34px;
+      border: 1px solid rgba(255, 253, 247, .25);
+      border-radius: 999px;
+      background: rgba(255, 253, 247, .1);
+      color: #fffdf7;
+      font: inherit;
+      font-size: 13px;
+      padding: 6px 12px;
+    }
+
+    .sync-row input {
+      width: min(100%, 360px);
+      background: rgba(255, 253, 247, .92);
+      color: #101413;
+    }
+
+    .sync-row input::placeholder { color: #68645b; }
+
+    .sync-status {
+      color: #d6d2c8;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      color: #d6d2c8;
+      font-size: 12px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 16px 8px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 11px;
+      white-space: nowrap;
+      font: inherit;
+    }
+
+    .tab.active {
+      background: #101413;
+      border-color: #101413;
+      color: #fffdf7;
+    }
+
+    main {
+      padding: 12px 12px calc(28px + env(safe-area-inset-bottom));
+      display: grid;
+      gap: 12px;
+      overflow-x: hidden;
+    }
+
+    .project {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(30, 24, 14, .04);
+      min-width: 0;
+    }
+
+    .project h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .metric {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .audit-card {
+      border: 1px solid #e6dfd2;
+      background: #fbf8f1;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+    }
+
+    .audit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .audit-chip {
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #e6dfd2;
+      padding: 8px;
+      min-width: 0;
+    }
+
+    .audit-chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 750;
+      margin-bottom: 4px;
+    }
+
+    .audit-chip strong,
+    .audit-card p,
+    .audit-card li {
+      overflow-wrap: anywhere;
+    }
+
+    .audit-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .audit-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .revenue-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .revenue-card h2,
+    .revenue-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+
+    .revenue-card p,
+    .lead-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .revenue-stage {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      background: #eef8f4;
+      color: var(--next);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      margin-bottom: 8px;
+    }
+
+    .health-card {
+      border: 1px solid #d8e6dd;
+      background: #f5fbf8;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .health-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .health-card p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .health-command {
+      display: block;
+      background: #101413;
+      color: #fffdf7;
+      border-radius: 6px;
+      padding: 9px;
+      margin: 8px 0;
+      font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .health-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .revenue-grid,
+    .lead-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .lead-row {
+      border-top: 1px solid #eee8dc;
+      padding: 10px 0;
+    }
+
+    .lead-row strong {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .next-box {
+      border-left: 4px solid var(--next);
+      background: #eef8f4;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      font-weight: 650;
+    }
+
+    .task {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-top: 1px solid #ece7dc;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      border-radius: 999px;
+      background: #ede8dd;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 750;
+    }
+
+    .task .badge,
+    .queue-item .badge,
+    .agent-status-main > .badge,
+    .agent-lane > .badge {
+      align-self: start;
+    }
+
+    .next .badge { background: #dff4ec; color: var(--next); }
+    .in_progress .badge { background: #e5edff; color: var(--blue); }
+    .done { color: var(--muted); text-decoration: line-through; }
+    .done .badge { background: #e7e4dc; }
+    .blocked .badge { background: #ffe7df; color: var(--blocked); }
+    .queued .badge { background: #ede8dd; color: var(--muted); }
+    .ready .badge,
+    .review_required .badge { background: #fff3d9; color: var(--amber); }
+    .active .badge { background: #eee7ff; color: var(--purple); }
+    .working .badge { background: #e5edff; color: var(--blue); }
+    .waiting_handover .badge { background: #ede8dd; color: var(--muted); }
+    .needs_approval .badge { background: #fff3d9; color: var(--amber); }
+
+    .history {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #ece7dc;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .project-actions a {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--blue);
+      padding: 8px 12px;
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .agent-status {
+      border: 1px solid #e6dfd2;
+      border-radius: 8px;
+      background: #fffaf0;
+      padding: 10px;
+      margin-bottom: 12px;
+      min-width: 0;
+    }
+
+    .agent-status-main,
+    .agent-lane {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 10px;
+      align-items: start;
+      min-width: 0;
+    }
+
+    .agent-status-main strong,
+    .agent-lane strong {
+      display: block;
+      overflow-wrap: anywhere;
+    }
+
+    .agent-status p,
+    .agent-lane p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .agent-lanes {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .agent-lane {
+      padding-top: 8px;
+      border-top: 1px solid #eee8dc;
+    }
+
+    .agent-handoff {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .project-alert {
+      margin-top: 8px;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-weight: 650;
+      overflow-wrap: anywhere;
+    }
+
+    .project-alert.blocked {
+      background: #ffe7df;
+      color: var(--blocked);
+    }
+
+    .project-alert.needs_approval {
+      background: #fff3d9;
+      color: var(--amber);
+    }
+
+    .project-actions a.primary {
+      background: #101413;
+      border-color: #101413;
+      color: #fffdf7;
+    }
+
+    .empty {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .pipeline-hero {
+      background: #101413;
+      color: #fffdf7;
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid #2e3936;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .pipeline-hero h2,
+    .queue-card h2,
+    .lane-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+
+    .pipeline-hero p {
+      margin: 0 0 12px;
+      color: #d6d2c8;
+      overflow-wrap: anywhere;
+    }
+
+    .pipeline-metrics,
+    .lane-grid,
+    .agent-project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .metric-chip,
+    .source-chip {
+      border: 1px solid rgba(255, 253, 247, .18);
+      background: rgba(255, 253, 247, .08);
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 0;
+    }
+
+    .metric-chip strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .metric-chip span,
+    .source-chip span {
+      color: #d6d2c8;
+      font-size: 12px;
+    }
+
+    .lane-card,
+    .queue-card,
+    .agent-project-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 2px 10px rgba(30, 24, 14, .04);
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .lane-card p,
+    .agent-project-card p,
+    .queue-meta,
+    .queue-detail {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .queue-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 10px;
+      padding: 12px 0;
+      border-top: 1px solid #ece7dc;
+    }
+
+    .queue-item.done {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .queue-title {
+      display: block;
+      font-weight: 750;
+      margin-bottom: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    .source-list {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .source-chip {
+      flex: 0 0 210px;
+      color: #fffdf7;
+    }
+
+    .source-chip strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .agent-project-card h2 {
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+
+    .agent-project-card .agent-status {
+      margin-bottom: 0;
+      background: #fffdf7;
+    }
+
+    .audit-project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .update-popout {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 4;
+      max-height: min(58vh, 430px);
+      overflow: auto;
+      background: #fffdf7;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 14px 38px rgba(16, 20, 19, .2);
+    }
+
+    .update-popout[hidden] {
+      display: none;
+    }
+
+    .update-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .update-head h2 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .update-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .update-close {
+      flex: 0 0 34px;
+      width: 34px;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f7f2e8;
+      color: var(--ink);
+      font: inherit;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .update-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      display: grid;
+      gap: 7px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 520px) {
+      .pipeline-metrics,
+      .lane-grid,
+      .agent-project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-chip strong {
+        font-size: 20px;
+      }
+
+      .queue-item {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .agent-status-main,
+      .agent-lane {
+        grid-template-columns: 92px 1fr;
+      }
+
+      .audit-grid,
+      .audit-project-grid,
+      .revenue-grid,
+      .health-grid,
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Planner</h1>
+    <div class="meta" id="meta"></div>
+    <div class="sync-row">
+      <button type="button" id="refresh">Refresh</button>
+      <input id="sync-url" type="url" inputmode="url" placeholder="Optional Mac sync URL">
+      <button type="button" id="save-sync-url">Save URL</button>
+      <span class="sync-status" id="sync-status">Offline-ready after install.</span>
+    </div>
+  </header>
+  <nav class="tabs" id="tabs" aria-label="Project filters"></nav>
+  <main id="app"></main>
+  <aside class="update-popout" id="update-popout" aria-live="polite" hidden>
+    <div class="update-head">
+      <div>
+        <h2 id="update-title">Latest run</h2>
+        <p id="update-meta"></p>
+      </div>
+      <button class="update-close" id="close-updates" type="button" aria-label="Close update list">&times;</button>
+    </div>
+    <ul class="update-list" id="update-list"></ul>
+  </aside>
+
+  <script>
+    let state = window.PLANNER_STATE || { projects: {} };
+    let projects = Object.entries(state.projects || {});
+    const tabs = document.querySelector("#tabs");
+    const app = document.querySelector("#app");
+    const meta = document.querySelector("#meta");
+    const syncStatus = document.querySelector("#sync-status");
+    const refreshButton = document.querySelector("#refresh");
+    const syncUrlInput = document.querySelector("#sync-url");
+    const saveSyncUrlButton = document.querySelector("#save-sync-url");
+    const updatePopout = document.querySelector("#update-popout");
+    const updateTitle = document.querySelector("#update-title");
+    const updateMeta = document.querySelector("#update-meta");
+    const updateList = document.querySelector("#update-list");
+    const closeUpdates = document.querySelector("#close-updates");
+    let active = "all";
+
+    syncUrlInput.value = localStorage.getItem("planner:sync-url") || "";
+
+    function updateMeta() {
+      meta.textContent = `Updated ${state.updated_at || "not yet"} · Run #${state.automation_runs || 0}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function projectButton(id, name) {
+      const button = document.createElement("button");
+      button.className = "tab";
+      button.type = "button";
+      button.textContent = name;
+      button.dataset.id = id;
+      button.addEventListener("click", () => {
+        active = id;
+        render();
+      });
+      return button;
+    }
+
+    function renderTabs() {
+      tabs.innerHTML = "";
+      tabs.append(projectButton("all", "All"));
+      tabs.append(projectButton("agents", "Agents"));
+      tabs.append(projectButton("revenue", "Revenue"));
+      tabs.append(projectButton("audit", "Audit"));
+      tabs.append(projectButton("health", "Health"));
+      tabs.append(projectButton("pipeline", "Pipeline"));
+      projects.forEach(([id, project]) => tabs.append(projectButton(id, project.name)));
+    }
+
+    function taskHtml(item) {
+      const status = item.status || "todo";
+      return `
+        <div class="task ${status}">
+          <span class="badge">${status.replace("_", " ")}</span>
+          <span>${escapeHtml(item.task)}</span>
+        </div>
+      `;
+    }
+
+    function statusBadge(status) {
+      const safeStatus = status || "queued";
+      return `<span class="badge">${escapeHtml(safeStatus.replace("_", " "))}</span>`;
+    }
+
+    function handoffHtml(lane) {
+      const bits = [];
+      if (lane.handoff_from) bits.push(`From ${lane.handoff_from}`);
+      if (lane.handoff_to) bits.push(`To ${lane.handoff_to}`);
+      if (lane.updated_at) bits.push(`Updated ${lane.updated_at}`);
+      return bits.length ? `<div class="agent-handoff">${escapeHtml(bits.join(" · "))}</div>` : "";
+    }
+
+    function agentStatusHtml(project, options = {}) {
+      const status = project.agent_status || {};
+      const state = status.state || "waiting_handover";
+      const lanes = options.compact ? [] : (status.lanes || []);
+      const blocker = status.blocker ? `<div class="project-alert blocked">Blocked: ${escapeHtml(status.blocker)}</div>` : "";
+      const approval = !status.blocker && status.approval
+        ? `<div class="project-alert needs_approval">Approval: ${escapeHtml(status.approval)}</div>`
+        : "";
+      const laneRows = lanes.map(lane => {
+        const laneStatus = lane.status || "waiting_handover";
+        return `
+          <div class="agent-lane ${laneStatus}">
+            ${statusBadge(laneStatus)}
+            <div>
+              <strong>${escapeHtml(lane.agent || "Agent")}</strong>
+              <p>${escapeHtml(lane.detail || "")}</p>
+              ${handoffHtml(lane)}
+            </div>
+          </div>
+        `;
+      }).join("");
+      return `
+        <div class="agent-status ${state}">
+          <div class="agent-status-main">
+            ${statusBadge(state)}
+            <div>
+              <strong>${escapeHtml(status.label || state.replace("_", " "))}</strong>
+              <p>${escapeHtml(status.summary || "")}</p>
+              ${status.next_action ? `<p>${escapeHtml(status.next_action)}</p>` : ""}
+            </div>
+          </div>
+          ${blocker || approval}
+          ${laneRows ? `<div class="agent-lanes">${laneRows}</div>` : ""}
+        </div>
+      `;
+    }
+
+    function auditHtml(project, options = {}) {
+      const audit = project.audit || {};
+      const missing = (audit.missing || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+      const steps = (audit.next_steps || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+      const agents = (audit.agents || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+      const details = options.compact ? "" : `
+          <h3>${escapeHtml(audit.summary || "No audit summary yet.")}</h3>
+          <p class="metric">Missing pieces</p>
+          <ul>${missing || "<li>None recorded.</li>"}</ul>
+          <p class="metric">Next steps</p>
+          <ul>${steps || "<li>None recorded.</li>"}</ul>
+          <p class="metric">Agents to run</p>
+          <ul>${agents || "<li>None recorded.</li>"}</ul>
+      `;
+      return `
+        <div class="audit-card">
+          <div class="audit-grid">
+            <div class="audit-chip"><span>Quality</span><strong>${escapeHtml(audit.quality || "Unknown")}</strong></div>
+            <div class="audit-chip"><span>Backend</span><strong>${escapeHtml(audit.backend || "Unknown")}</strong></div>
+            <div class="audit-chip"><span>Production</span><strong>${escapeHtml(audit.production || "Unknown")}</strong></div>
+          </div>
+          ${details}
+        </div>
+      `;
+    }
+
+    function revenueHtml(project, options = {}) {
+      const revenue = project.revenue || {};
+      const agents = (revenue.agents || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+      const detail = options.compact ? "" : `
+        <p><strong>Capture:</strong> ${escapeHtml(revenue.capture || "No capture path recorded.")}</p>
+        <p><strong>Follow-up:</strong> ${escapeHtml(revenue.follow_up_script || "")}</p>
+        <p class="metric">Agents</p>
+        <ul>${agents || "<li>Revenue Ops Agent</li>"}</ul>
+      `;
+      return `
+        <div class="revenue-card">
+          <span class="revenue-stage">${escapeHtml(revenue.crm_label || "No stage")}</span>
+          <h3>${escapeHtml(revenue.offer || "No offer recorded.")}</h3>
+          <p>${escapeHtml(revenue.next_revenue_action || "")}</p>
+          ${detail}
+        </div>
+      `;
+    }
+
+    function healthHtml(project, options = {}) {
+      const health = project.health || {};
+      const detail = options.compact ? "" : `
+        <p><strong>Run URL:</strong> ${escapeHtml(health.run_url || project.website_url || "None recorded.")}</p>
+        <p><strong>Next blocker:</strong> ${escapeHtml(health.blocker || "None recorded.")}</p>
+        <p><strong>Never commit/expose:</strong> ${escapeHtml(health.never_commit || "Secrets or private data.")}</p>
+      `;
+      return `
+        <div class="health-card">
+          <h3>${escapeHtml(health.status || "Needs proof step")}</h3>
+          <p><strong>Proof command</strong></p>
+          <code class="health-command">${escapeHtml(health.proof_command || "Add one exact command.")}</code>
+          ${detail}
+        </div>
+      `;
+    }
+
+    function projectHtml(id, project) {
+      const tasks = (project.checklist || []).map(taskHtml).join("");
+      const latest = (project.run_history || []).slice(-1)[0];
+      const website = project.website_url ? `
+        <div class="project-actions">
+          <a class="primary" href="${escapeHtml(project.website_url)}" target="_blank" rel="noopener">Open website</a>
+        </div>
+      ` : "";
+      return `
+        <section class="project" data-id="${id}">
+          <h2>${escapeHtml(project.name)}</h2>
+          <p class="metric">${escapeHtml(project.metric || "")}</p>
+          ${healthHtml(project, { compact: true })}
+          ${auditHtml(project, { compact: true })}
+          ${revenueHtml(project, { compact: true })}
+          ${agentStatusHtml(project, { compact: true })}
+          <div class="next-box">${escapeHtml(project.next_big_step || "No next step yet.")}</div>
+          ${tasks}
+          ${website}
+          <div class="history">
+            Last run: ${escapeHtml(project.last_run || "none")}${latest ? ` · ${escapeHtml(latest.angle)}` : ""}
+          </div>
+        </section>
+      `;
+    }
+
+    function queueLabel(item) {
+      return item.angle || item.output || item.deliverable || item.caption_seed || item.content_id || "Queue item";
+    }
+
+    function queueDetail(item) {
+      return item.pattern || item.hook || item.approval_gate || item.posting_gate || item.guardrail || item.platform || "";
+    }
+
+    function queueHtml(name, items) {
+      const rows = (items || []).map(item => {
+        const status = item.status || "queued";
+        return `
+          <div class="queue-item ${status}">
+            ${statusBadge(status)}
+            <div>
+              <span class="queue-title">${escapeHtml(queueLabel(item))}</span>
+              <p class="queue-meta">${escapeHtml(item.agent || item.content_id || "")}</p>
+              <p class="queue-detail">${escapeHtml(queueDetail(item))}</p>
+            </div>
+          </div>
+        `;
+      }).join("");
+      return `
+        <section class="queue-card">
+          <h2>${escapeHtml(name)}</h2>
+          ${rows || `<div class="empty">No queued items.</div>`}
+        </section>
+      `;
+    }
+
+    function agentDashboardHtml() {
+      const cards = projects.map(([id, project]) => `
+        <section class="agent-project-card ${escapeHtml(project.agent_status?.state || "waiting_handover")}" data-id="${escapeHtml(id)}">
+          <h2>${escapeHtml(project.name)}</h2>
+          <p>${escapeHtml(project.metric || "")}</p>
+          ${agentStatusHtml(project)}
+        </section>
+      `).join("");
+      const blockedCount = projects.filter(([, project]) => project.agent_status?.state === "blocked").length;
+      const approvalCount = projects.filter(([, project]) => project.agent_status?.state === "needs_approval").length;
+      const workingCount = projects.filter(([, project]) => project.agent_status?.state === "working").length;
+      return `
+        <section class="pipeline-hero">
+          <h2>Agent Status</h2>
+          <p>Scan every project by handoff state: blocked, needs approval, working, or waiting for the next agent.</p>
+          <div class="pipeline-metrics">
+            <div class="metric-chip"><strong>${blockedCount}</strong><span>blocked</span></div>
+            <div class="metric-chip"><strong>${approvalCount}</strong><span>need approval</span></div>
+            <div class="metric-chip"><strong>${workingCount}</strong><span>working</span></div>
+            <div class="metric-chip"><strong>${projects.length}</strong><span>projects tracked</span></div>
+          </div>
+        </section>
+        <div class="agent-project-grid">${cards}</div>
+      `;
+    }
+
+    function auditDashboardHtml() {
+      const cards = projects.map(([id, project]) => `
+        <section class="project" data-id="${escapeHtml(id)}">
+          <h2>${escapeHtml(project.name)}</h2>
+          <p class="metric">${escapeHtml(project.stage || "")}</p>
+          ${auditHtml(project)}
+          ${agentStatusHtml(project, { compact: true })}
+        </section>
+      `).join("");
+      return `
+        <section class="pipeline-hero">
+          <h2>Project Audit</h2>
+          <p>What each project is missing, how production-ready it is, and which agents should do the next job.</p>
+          <div class="pipeline-metrics">
+            <div class="metric-chip"><strong>${projects.length}</strong><span>projects tracked</span></div>
+            <div class="metric-chip"><strong>${projects.filter(([, project]) => (project.audit?.production || "").includes("ready")).length}</strong><span>ready states</span></div>
+            <div class="metric-chip"><strong>${projects.filter(([, project]) => (project.agent_status?.state === "blocked")).length}</strong><span>blocked lanes</span></div>
+            <div class="metric-chip"><strong>${projects.filter(([, project]) => (project.agent_status?.state === "needs_approval")).length}</strong><span>approval gates</span></div>
+          </div>
+        </section>
+        <div class="audit-project-grid">${cards}</div>
+      `;
+    }
+
+    function healthDashboardHtml() {
+      const cards = projects.map(([id, project]) => `
+        <section class="project" data-id="${escapeHtml(id)}">
+          <h2>${escapeHtml(project.name)}</h2>
+          <p class="metric">${escapeHtml(project.stage || "")}</p>
+          ${healthHtml(project)}
+        </section>
+      `).join("");
+      const missing = projects.filter(([, project]) => !project.health?.proof_command).length;
+      const blockers = projects.filter(([, project]) => (project.health?.blocker || "").trim()).length;
+      return `
+        <section class="pipeline-hero">
+          <h2>Project Health</h2>
+          <p>Proof command, run URL, next blocker, and data/secret boundary for every tracked project.</p>
+          <div class="pipeline-metrics">
+            <div class="metric-chip"><strong>${projects.length}</strong><span>projects tracked</span></div>
+            <div class="metric-chip"><strong>${missing}</strong><span>missing proof</span></div>
+            <div class="metric-chip"><strong>${blockers}</strong><span>blockers named</span></div>
+            <div class="metric-chip"><strong>5</strong><span>health questions</span></div>
+          </div>
+        </section>
+        <div class="health-grid">${cards}</div>
+      `;
+    }
+
+    function revenueDashboardHtml() {
+      const revenue = state.revenue_ops || {};
+      const metrics = revenue.metrics || {};
+      const projectCards = (revenue.projects || []).map(item => `
+        <section class="revenue-card">
+          <span class="revenue-stage">${escapeHtml(item.crm_label || item.crm_stage || "")}</span>
+          <h2>${escapeHtml(item.project_name || item.project_id || "Project")}</h2>
+          <p><strong>Offer:</strong> ${escapeHtml(item.offer || "")}</p>
+          <p><strong>Capture:</strong> ${escapeHtml(item.capture || "")}</p>
+          <p><strong>Next:</strong> ${escapeHtml(item.next_revenue_action || "")}</p>
+        </section>
+      `).join("");
+      const queueRows = (revenue.today_queue || []).map(item => `
+        <div class="queue-item ${escapeHtml(item.status || "queued")}">
+          ${statusBadge(item.status || "queued")}
+          <div>
+            <span class="queue-title">${escapeHtml(item.label || "")}</span>
+            <p class="queue-detail">${escapeHtml(item.detail || "")}</p>
+          </div>
+        </div>
+      `).join("");
+      const followups = (revenue.followups || []).map(lead => `
+        <div class="lead-row">
+          <strong>${escapeHtml(lead.company || "Lead")}</strong>
+          <p class="lead-meta">${escapeHtml(lead.priority || "")} · ${escapeHtml(lead.status || "")} · ${escapeHtml(lead.phone || lead.email || "")}</p>
+          <p>${escapeHtml(lead.next_action || "")}</p>
+        </div>
+      `).join("");
+      return `
+        <section class="pipeline-hero">
+          <h2>Revenue Ops</h2>
+          <p>${escapeHtml(revenue.summary || "Shared CRM and follow-up queue.")}</p>
+          <div class="pipeline-metrics">
+            <div class="metric-chip"><strong>${escapeHtml(metrics.projects_tracked || 0)}</strong><span>projects</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(metrics.capture_gaps || 0)}</strong><span>capture gaps</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(metrics.waste_leads_total || 0)}</strong><span>waste leads</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(metrics.waste_high_priority_new || 0)}</strong><span>high priority new</span></div>
+          </div>
+        </section>
+        <section class="queue-card">
+          <h2>Today Revenue Queue</h2>
+          ${queueRows || `<div class="empty">No revenue queue yet.</div>`}
+        </section>
+        <section class="revenue-card">
+          <h2>Top Waste Follow-ups</h2>
+          ${followups || `<p>No imported follow-ups.</p>`}
+        </section>
+        <div class="revenue-grid">${projectCards}</div>
+      `;
+    }
+
+    function pipelineHtml() {
+      const pipeline = state.content_pipeline;
+      if (!pipeline) {
+        return `<div class="empty">No content pipeline data yet. Run scripts/run_content_pipeline.py on the Mac.</div>`;
+      }
+      const metrics = pipeline.metrics || {};
+      const lanes = (pipeline.agent_lanes || []).map(lane => `
+        <section class="lane-card ${lane.status || "queued"}">
+          <h3>${escapeHtml(lane.name || lane.id)}</h3>
+          <div class="${escapeHtml(lane.status || "queued")}">${statusBadge(lane.status || "queued")}</div>
+          <p>${escapeHtml(lane.goal || "")}</p>
+        </section>
+      `).join("");
+      const sources = (pipeline.source_watchlist || []).map(source => `
+        <div class="source-chip">
+          <strong>${escapeHtml(source.platform || "source")} · ${escapeHtml(source.handle || "")}</strong>
+          <span>${escapeHtml(source.why || "")}</span>
+        </div>
+      `).join("");
+      const queues = pipeline.queues || {};
+      return `
+        <section class="pipeline-hero">
+          <h2>Content Pipeline</h2>
+          <p>${escapeHtml(pipeline.copy_policy || "Model patterns. Do not copy exact creative.")}</p>
+          <div class="pipeline-metrics">
+            <div class="metric-chip"><strong>${escapeHtml(metrics.queued_items || 0)}</strong><span>queued items</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(metrics.review_required || 0)}</strong><span>need review</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(metrics.provider_mode || "queue_only")}</strong><span>provider mode</span></div>
+            <div class="metric-chip"><strong>${escapeHtml(pipeline.posting_policy || "review")}</strong><span>posting gate</span></div>
+          </div>
+        </section>
+        <section class="pipeline-hero">
+          <h2>Source Watchlist</h2>
+          <div class="source-list">${sources || "<span>No sources configured.</span>"}</div>
+        </section>
+        <div class="lane-grid">${lanes}</div>
+        ${queueHtml("Research Queue", queues.research)}
+        ${queueHtml("Planning Queue", queues.planning)}
+        ${queueHtml("Video / Asset Queue", queues.video)}
+        ${queueHtml("Posting Review Queue", queues.posting)}
+      `;
+    }
+
+    function render() {
+      updateMeta();
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.toggle("active", tab.dataset.id === active);
+      });
+      if (active === "pipeline") {
+        app.innerHTML = pipelineHtml();
+        return;
+      }
+      if (active === "audit") {
+        app.innerHTML = auditDashboardHtml();
+        return;
+      }
+      if (active === "health") {
+        app.innerHTML = healthDashboardHtml();
+        return;
+      }
+      if (active === "revenue") {
+        app.innerHTML = revenueDashboardHtml();
+        return;
+      }
+      if (active === "agents") {
+        app.innerHTML = agentDashboardHtml();
+        return;
+      }
+      const visible = active === "all" ? projects : projects.filter(([id]) => id === active);
+      app.innerHTML = visible.length
+        ? visible.map(([id, project]) => projectHtml(id, project)).join("")
+        : `<div class="empty">No planner data yet.</div>`;
+    }
+
+    async function refreshData() {
+      syncStatus.textContent = "Checking for planner updates...";
+      try {
+        const savedUrl = localStorage.getItem("planner:sync-url");
+        const source = savedUrl || "planner-data.js";
+        const separator = source.includes("?") ? "&" : "?";
+        const response = await fetch(`${source}${separator}ts=${Date.now()}`, { cache: "no-store" });
+        const text = await response.text();
+        const match = text.match(/window\.PLANNER_STATE\s*=\s*([\s\S]*);?\s*$/);
+        if (!match) throw new Error("Planner data format changed.");
+        state = JSON.parse(match[1].replace(/;\s*$/, ""));
+        projects = Object.entries(state.projects || {});
+        renderTabs();
+        render();
+        localStorage.setItem("planner:last-sync", new Date().toISOString());
+        syncStatus.textContent = "Updated from latest planner data.";
+      } catch (error) {
+        const lastSync = localStorage.getItem("planner:last-sync");
+        syncStatus.textContent = lastSync ? `Offline. Last sync ${lastSync.slice(0, 16).replace("T", " ")}.` : "Offline. Showing bundled planner data.";
+      }
+    }
+
+    function renderUpdateNotes(notes) {
+      if (!notes || !notes.version) return;
+      const dismissed = localStorage.getItem("planner:dismissed-update-version");
+      if (dismissed === notes.version) return;
+      updateTitle.textContent = notes.title || "Latest run";
+      updateMeta.textContent = notes.finished_at ? `Finished ${notes.finished_at} · ${notes.version}` : notes.version;
+      updateList.innerHTML = (notes.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join("");
+      if (!updateList.innerHTML) return;
+      updatePopout.hidden = false;
+    }
+
+    async function refreshUpdateNotes() {
+      try {
+        const response = await fetch(`update-notes.json?ts=${Date.now()}`, { cache: "no-store" });
+        renderUpdateNotes(await response.json());
+      } catch (error) {
+        renderUpdateNotes({
+          version: `run-${state.automation_runs || 0}`,
+          title: "Planner updated",
+          finished_at: state.updated_at || "",
+          items: [
+            `Planner data refreshed for ${projects.length} projects.`,
+            "Open each project tab to review the current next step.",
+            "Use Refresh when connected to the Mac sync URL for latest data."
+          ]
+        });
+      }
+    }
+
+    refreshButton.addEventListener("click", refreshData);
+    saveSyncUrlButton.addEventListener("click", () => {
+      const value = syncUrlInput.value.trim();
+      if (value) {
+        localStorage.setItem("planner:sync-url", value);
+        syncStatus.textContent = "Sync URL saved.";
+      } else {
+        localStorage.removeItem("planner:sync-url");
+        syncStatus.textContent = "Sync URL cleared; using bundled data.";
+      }
+    });
+    closeUpdates.addEventListener("click", () => {
+      const version = updateMeta.textContent.split(" · ").pop() || `run-${state.automation_runs || 0}`;
+      localStorage.setItem("planner:dismissed-update-version", version);
+      updatePopout.hidden = true;
+    });
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {
+        syncStatus.textContent = "Install cache unavailable on this connection.";
+      });
+    }
+
+    renderTabs();
+    render();
+    refreshUpdateNotes();
+  </script>
+</body>
+</html>

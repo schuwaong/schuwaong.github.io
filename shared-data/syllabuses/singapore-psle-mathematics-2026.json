@@ -1,0 +1,106 @@
+{
+  "id": "sg-psle-mathematics-2026",
+  "curriculumId": "sg-psle-2026",
+  "syllabus": "Singapore PSLE",
+  "subject": "Mathematics",
+  "code": "0008",
+  "foundationCode": "0038",
+  "level": "Primary 6",
+  "examYear": 2026,
+  "retrievedAt": "2026-06-19",
+  "sources": [
+    {
+      "publisher": "Singapore Ministry of Education",
+      "title": "2021 Primary Mathematics Syllabus Primary One to Six, updated October 2025",
+      "url": "https://www.moe.gov.sg/api/media/92bff26d-b2b4-4535-b868-b8415c744b91/2021-Primary-Mathematics-Syllabus-P1-to-P6-Updated-October-2025.pdf",
+      "pageRefs": ["Section 5: Primary Mathematics Syllabus", "Content by Levels"]
+    },
+    {
+      "publisher": "Singapore Examinations and Assessment Board",
+      "title": "PSLE formats examined in 2026",
+      "url": "https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/",
+      "pageRefs": ["Mathematics 0008", "Foundation Mathematics 0038"]
+    }
+  ],
+  "paperSpecs": [
+    {
+      "paper": "Paper 1",
+      "mode": "No calculator unless official format says otherwise",
+      "marks": 50,
+      "questionTypes": ["multiple-choice", "short-answer"]
+    },
+    {
+      "paper": "Paper 2",
+      "mode": "Calculator paper",
+      "marks": 50,
+      "questionTypes": ["short-answer", "structured", "problem-solving"]
+    }
+  ],
+  "topics": [
+    {
+      "id": "number-and-algebra",
+      "title": "Number and Algebra",
+      "subtopics": [
+        { "id": "whole-numbers", "title": "Whole numbers", "levels": ["P1", "P2", "P3", "P4", "P5", "P6"], "content": "Place value, comparison, ordering, patterns, four operations, factors and multiples." },
+        { "id": "fractions", "title": "Fractions", "levels": ["P2", "P3", "P4", "P5", "P6"], "content": "Equivalent fractions, simplifying, comparison, four operations, mixed numbers, and word problems." },
+        { "id": "decimals", "title": "Decimals", "levels": ["P4", "P5", "P6"], "content": "Decimal notation, comparison, four operations, approximation, and money/measurement contexts." },
+        { "id": "percentage", "title": "Percentage", "levels": ["P5", "P6"], "content": "Percent as part of a whole, percentage increase/decrease, percentage change, and applied word problems." },
+        { "id": "ratio", "title": "Ratio", "levels": ["P5", "P6"], "content": "Equivalent ratios, part-whole comparison, unchanged quantity models, and multi-step ratio problems." },
+        { "id": "rate-and-speed", "title": "Rate and speed", "levels": ["P5", "P6"], "content": "Rate, speed, distance, time, unit conversion, average speed, and travel problems." },
+        { "id": "algebra", "title": "Algebra", "levels": ["P6"], "content": "Use of letters, forming expressions, simplifying, substitution, and solving simple equations." }
+      ]
+    },
+    {
+      "id": "measurement-and-geometry",
+      "title": "Measurement and Geometry",
+      "subtopics": [
+        { "id": "length-mass-volume-time", "title": "Length, mass, volume and time", "levels": ["P1", "P2", "P3", "P4"], "content": "Measurement units, compound units, unit conversion, duration, and 24-hour time." },
+        { "id": "area-and-perimeter", "title": "Area and perimeter", "levels": ["P3", "P4", "P5", "P6"], "content": "Perimeter and area of squares, rectangles, composite figures, triangles, and related word problems." },
+        { "id": "volume-of-cubes-and-cuboids", "title": "Volume of cubes and cuboids", "levels": ["P5", "P6"], "content": "Volume formula, missing dimension problems, composite solids, and capacity contexts." },
+        { "id": "angles", "title": "Angles", "levels": ["P3", "P4", "P5", "P6"], "content": "Angle measurement, angles on a straight line, around a point, vertically opposite angles, triangles and quadrilaterals." },
+        { "id": "circle", "title": "Circle", "levels": ["P6"], "content": "Radius, diameter, circumference, area, and composite figures involving circles." },
+        { "id": "shapes-and-nets", "title": "2D/3D shapes and nets", "levels": ["P1", "P2", "P3", "P4"], "content": "Properties of 2D and 3D shapes, patterns, nets, and visualisation." }
+      ]
+    },
+    {
+      "id": "statistics",
+      "title": "Statistics",
+      "subtopics": [
+        { "id": "graphs-and-charts", "title": "Tables, picture graphs, bar graphs, line graphs and pie charts", "levels": ["P1", "P2", "P3", "P4", "P5", "P6"], "content": "Read, interpret and compare data using tables and graphs, including pie charts." },
+        { "id": "average", "title": "Average", "levels": ["P6"], "content": "Mean of a set of data, total-value reasoning, missing value problems and data interpretation." }
+      ]
+    }
+  ],
+  "reusableLearningObjects": {
+    "noteCards": [
+      {
+        "id": "math-model-methods",
+        "title": "Choose a model before calculating",
+        "body": "For PSLE problem sums, identify whether the question is part-whole, comparison, before-after, rate, or geometry before choosing the operation.",
+        "workedExample": "For a ratio question, draw units first, identify the unchanged quantity, then convert units to values.",
+        "commonMistake": "Starting with arithmetic before identifying the relationship.",
+        "memoryHook": "Model first, numbers second."
+      }
+    ],
+    "quizCards": [
+      {
+        "id": "ratio-unchanged-quantity-check",
+        "type": "short-answer",
+        "difficulty": "standard",
+        "prompt": "In a before-after ratio question, what should you check before converting ratio units to actual values?",
+        "answer": "Check which quantity is unchanged.",
+        "explanation": "The unchanged quantity anchors the unit comparison between the two ratios."
+      }
+    ],
+    "scriptedPaperTemplates": [
+      {
+        "id": "psle-math-mixed-100",
+        "title": "PSLE Mathematics Mixed Practice",
+        "marks": 100,
+        "sections": ["Paper 1 MCQ/short-answer", "Paper 2 structured problem-solving"],
+        "subtopicMix": ["number-and-algebra", "measurement-and-geometry", "statistics"]
+      }
+    ]
+  }
+}
+

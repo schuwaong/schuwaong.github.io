@@ -1,0 +1,16 @@
+{
+  "version": "run-20260619-103902",
+  "title": "Project planner run complete",
+  "started_at": "2026-06-19T10:38:59",
+  "finished_at": "2026-06-19T10:39:02",
+  "items": [
+    "IC Education: no safe automated handler for `Replace mailto study-plan requests with a live form endpoint when credentials are available.`.",
+    "Investing Education: no safe automated handler for `Connect the weekly brief form to a real mailing-list provider.`.",
+    "Jobs Hunt: no safe automated handler for `Add the real payment URL to the paid pilot intake page.`.",
+    "Property: no next item.",
+    "IC Wearables: no safe automated handler for `Add provider credentials to IC_wearables/.env.local and rerun daily catalog.`.",
+    "NLP Keyboard: no safe automated handler for `Recruit first three beta testers and log setup completion.`.",
+    "3R Waste Leads: owner action required; calls/messages were not automated.",
+    "Phone update: installed and launched Project Planner."
+  ]
+}

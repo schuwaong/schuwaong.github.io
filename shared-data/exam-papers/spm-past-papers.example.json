@@ -1,0 +1,32 @@
+{
+  "notes": [
+    "Replace these examples with official, licensed, or otherwise permitted URLs.",
+    "Keep one row per question paper, answer scheme, insert, or data booklet.",
+    "The downloader will create folders by curriculum/subject/year."
+  ],
+  "papers": [
+    {
+      "curriculum": "SPM",
+      "year": 2023,
+      "subject": "Mathematics",
+      "paper": "Paper 1",
+      "variant": "Trial",
+      "kind": "question",
+      "source": "Example only",
+      "url": "https://example.com/spm/2023/mathematics-paper-1.pdf",
+      "filename": "spm-2023-mathematics-paper-1-question.pdf"
+    },
+    {
+      "curriculum": "SPM",
+      "year": 2023,
+      "subject": "Mathematics",
+      "paper": "Paper 1",
+      "variant": "Trial",
+      "kind": "mark-scheme",
+      "source": "Example only",
+      "url": "https://example.com/spm/2023/mathematics-paper-1-mark-scheme.pdf",
+      "filename": "spm-2023-mathematics-paper-1-mark-scheme.pdf"
+    }
+  ]
+}
+

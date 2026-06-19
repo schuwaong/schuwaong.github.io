@@ -463,6 +463,241 @@
       box-shadow: var(--shadow);
     }
 
+    .date-board {
+      margin-top: 28px;
+      padding: 20px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .date-board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .date-card {
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #f8fbf8;
+      box-shadow: 4px 4px 0 rgba(29, 33, 31, .2);
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .date-card[data-status="cancelled"] {
+      background: #fce9e6;
+    }
+
+    .date-card[data-status="confirmed"] {
+      background: #e5f4ef;
+    }
+
+    .date-card[data-status="tentative"] {
+      background: #fff4c8;
+    }
+
+    .date-card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .date-card strong {
+      font-size: .92rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .date-pill {
+      min-height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: #fff;
+      font-size: .76rem;
+      font-weight: 900;
+      line-height: 28px;
+      white-space: nowrap;
+    }
+
+    .date-meta {
+      display: grid;
+      gap: 2px;
+      color: #26302c;
+      font-size: .98rem;
+      line-height: 1.45;
+    }
+
+    .date-meta span {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .date-note {
+      margin: 0;
+      color: #3a4642;
+      line-height: 1.45;
+    }
+
+    .date-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .date-status {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .reply-lab {
+      margin-top: 28px;
+      padding: 20px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .reply-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, .88fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .reply-fields {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 3px 3px 0 rgba(29, 33, 31, .15);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .field textarea {
+      min-height: 154px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .control-set {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .reply-chip {
+      min-height: 48px;
+      padding: 9px 10px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #f8fbf8;
+      box-shadow: 3px 3px 0 rgba(29, 33, 31, .7);
+      color: var(--ink);
+      font: inherit;
+      font-size: .93rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .reply-chip:nth-child(2n) {
+      background: #fff4c8;
+    }
+
+    .reply-chip:hover,
+    .reply-chip.active {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .reply-chip.active {
+      background: #e5f4ef;
+    }
+
+    .cue-list {
+      min-height: 94px;
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbf8;
+      color: #3a4642;
+      line-height: 1.45;
+    }
+
+    .reply-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .draft-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .reply-card {
+      padding: 14px;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #f8fbf8;
+      box-shadow: 4px 4px 0 rgba(29, 33, 31, .2);
+    }
+
+    .reply-card:nth-child(2n) {
+      background: #fff4c8;
+    }
+
+    .reply-card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .reply-card strong {
+      font-size: .92rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .reply-text {
+      margin: 0;
+      color: #26302c;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
     .slot-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -655,6 +890,14 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .reply-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .date-board-grid {
+        grid-template-columns: 1fr;
+      }
+
       .planner-grid {
         grid-template-columns: 1fr;
       }
@@ -689,6 +932,7 @@
       .visual,
       .choice-grid,
       .slot-grid,
+      .chip-grid,
       .split-actions {
         grid-template-columns: 1fr;
       }
@@ -744,6 +988,7 @@
         <div class="primary-row">
           <button class="main-action" type="button" data-pick="date">Pick a date</button>
           <button class="secondary-action" type="button" data-pick="chat">Keep chatting</button>
+          <button class="secondary-action" type="button" data-open-replies>Draft reply</button>
         </div>
       </div>
 
@@ -793,6 +1038,67 @@
           <small>For when the vibe is either bold or beautifully not-today.</small>
         </button>
       </div>
+    </section>
+
+    <section class="reply-lab" id="reply-lab" aria-labelledby="reply-title">
+      <div class="section-head">
+        <h2 id="reply-title">Reply automation</h2>
+        <p>Paste the latest message, pick the move, then copy a draft. You still choose what gets sent.</p>
+      </div>
+      <div class="reply-grid">
+        <div class="reply-fields">
+          <label class="field" for="incoming-message">
+            <span>Latest message</span>
+            <textarea id="incoming-message" placeholder="Paste her latest Bumble message here."></textarea>
+          </label>
+          <div class="field-row">
+            <label class="field" for="detail-input">
+              <span>Detail to include</span>
+              <input id="detail-input" type="text" placeholder="teaching, rest, coffee, gym-lite">
+            </label>
+            <label class="field" for="question-input">
+              <span>Question angle</span>
+              <input id="question-input" type="text" placeholder="What helps you recharge?">
+            </label>
+          </div>
+          <div class="reply-actions">
+            <button class="main-action" id="generate-replies" type="button">Generate replies</button>
+            <button class="copy-action" id="clear-reply-lab" type="button">Clear</button>
+          </div>
+        </div>
+        <aside class="picker" aria-label="Reply controls">
+          <div class="control-set">
+            <div class="picker-label">Intent</div>
+            <div class="chip-grid" id="intent-controls">
+              <button class="reply-chip active" type="button" data-intent="chat">Keep chatting</button>
+              <button class="reply-chip" type="button" data-intent="ask">Ask out</button>
+              <button class="reply-chip" type="button" data-intent="playful">Playful</button>
+              <button class="reply-chip" type="button" data-intent="raincheck">Raincheck</button>
+            </div>
+          </div>
+          <div class="control-set">
+            <div class="picker-label">Tone</div>
+            <div class="chip-grid" id="tone-controls">
+              <button class="reply-chip active" type="button" data-tone="warm">Warm</button>
+              <button class="reply-chip" type="button" data-tone="playful">Playful</button>
+              <button class="reply-chip" type="button" data-tone="direct">Direct</button>
+              <button class="reply-chip" type="button" data-tone="gentle">Gentle</button>
+            </div>
+          </div>
+          <div class="picker-label">Cues</div>
+          <p class="cue-list" id="reply-cues">Paste a message to get cues before drafting.</p>
+        </aside>
+      </div>
+      <div class="draft-stack" id="reply-drafts" aria-live="polite"></div>
+    </section>
+
+    <section class="date-board" id="date-board" aria-labelledby="date-board-title">
+      <div class="section-head">
+        <h2 id="date-board-title">Live date board</h2>
+        <p>Read this as the current source of truth: one cancelled, two active, so the automation stops nudging stale plans.</p>
+      </div>
+      <p class="date-status" id="date-board-status">Updated from local Bumble logs.</p>
+      <div class="date-board-grid" id="date-board-grid"></div>
     </section>
 
     <section class="planner" id="planner" aria-labelledby="planner-title">
@@ -961,6 +1267,68 @@
     const resetButton = document.querySelector("#reset-slot");
     const slotButtons = Array.from(document.querySelectorAll("[data-slot]"));
     const response = document.querySelector("#response");
+    const replyLab = document.querySelector("#reply-lab");
+    const incomingMessage = document.querySelector("#incoming-message");
+    const detailInput = document.querySelector("#detail-input");
+    const questionInput = document.querySelector("#question-input");
+    const generateRepliesButton = document.querySelector("#generate-replies");
+    const clearReplyLabButton = document.querySelector("#clear-reply-lab");
+    const replyCues = document.querySelector("#reply-cues");
+    const replyDrafts = document.querySelector("#reply-drafts");
+    const dateBoardStatus = document.querySelector("#date-board-status");
+    const dateBoardGrid = document.querySelector("#date-board-grid");
+    const intentControls = Array.from(document.querySelectorAll("[data-intent]"));
+    const toneControls = Array.from(document.querySelectorAll("[data-tone]"));
+
+    const replyState = {
+      intent: "chat",
+      tone: "warm"
+    };
+
+    const dateBoardData = [
+      {
+        id: "n-kd-range",
+        name: "N",
+        status: "cancelled",
+        statusLabel: "Cancelled",
+        dateLabel: "Thursday, Jun 18",
+        timeLabel: "7:00 PM",
+        start: "2026-06-18T19:00:00+08:00",
+        durationMinutes: 90,
+        place: "Kota Damansara driving range, Jalan PJU 5/1A",
+        source: "Bumble live thread",
+        note: "She wrote: I cannot come tonight. My uncle passed away.",
+        calendarAction: "Remove or cancel the Google Calendar event for N, Thursday Jun 18 at 7:00 PM."
+      },
+      {
+        id: "thipawan-luck-bros",
+        name: "Thipawan",
+        status: "confirmed",
+        statusLabel: "Confirmed",
+        dateLabel: "Sunday, Jun 21",
+        timeLabel: "3:00 PM",
+        start: "2026-06-21T15:00:00+08:00",
+        durationMinutes: 90,
+        place: "Luck Bros, Bandar Puteri",
+        source: "Bumble live thread",
+        note: "Confirmed after she said Sunday 3pm sounds good after her morning run.",
+        calendarAction: "Keep or add as Sunday Jun 21 at 3:00 PM."
+      },
+      {
+        id: "hilary-arest",
+        name: "Hilary",
+        status: "tentative",
+        statusLabel: "Tentative",
+        dateLabel: "Monday, Jun 22",
+        timeLabel: "4:30 PM",
+        start: "2026-06-22T16:30:00+08:00",
+        durationMinutes: 90,
+        place: "Arest Cafe, Uptown",
+        source: "Bumble live thread",
+        note: "Time is agreed. Cafe is likely Arest, but she is still chatting about cake.",
+        calendarAction: "Keep as tentative until the cafe is explicitly locked."
+      }
+    ];
 
     const slotData = {
       "sat-brunch": {
@@ -1012,6 +1380,20 @@
         vibeLabel: "gym-lite",
         backupLabel: "Monday 7:00 PM coffee"
       },
+      "thipawan-sun-coffee": {
+        dateMode: { type: "fixed", value: "2026-06-21" },
+        timeValue: "15:00",
+        timeLabel: "3:00 PM",
+        vibeLabel: "coffee at Luck Bros with Thipawan",
+        backupLabel: "Hilary Monday 4:30 PM Arest Cafe"
+      },
+      "hilary-mon-coffee": {
+        dateMode: { type: "fixed", value: "2026-06-22" },
+        timeValue: "16:30",
+        timeLabel: "4:30 PM",
+        vibeLabel: "coffee at Arest Cafe with Hilary",
+        backupLabel: "Ask Hilary to confirm the cake/cafe"
+      },
       "nextweek-coffee": {
         dateMode: { type: "offset", value: 7 },
         timeValue: "18:30",
@@ -1023,13 +1405,13 @@
 
     const slotOrder = Object.keys(slotData);
     const scheduleState = {
-      activeSlot: "sat-brunch",
-      dateMode: { type: "weekday", value: 6 },
+      activeSlot: "thipawan-sun-coffee",
+      dateMode: { type: "fixed", value: "2026-06-21" },
       dateLabel: "",
-      timeLabel: "11:00 AM",
-      timeValue: "11:00",
-      vibeLabel: "brunch",
-      backupLabel: "Saturday 4:30 PM walk"
+      timeLabel: "3:00 PM",
+      timeValue: "15:00",
+      vibeLabel: "coffee at Luck Bros with Thipawan",
+      backupLabel: "Hilary Monday 4:30 PM Arest Cafe"
     };
 
     function toLocalIso(date) {
@@ -1072,6 +1454,7 @@
       if (!mode) return "";
       if (mode.type === "offset") return toLocalIso(shiftDate(mode.value));
       if (mode.type === "weekday") return toLocalIso(nextWeekday(mode.value));
+      if (mode.type === "fixed") return mode.value;
       return "";
     }
 
@@ -1099,6 +1482,352 @@
       resultTitle.textContent = `${dayText} · ${timeText}`;
       resultStatus.textContent = `Current vibe: ${scheduleState.vibeLabel}. Backup: ${scheduleState.backupLabel}.`;
       draft.textContent = `Would you be free ${dayText} at ${timeText} for ${scheduleState.vibeLabel}? If not, I can do ${scheduleState.backupLabel}.`;
+    }
+
+    function setActiveControl(buttons, key, value) {
+      buttons.forEach((button) => {
+        button.classList.toggle("active", button.dataset[key] === value);
+      });
+    }
+
+    function boardEntryLabel(entry) {
+      return `${entry.name}: ${entry.statusLabel} ${entry.dateLabel} at ${entry.timeLabel}`;
+    }
+
+    function dateToIsoBasic(dateValue) {
+      return dateValue.replace(/[-:]/g, "");
+    }
+
+    function entryCalendarText(entry) {
+      const lines = [
+        boardEntryLabel(entry),
+        `Place: ${entry.place}`,
+        `Status: ${entry.statusLabel}`,
+        entry.note,
+        entry.calendarAction
+      ];
+      return lines.join("\n");
+    }
+
+    function downloadIcs(entry) {
+      if (!entry.start || entry.status === "cancelled") return;
+      const start = new Date(entry.start);
+      const end = new Date(start.getTime() + (entry.durationMinutes || 90) * 60000);
+      const stamp = dateToIsoBasic(new Date().toISOString().replace(/\.\d{3}Z$/, "Z"));
+      const startText = dateToIsoBasic(start.toISOString().replace(/\.\d{3}Z$/, "Z"));
+      const endText = dateToIsoBasic(end.toISOString().replace(/\.\d{3}Z$/, "Z"));
+      const body = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Josh Bumble Date Board//EN",
+        "BEGIN:VEVENT",
+        `UID:${entry.id}@josh-bumble-date-board`,
+        `DTSTAMP:${stamp}`,
+        `DTSTART:${startText}`,
+        `DTEND:${endText}`,
+        `SUMMARY:Bumble: ${entry.name}`,
+        `LOCATION:${entry.place}`,
+        `DESCRIPTION:${entry.note}`,
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const url = URL.createObjectURL(new Blob([body], { type: "text/calendar" }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${entry.id}.ics`;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function createMetaLine(labelText, valueText) {
+      const line = document.createElement("div");
+      const label = document.createElement("span");
+      label.textContent = labelText;
+      line.append(label, document.createTextNode(valueText));
+      return line;
+    }
+
+    function renderDateBoard() {
+      dateBoardStatus.textContent = "Updated from local Bumble logs. N is cancelled; Thipawan and Hilary are the next live dates.";
+      dateBoardGrid.replaceChildren(...dateBoardData.map((entry) => {
+        const card = document.createElement("article");
+        card.className = "date-card";
+        card.dataset.status = entry.status;
+
+        const top = document.createElement("div");
+        top.className = "date-card-top";
+
+        const title = document.createElement("strong");
+        title.textContent = entry.name;
+
+        const pill = document.createElement("span");
+        pill.className = "date-pill";
+        pill.textContent = entry.statusLabel;
+
+        const meta = document.createElement("div");
+        meta.className = "date-meta";
+        [
+          createMetaLine("Date", entry.dateLabel),
+          createMetaLine("Time", entry.timeLabel),
+          createMetaLine("Place", entry.place),
+          createMetaLine("Source", entry.source)
+        ].forEach((line) => meta.append(line));
+
+        const note = document.createElement("p");
+        note.className = "date-note";
+        note.textContent = entry.note;
+
+        const actions = document.createElement("div");
+        actions.className = "date-actions";
+
+        const copy = document.createElement("button");
+        copy.className = "copy-action";
+        copy.type = "button";
+        copy.dataset.copyDate = entry.id;
+        copy.textContent = "Copy note";
+
+        const status = document.createElement("button");
+        status.className = "copy-action";
+        status.type = "button";
+        status.dataset.dateStatus = entry.id;
+        status.textContent = entry.status === "cancelled" ? "Mark cancelled" : "Use in reply";
+
+        const calendar = document.createElement("button");
+        calendar.className = "copy-action";
+        calendar.type = "button";
+        if (entry.status === "cancelled") {
+          calendar.dataset.copyDate = entry.id;
+          calendar.textContent = "Copy cleanup";
+        } else {
+          calendar.dataset.downloadIcs = entry.id;
+          calendar.textContent = "Download ICS";
+        }
+
+        top.append(title, pill);
+        actions.append(copy, status, calendar);
+        card.append(top, meta, note, actions);
+        return card;
+      }));
+      dateBoardGrid.dataset.entries = JSON.stringify(dateBoardData);
+    }
+
+    function normalizeMessage(value) {
+      return value.trim().replace(/\s+/g, " ");
+    }
+
+    function sentenceCase(value) {
+      const clean = value.trim();
+      if (!clean) return "";
+      return clean.charAt(0).toUpperCase() + clean.slice(1);
+    }
+
+    function getDetail() {
+      return detailInput.value.trim() || "your teacher-mode advice";
+    }
+
+    function getQuestionAngle() {
+      return questionInput.value.trim() || "What usually helps you recharge after a full day?";
+    }
+
+    function analyzeIncoming() {
+      const raw = normalizeMessage(incomingMessage.value);
+      const lower = raw.toLowerCase();
+      const cues = [];
+      const questions = raw.match(/[^.!?]*\?/g) || [];
+      const isTired = /\b(tired|sleepy|rest|busy|exhausted|drained|long day|work|class|teaching|school|kids)\b/.test(lower);
+      const isPositive = /\b(haha|lol|nice|cute|sweet|yes|sure|okay|ok|haha|hehe|good|love)\b/.test(lower);
+      const isBereavement = /\b(passed away|pass away|funeral|uncle passed|aunt passed|grandma passed|grandpa passed|condolence|condolences)\b/.test(lower);
+      const isCancellation = /\b(cannot come|can't come|cant come|cannot make|can't make|cant make|not coming|raincheck|reschedule|postpone|bail|bailed)\b/.test(lower);
+      const isUncertain = /\b(maybe|not sure|see first|later|another time|busy|can't|cannot|raincheck)\b/.test(lower) || isCancellation;
+      const asksAboutYou = /\b(you|u|your)\b/.test(lower) && questions.length > 0;
+
+      if (!raw) cues.push("No pasted message yet, using the page context.");
+      if (questions.length > 0) cues.push("She asked something, so answer before pivoting.");
+      if (isBereavement) cues.push("Bereavement came up, so do not reschedule in the same breath.");
+      if (isCancellation) cues.push("A plan changed or got cancelled; update the date board/calendar before drafting.");
+      if (isTired) cues.push("Rest or work came up, keep the invite low-pressure.");
+      if (isPositive) cues.push("The vibe reads warm enough for light playfulness.");
+      if (isUncertain) cues.push("There may be hesitation, so offer space and an easy out.");
+      if (asksAboutYou) cues.push("She may be inviting you to share about yourself.");
+      if (raw && cues.length === 0) cues.push("Neutral message, keep it simple and curious.");
+
+      return { raw, lower, cues, questions, isTired, isPositive, isUncertain, isBereavement, isCancellation, asksAboutYou };
+    }
+
+    function tonePrefix(tone) {
+      const prefixes = {
+        warm: "Haha fair,",
+        playful: "Okay teacher,",
+        direct: "Fair.",
+        gentle: "No rush,"
+      };
+      return prefixes[tone] || prefixes.warm;
+    }
+
+    function buildAnswer(analyzed) {
+      if (analyzed.asksAboutYou) {
+        return "I am extrovert in the morning and introvert at night, so your rest advice was painfully accurate.";
+      }
+      if (analyzed.questions.length > 0) {
+        return "Short answer: I am trying to be better at balancing the ambitious side with actually resting.";
+      }
+      if (analyzed.isBereavement) {
+        return "I am sorry to hear that.";
+      }
+      if (analyzed.isCancellation) {
+        return "Thanks for telling me.";
+      }
+      if (analyzed.isTired) {
+        return "Sounds like you had a full day, so I will respect the rest agenda.";
+      }
+      if (analyzed.isUncertain) {
+        return "All good, we can keep it easy.";
+      }
+      if (analyzed.isPositive) {
+        return "I like that answer.";
+      }
+      return "That makes sense.";
+    }
+
+    function slotInvite() {
+      const dayText = readManualDate();
+      const timeText = readManualTime();
+      return `Would you be free ${dayText} at ${timeText} for ${scheduleState.vibeLabel}? If not, ${scheduleState.backupLabel} works too.`;
+    }
+
+    function cleanDraft(value) {
+      return value.replace(/\s+/g, " ").replace(/\s+([?.!,])/g, "$1").trim();
+    }
+
+    function buildReplyDrafts() {
+      const analyzed = analyzeIncoming();
+      const detail = getDetail();
+      const question = sentenceCase(getQuestionAngle()).replace(/[.?!]*$/, "?");
+      const prefix = tonePrefix(replyState.tone);
+      const answer = buildAnswer(analyzed);
+      const invite = slotInvite();
+      const softener = analyzed.isTired || analyzed.isUncertain || analyzed.isCancellation
+        ? "No pressure if rest wins."
+        : "Low pressure, but I think it would be fun.";
+
+      if (analyzed.isBereavement) {
+        return [
+          "Oh gosh, I am sorry to hear that. Please take care of yourself and your family first. No worries at all about tonight.",
+          "I am sorry for your loss. Do not worry about the plan tonight, just take the time you need.",
+          "Thanks for letting me know. I am sorry that happened. We can leave tonight aside and talk another time when things settle."
+        ].map(cleanDraft);
+      }
+
+      const templates = {
+        chat: [
+          `${prefix} ${answer} I am curious about ${detail}: ${question}`,
+          `${answer} I like that you said character matters more than labels. What is a small green flag you notice early?`,
+          `Noted. I will take the rest advice seriously, at least in public. ${question}`
+        ],
+        ask: [
+          `${prefix} ${answer} ${invite} ${softener}`,
+          `${answer} Tiny date proposal: ${invite}`,
+          `Teacher's orders accepted: rest first, then maybe ${scheduleState.vibeLabel}. ${invite}`
+        ],
+        playful: [
+          `${prefix} I am filing your rest advice under annoyingly reasonable. ${question}`,
+          `${answer} I promise not to turn this into personality-type homework. I do want to know: ${question}`,
+          `Okay, I will be normal for at least three messages. Starting now: ${question}`
+        ],
+        raincheck: [
+          `${prefix} ${answer} Let's keep it easy for now. No pressure from my side.`,
+          `All good if today is a rest day. We can keep chatting and find a better time later.`,
+          `Raincheck accepted. I would rather make plans when the energy is actually there.`
+        ]
+      };
+
+      return templates[replyState.intent].map(cleanDraft);
+    }
+
+    function renderReplyCues() {
+      const analyzed = analyzeIncoming();
+      replyCues.textContent = analyzed.cues.join(" ");
+    }
+
+    function createReplyCard(text, index) {
+      const card = document.createElement("article");
+      card.className = "reply-card";
+
+      const head = document.createElement("div");
+      head.className = "reply-card-head";
+
+      const label = document.createElement("strong");
+      label.textContent = `Option ${index + 1}`;
+
+      const button = document.createElement("button");
+      button.className = "copy-action";
+      button.type = "button";
+      button.dataset.copyReply = String(index);
+      button.textContent = "Copy";
+
+      const copy = document.createElement("p");
+      copy.className = "reply-text";
+      copy.textContent = text;
+
+      head.append(label, button);
+      card.append(head, copy);
+      return card;
+    }
+
+    function copyText(text, button, originalLabel) {
+      const resetButton = () => {
+        window.setTimeout(() => {
+          button.textContent = originalLabel;
+        }, 1600);
+      };
+
+      if (!navigator.clipboard) {
+        button.textContent = "Select text";
+        resetButton();
+        return;
+      }
+
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          button.textContent = "Copied";
+        })
+        .catch(() => {
+          button.textContent = "Select text";
+        })
+        .finally(resetButton);
+    }
+
+    function renderReplyDrafts() {
+      renderReplyCues();
+      const drafts = buildReplyDrafts();
+      replyDrafts.replaceChildren(...drafts.map(createReplyCard));
+      replyDrafts.dataset.drafts = JSON.stringify(drafts);
+    }
+
+    function applyDateBoardEntry(id) {
+      const entry = dateBoardData.find((item) => item.id === id);
+      if (!entry) return;
+
+      if (entry.status === "cancelled") {
+        incomingMessage.value = entry.note;
+        detailInput.value = `${entry.name}'s ${entry.dateLabel} ${entry.timeLabel} plan`;
+        questionInput.value = "";
+        replyState.intent = "raincheck";
+        replyState.tone = "gentle";
+      } else {
+        detailInput.value = `${entry.dateLabel} at ${entry.timeLabel}, ${entry.place}`;
+        questionInput.value = `Still good for ${entry.place}?`;
+        replyState.intent = entry.status === "tentative" ? "chat" : "ask";
+        replyState.tone = "warm";
+      }
+
+      setActiveControl(intentControls, "intent", replyState.intent);
+      setActiveControl(toneControls, "tone", replyState.tone);
+      renderReplyDrafts();
+      replyLab.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function applySlot(key) {
@@ -1136,6 +1865,14 @@
         return;
       }
 
+      if (key === "chat") {
+        replyState.intent = "chat";
+        setActiveControl(intentControls, "intent", replyState.intent);
+        renderReplyDrafts();
+        replyLab.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
       if (key === "skip") {
         boldPanel.classList.add("active");
         boldPanel.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1150,6 +1887,59 @@
     }
 
     document.addEventListener("click", (event) => {
+      const copyDateButton = event.target.closest("[data-copy-date]");
+      if (copyDateButton) {
+        const entry = dateBoardData.find((item) => item.id === copyDateButton.dataset.copyDate);
+        if (entry) {
+          copyText(`${boardEntryLabel(entry)}. ${entry.place}. ${entry.note} ${entry.calendarAction}`, copyDateButton, "Copy note");
+        }
+        return;
+      }
+
+      const dateStatusButton = event.target.closest("[data-date-status]");
+      if (dateStatusButton) {
+        applyDateBoardEntry(dateStatusButton.dataset.dateStatus);
+        return;
+      }
+
+      const downloadIcsButton = event.target.closest("[data-download-ics]");
+      if (downloadIcsButton) {
+        const entry = dateBoardData.find((item) => item.id === downloadIcsButton.dataset.downloadIcs);
+        if (entry) downloadIcs(entry);
+        return;
+      }
+
+      const copyReplyButton = event.target.closest("[data-copy-reply]");
+      if (copyReplyButton) {
+        const drafts = JSON.parse(replyDrafts.dataset.drafts || "[]");
+        const text = drafts[Number(copyReplyButton.dataset.copyReply)] || "";
+        if (text) copyText(text, copyReplyButton, "Copy");
+        return;
+      }
+
+      const intentButton = event.target.closest("[data-intent]");
+      if (intentButton) {
+        replyState.intent = intentButton.dataset.intent;
+        setActiveControl(intentControls, "intent", replyState.intent);
+        renderReplyDrafts();
+        return;
+      }
+
+      const toneButton = event.target.closest("[data-tone]");
+      if (toneButton) {
+        replyState.tone = toneButton.dataset.tone;
+        setActiveControl(toneControls, "tone", replyState.tone);
+        renderReplyDrafts();
+        return;
+      }
+
+      const openRepliesButton = event.target.closest("[data-open-replies]");
+      if (openRepliesButton) {
+        renderReplyDrafts();
+        replyLab.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+
       const slotButton = event.target.closest("[data-slot]");
       if (slotButton) {
         applySlot(slotButton.dataset.slot);
@@ -1163,6 +1953,25 @@
 
     dateInput.addEventListener("input", updateSummary);
     timeInput.addEventListener("input", updateSummary);
+    incomingMessage.addEventListener("input", renderReplyDrafts);
+    detailInput.addEventListener("input", renderReplyDrafts);
+    questionInput.addEventListener("input", renderReplyDrafts);
+
+    generateRepliesButton.addEventListener("click", () => {
+      renderReplyDrafts();
+    });
+
+    clearReplyLabButton.addEventListener("click", () => {
+      incomingMessage.value = "";
+      detailInput.value = "";
+      questionInput.value = "";
+      replyState.intent = "chat";
+      replyState.tone = "warm";
+      setActiveControl(intentControls, "intent", replyState.intent);
+      setActiveControl(toneControls, "tone", replyState.tone);
+      renderReplyDrafts();
+      incomingMessage.focus();
+    });
 
     shuffleButton.addEventListener("click", () => {
       const nextKey = slotOrder[Math.floor(Math.random() * slotOrder.length)];
@@ -1323,7 +2132,9 @@
     }
 
     drawDateMap();
-    applySlot("sat-brunch");
+    renderDateBoard();
+    applySlot("thipawan-sun-coffee");
+    renderReplyDrafts();
   </script>
 </body>
 </html>
