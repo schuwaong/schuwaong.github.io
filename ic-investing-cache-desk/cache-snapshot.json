@@ -1,0 +1,1131 @@
+{
+  "generated_at": "2026-06-19T07:30:52.750488+00:00",
+  "workspace": "static GitHub Pages snapshot",
+  "files": {
+    "watchlist": {
+      "name": "watchlist_current.json",
+      "size": 193703,
+      "modified_at": "2026-06-19T07:12:32.543164+00:00"
+    },
+    "market_mover": null,
+    "reddit": null,
+    "news_risk": null,
+    "news_headline_events": null,
+    "social_leads": null,
+    "scan_context": {
+      "name": "handoff-plan_2026-06-19_151228.json",
+      "size": 6797,
+      "modified_at": "2026-06-19T07:12:28.383183+00:00"
+    },
+    "instagram": {
+      "name": "instagram_2026-06-19_151228.json",
+      "size": 1591,
+      "modified_at": "2026-06-19T07:12:28.520861+00:00"
+    },
+    "geopolitics": {
+      "name": "geopolitics_2026-06-19_151228.json",
+      "size": 1642,
+      "modified_at": "2026-06-19T07:12:28.541856+00:00"
+    },
+    "opend_positions": null,
+    "active_portfolio": null
+  },
+  "summary": {
+    "active_watchlist": 4,
+    "removed_watchlist": 9,
+    "market_movers": 0,
+    "headlines": 0,
+    "headline_events": 0,
+    "reddit_trends": 0,
+    "social_leads": 0,
+    "scan_candidates": 13,
+    "risk_state": "UNKNOWN",
+    "instagram_items": 0,
+    "geopolitics_items": 0,
+    "opend_positions": 0
+  },
+  "watchlist": {
+    "updated_at": "2026-06-19 15:12:32",
+    "items": [
+      {
+        "symbol": "GOOG",
+        "market": "US",
+        "status": "starter_now",
+        "setup_score_0_to_5": 3.6,
+        "decision_score": 72.0,
+        "score_components": {
+          "source_quality_score": 0.7,
+          "freshness_score": 1.0,
+          "technical_score": 0.9,
+          "valuation_score": 0.5,
+          "catalyst_score": 0.45,
+          "risk_score": 0.75,
+          "portfolio_fit_score": 0.65,
+          "disagreement_penalty": 0.0
+        },
+        "thesis": "Cash-generative AI/platform exposure with less froth than the hot AI winners.",
+        "source_agents": [
+          "opportunity-scan",
+          "ml-alpha",
+          "kronos-alpha",
+          "technical",
+          "valuation",
+          "earnings",
+          "bottleneck",
+          "portfolio-risk",
+          "redteam",
+          "context"
+        ],
+        "agent_gates": [
+          {
+            "source": "opportunity-scan",
+            "status": "pass",
+            "reason": "Inside deeper add zone; still require a later risk check.",
+            "evidence": ""
+          },
+          {
+            "source": "ml-alpha",
+            "status": "pass",
+            "reason": "ML alpha scaffold is favorable (67.4/100).",
+            "evidence": "zone_alignment +27.6bp (inside deeper add zone); source_quality +8.4bp (external source quality); freshness +8.0bp (recency of linked evidence)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "technical",
+            "status": "pass",
+            "reason": "Technical report does not flag a blocker.",
+            "evidence": "- `US.GOOG` Alphabet: last 367.46, today +3.06%; deep add zone; +2.32% from starter band."
+          },
+          {
+            "source": "valuation",
+            "status": "pass",
+            "reason": "Valuation report does not flag a blocker.",
+            "evidence": "- `US.GOOG` Alphabet: last 367.46; valuation zone is acceptable only if fundamentals/catalysts are intact."
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: last 367.46, today +3.06%; avoid full size until date confirmed."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: quality platform dip; last 367.46; must still pass bottleneck evidence for Grid power for AI/data centers, Platform monetization and regulation."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "evidence_ids": [
+          "evidence_b4295504e9aad8de",
+          "evidence_d77ec26de320c55e",
+          "evidence_dc977dfd8fe7a02e",
+          "evidence_9af5b520dbaf7324",
+          "evidence_cceab2b3d71d04d9",
+          "evidence_92ea4accfdbea8a8"
+        ],
+        "current_price": 367.46,
+        "entry_zone": "376-382",
+        "entry_point": "376-382",
+        "add_zone": "365-370",
+        "chase_above": 388,
+        "invalidation": 360,
+        "stoploss": 360,
+        "max_nav_pct": 3,
+        "first_target": "",
+        "confidence": "conditional",
+        "reason": "Inside deeper add zone; still require a later risk check.",
+        "bucket_label": "quality platform dip",
+        "setup_label": "Alphabet",
+        "bullbear_theory": "`US.GOOG` Alphabet: Cash-generative AI/platform exposure with less froth than the hot AI winners. Last 367.46, today +3.06%.",
+        "committee_blockers": [],
+        "committee_cautions": [
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: last 367.46, today +3.06%; avoid full size until date confirmed."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: quality platform dip; last 367.46; must still pass bottleneck evidence for Grid power for AI/data centers, Platform monetization and regulation."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.GOOG` Alphabet: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "remove_if": "Breaks invalidation, moves above chase zone, or committee gates block the setup.",
+        "last_reviewed": "2026-06-19 15:12:32",
+        "raw_code": "US.GOOG",
+        "bucket": "starter_now",
+        "change_pct": 3.0569890060578864
+      },
+      {
+        "symbol": "09999",
+        "market": "HK",
+        "status": "starter_now",
+        "setup_score_0_to_5": 3.2,
+        "decision_score": 64.0,
+        "score_components": {
+          "source_quality_score": 0.5,
+          "freshness_score": 0.35,
+          "technical_score": 0.9,
+          "valuation_score": 0.5,
+          "catalyst_score": 0.6,
+          "risk_score": 0.75,
+          "portfolio_fit_score": 0.65,
+          "disagreement_penalty": 0.0
+        },
+        "thesis": "Cash-generative gaming/platform exposure, but still China-policy exposed.",
+        "source_agents": [
+          "opportunity-scan",
+          "ml-alpha",
+          "kronos-alpha",
+          "technical",
+          "valuation",
+          "earnings",
+          "bottleneck",
+          "portfolio-risk",
+          "redteam",
+          "context"
+        ],
+        "agent_gates": [
+          {
+            "source": "opportunity-scan",
+            "status": "pass",
+            "reason": "Inside starter zone.",
+            "evidence": ""
+          },
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (64.0/100).",
+            "evidence": "zone_alignment +25.2bp (inside starter zone); tape_quality +9.4bp (-3.69% controlled pullback); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "technical",
+            "status": "pass",
+            "reason": "Technical report does not flag a blocker.",
+            "evidence": "- `HK.09999` NetEase: last 190.50, today -3.69%; starter zone; +0.00% from starter band."
+          },
+          {
+            "source": "valuation",
+            "status": "pass",
+            "reason": "Valuation report does not flag a blocker.",
+            "evidence": "- `HK.09999` NetEase: last 190.50; valuation zone is acceptable only if fundamentals/catalysts are intact."
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: last 190.50, today -3.69%; starter zone, but earnings date must be checked first."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: HK platform watch; last 190.50; must still pass bottleneck evidence for Platform monetization and regulation."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "evidence_ids": [
+          "evidence_f084a00b52985919",
+          "evidence_2274479bf6cfaf01",
+          "evidence_2e6947e26c166b04",
+          "evidence_f942e267aba68e14"
+        ],
+        "current_price": 190.5,
+        "entry_zone": "188-192",
+        "entry_point": "188-192",
+        "add_zone": "178-184",
+        "chase_above": 198,
+        "invalidation": 176,
+        "stoploss": 176,
+        "max_nav_pct": 2,
+        "first_target": "",
+        "confidence": "conditional",
+        "reason": "Inside starter zone.",
+        "bucket_label": "HK platform watch",
+        "setup_label": "NetEase",
+        "bullbear_theory": "`HK.09999` NetEase: Cash-generative gaming/platform exposure, but still China-policy exposed. Last 190.50, today -3.69%.",
+        "committee_blockers": [],
+        "committee_cautions": [
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (64.0/100).",
+            "evidence": "zone_alignment +25.2bp (inside starter zone); tape_quality +9.4bp (-3.69% controlled pullback); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: last 190.50, today -3.69%; starter zone, but earnings date must be checked first."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: HK platform watch; last 190.50; must still pass bottleneck evidence for Platform monetization and regulation."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `HK.09999` NetEase: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "remove_if": "Breaks invalidation, moves above chase zone, or committee gates block the setup.",
+        "last_reviewed": "2026-06-19 15:12:32",
+        "raw_code": "HK.09999",
+        "bucket": "starter_now",
+        "change_pct": -3.690596562184034
+      },
+      {
+        "symbol": "UBER",
+        "market": "US",
+        "status": "starter_now",
+        "setup_score_0_to_5": 3.5,
+        "decision_score": 69.0,
+        "score_components": {
+          "source_quality_score": 0.5,
+          "freshness_score": 1.0,
+          "technical_score": 0.9,
+          "valuation_score": 0.5,
+          "catalyst_score": 0.45,
+          "risk_score": 0.75,
+          "portfolio_fit_score": 0.65,
+          "disagreement_penalty": 0.0
+        },
+        "thesis": "Profitable platform growth with less direct AI/semiconductor correlation.",
+        "source_agents": [
+          "opportunity-scan",
+          "ml-alpha",
+          "kronos-alpha",
+          "technical",
+          "valuation",
+          "earnings",
+          "bottleneck",
+          "portfolio-risk",
+          "redteam",
+          "context"
+        ],
+        "agent_gates": [
+          {
+            "source": "opportunity-scan",
+            "status": "pass",
+            "reason": "Inside starter zone.",
+            "evidence": ""
+          },
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (62.6/100).",
+            "evidence": "zone_alignment +25.2bp (inside starter zone); freshness +8.0bp (recency of linked evidence); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "technical",
+            "status": "pass",
+            "reason": "Technical report does not flag a blocker.",
+            "evidence": "- `US.UBER` Uber: last 71.64, today +3.01%; starter zone; +0.00% from starter band."
+          },
+          {
+            "source": "valuation",
+            "status": "pass",
+            "reason": "Valuation report does not flag a blocker.",
+            "evidence": "- `US.UBER` Uber: last 71.64; valuation zone is acceptable only if fundamentals/catalysts are intact."
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.UBER` Uber: last 71.64, today +3.01%; starter zone, but earnings date must be checked first."
+          },
+          {
+            "source": "bottleneck",
+            "status": "pass",
+            "reason": "Bottleneck report does not flag a blocker.",
+            "evidence": "- `US.UBER` Uber: non-AI growth diversifier; last 71.64."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.UBER` Uber: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "evidence_ids": [
+          "evidence_abebc06c3f1cc993"
+        ],
+        "current_price": 71.64,
+        "entry_zone": "70-72",
+        "entry_point": "70-72",
+        "add_zone": "67-69",
+        "chase_above": 75,
+        "invalidation": 66,
+        "stoploss": 66,
+        "max_nav_pct": 3,
+        "first_target": "",
+        "confidence": "conditional",
+        "reason": "Inside starter zone.",
+        "bucket_label": "non-AI growth diversifier",
+        "setup_label": "Uber",
+        "bullbear_theory": "`US.UBER` Uber: Profitable platform growth with less direct AI/semiconductor correlation. Last 71.64, today +3.01%.",
+        "committee_blockers": [],
+        "committee_cautions": [
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (62.6/100).",
+            "evidence": "zone_alignment +25.2bp (inside starter zone); freshness +8.0bp (recency of linked evidence); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.UBER` Uber: last 71.64, today +3.01%; starter zone, but earnings date must be checked first."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.UBER` Uber: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "remove_if": "Breaks invalidation, moves above chase zone, or committee gates block the setup.",
+        "last_reviewed": "2026-06-19 15:12:32",
+        "raw_code": "US.UBER",
+        "bucket": "starter_now",
+        "change_pct": 3.005032350826742
+      },
+      {
+        "symbol": "DHR",
+        "market": "US",
+        "status": "watch_pullback",
+        "setup_score_0_to_5": 2.4,
+        "decision_score": 48.8,
+        "score_components": {
+          "source_quality_score": 0.25,
+          "freshness_score": 0.25,
+          "technical_score": 0.45,
+          "valuation_score": 0.5,
+          "catalyst_score": 0.45,
+          "risk_score": 0.75,
+          "portfolio_fit_score": 0.65,
+          "disagreement_penalty": 0.0
+        },
+        "thesis": "Life-science quality compounder and portfolio diversifier.",
+        "source_agents": [
+          "opportunity-scan",
+          "ml-alpha",
+          "kronos-alpha",
+          "technical",
+          "valuation",
+          "earnings",
+          "bottleneck",
+          "portfolio-risk",
+          "redteam",
+          "context"
+        ],
+        "agent_gates": [
+          {
+            "source": "opportunity-scan",
+            "status": "pass",
+            "reason": "Outside preferred starter zone.",
+            "evidence": ""
+          },
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (53.2/100).",
+            "evidence": "zone_alignment +19.5bp (outside zone but measurable); tape_quality +9.4bp (-2.00% controlled pullback); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "technical",
+            "status": "pass",
+            "reason": "Technical report does not flag a blocker.",
+            "evidence": "- `US.DHR` Danaher: last 177.17, today -2.00%; watch zone; +1.60% from starter band."
+          },
+          {
+            "source": "valuation",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: last 177.17; watchlist valuation gate; wait for better price or stronger evidence."
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: last 177.17, today -2.00%; avoid full size until date confirmed."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: defensive quality diversifier; last 177.17; must still pass bottleneck evidence for Healthcare workflow/admin capacity."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "evidence_ids": [],
+        "current_price": 177.17,
+        "entry_zone": "180-183",
+        "entry_point": "180-183",
+        "add_zone": "172-176",
+        "chase_above": 188,
+        "invalidation": 170,
+        "stoploss": 170,
+        "max_nav_pct": 3,
+        "first_target": "",
+        "confidence": "conditional",
+        "reason": "Outside preferred starter zone.",
+        "bucket_label": "defensive quality diversifier",
+        "setup_label": "Danaher",
+        "bullbear_theory": "`US.DHR` Danaher: Life-science quality compounder and portfolio diversifier. Last 177.17, today -2.00%.",
+        "committee_blockers": [],
+        "committee_cautions": [
+          {
+            "source": "ml-alpha",
+            "status": "caution",
+            "reason": "ML alpha scaffold is mixed (53.2/100).",
+            "evidence": "zone_alignment +19.5bp (outside zone but measurable); tape_quality +9.4bp (-2.00% controlled pullback); portfolio_fit +6.6bp (portfolio fit neutral)"
+          },
+          {
+            "source": "kronos-alpha",
+            "status": "missing",
+            "reason": "No Kronos forecast signal found for this symbol.",
+            "evidence": ""
+          },
+          {
+            "source": "valuation",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: last 177.17; watchlist valuation gate; wait for better price or stronger evidence."
+          },
+          {
+            "source": "earnings",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: last 177.17, today -2.00%; avoid full size until date confirmed."
+          },
+          {
+            "source": "bottleneck",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: defensive quality diversifier; last 177.17; must still pass bottleneck evidence for Healthcare workflow/admin capacity."
+          },
+          {
+            "source": "portfolio-risk",
+            "status": "caution",
+            "reason": "Portfolio gate deferred; opportunity scan is market-only.",
+            "evidence": ""
+          },
+          {
+            "source": "redteam",
+            "status": "caution",
+            "reason": "Report requires confirmation before sizing.",
+            "evidence": "- `US.DHR` Danaher: must still pass earnings, macro, geopolitics, valuation, and portfolio-risk checks."
+          },
+          {
+            "source": "context",
+            "status": "missing",
+            "reason": "No symbol-specific current-context evidence found.",
+            "evidence": ""
+          }
+        ],
+        "remove_if": "Breaks invalidation, moves above chase zone, or committee gates block the setup.",
+        "last_reviewed": "2026-06-19 15:12:32",
+        "raw_code": "US.DHR",
+        "bucket": "watch_pullback",
+        "change_pct": -2.002323137341666
+      }
+    ],
+    "removed": [
+      {
+        "symbol": "AMZN",
+        "market": "US",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Below invalidation; thesis needs review first.",
+        "evidence_source": "ml-alpha, technical, valuation, redteam",
+        "raw_code": "US.AMZN",
+        "status": "avoid"
+      },
+      {
+        "symbol": "QNT",
+        "market": "US",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "No quote available.",
+        "evidence_source": "ml-alpha",
+        "raw_code": "US.QNT",
+        "status": "no_quote"
+      },
+      {
+        "symbol": "00700",
+        "market": "HK",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Above chase threshold.",
+        "evidence_source": "ml-alpha, technical, valuation, redteam",
+        "raw_code": "HK.00700",
+        "status": "avoid_chase"
+      },
+      {
+        "symbol": "META",
+        "market": "US",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Below invalidation; thesis needs review first.",
+        "evidence_source": "ml-alpha, technical, valuation, redteam",
+        "raw_code": "US.META",
+        "status": "avoid"
+      },
+      {
+        "symbol": "TSM",
+        "market": "US",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Blocked by committee gates: ml-alpha, valuation, redteam. Up more than 5% intraday; do not treat spike as a dip.",
+        "evidence_source": "ml-alpha, valuation, redteam",
+        "raw_code": "US.TSM",
+        "status": "committee_blocked"
+      },
+      {
+        "symbol": "09988",
+        "market": "HK",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Below invalidation; thesis needs review first.",
+        "evidence_source": "ml-alpha, technical, valuation, redteam",
+        "raw_code": "HK.09988",
+        "status": "avoid"
+      },
+      {
+        "symbol": "CRM",
+        "market": "US",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "Below invalidation; thesis needs review first.",
+        "evidence_source": "ml-alpha, technical, valuation, redteam",
+        "raw_code": "US.CRM",
+        "status": "avoid"
+      },
+      {
+        "symbol": "01810",
+        "market": "HK",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "No quote available.",
+        "evidence_source": "ml-alpha",
+        "raw_code": "HK.01810",
+        "status": "no_quote"
+      },
+      {
+        "symbol": "03690",
+        "market": "HK",
+        "removed_at": "2026-06-19 15:12:32",
+        "reason": "No quote available.",
+        "evidence_source": "ml-alpha",
+        "raw_code": "HK.03690",
+        "status": "no_quote"
+      }
+    ],
+    "source_reports": {
+      "opportunity-scan": "opportunity-scan_2026-06-19_151228.md",
+      "ml-alpha": "ml-alpha_2026-06-19_151228.md",
+      "kronos-alpha": "kronos-alpha_2026-06-19_151231.md",
+      "bullbear": "bullbear_2026-06-19_151231.md",
+      "congressional-growth": "congressional-growth_2026-06-19_151228.md",
+      "ipo": "ipo_2026-06-19_151228.md",
+      "bottleneck": "bottleneck_2026-06-19_151231.md",
+      "radar": "radar_2026-06-19_151228.md",
+      "leads": "leads_2026-06-19_151231.md",
+      "news": "news_2026-06-19_151228.md",
+      "tweet": "tweet_2026-06-19_151228.md",
+      "instagram": "instagram_2026-06-19_151228.md",
+      "geopolitics": "geopolitics_2026-06-19_151228.md",
+      "macro": "macro_2026-06-19_151228.md",
+      "earnings": "earnings_2026-06-19_151228.md",
+      "valuation": "valuation_2026-06-19_151228.md",
+      "technical": "technical_2026-06-19_151231.md",
+      "insiders": "insiders_2026-06-19_151228.md",
+      "options": "options_2026-06-19_151228.md",
+      "china-hk": "china-hk_2026-06-19_151228.md",
+      "redteam": "redteam_2026-06-19_151231.md",
+      "congressional-trades": "congressional_growth_2026-06-08_213001.md"
+    },
+    "quote_errors": [
+      "OpenD quote port is closed; skipped primary quote source.",
+      "HK.03690 Yahoo fallback failed: <urlopen error _ssl.c:1112: The handshake operation timed out>",
+      "HK.01810 Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.PLTR Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.AMD Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.AVGO Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.NVDA Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.MSFT Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.QNT Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    ],
+    "market_volatility_warning": {
+      "status": "normal",
+      "primary_driver": "Mixed headline risk",
+      "impact_note": "Broad market headlines are active, so current price action should be treated as context-dependent rather than an automatic buy-the-dip signal.",
+      "watchlist_note": "Use fresher confirmation from price, yields, and headlines before adding to high-beta names.",
+      "benchmarks": [],
+      "headlines": [],
+      "quote_errors": [
+        "OpenD quote port is closed; skipped primary quote source.",
+        "US.SPY Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "US.QQQ Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "US.DIA Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "US.IWM Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "US.TLT Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "HK.02800 Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      ]
+    }
+  },
+  "market": {
+    "source": "trading_pipeline_watchlist_current",
+    "mode": "research_only_no_trading",
+    "generated_at": "2026-06-19 15:12:32",
+    "index_pulse": [],
+    "market_movers": [],
+    "yahoo_trending_symbols": [],
+    "headlines": [],
+    "limitations": [
+      "OpenD quote port is closed; skipped primary quote source.",
+      "HK.03690 Yahoo fallback failed: <urlopen error _ssl.c:1112: The handshake operation timed out>",
+      "HK.01810 Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.PLTR Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.AMD Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.AVGO Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.NVDA Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.MSFT Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "US.QNT Yahoo fallback failed: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+    ]
+  },
+  "reddit": {
+    "items": []
+  },
+  "news_risk": {},
+  "news_headline_events": [],
+  "social_leads": {
+    "items": []
+  },
+  "scan_context": {
+    "candidates": [
+      {
+        "symbol": "GOOG",
+        "market": "US",
+        "source_tags": [
+          "starter_now"
+        ],
+        "mentions": 6
+      },
+      {
+        "symbol": "META",
+        "market": "US",
+        "source_tags": [
+          "avoid"
+        ],
+        "mentions": 6
+      },
+      {
+        "symbol": "UBER",
+        "market": "US",
+        "source_tags": [
+          "starter_now"
+        ],
+        "mentions": 1
+      },
+      {
+        "symbol": "DHR",
+        "market": "US",
+        "source_tags": [
+          "watch_pullback"
+        ],
+        "mentions": 0
+      },
+      {
+        "symbol": "CRM",
+        "market": "US",
+        "source_tags": [
+          "avoid"
+        ],
+        "mentions": 1
+      },
+      {
+        "symbol": "AMZN",
+        "market": "US",
+        "source_tags": [
+          "avoid"
+        ],
+        "mentions": 6
+      },
+      {
+        "symbol": "TSM",
+        "market": "US",
+        "source_tags": [
+          "watch_pullback"
+        ],
+        "mentions": 2
+      },
+      {
+        "symbol": "00700",
+        "market": "HK",
+        "source_tags": [
+          "avoid_chase"
+        ],
+        "mentions": 6
+      },
+      {
+        "symbol": "09999",
+        "market": "HK",
+        "source_tags": [
+          "starter_now"
+        ],
+        "mentions": 4
+      },
+      {
+        "symbol": "09988",
+        "market": "HK",
+        "source_tags": [
+          "avoid"
+        ],
+        "mentions": 2
+      },
+      {
+        "symbol": "03690",
+        "market": "HK",
+        "source_tags": [
+          "no_quote"
+        ],
+        "mentions": 3
+      },
+      {
+        "symbol": "01810",
+        "market": "HK",
+        "source_tags": [
+          "no_quote"
+        ],
+        "mentions": 2
+      },
+      {
+        "symbol": "QNT",
+        "market": "US",
+        "source_tags": [
+          "no_quote"
+        ],
+        "mentions": 1
+      }
+    ]
+  },
+  "content": {
+    "instagram": {
+      "items": [],
+      "errors": [
+        "https://rsshub.app/instagram/2/tags/spacex: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://rsshub.app/instagram/2/tags/elonmusk: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://rsshub.app/instagram/2/tags/tesla: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://news.google.com/rss/search?q=Microsoft%20Instagram%20product%20launch%20Copilot%20Surface%20AI&hl=en-US&gl=US&ceid=US:en: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://blogs.microsoft.com/feed/: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://blogs.windows.com/feed/: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      ],
+      "quality": {
+        "status": "blocked",
+        "attempted_sources": 6,
+        "failed_sources": 6,
+        "successful_sources": 0,
+        "unique_item_sources": 0,
+        "item_count": 0,
+        "recency": {
+          "dated_count": 0,
+          "undated_count": 0,
+          "newest_age_days": null,
+          "oldest_age_days": null,
+          "fresh_3d_count": 0,
+          "recent_14d_count": 0,
+          "stale_90d_count": 0
+        }
+      },
+      "evidence_ids": [],
+      "risk_rules": {
+        "gross_exposure_elevated_pct": 160,
+        "gross_exposure_red_flag_pct": 190,
+        "intraday_spike_pct": 5,
+        "normal_starter_nav_pct_low": 2,
+        "normal_starter_nav_pct_high": 3,
+        "high_conviction_nav_pct_cap": 5
+      }
+    },
+    "geopolitics": {
+      "items": [],
+      "errors": [
+        "https://news.google.com/rss/search?q=China%20Taiwan%20semiconductor%20export%20controls%20tariffs%20sanctions%20markets&hl=en-US&gl=US&ceid=US:en: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://news.google.com/rss/search?q=Middle%20East%20oil%20shipping%20Red%20Sea%20markets&hl=en-US&gl=US&ceid=US:en: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://news.google.com/rss/search?q=rare%20earths%20export%20controls%20China%20US%20markets&hl=en-US&gl=US&ceid=US:en: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://news.google.com/rss/search?q=USA%20Rare%20Earth%20MP%20Materials%20Vulcan%20Elements%20rare%20earth%20magnets%20Trump&hl=en-US&gl=US&ceid=US:en: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      ],
+      "quality": {
+        "status": "blocked",
+        "attempted_sources": 4,
+        "failed_sources": 4,
+        "successful_sources": 0,
+        "unique_item_sources": 0,
+        "item_count": 0,
+        "recency": {
+          "dated_count": 0,
+          "undated_count": 0,
+          "newest_age_days": null,
+          "oldest_age_days": null,
+          "fresh_3d_count": 0,
+          "recent_14d_count": 0,
+          "stale_90d_count": 0
+        }
+      },
+      "evidence_ids": [],
+      "risk_rules": {
+        "gross_exposure_elevated_pct": 160,
+        "gross_exposure_red_flag_pct": 190,
+        "intraday_spike_pct": 5,
+        "normal_starter_nav_pct_low": 2,
+        "normal_starter_nav_pct_high": 3,
+        "high_conviction_nav_pct_cap": 5
+      }
+    },
+    "opend": {
+      "positions": [],
+      "metadata": {}
+    }
+  },
+  "reports": [
+    {
+      "key": "market_mover",
+      "label": "Market Mover Briefing",
+      "file": null,
+      "preview": ""
+    },
+    {
+      "key": "watchlist",
+      "label": "Watchlist Refresh",
+      "file": {
+        "name": "watchlist_2026-06-19_151232.md",
+        "size": 14370,
+        "modified_at": "2026-06-19T07:12:32.543395+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "opportunity",
+      "label": "Opportunity Scan",
+      "file": {
+        "name": "opportunity-scan_2026-06-19_151228.md",
+        "size": 4795,
+        "modified_at": "2026-06-19T07:12:28.649178+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "committee",
+      "label": "Latest Debate",
+      "file": {
+        "name": "debate_2026-06-16_162606.md",
+        "size": 54719,
+        "modified_at": "2026-06-16T08:26:06.568527+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "scan_context",
+      "label": "Scan Context",
+      "file": {
+        "name": "handoff-plan_2026-06-19_151228.md",
+        "size": 4691,
+        "modified_at": "2026-06-19T07:12:28.382115+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "bottleneck",
+      "label": "Industry Bottleneck",
+      "file": {
+        "name": "bottleneck_2026-06-19_151231.md",
+        "size": 5249,
+        "modified_at": "2026-06-19T07:12:31.630741+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "ipo",
+      "label": "IPO Scan",
+      "file": {
+        "name": "ipo_2026-06-19_151228.md",
+        "size": 866,
+        "modified_at": "2026-06-19T07:12:28.413041+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "crypto",
+      "label": "Crypto Scan",
+      "file": null,
+      "preview": ""
+    },
+    {
+      "key": "instagram",
+      "label": "Instagram Hype Scan",
+      "file": {
+        "name": "instagram_2026-06-19_151228.md",
+        "size": 1327,
+        "modified_at": "2026-06-19T07:12:28.520641+00:00"
+      },
+      "preview": ""
+    },
+    {
+      "key": "geopolitics",
+      "label": "Geopolitics Scan",
+      "file": {
+        "name": "geopolitics_2026-06-19_151228.md",
+        "size": 1415,
+        "modified_at": "2026-06-19T07:12:28.541670+00:00"
+      },
+      "preview": ""
+    }
+  ]
+}
