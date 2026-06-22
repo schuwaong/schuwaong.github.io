@@ -1,0 +1,31 @@
+name: Daily lesson refresh
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build daily lesson
+        run: node igcse-90-day-plan/build-daily-lesson.js
+
+      - name: Commit daily lesson
+        run: |
+          if git diff --quiet -- igcse-90-day-plan/daily-lesson.json; then
+            echo "No lesson change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add igcse-90-day-plan/daily-lesson.json
+          git commit -m "Update daily IGCSE lesson"
+          git push

@@ -1,0 +1,39 @@
+{
+  "dateKey": "2026-06-23",
+  "seedDateKey": "2026-06-23",
+  "source": "workflow",
+  "vocab": {
+    "category": "science",
+    "term": "result",
+    "zh": "结果",
+    "exampleEn": "The result supports the idea.",
+    "exampleZh": "结果支持这个观点。"
+  },
+  "cycle": {
+    "number": 10,
+    "phase": 2,
+    "titleEn": "Past paper routine",
+    "titleZh": "往年题训练",
+    "summaryEn": "Take one paper, mark it, and repair the mistakes immediately.",
+    "summaryZh": "做一套题，立刻批改，然后马上修错。",
+    "focusWords": [
+      "paper / 试卷",
+      "mark scheme / 评分标准",
+      "correction / 更正",
+      "timed / 限时"
+    ]
+  },
+  "frame": {
+    "slot": "Improvement / 改进",
+    "en": "To improve this answer, I should...",
+    "zh": "要改进这道题，我应该...",
+    "useEn": "Use in self-review after marking.",
+    "useZh": "批改后自我修正时使用。"
+  },
+  "meaningEn": "This science word helps you explain experiments, results, or evidence clearly.",
+  "meaningZh": "这个科学词可以帮助你清楚解释实验、结果或证据。",
+  "promptEn": "Use this frame: To improve this answer, I should...",
+  "promptZh": "使用这个句型：要改进这道题，我应该...",
+  "sourceEn": "This lesson is auto-picked from the word bank and refreshes every day.",
+  "sourceZh": "这节课会从词汇库里自动抽取，并每天刷新。"
+}

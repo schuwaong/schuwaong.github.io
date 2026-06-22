@@ -129,6 +129,7 @@
         border-radius: 999px;
         color: var(--ink);
         background: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
       }
 
       .hero {
@@ -716,6 +717,156 @@
         line-height: 1.55;
       }
 
+      .daily-note {
+        margin-top: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(234, 241, 238, 0.7));
+      }
+
+      .daily-note strong {
+        margin-bottom: 6px;
+      }
+
+      .daily-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+      }
+
+      .daily-modal.hidden {
+        display: none !important;
+      }
+
+      .daily-modal__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(9, 16, 28, 0.48);
+        backdrop-filter: blur(6px);
+      }
+
+      .daily-modal__panel {
+        position: relative;
+        z-index: 1;
+        width: min(760px, 100%);
+        max-height: min(88vh, 860px);
+        overflow: auto;
+        padding: 20px;
+        border: 1px solid rgba(14, 27, 45, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 28px 70px rgba(10, 18, 31, 0.24);
+      }
+
+      .daily-modal__head,
+      .daily-modal__foot {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .daily-modal__head {
+        margin-bottom: 18px;
+      }
+
+      .daily-modal__head h2 {
+        margin: 6px 0 0;
+        font-size: 1.8rem;
+        line-height: 1.05;
+      }
+
+      .daily-modal__foot {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .icon-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 1.15rem;
+      }
+
+      .daily-lesson-card {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid rgba(18, 35, 63, 0.12);
+        border-radius: 8px;
+        background: linear-gradient(180deg, rgba(243, 247, 252, 0.98), rgba(255, 255, 255, 0.98));
+      }
+
+      .daily-lesson-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .daily-word {
+        margin: 6px 0 0;
+        font-size: 2.05rem;
+        line-height: 1;
+      }
+
+      .daily-zh {
+        margin: 8px 0 0;
+        color: var(--teal);
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .daily-date {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .daily-section {
+        padding-top: 12px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.14);
+      }
+
+      .daily-section strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .daily-section p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .daily-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .daily-grid .tag {
+        justify-content: center;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
       .hidden {
         display: none !important;
       }
@@ -773,6 +924,26 @@
         .day-grid {
           grid-template-columns: 1fr;
         }
+
+        .daily-modal {
+          padding: 12px;
+        }
+
+        .daily-modal__head,
+        .daily-modal__foot,
+        .daily-lesson-top {
+          grid-template-columns: 1fr;
+          display: grid;
+          align-items: start;
+        }
+
+        .daily-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .daily-word {
+          font-size: 1.7rem;
+        }
       }
     </style>
   </head>
@@ -789,9 +960,67 @@
         <a href="#tips">Chinese learner tips</a>
       </nav>
       <div class="topmeta">
+        <button class="ghost-link" id="dailyLessonBtn" type="button">Daily lesson</button>
         <a class="ghost-link" href="https://schuwaong.github.io/" target="_blank" rel="noreferrer">Site root</a>
       </div>
     </header>
+
+    <div class="daily-modal hidden" id="dailyModal" aria-hidden="true">
+      <div class="daily-modal__backdrop" id="dailyModalBackdrop"></div>
+      <div
+        class="daily-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dailyLessonTitle"
+      >
+        <div class="daily-modal__head">
+          <div>
+            <p class="eyebrow">Daily lesson / 每日一课</p>
+            <h2 id="dailyLessonTitle">One-minute vocabulary lesson</h2>
+          </div>
+          <button class="icon-btn" id="dailyModalClose" type="button" aria-label="Close daily lesson">
+            ×
+          </button>
+        </div>
+
+        <div class="daily-lesson-card">
+          <div class="daily-lesson-top">
+            <div>
+              <span class="cycle-index" id="dailyLessonCycle">Cycle</span>
+              <h3 class="daily-word" id="dailyLessonWord">word</h3>
+              <p class="daily-zh" id="dailyLessonZh">中文</p>
+            </div>
+            <div class="daily-date" id="dailyLessonDate">Today</div>
+          </div>
+
+          <div class="daily-section">
+            <strong>Quick meaning / 快速理解</strong>
+            <p class="en" id="dailyLessonMeaningEn"></p>
+            <p class="zh" id="dailyLessonMeaningZh"></p>
+          </div>
+
+          <div class="daily-section">
+            <strong>Example / 例句</strong>
+            <p class="en" id="dailyLessonExampleEn"></p>
+            <p class="zh" id="dailyLessonExampleZh"></p>
+          </div>
+
+          <div class="daily-section">
+            <strong>One-minute drill / 一分钟练习</strong>
+            <div class="daily-grid">
+              <span class="tag en" id="dailyLessonPromptEn"></span>
+              <span class="tag zh" id="dailyLessonPromptZh"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="daily-modal__foot">
+          <p class="en" id="dailyLessonSourceEn"></p>
+          <p class="zh" id="dailyLessonSourceZh"></p>
+          <button class="action-btn primary" id="dailyLessonGotIt" type="button">Got it</button>
+        </div>
+      </div>
+    </div>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
@@ -1063,6 +1292,16 @@
             <span class="zh">
               这个页面是通用的 IGCSE 复习计划。如果你的科目试卷结构不同，只要保留同样的
              复习节奏，再替换具体内容就可以。
+            </span>
+          </div>
+          <div class="footer-note daily-note">
+            <strong>Daily lesson / 每日一课</strong>
+            <span class="en">
+              A popup lesson opens once per day and rotates automatically by date. A scheduled
+              site update can also refresh the lesson bank on its own.
+            </span>
+            <span class="zh">
+              每天会自动弹出一课，内容按日期轮换。再配合定时更新，词汇库也可以自动刷新。
             </span>
           </div>
         </div>
@@ -1473,9 +1712,28 @@
       const doneCount = document.getElementById("doneCount");
       const progressFill = document.getElementById("progressFill");
       const clearProgress = document.getElementById("clearProgress");
+      const dailyLessonBtn = document.getElementById("dailyLessonBtn");
+      const dailyModal = document.getElementById("dailyModal");
+      const dailyModalBackdrop = document.getElementById("dailyModalBackdrop");
+      const dailyModalClose = document.getElementById("dailyModalClose");
+      const dailyLessonGotIt = document.getElementById("dailyLessonGotIt");
+      const dailyLessonCycle = document.getElementById("dailyLessonCycle");
+      const dailyLessonWord = document.getElementById("dailyLessonWord");
+      const dailyLessonZh = document.getElementById("dailyLessonZh");
+      const dailyLessonDate = document.getElementById("dailyLessonDate");
+      const dailyLessonMeaningEn = document.getElementById("dailyLessonMeaningEn");
+      const dailyLessonMeaningZh = document.getElementById("dailyLessonMeaningZh");
+      const dailyLessonExampleEn = document.getElementById("dailyLessonExampleEn");
+      const dailyLessonExampleZh = document.getElementById("dailyLessonExampleZh");
+      const dailyLessonPromptEn = document.getElementById("dailyLessonPromptEn");
+      const dailyLessonPromptZh = document.getElementById("dailyLessonPromptZh");
+      const dailyLessonSourceEn = document.getElementById("dailyLessonSourceEn");
+      const dailyLessonSourceZh = document.getElementById("dailyLessonSourceZh");
       const phaseButtons = document.querySelectorAll("[data-phase-btn]");
       const langButtons = document.querySelectorAll("[data-lang-btn]");
       const storageKey = "igcse-90-progress";
+      const dailyStorageKey = "igcse-90-daily-lesson";
+      const dailyLessonPath = "./daily-lesson.json";
 
       const phaseMeta = {
         1: { container: planRoot, label: "Phase 1" },
@@ -1497,12 +1755,188 @@
         }
       }
 
+      function loadDailyState() {
+        try {
+          return JSON.parse(localStorage.getItem(dailyStorageKey) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
       function saveProgress() {
         try {
           localStorage.setItem(storageKey, JSON.stringify([...progressSet]));
         } catch {
           // No-op when storage is not available.
         }
+      }
+
+      function saveDailyState(state) {
+        try {
+          localStorage.setItem(dailyStorageKey, JSON.stringify(state));
+        } catch {
+          // No-op when storage is not available.
+        }
+      }
+
+      function getKualaLumpurDateKey(date = new Date()) {
+        const parts = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kuala_Lumpur",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).formatToParts(date);
+        const map = Object.fromEntries(
+          parts.filter((part) => part.type !== "literal").map((part) => [part.type, part.value])
+        );
+        return `${map.year}-${map.month}-${map.day}`;
+      }
+
+      function hashString(value) {
+        let hash = 0;
+        for (let index = 0; index < value.length; index += 1) {
+          hash = (hash * 31 + value.charCodeAt(index)) >>> 0;
+        }
+        return hash;
+      }
+
+      function categoryMeaning(category, term) {
+        if (category === "command") {
+          return {
+            en: `This command word tells you what kind of answer the question wants.`,
+            zh: `这个指令词告诉你题目想要哪一种答案。`,
+          };
+        }
+        if (category === "connect") {
+          return {
+            en: `This connector helps your answer flow from one idea to the next.`,
+            zh: `这个连接词帮助你的答案从一个意思顺到下一个意思。`,
+          };
+        }
+        if (category === "study") {
+          return {
+            en: `This is a study word you can use to organize revision and memory.`,
+            zh: `这是一个学习词，能帮助你整理复习和记忆。`,
+          };
+        }
+        if (category === "maths") {
+          return {
+            en: `This maths word helps you write calculations, methods, or final answers clearly.`,
+            zh: `这个数学词可以帮助你把计算、步骤或最终答案写清楚。`,
+          };
+        }
+        return {
+          en: `This science word helps you explain experiments, results, or evidence clearly.`,
+          zh: `这个科学词可以帮助你清楚解释实验、结果或证据。`,
+        };
+      }
+
+      function buildDailyLesson(seedDateKey, source = "local") {
+        const hash = hashString(seedDateKey);
+        const vocab = vocabItems[hash % vocabItems.length];
+        const cycle = cycleData[hash % cycleData.length];
+        const frame = frames[hash % frames.length];
+        const meaning = categoryMeaning(vocab.category, vocab.term);
+        return {
+          seedDateKey,
+          source,
+          vocab,
+          cycle,
+          frame,
+          meaningEn: meaning.en,
+          meaningZh: meaning.zh,
+          promptEn: `Use this frame: ${frame.en}`,
+          promptZh: `使用这个句型：${frame.zh}`,
+          sourceEn: "This lesson is auto-picked from the word bank and refreshes every day.",
+          sourceZh: "这节课会从词汇库里自动抽取，并每天刷新。",
+        };
+      }
+
+      function renderDailyLesson(lesson) {
+        dailyLessonCycle.textContent = `Cycle ${lesson.cycle.number}`;
+        dailyLessonWord.textContent = lesson.vocab.term;
+        dailyLessonZh.textContent = lesson.vocab.zh;
+        dailyLessonDate.textContent = lesson.seedDateKey;
+        dailyLessonMeaningEn.textContent = lesson.meaningEn;
+        dailyLessonMeaningZh.textContent = lesson.meaningZh;
+        dailyLessonExampleEn.textContent = lesson.vocab.exampleEn;
+        dailyLessonExampleZh.textContent = lesson.vocab.exampleZh;
+        dailyLessonPromptEn.textContent = lesson.promptEn;
+        dailyLessonPromptZh.textContent = lesson.promptZh;
+        dailyLessonSourceEn.textContent = lesson.sourceEn;
+        dailyLessonSourceZh.textContent = lesson.sourceZh;
+      }
+
+      function openDailyLesson(lesson, auto = false) {
+        renderDailyLesson(lesson);
+        dailyModal.classList.remove("hidden");
+        dailyModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        if (auto) {
+          saveDailyState({ lastShown: lesson.seedDateKey, source: lesson.source });
+        }
+        window.setTimeout(() => {
+          dailyModalClose.focus({ preventScroll: true });
+        }, 0);
+      }
+
+      function closeDailyLesson() {
+        dailyModal.classList.add("hidden");
+        dailyModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        dailyLessonBtn.focus({ preventScroll: true });
+      }
+
+      async function loadDailyLesson() {
+        const fallbackDateKey = getKualaLumpurDateKey();
+        try {
+          const response = await fetch(`${dailyLessonPath}?v=${encodeURIComponent(fallbackDateKey)}`, {
+            cache: "no-store",
+          });
+          if (!response.ok) {
+            return buildDailyLesson(fallbackDateKey, "local");
+          }
+          const payload = await response.json();
+          if (payload && typeof payload.dateKey === "string" && payload.dateKey) {
+            if (payload.vocab && payload.cycle && payload.frame) {
+              return {
+                ...payload,
+                seedDateKey: payload.dateKey,
+              };
+            }
+            return buildDailyLesson(payload.dateKey, payload.source || "workflow");
+          }
+        } catch {
+          // Use the locally generated daily seed.
+        }
+        return buildDailyLesson(fallbackDateKey, "local");
+      }
+
+      async function initDailyLesson() {
+        const lesson = await loadDailyLesson();
+        const dailyState = loadDailyState();
+        renderDailyLesson(lesson);
+
+        if (dailyState.lastShown !== lesson.seedDateKey) {
+          window.setTimeout(() => openDailyLesson(lesson, true), 900);
+        }
+
+        dailyLessonBtn.addEventListener("click", () => openDailyLesson(lesson, false));
+
+        if (dailyModalBackdrop) {
+          dailyModalBackdrop.addEventListener("click", closeDailyLesson);
+        }
+        if (dailyModalClose) {
+          dailyModalClose.addEventListener("click", closeDailyLesson);
+        }
+        if (dailyLessonGotIt) {
+          dailyLessonGotIt.addEventListener("click", closeDailyLesson);
+        }
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !dailyModal.classList.contains("hidden")) {
+            closeDailyLesson();
+          }
+        });
       }
 
       function updateProgressSummary() {
@@ -1791,6 +2225,7 @@
       updateCheckmarks();
       applyFilters();
       setLanguage("both");
+      initDailyLesson();
     </script>
   </body>
 </html>
