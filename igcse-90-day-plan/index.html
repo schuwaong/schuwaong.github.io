@@ -1,0 +1,1796 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IGCSE 90-Day Plan | 90天复习计划</title>
+    <meta
+      name="description"
+      content="A bilingual 90-day IGCSE study planner with Chinese translations, vocabulary examples, command words, and a day-by-day revision route."
+    />
+    <style>
+      :root {
+        --bg: #f3f5f9;
+        --bg-soft: #eaf1ee;
+        --panel: rgba(255, 255, 255, 0.9);
+        --panel-strong: #ffffff;
+        --ink: #0e1b2d;
+        --muted: #5d6a80;
+        --line: rgba(14, 27, 45, 0.12);
+        --line-strong: rgba(14, 27, 45, 0.18);
+        --navy: #12233f;
+        --blue: #2357d1;
+        --teal: #0d8d7b;
+        --coral: #e85d5d;
+        --gold: #d89a29;
+        --mint: #d8f0e6;
+        --shadow: 0 16px 40px rgba(10, 18, 31, 0.08);
+        --radius: 8px;
+        --radius-sm: 6px;
+        --max: 1360px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background:
+          linear-gradient(180deg, #f6f7fb 0%, #eef4f9 38%, #f9fbf8 100%);
+      }
+
+      body[data-language="en"] .zh {
+        display: none !important;
+      }
+
+      body[data-language="zh"] .en {
+        display: none !important;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 22px;
+        border-bottom: 1px solid rgba(14, 27, 45, 0.08);
+        background: rgba(246, 248, 251, 0.9);
+        backdrop-filter: blur(16px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.85rem;
+      }
+
+      .toplinks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .toplinks a {
+        padding: 8px 12px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .toplinks a:hover {
+        border-color: var(--line-strong);
+        color: var(--ink);
+      }
+
+      .topmeta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .ghost-link {
+        padding: 9px 13px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 74vh;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(245, 247, 250, 0.96) 0%, rgba(245, 247, 250, 0.91) 33%, rgba(245, 247, 250, 0.58) 63%, rgba(245, 247, 250, 0.9) 100%),
+          linear-gradient(180deg, rgba(245, 247, 250, 0.06) 0%, rgba(245, 247, 250, 0.18) 100%);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 32px;
+        align-items: end;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 84px 22px 38px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--teal);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .hero h1 {
+        margin: 0;
+        max-width: 12ch;
+        font-size: 4.2rem;
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 18px 0 0;
+        font-size: 1.06rem;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      .hero-rail {
+        display: grid;
+        gap: 10px;
+        align-self: stretch;
+        padding: 4px 0 0;
+      }
+
+      .hero-chip {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-chip strong {
+        display: block;
+        font-size: 1.02rem;
+      }
+
+      .hero-chip span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-controls {
+        display: grid;
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .segmented {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .segmented button {
+        padding: 10px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.86);
+        cursor: pointer;
+      }
+
+      .segmented button.active {
+        border-color: transparent;
+        color: #fff;
+        background: var(--navy);
+      }
+
+      .searchbox {
+        display: grid;
+        gap: 8px;
+        max-width: 560px;
+      }
+
+      .searchbox label {
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .searchbox input {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--ink);
+      }
+
+      .band {
+        padding: 34px 22px;
+      }
+
+      .inner {
+        max-width: var(--max);
+        margin: 0 auto;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 18px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 2rem;
+        line-height: 1.05;
+      }
+
+      .section-head p {
+        max-width: 720px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .summary-grid,
+      .tools-grid,
+      .tips-grid,
+      .frames-grid,
+      .vocab-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .summary-card,
+      .tool-card,
+      .tip-card,
+      .frame-card,
+      .vocab-card,
+      .cycle-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-card {
+        padding: 16px;
+        min-height: 136px;
+      }
+
+      .summary-card .kicker {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .summary-card strong {
+        display: block;
+        font-size: 1.18rem;
+        margin-bottom: 6px;
+      }
+
+      .summary-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .band-slab {
+        margin-top: 26px;
+        padding: 18px;
+        border: 1px solid rgba(35, 87, 209, 0.14);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(232, 240, 255, 0.6));
+      }
+
+      .band-slab strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.02rem;
+      }
+
+      .band-slab p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .progress-row {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 14px;
+        align-items: center;
+        margin: 20px 0 16px;
+      }
+
+      .progress-meta {
+        min-width: 118px;
+        font-weight: 700;
+      }
+
+      .progress-bar {
+        height: 12px;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .progress-bar span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--teal), var(--blue));
+      }
+
+      .action-btn {
+        padding: 11px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .action-btn.primary {
+        border-color: transparent;
+        color: #fff;
+        background: var(--navy);
+      }
+
+      .phase-group {
+        margin-top: 18px;
+      }
+
+      .phase-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 12px;
+      }
+
+      .phase-head h3 {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+      }
+
+      .phase-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .phase-note {
+        min-width: 200px;
+        padding: 12px 14px;
+        border-left: 3px solid var(--blue);
+        border-radius: var(--radius-sm);
+        background: rgba(35, 87, 209, 0.06);
+      }
+
+      .phase-note strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .cycle-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .cycle-card {
+        padding: 16px;
+      }
+
+      .cycle-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 12px;
+      }
+
+      .cycle-head h4 {
+        margin: 4px 0 0;
+        font-size: 1.18rem;
+      }
+
+      .cycle-index,
+      .cycle-tag,
+      .badge,
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .cycle-index {
+        background: rgba(13, 141, 123, 0.12);
+        color: var(--teal);
+      }
+
+      .cycle-tag {
+        background: rgba(35, 87, 209, 0.1);
+        color: var(--blue);
+      }
+
+      .cycle-summary {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .focus-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .focus-chips span,
+      .category-btn {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--ink);
+      }
+
+      .day-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .day-card {
+        display: grid;
+        gap: 9px;
+        min-height: 168px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 248, 252, 0.96));
+      }
+
+      .day-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .day-top strong {
+        display: block;
+        font-size: 0.98rem;
+      }
+
+      .day-top span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .done-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .done-toggle input {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: var(--teal);
+      }
+
+      .day-card h5 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .day-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.92rem;
+      }
+
+      .day-example {
+        margin: 0;
+        padding-top: 8px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.12);
+        color: var(--ink);
+        line-height: 1.48;
+        font-size: 0.92rem;
+      }
+
+      .tool-card {
+        padding: 16px;
+      }
+
+      .tool-card strong,
+      .tip-card strong,
+      .frame-card strong,
+      .vocab-card strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .tool-card p,
+      .tip-card p,
+      .frame-card p,
+      .vocab-card p {
+        margin: 0;
+        line-height: 1.52;
+        color: var(--muted);
+      }
+
+      .vocab-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: end;
+        margin-bottom: 14px;
+      }
+
+      .category-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .category-btn {
+        cursor: pointer;
+        color: var(--muted);
+      }
+
+      .category-btn.active {
+        border-color: transparent;
+        color: #fff;
+        background: var(--blue);
+      }
+
+      .vocab-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .vocab-card {
+        padding: 14px;
+      }
+
+      .vocab-card .term {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .vocab-card .word {
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .vocab-card .cn {
+        color: var(--teal);
+        font-weight: 700;
+      }
+
+      .vocab-card .example {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.12);
+      }
+
+      .frames-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .frame-card {
+        padding: 14px;
+      }
+
+      .frame-card .slot {
+        display: inline-flex;
+        margin-bottom: 10px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: rgba(13, 141, 123, 0.1);
+        color: var(--teal);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .tips-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .tip-card {
+        padding: 14px;
+      }
+
+      .tip-card .num {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 1100px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-grid,
+        .vocab-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .tips-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .topbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .topmeta {
+          justify-content: space-between;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .hero-inner {
+          padding-top: 38px;
+        }
+
+        .hero h1 {
+          max-width: none;
+          font-size: 2.9rem;
+        }
+
+        .section-head,
+        .phase-head,
+        .progress-row,
+        .vocab-head {
+          grid-template-columns: 1fr;
+          display: grid;
+          align-items: start;
+        }
+
+        .summary-grid,
+        .vocab-grid,
+        .frames-grid,
+        .day-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body data-phase="all" data-language="both">
+    <header class="topbar">
+      <a class="brand" href="#top">
+        <span class="brand-mark">IG</span>
+        <span>IGCSE 90-Day Plan</span>
+      </a>
+      <nav class="toplinks" aria-label="Page sections">
+        <a href="#plan">Plan</a>
+        <a href="#vocab">Vocabulary</a>
+        <a href="#frames">Sentence frames</a>
+        <a href="#tips">Chinese learner tips</a>
+      </nav>
+      <div class="topmeta">
+        <a class="ghost-link" href="https://schuwaong.github.io/" target="_blank" rel="noreferrer">Site root</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-media"
+          src="../ic-educate/assets/lesson-ops-hero-DCoDSaqB.png"
+          alt="Study desk with a laptop, notebook, and planner board"
+        />
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <div>
+            <p class="eyebrow">Cambridge IGCSE study planner | 剑桥 IGCSE 复习计划</p>
+            <h1 id="hero-title">IGCSE 90-Day Plan</h1>
+            <p class="lede">
+              A bilingual revision page for Chinese-speaking students. Read the English,
+              check the Chinese, then practice with examples, vocabulary, and a repeatable
+              90-day routine that turns weak topics into marks.
+            </p>
+
+            <div class="hero-controls">
+              <div class="segmented" role="tablist" aria-label="Phase filter">
+                <button class="active" type="button" data-phase-btn="all">All</button>
+                <button type="button" data-phase-btn="1">Phase 1</button>
+                <button type="button" data-phase-btn="2">Phase 2</button>
+                <button type="button" data-phase-btn="3">Phase 3</button>
+              </div>
+
+              <div class="segmented" role="tablist" aria-label="Language filter">
+                <button class="active" type="button" data-lang-btn="both">Both</button>
+                <button type="button" data-lang-btn="en">English</button>
+                <button type="button" data-lang-btn="zh">中文</button>
+              </div>
+
+              <label class="searchbox" for="searchInput">
+                <span>Find a word, day, or example / 搜索词汇、日程或例句</span>
+                <input id="searchInput" type="search" placeholder="Try: explain, ratio, evidence, write" />
+              </label>
+            </div>
+          </div>
+
+          <div class="hero-rail" aria-label="Quick summary">
+            <div class="hero-chip">
+              <div>
+                <strong>90 days</strong>
+                <span>15 study cycles / 15 个学习循环</span>
+              </div>
+              <span>01</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Bilingual</strong>
+                <span>English + Simplified Chinese</span>
+              </div>
+              <span>02</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Vocabulary bank</strong>
+                <span>Words, command words, and examples</span>
+              </div>
+              <span>03</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Progress tracking</strong>
+                <span>Mark each day as done</span>
+              </div>
+              <span>04</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="overview">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">How to use it / 使用方法</p>
+              <h2>Simple enough to keep using every day.</h2>
+            </div>
+            <p>
+              The plan uses 3 phases and 15 six-day cycles. Every cycle repeats the same
+              learning rhythm: map the topic, learn words, copy a model, practice alone,
+              do one timed set, then review and teach it back.
+            </p>
+          </div>
+
+          <div class="summary-grid">
+            <article class="summary-card">
+              <span class="kicker">Step 1 / 第 1 步</span>
+              <strong>Read English first, then Chinese.</strong>
+              <p>
+                Start with the English line, check the translation, and then speak the idea
+                back without looking.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 2 / 第 2 步</span>
+              <strong>Build a mistake log.</strong>
+              <p>
+                Write the word, the meaning, the example, and the mistake. This is how weak
+                topics become repeatable marks.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 3 / 第 3 步</span>
+              <strong>Use short answers first.</strong>
+              <p>
+                If you are stuck, write the simplest correct English. Short and clear beats
+                blank.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 4 / 第 4 步</span>
+              <strong>Review every sixth day.</strong>
+              <p>
+                The plan is built around a repeatable six-day loop so you can revise, test,
+                and recover without guessing what to do next.
+              </p>
+            </article>
+          </div>
+
+          <div class="band-slab">
+            <strong>Study rule / 学习规则</strong>
+            <p>
+              Learn one thing, practice it once, mark it once, and review it once. That small
+              loop is enough to change the way a revision day feels.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="plan">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">90-day route / 90天路线</p>
+              <h2>Three phases. Fifteen cycles. Ninety days.</h2>
+            </div>
+            <p>
+              Phase 1 builds the base, Phase 2 grows skill, and Phase 3 locks in exam mode.
+              Keep the same routine, and let the topic change instead of the method.
+            </p>
+          </div>
+
+          <div class="progress-row">
+            <div class="progress-meta">
+              <span id="doneCount">0</span> / 90 done
+            </div>
+            <div class="progress-bar" aria-label="Progress">
+              <span id="progressFill"></span>
+            </div>
+            <button class="action-btn" id="clearProgress" type="button">Clear progress</button>
+          </div>
+
+          <div class="phase-group" data-phase-group="1">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 1 / 第 1 阶段</p>
+                <h3>Build the base / 打基础</h3>
+                <p>
+                  Days 1-30 are for mapping the exam, learning the command words, and
+                  creating a notebook that makes revision cleaner.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Know what the papers want before you chase speed.</span>
+                <span class="zh">先看懂题目和试卷要求，再去追速度。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase1"></div>
+          </div>
+
+          <div class="phase-group" data-phase-group="2">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 2 / 第 2 阶段</p>
+                <h3>Build skill / 提升能力</h3>
+                <p>
+                  Days 31-60 move from notes to response patterns: explain clearly, compare
+                  properly, and use better examples.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Turn vocabulary into answers and answers into marks.</span>
+                <span class="zh">把词汇变成答案，把答案变成分数。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase2"></div>
+          </div>
+
+          <div class="phase-group" data-phase-group="3">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 3 / 第 3 阶段</p>
+                <h3>Exam mode / 考试模式</h3>
+                <p>
+                  Days 61-90 are for timed papers, weak-topic repair, and calm review before
+                  the real exam day.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Stay calm, check the command word, and finish strong.</span>
+                <span class="zh">保持冷静，先看指令词，稳稳做完。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase3"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="vocab">
+        <div class="inner">
+          <div class="vocab-head">
+            <div>
+              <p class="eyebrow">Vocabulary bank / 小词汇库</p>
+              <h2>Words, translations, and example lines.</h2>
+            </div>
+            <p>
+              Search a word, then read the translation and the example sentence. This is the
+              fastest way to build usable exam language.
+            </p>
+          </div>
+
+          <div class="category-row" id="categoryRow" aria-label="Vocabulary categories"></div>
+          <div class="vocab-grid" id="vocabGrid"></div>
+        </div>
+      </section>
+
+      <section class="band" id="frames">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Sentence frames / 句型框架</p>
+              <h2>Ready-made lines for answers.</h2>
+            </div>
+            <p>
+              Use these when you do not know how to start. They help with essays, analysis,
+              science explanations, and short answers.
+            </p>
+          </div>
+          <div class="frames-grid" id="framesGrid"></div>
+        </div>
+      </section>
+
+      <section class="band" id="tips">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Chinese learner tips / 中文学习者技巧</p>
+              <h2>Small habits that make the page easier to use.</h2>
+            </div>
+            <p>
+              These are the little moves that keep Chinese-speaking students from getting
+              stuck when the English gets heavy.
+            </p>
+          </div>
+          <div class="tips-grid" id="tipsGrid"></div>
+          <div class="footer-note">
+            <strong>Final note / 最后说明</strong>
+            <span class="en">
+              This page is a general IGCSE revision planner. If your subject has a different
+              paper structure, keep the same routine and swap the topic content.
+            </span>
+            <span class="zh">
+              这个页面是通用的 IGCSE 复习计划。如果你的科目试卷结构不同，只要保留同样的
+             复习节奏，再替换具体内容就可以。
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const dayTemplates = [
+        {
+          nameEn: "Map",
+          nameZh: "诊断",
+          titleEn: "Map the topic",
+          titleZh: "先画主题地图",
+          build: (cycle) => ({
+            taskEn: `Skim one question or one short passage from ${cycle.titleEn.toLowerCase()} and circle the words you do not know yet.`,
+            taskZh: `先快速看一题或一段与${cycle.titleZh}相关的材料，把不认识的词圈出来。`,
+            exampleEn: `Add 5 unknown words to your mistake log and translate each one into Chinese.`,
+            exampleZh: `把 5 个不认识的词写进错题本，每个词都配一个中文意思。`,
+          }),
+        },
+        {
+          nameEn: "Words",
+          nameZh: "词汇",
+          titleEn: "Build the word bank",
+          titleZh: "建立词汇库",
+          build: (cycle) => ({
+            taskEn: `Learn 8 to 10 focus words from ${cycle.titleEn.toLowerCase()} and write one short example for each.`,
+            taskZh: `学习 8 到 10 个和${cycle.titleZh}有关的关键词，并给每个词写一个简短例句。`,
+            exampleEn: `Say the word, the translation, and the example out loud once.`,
+            exampleZh: `把单词、中文意思和例句大声读一遍。`,
+          }),
+        },
+        {
+          nameEn: "Model",
+          nameZh: "范例",
+          titleEn: "Copy a model answer",
+          titleZh: "抄写并分析范例",
+          build: (cycle) => ({
+            taskEn: `Copy one good answer or one worked solution related to ${cycle.titleEn.toLowerCase()}, then underline the structure.`,
+            taskZh: `抄写一份与${cycle.titleZh}相关的好答案或范例解法，并标出它的结构。`,
+            exampleEn: `Label the opening, evidence, and conclusion in English and Chinese.`,
+            exampleZh: `用英语和中文分别标出开头、证据和结论。`,
+          }),
+        },
+        {
+          nameEn: "Practice",
+          nameZh: "练习",
+          titleEn: "Work alone",
+          titleZh: "独立练习",
+          build: (cycle) => ({
+            taskEn: `Answer 3 short questions from ${cycle.titleEn.toLowerCase()} without looking at notes first.`,
+            taskZh: `先不看笔记，独立完成 3 道和${cycle.titleZh}有关的短题。`,
+            exampleEn: `If you miss a point, write the correct version beside it.`,
+            exampleZh: `如果答错了，把正确答案写在旁边。`,
+          }),
+        },
+        {
+          nameEn: "Timed",
+          nameZh: "限时",
+          titleEn: "Do one timed set",
+          titleZh: "完成限时练习",
+          build: (cycle) => ({
+            taskEn: `Set a timer for 10 to 20 minutes and finish one timed set on ${cycle.titleEn.toLowerCase()}.`,
+            taskZh: `设 10 到 20 分钟的计时器，完成一组${cycle.titleZh}的限时练习。`,
+            exampleEn: `Check the command word first, then pace your answer.`,
+            exampleZh: `先看指令词，再安排答题速度。`,
+          }),
+        },
+        {
+          nameEn: "Review",
+          nameZh: "复习",
+          titleEn: "Review and teach back",
+          titleZh: "复习并讲给别人听",
+          build: (cycle) => ({
+            taskEn: `Mark your work, fix the weak points, and explain the key idea from ${cycle.titleEn.toLowerCase()} in simple English.`,
+            taskZh: `批改自己的答案，修正薄弱点，再用简单英文讲一遍${cycle.titleZh}的核心意思。`,
+            exampleEn: `If you can teach it in 30 seconds, you probably know it well.`,
+            exampleZh: `如果你能在 30 秒内讲清楚，说明你已经比较会了。`,
+          }),
+        },
+      ];
+
+      const cycleData = [
+        {
+          number: 1,
+          phase: 1,
+          titleEn: "Exam map and baseline",
+          titleZh: "考试地图与诊断",
+          summaryEn: "Know the papers, subjects, and weak spots before you chase speed.",
+          summaryZh: "先搞清楚科目、题型和弱项，再开始追速度。",
+          focusWords: ["diagnostic / 诊断", "planner / 计划表", "weak topic / 弱项", "target / 目标"],
+        },
+        {
+          number: 2,
+          phase: 1,
+          titleEn: "Command words and notebook",
+          titleZh: "指令词与笔记本",
+          summaryEn: "Train yourself to notice what the question wants before you answer.",
+          summaryZh: "先看懂题目到底要你做什么，再开始写答案。",
+          focusWords: ["define / 下定义", "describe / 描述", "explain / 解释", "compare / 比较"],
+        },
+        {
+          number: 3,
+          phase: 1,
+          titleEn: "Reading and annotation",
+          titleZh: "阅读与标注",
+          summaryEn: "Skim, underline, and translate important bits without translating everything.",
+          summaryZh: "先扫读、划线、翻译重点，不要每个词都翻。",
+          focusWords: ["skim / 扫读", "underline / 划线", "inference / 推断", "context / 语境"],
+        },
+        {
+          number: 4,
+          phase: 1,
+          titleEn: "Paragraphs and short answers",
+          titleZh: "段落与短答",
+          summaryEn: "Build clean answers with one idea, one evidence line, and one short conclusion.",
+          summaryZh: "每个答案只写一个中心、一个证据和一个简短结论。",
+          focusWords: ["point / 要点", "evidence / 证据", "conclusion / 结论", "because / 因为"],
+        },
+        {
+          number: 5,
+          phase: 1,
+          titleEn: "Vocabulary and translation",
+          titleZh: "词汇与翻译",
+          summaryEn: "Grow a usable word bank for subjects, instructions, and exam answers.",
+          summaryZh: "建立能真正拿来用的词汇库，包含科目词、指令词和答题词。",
+          focusWords: ["vocabulary / 词汇", "meaning / 含义", "sentence / 句子", "example / 例句"],
+        },
+        {
+          number: 6,
+          phase: 2,
+          titleEn: "Maths language and units",
+          titleZh: "数学语言与单位",
+          summaryEn: "Make sure numbers, units, and method words are clear and accurate.",
+          summaryZh: "数字、单位和步骤词都要准确清楚。",
+          focusWords: ["ratio / 比例", "percentage / 百分比", "unit / 单位", "estimate / 估算"],
+        },
+        {
+          number: 7,
+          phase: 2,
+          titleEn: "Science language and methods",
+          titleZh: "科学语言与方法",
+          summaryEn: "Learn how to describe experiments, variables, and conclusions clearly.",
+          summaryZh: "学会清楚描述实验、变量和结论。",
+          focusWords: ["variable / 变量", "method / 方法", "observation / 观察", "conclusion / 结论"],
+        },
+        {
+          number: 8,
+          phase: 2,
+          titleEn: "Graphs, tables, and data",
+          titleZh: "图表、表格与数据",
+          summaryEn: "Talk about trends, comparisons, and changes instead of only naming the graph.",
+          summaryZh: "不要只说图表名称，要会说趋势、比较和变化。",
+          focusWords: ["trend / 趋势", "increase / 增加", "decrease / 减少", "compare / 比较"],
+        },
+        {
+          number: 9,
+          phase: 2,
+          titleEn: "Explain, compare, justify",
+          titleZh: "解释、比较与论证",
+          summaryEn: "Use linking words to make your logic visible in every answer.",
+          summaryZh: "用连接词把逻辑写出来，让答案看得见思路。",
+          focusWords: ["therefore / 因此", "however / 然而", "similar / 相似", "justify / 论证"],
+        },
+        {
+          number: 10,
+          phase: 2,
+          titleEn: "Past paper routine",
+          titleZh: "往年题训练",
+          summaryEn: "Take one paper, mark it, and repair the mistakes immediately.",
+          summaryZh: "做一套题，立刻批改，然后马上修错。",
+          focusWords: ["paper / 试卷", "mark scheme / 评分标准", "correction / 更正", "timed / 限时"],
+        },
+        {
+          number: 11,
+          phase: 3,
+          titleEn: "Weak-topic repair",
+          titleZh: "弱项修补",
+          summaryEn: "Attack the top three weak topics with short, focused practice.",
+          summaryZh: "只盯住最弱的三个主题，做短而集中的训练。",
+          focusWords: ["repair / 修补", "weakness / 弱项", "review / 复习", "progress / 进步"],
+        },
+        {
+          number: 12,
+          phase: 3,
+          titleEn: "Timed writing and long response",
+          titleZh: "限时写作与长答",
+          summaryEn: "Finish longer answers with structure, evidence, and calm pacing.",
+          summaryZh: "长答案要有结构、有证据，而且要稳住节奏。",
+          focusWords: ["structure / 结构", "evidence / 证据", "pace / 节奏", "finish / 完成"],
+        },
+        {
+          number: 13,
+          phase: 3,
+          titleEn: "Mixed paper practice",
+          titleZh: "混合试卷练习",
+          summaryEn: "Switch between subjects so your brain learns to change gears.",
+          summaryZh: "在不同科目之间切换，让大脑学会换挡。",
+          focusWords: ["mixed / 混合", "switch / 切换", "focus / 专注", "gear / 档位"],
+        },
+        {
+          number: 14,
+          phase: 3,
+          titleEn: "Full exam simulation",
+          titleZh: "整套模拟考试",
+          summaryEn: "Do one full paper under real timing and real silence.",
+          summaryZh: "像正式考试一样，做一整套并严格计时。",
+          focusWords: ["simulation / 模拟", "full paper / 整套卷", "silence / 安静", "deadline / 截止时间"],
+        },
+        {
+          number: 15,
+          phase: 3,
+          titleEn: "Final review and calm",
+          titleZh: "最后复习与稳定心态",
+          summaryEn: "Light review, sleep well, and keep the answers simple on exam day.",
+          summaryZh: "轻复习、睡好觉，考试当天把答案写得简单清楚。",
+          focusWords: ["final / 最后", "calm / 冷静", "simple / 简单", "confidence / 自信"],
+        },
+      ];
+
+      const vocabItems = [
+        { category: "command", term: "define", zh: "下定义", exampleEn: "Define evaporation.", exampleZh: "给 evaporation 下定义。" },
+        { category: "command", term: "describe", zh: "描述", exampleEn: "Describe the trend in the graph.", exampleZh: "描述图表里的趋势。" },
+        { category: "command", term: "explain", zh: "解释", exampleEn: "Explain why the result changes.", exampleZh: "解释结果为什么会变化。" },
+        { category: "command", term: "compare", zh: "比较", exampleEn: "Compare method A and method B.", exampleZh: "比较方法 A 和方法 B。" },
+        { category: "command", term: "analyse", zh: "分析", exampleEn: "Analyse the passage for key ideas.", exampleZh: "分析文章中的关键信息。" },
+        { category: "command", term: "evaluate", zh: "评价", exampleEn: "Evaluate which option is better.", exampleZh: "评价哪个选项更好。" },
+        { category: "command", term: "justify", zh: "论证", exampleEn: "Justify your answer with evidence.", exampleZh: "用证据论证你的答案。" },
+        { category: "command", term: "infer", zh: "推断", exampleEn: "Infer the meaning from the context.", exampleZh: "根据语境推断意思。" },
+        { category: "command", term: "outline", zh: "概述", exampleEn: "Outline the main steps.", exampleZh: "概述主要步骤。" },
+        { category: "command", term: "suggest", zh: "建议", exampleEn: "Suggest one improvement.", exampleZh: "提出一个改进建议。" },
+        { category: "connect", term: "because", zh: "因为", exampleEn: "I chose it because it is clearer.", exampleZh: "我选它，因为它更清楚。" },
+        { category: "connect", term: "therefore", zh: "因此", exampleEn: "The result is therefore reliable.", exampleZh: "因此这个结果是可靠的。" },
+        { category: "connect", term: "however", zh: "然而", exampleEn: "However, the second method is slower.", exampleZh: "然而，第二种方法更慢。" },
+        { category: "connect", term: "although", zh: "虽然", exampleEn: "Although the idea is simple, it is useful.", exampleZh: "虽然这个想法简单，但很有用。" },
+        { category: "connect", term: "in contrast", zh: "相比之下", exampleEn: "In contrast, the first answer is shorter.", exampleZh: "相比之下，第一个答案更短。" },
+        { category: "connect", term: "as a result", zh: "结果", exampleEn: "As a result, the score improved.", exampleZh: "结果，分数提高了。" },
+        { category: "connect", term: "for example", zh: "例如", exampleEn: "For example, one reason is time pressure.", exampleZh: "例如，一个原因是时间压力。" },
+        { category: "connect", term: "moreover", zh: "此外", exampleEn: "Moreover, the data is easy to compare.", exampleZh: "此外，这些数据也容易比较。" },
+        { category: "connect", term: "meanwhile", zh: "同时", exampleEn: "Meanwhile, the other group stayed steady.", exampleZh: "同时，另一组保持稳定。" },
+        { category: "connect", term: "similarly", zh: "同样地", exampleEn: "Similarly, the second graph shows growth.", exampleZh: "同样地，第二张图也显示增长。" },
+        { category: "study", term: "revision", zh: "复习", exampleEn: "My revision starts with short daily notes.", exampleZh: "我的复习从每天的短笔记开始。" },
+        { category: "study", term: "mistake log", zh: "错题本", exampleEn: "Write every error in your mistake log.", exampleZh: "把每一个错误写进错题本。" },
+        { category: "study", term: "flashcard", zh: "记忆卡", exampleEn: "A flashcard works well for command words.", exampleZh: "记忆卡很适合练指令词。" },
+        { category: "study", term: "weak topic", zh: "弱项", exampleEn: "This is my weakest topic right now.", exampleZh: "这是我现在最弱的一项。" },
+        { category: "study", term: "target mark", zh: "目标分", exampleEn: "Set a target mark for each paper.", exampleZh: "给每一份试卷设一个目标分。" },
+        { category: "study", term: "progress", zh: "进步", exampleEn: "Small progress is still progress.", exampleZh: "一点点进步也是进步。" },
+        { category: "study", term: "accuracy", zh: "准确率", exampleEn: "Accuracy matters more than speed at first.", exampleZh: "一开始准确率比速度更重要。" },
+        { category: "study", term: "confidence", zh: "自信", exampleEn: "Confidence grows when practice is repeated.", exampleZh: "练得多了，自信就会增长。" },
+        { category: "study", term: "planner", zh: "计划表", exampleEn: "Use the planner before you start revising.", exampleZh: "先看计划表，再开始复习。" },
+        { category: "study", term: "timed paper", zh: "限时试卷", exampleEn: "Do one timed paper every few days.", exampleZh: "每隔几天做一份限时试卷。" },
+        { category: "maths", term: "ratio", zh: "比例", exampleEn: "The ratio is written as 3:2.", exampleZh: "比例写成 3:2。" },
+        { category: "maths", term: "percentage", zh: "百分比", exampleEn: "Convert the fraction into a percentage.", exampleZh: "把分数换成百分比。" },
+        { category: "maths", term: "mean", zh: "平均数", exampleEn: "Find the mean of the data set.", exampleZh: "求这组数据的平均数。" },
+        { category: "maths", term: "estimate", zh: "估算", exampleEn: "Estimate the answer before calculating.", exampleZh: "先估算，再计算。" },
+        { category: "maths", term: "unit", zh: "单位", exampleEn: "Always check the unit in the final answer.", exampleZh: "最后答案一定要检查单位。" },
+        { category: "maths", term: "factor", zh: "因数", exampleEn: "List the factors of 24.", exampleZh: "列出 24 的因数。" },
+        { category: "maths", term: "product", zh: "乘积", exampleEn: "The product of 4 and 5 is 20.", exampleZh: "4 和 5 的乘积是 20。" },
+        { category: "maths", term: "difference", zh: "差", exampleEn: "Find the difference between the two numbers.", exampleZh: "找出这两个数的差。" },
+        { category: "maths", term: "simplify", zh: "化简", exampleEn: "Simplify the expression first.", exampleZh: "先把表达式化简。" },
+        { category: "maths", term: "round", zh: "四舍五入", exampleEn: "Round the number to 2 decimal places.", exampleZh: "把数字四舍五入到小数点后两位。" },
+        { category: "science", term: "variable", zh: "变量", exampleEn: "Change one variable at a time.", exampleZh: "一次只改变一个变量。" },
+        { category: "science", term: "method", zh: "方法", exampleEn: "Describe the method step by step.", exampleZh: "按步骤描述方法。" },
+        { category: "science", term: "observation", zh: "观察", exampleEn: "Record your observation in a table.", exampleZh: "把观察结果记录在表格里。" },
+        { category: "science", term: "conclusion", zh: "结论", exampleEn: "Write a conclusion based on the evidence.", exampleZh: "根据证据写结论。" },
+        { category: "science", term: "reliable", zh: "可靠的", exampleEn: "The result is more reliable with repeats.", exampleZh: "重复实验后结果更可靠。" },
+        { category: "science", term: "accurate", zh: "准确的", exampleEn: "Use accurate measurements.", exampleZh: "使用准确的测量。" },
+        { category: "science", term: "hypothesis", zh: "假设", exampleEn: "State a clear hypothesis first.", exampleZh: "先写出清楚的假设。" },
+        { category: "science", term: "trend", zh: "趋势", exampleEn: "The trend shows a steady increase.", exampleZh: "趋势显示稳定上升。" },
+        { category: "science", term: "predict", zh: "预测", exampleEn: "Predict what will happen next.", exampleZh: "预测接下来会发生什么。" },
+        { category: "science", term: "result", zh: "结果", exampleEn: "The result supports the idea.", exampleZh: "结果支持这个观点。" },
+      ];
+
+      const frames = [
+        {
+          slot: "Start strong / 开头",
+          en: "The main idea is...",
+          zh: "主旨是...",
+          useEn: "Use this in essays or short explanations.",
+          useZh: "适合写作文或简答题。",
+        },
+        {
+          slot: "Evidence / 证据",
+          en: "A clear example is...",
+          zh: "一个清楚的例子是...",
+          useEn: "Use after you state a point.",
+          useZh: "先写观点，再写例子。",
+        },
+        {
+          slot: "Reason / 原因",
+          en: "This is because...",
+          zh: "这是因为...",
+          useEn: "Useful in science, history, and analysis.",
+          useZh: "科学、历史、分析题都能用。",
+        },
+        {
+          slot: "Contrast / 对比",
+          en: "In contrast, ...",
+          zh: "相比之下...",
+          useEn: "Use when comparing two things.",
+          useZh: "比较两个对象时使用。",
+        },
+        {
+          slot: "Result / 结果",
+          en: "As a result, ...",
+          zh: "因此，...",
+          useEn: "Use after showing cause and effect.",
+          useZh: "写因果关系时使用。",
+        },
+        {
+          slot: "Science / 科学",
+          en: "The result is reliable because...",
+          zh: "这个结果可靠，因为...",
+          useEn: "Good for experiments and methods.",
+          useZh: "实验题和方法题很适合。",
+        },
+        {
+          slot: "Maths / 数学",
+          en: "My calculation is...",
+          zh: "我的计算是...",
+          useEn: "Use to show your working clearly.",
+          useZh: "把计算步骤写清楚。",
+        },
+        {
+          slot: "Data / 数据",
+          en: "The trend shows...",
+          zh: "趋势显示...",
+          useEn: "Use for charts and tables.",
+          useZh: "图表题和表格题常用。",
+        },
+        {
+          slot: "Opinion / 观点",
+          en: "I agree because...",
+          zh: "我同意，因为...",
+          useEn: "Useful in discussion and evaluation.",
+          useZh: "讨论题和评价题很有用。",
+        },
+        {
+          slot: "Improvement / 改进",
+          en: "To improve this answer, I should...",
+          zh: "要改进这道题，我应该...",
+          useEn: "Use in self-review after marking.",
+          useZh: "批改后自我修正时使用。",
+        },
+        {
+          slot: "Compare / 比较",
+          en: "Both ideas are similar because...",
+          zh: "两个观点相似，因为...",
+          useEn: "Use when the question asks for comparison.",
+          useZh: "比较题很适合。",
+        },
+        {
+          slot: "Close / 结尾",
+          en: "My conclusion is...",
+          zh: "我的结论是...",
+          useEn: "Use at the end of an answer.",
+          useZh: "写在答案最后。",
+        },
+      ];
+
+      const tips = [
+        {
+          en: "Read the command word first.",
+          zh: "先看指令词。",
+          detailEn: "It tells you whether you should define, explain, compare, or evaluate.",
+          detailZh: "它会告诉你要下定义、解释、比较还是评价。",
+        },
+        {
+          en: "Translate once, then answer in English.",
+          zh: "先翻译一次，再用英文回答。",
+          detailEn: "Do not get stuck translating every single word.",
+          detailZh: "不要卡在每一个单词上。",
+        },
+        {
+          en: "Use a mistake log.",
+          zh: "用错题本。",
+          detailEn: "Write the wrong version, the corrected version, and one Chinese note.",
+          detailZh: "写错的版本、正确版本和中文备注。",
+        },
+        {
+          en: "Make short answers before long ones.",
+          zh: "先写短答案，再写长答案。",
+          detailEn: "A simple correct answer is better than a blank page.",
+          detailZh: "简单正确的答案，永远比空白卷子好。",
+        },
+        {
+          en: "Learn words with examples.",
+          zh: "单词要配例句。",
+          detailEn: "A word is easier to remember when you see it used in a sentence.",
+          detailZh: "词放进句子里更容易记住。",
+        },
+        {
+          en: "Review after every timed set.",
+          zh: "每次限时练习后都要复习。",
+          detailEn: "Mark the paper, fix the weak points, and try the same type again later.",
+          detailZh: "批改卷子，修正弱点，过一段时间再练同类题。",
+        },
+      ];
+
+      const planRoot = document.getElementById("phase1");
+      const planRoot2 = document.getElementById("phase2");
+      const planRoot3 = document.getElementById("phase3");
+      const vocabGrid = document.getElementById("vocabGrid");
+      const framesGrid = document.getElementById("framesGrid");
+      const tipsGrid = document.getElementById("tipsGrid");
+      const searchInput = document.getElementById("searchInput");
+      const categoryRow = document.getElementById("categoryRow");
+      const doneCount = document.getElementById("doneCount");
+      const progressFill = document.getElementById("progressFill");
+      const clearProgress = document.getElementById("clearProgress");
+      const phaseButtons = document.querySelectorAll("[data-phase-btn]");
+      const langButtons = document.querySelectorAll("[data-lang-btn]");
+      const storageKey = "igcse-90-progress";
+
+      const phaseMeta = {
+        1: { container: planRoot, label: "Phase 1" },
+        2: { container: planRoot2, label: "Phase 2" },
+        3: { container: planRoot3, label: "Phase 3" },
+      };
+
+      const categories = ["all", "command", "connect", "study", "maths", "science"];
+      let activePhase = "all";
+      let activeLang = "both";
+      let activeCategory = "all";
+      let progressSet = loadProgress();
+
+      function loadProgress() {
+        try {
+          return new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+        } catch {
+          return new Set();
+        }
+      }
+
+      function saveProgress() {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify([...progressSet]));
+        } catch {
+          // No-op when storage is not available.
+        }
+      }
+
+      function updateProgressSummary() {
+        const count = progressSet.size;
+        doneCount.textContent = String(count);
+        progressFill.style.width = `${(count / 90) * 100}%`;
+      }
+
+      function phaseLabel(phase) {
+        return phase === 1 ? "Phase 1" : phase === 2 ? "Phase 2" : "Phase 3";
+      }
+
+      function cycleSearchText(cycle) {
+        return [
+          cycle.titleEn,
+          cycle.titleZh,
+          cycle.summaryEn,
+          cycle.summaryZh,
+          cycle.focusWords.join(" "),
+        ]
+          .join(" ")
+          .toLowerCase();
+      }
+
+      function dayCardHtml(dayNumber, cycle, template) {
+        const built = template.build(cycle);
+        const search = [
+          cycle.titleEn,
+          cycle.titleZh,
+          template.titleEn,
+          template.titleZh,
+          template.nameEn,
+          template.nameZh,
+          built.taskEn,
+          built.taskZh,
+          built.exampleEn,
+          built.exampleZh,
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return `
+          <article class="day-card" data-day="${dayNumber}" data-search="${search}">
+            <div class="day-top">
+              <div>
+                <strong>Day ${dayNumber}</strong>
+                <span>${template.titleEn} / ${template.titleZh}</span>
+              </div>
+              <label class="done-toggle">
+                <input type="checkbox" data-progress-day="${dayNumber}" />
+                <span>Done</span>
+              </label>
+            </div>
+            <h5 class="en">${template.titleEn}</h5>
+            <h5 class="zh">${template.titleZh}</h5>
+            <p class="day-copy en">${built.taskEn}</p>
+            <p class="day-copy zh">${built.taskZh}</p>
+            <p class="day-example en">${built.exampleEn}</p>
+            <p class="day-example zh">${built.exampleZh}</p>
+          </article>
+        `;
+      }
+
+      function cycleCardHtml(cycle, indexInPhase) {
+        const dayStart = (cycle.number - 1) * 6 + 1;
+        const dayTemplateHtml = dayTemplates
+          .map((template, index) => dayCardHtml(dayStart + index, cycle, template))
+          .join("");
+        const search = cycleSearchText(cycle);
+        const chips = cycle.focusWords.map((word) => `<span>${word}</span>`).join("");
+
+        return `
+          <article class="cycle-card" data-search="${search}" data-phase="${cycle.phase}">
+            <div class="cycle-head">
+              <div>
+                <span class="cycle-index">Cycle ${cycle.number}</span>
+                <h4 class="en">${cycle.titleEn}</h4>
+                <h4 class="zh">${cycle.titleZh}</h4>
+              </div>
+              <span class="cycle-tag">${phaseLabel(cycle.phase)}</span>
+            </div>
+            <p class="cycle-summary en">${cycle.summaryEn}</p>
+            <p class="cycle-summary zh">${cycle.summaryZh}</p>
+            <div class="focus-chips" aria-label="Focus words">${chips}</div>
+            <div class="day-grid">${dayTemplateHtml}</div>
+          </article>
+        `;
+      }
+
+      function renderPlan() {
+        const phase1 = cycleData.slice(0, 5).map(cycleCardHtml).join("");
+        const phase2 = cycleData.slice(5, 10).map(cycleCardHtml).join("");
+        const phase3 = cycleData.slice(10, 15).map(cycleCardHtml).join("");
+        planRoot.innerHTML = phase1;
+        planRoot2.innerHTML = phase2;
+        planRoot3.innerHTML = phase3;
+      }
+
+      function renderVocab() {
+        vocabGrid.innerHTML = vocabItems
+          .map((item) => {
+            const search = [item.term, item.zh, item.exampleEn, item.exampleZh, item.category]
+              .join(" ")
+              .toLowerCase();
+            const categoryLabel =
+              item.category === "command"
+                ? "Command words"
+                : item.category === "connect"
+                  ? "Connectors"
+                  : item.category === "study"
+                    ? "Study words"
+                    : item.category === "maths"
+                      ? "Maths"
+                      : "Science";
+
+            return `
+              <article class="vocab-card" data-category="${item.category}" data-search="${search}">
+                <div class="term">
+                  <div>
+                    <strong class="word">${item.term}</strong>
+                    <span class="cn">${item.zh}</span>
+                  </div>
+                  <span class="tag">${categoryLabel}</span>
+                </div>
+                <p class="en">${item.exampleEn}</p>
+                <p class="zh">${item.exampleZh}</p>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderFrames() {
+        framesGrid.innerHTML = frames
+          .map(
+            (item) => `
+              <article class="frame-card">
+                <span class="slot">${item.slot}</span>
+                <strong class="en">${item.en}</strong>
+                <strong class="zh">${item.zh}</strong>
+                <p class="en">${item.useEn}</p>
+                <p class="zh">${item.useZh}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderTips() {
+        tipsGrid.innerHTML = tips
+          .map(
+            (tip, index) => `
+              <article class="tip-card">
+                <span class="num">${index + 1}</span>
+                <strong class="en">${tip.en}</strong>
+                <strong class="zh">${tip.zh}</strong>
+                <p class="en">${tip.detailEn}</p>
+                <p class="zh">${tip.detailZh}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function updateCheckmarks() {
+        document.querySelectorAll("[data-progress-day]").forEach((checkbox) => {
+          const day = Number(checkbox.dataset.progressDay);
+          checkbox.checked = progressSet.has(day);
+        });
+        updateProgressSummary();
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        document.querySelectorAll(".phase-group").forEach((group) => {
+          const phase = group.dataset.phaseGroup;
+          group.classList.toggle("hidden", activePhase !== "all" && activePhase !== phase);
+        });
+
+        document.querySelectorAll(".cycle-card").forEach((cycle) => {
+          const cycleMatches = !query || cycle.dataset.search.includes(query);
+          let anyDayVisible = false;
+
+          cycle.querySelectorAll(".day-card").forEach((day) => {
+            const matches = !query || day.dataset.search.includes(query);
+            day.classList.toggle("hidden", !matches);
+            anyDayVisible = anyDayVisible || matches;
+          });
+
+          cycle.classList.toggle("hidden", !cycleMatches && !anyDayVisible);
+        });
+
+        document.querySelectorAll(".vocab-card").forEach((card) => {
+          const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+          const matchesQuery = !query || card.dataset.search.includes(query);
+          card.classList.toggle("hidden", !(matchesCategory && matchesQuery));
+        });
+      }
+
+      function setPhase(phase) {
+        activePhase = phase;
+        phaseButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.phaseBtn === phase);
+        });
+        applyFilters();
+      }
+
+      function setLanguage(lang) {
+        activeLang = lang;
+        document.body.dataset.language = lang;
+        langButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.langBtn === lang);
+        });
+      }
+
+      function setCategory(category) {
+        activeCategory = category;
+        document.querySelectorAll(".category-btn").forEach((button) => {
+          button.classList.toggle("active", button.dataset.categoryBtn === category);
+        });
+        applyFilters();
+      }
+
+      function buildCategoryRow() {
+        const labels = [
+          { key: "all", label: "All / 全部" },
+          { key: "command", label: "Command words / 指令词" },
+          { key: "connect", label: "Connectors / 连接词" },
+          { key: "study", label: "Study words / 学习词" },
+          { key: "maths", label: "Maths / 数学" },
+          { key: "science", label: "Science / 科学" },
+        ];
+
+        categoryRow.innerHTML = labels
+          .map(
+            (item, index) =>
+              `<button class="category-btn ${index === 0 ? "active" : ""}" type="button" data-category-btn="${item.key}">${item.label}</button>`
+          )
+          .join("");
+
+        categoryRow.querySelectorAll(".category-btn").forEach((button) => {
+          button.addEventListener("click", () => setCategory(button.dataset.categoryBtn));
+        });
+      }
+
+      function attachEvents() {
+        phaseButtons.forEach((button) => {
+          button.addEventListener("click", () => setPhase(button.dataset.phaseBtn));
+        });
+
+        langButtons.forEach((button) => {
+          button.addEventListener("click", () => setLanguage(button.dataset.langBtn));
+        });
+
+        searchInput.addEventListener("input", applyFilters);
+        clearProgress.addEventListener("click", () => {
+          progressSet = new Set();
+          saveProgress();
+          updateCheckmarks();
+        });
+
+        document.addEventListener("change", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLInputElement)) return;
+          if (!target.matches("[data-progress-day]")) return;
+
+          const day = Number(target.dataset.progressDay);
+          if (target.checked) {
+            progressSet.add(day);
+          } else {
+            progressSet.delete(day);
+          }
+
+          saveProgress();
+          updateProgressSummary();
+        });
+      }
+
+      renderPlan();
+      renderVocab();
+      renderFrames();
+      renderTips();
+      buildCategoryRow();
+      attachEvents();
+      updateCheckmarks();
+      applyFilters();
+      setLanguage("both");
+    </script>
+  </body>
+</html>
