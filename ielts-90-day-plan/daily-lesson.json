@@ -1,0 +1,39 @@
+{
+  "dateKey": "2026-06-23",
+  "seedDateKey": "2026-06-23",
+  "source": "workflow",
+  "vocab": {
+    "category": "reading",
+    "term": "scan",
+    "zh": "寻读",
+    "exampleEn": "Scan for names, dates, and key words.",
+    "exampleZh": "寻读姓名、日期和关键词。"
+  },
+  "cycle": {
+    "number": 10,
+    "phase": 2,
+    "titleEn": "Paraphrasing and coherence",
+    "titleZh": "改写与连贯",
+    "summaryEn": "Turn simple ideas into cleaner IELTS lines and link them smoothly.",
+    "summaryZh": "把简单意思改成更像雅思答案的表达，并把句子连起来。",
+    "focusWords": [
+      "paraphrase / 改写",
+      "coherence / 连贯性",
+      "cohesion / 衔接",
+      "linker / 连接词"
+    ]
+  },
+  "frame": {
+    "slot": "Linking / 衔接",
+    "en": "Moreover, ...",
+    "zh": "此外，...",
+    "useEn": "Use to connect ideas smoothly.",
+    "useZh": "用来把句子连接起来。"
+  },
+  "meaningEn": "This reading word helps you understand questions and paraphrases faster.",
+  "meaningZh": "这个阅读词可以帮助你更快看懂题目和改写。",
+  "promptEn": "Use this frame: Moreover, ...",
+  "promptZh": "使用这个句型：此外，...",
+  "sourceEn": "This lesson is auto-picked from the word bank and refreshes every day.",
+  "sourceZh": "这节课会从词汇库里自动抽取，并每天刷新。"
+}

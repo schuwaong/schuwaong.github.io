@@ -1,0 +1,2204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IELTS 90-Day Plan | 90天复习计划</title>
+    <meta
+      name="description"
+      content="A bilingual 90-day IELTS study planner with Chinese translations, vocabulary examples, speaking practice, and a day-by-day revision route."
+    />
+    <style>
+      :root {
+        --bg: #f3f5f9;
+        --bg-soft: #eaf1ee;
+        --panel: rgba(255, 255, 255, 0.9);
+        --panel-strong: #ffffff;
+        --ink: #0e1b2d;
+        --muted: #5d6a80;
+        --line: rgba(14, 27, 45, 0.12);
+        --line-strong: rgba(14, 27, 45, 0.18);
+        --navy: #12233f;
+        --blue: #2357d1;
+        --teal: #0d8d7b;
+        --coral: #e85d5d;
+        --gold: #d89a29;
+        --mint: #d8f0e6;
+        --shadow: 0 16px 40px rgba(10, 18, 31, 0.08);
+        --radius: 8px;
+        --radius-sm: 6px;
+        --max: 1360px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background:
+          linear-gradient(180deg, #f6f7fb 0%, #eef4f9 38%, #f9fbf8 100%);
+      }
+
+      body[data-language="en"] .zh {
+        display: none !important;
+      }
+
+      body[data-language="zh"] .en {
+        display: none !important;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 22px;
+        border-bottom: 1px solid rgba(14, 27, 45, 0.08);
+        background: rgba(246, 248, 251, 0.9);
+        backdrop-filter: blur(16px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.85rem;
+      }
+
+      .toplinks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .toplinks a {
+        padding: 8px 12px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.64);
+      }
+
+      .toplinks a:hover {
+        border-color: var(--line-strong);
+        color: var(--ink);
+      }
+
+      .topmeta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .ghost-link {
+        padding: 9px 13px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 74vh;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(245, 247, 250, 0.96) 0%, rgba(245, 247, 250, 0.91) 33%, rgba(245, 247, 250, 0.58) 63%, rgba(245, 247, 250, 0.9) 100%),
+          linear-gradient(180deg, rgba(245, 247, 250, 0.06) 0%, rgba(245, 247, 250, 0.18) 100%);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 32px;
+        align-items: end;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 84px 22px 38px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--teal);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0;
+      }
+
+      .hero h1 {
+        margin: 0;
+        max-width: 12ch;
+        font-size: 4.2rem;
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        max-width: 720px;
+        margin: 18px 0 0;
+        font-size: 1.06rem;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      .hero-rail {
+        display: grid;
+        gap: 10px;
+        align-self: stretch;
+        padding: 4px 0 0;
+      }
+
+      .hero-chip {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-chip strong {
+        display: block;
+        font-size: 1.02rem;
+      }
+
+      .hero-chip span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-controls {
+        display: grid;
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .segmented {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .segmented button {
+        padding: 10px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.86);
+        cursor: pointer;
+      }
+
+      .segmented button.active {
+        border-color: transparent;
+        color: #fff;
+        background: var(--navy);
+      }
+
+      .searchbox {
+        display: grid;
+        gap: 8px;
+        max-width: 560px;
+      }
+
+      .searchbox label {
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .searchbox input {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--ink);
+      }
+
+      .band {
+        padding: 34px 22px;
+      }
+
+      .inner {
+        max-width: var(--max);
+        margin: 0 auto;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 18px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 2rem;
+        line-height: 1.05;
+      }
+
+      .section-head p {
+        max-width: 720px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .summary-grid,
+      .tools-grid,
+      .tips-grid,
+      .frames-grid,
+      .vocab-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .summary-card,
+      .tool-card,
+      .tip-card,
+      .frame-card,
+      .vocab-card,
+      .cycle-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-card {
+        padding: 16px;
+        min-height: 136px;
+      }
+
+      .summary-card .kicker {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .summary-card strong {
+        display: block;
+        font-size: 1.18rem;
+        margin-bottom: 6px;
+      }
+
+      .summary-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .band-slab {
+        margin-top: 26px;
+        padding: 18px;
+        border: 1px solid rgba(35, 87, 209, 0.14);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(232, 240, 255, 0.6));
+      }
+
+      .band-slab strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.02rem;
+      }
+
+      .band-slab p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .progress-row {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 14px;
+        align-items: center;
+        margin: 20px 0 16px;
+      }
+
+      .progress-meta {
+        min-width: 118px;
+        font-weight: 700;
+      }
+
+      .progress-bar {
+        height: 12px;
+        overflow: hidden;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .progress-bar span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--teal), var(--blue));
+      }
+
+      .action-btn {
+        padding: 11px 14px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .action-btn.primary {
+        border-color: transparent;
+        color: #fff;
+        background: var(--navy);
+      }
+
+      .phase-group {
+        margin-top: 18px;
+      }
+
+      .phase-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: end;
+        margin-bottom: 12px;
+      }
+
+      .phase-head h3 {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+      }
+
+      .phase-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .phase-note {
+        min-width: 200px;
+        padding: 12px 14px;
+        border-left: 3px solid var(--blue);
+        border-radius: var(--radius-sm);
+        background: rgba(35, 87, 209, 0.06);
+      }
+
+      .phase-note strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .cycle-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .cycle-card {
+        padding: 16px;
+      }
+
+      .cycle-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 12px;
+      }
+
+      .cycle-head h4 {
+        margin: 4px 0 0;
+        font-size: 1.18rem;
+      }
+
+      .cycle-index,
+      .cycle-tag,
+      .badge,
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 9px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .cycle-index {
+        background: rgba(13, 141, 123, 0.12);
+        color: var(--teal);
+      }
+
+      .cycle-tag {
+        background: rgba(35, 87, 209, 0.1);
+        color: var(--blue);
+      }
+
+      .cycle-summary {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .focus-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .focus-chips span,
+      .category-btn {
+        padding: 7px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--ink);
+      }
+
+      .day-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .day-card {
+        display: grid;
+        gap: 9px;
+        min-height: 168px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 248, 252, 0.96));
+      }
+
+      .day-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .day-top strong {
+        display: block;
+        font-size: 0.98rem;
+      }
+
+      .day-top span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .done-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+
+      .done-toggle input {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: var(--teal);
+      }
+
+      .day-card h5 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      .day-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+        font-size: 0.92rem;
+      }
+
+      .day-example {
+        margin: 0;
+        padding-top: 8px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.12);
+        color: var(--ink);
+        line-height: 1.48;
+        font-size: 0.92rem;
+      }
+
+      .tool-card {
+        padding: 16px;
+      }
+
+      .tool-card strong,
+      .tip-card strong,
+      .frame-card strong,
+      .vocab-card strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .tool-card p,
+      .tip-card p,
+      .frame-card p,
+      .vocab-card p {
+        margin: 0;
+        line-height: 1.52;
+        color: var(--muted);
+      }
+
+      .vocab-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: end;
+        margin-bottom: 14px;
+      }
+
+      .category-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .category-btn {
+        cursor: pointer;
+        color: var(--muted);
+      }
+
+      .category-btn.active {
+        border-color: transparent;
+        color: #fff;
+        background: var(--blue);
+      }
+
+      .vocab-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .vocab-card {
+        padding: 14px;
+      }
+
+      .vocab-card .term {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .vocab-card .word {
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .vocab-card .cn {
+        color: var(--teal);
+        font-weight: 700;
+      }
+
+      .vocab-card .example {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.12);
+      }
+
+      .frames-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .frame-card {
+        padding: 14px;
+      }
+
+      .frame-card .slot {
+        display: inline-flex;
+        margin-bottom: 10px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        background: rgba(13, 141, 123, 0.1);
+        color: var(--teal);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .tips-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .tip-card {
+        padding: 14px;
+      }
+
+      .tip-card .num {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .daily-note {
+        margin-top: 18px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(234, 241, 238, 0.7));
+      }
+
+      .daily-note strong {
+        margin-bottom: 6px;
+      }
+
+      .daily-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+      }
+
+      .daily-modal.hidden {
+        display: none !important;
+      }
+
+      .daily-modal__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(9, 16, 28, 0.48);
+        backdrop-filter: blur(6px);
+      }
+
+      .daily-modal__panel {
+        position: relative;
+        z-index: 1;
+        width: min(760px, 100%);
+        max-height: min(88vh, 860px);
+        overflow: auto;
+        padding: 20px;
+        border: 1px solid rgba(14, 27, 45, 0.12);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 28px 70px rgba(10, 18, 31, 0.24);
+      }
+
+      .daily-modal__head,
+      .daily-modal__foot {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .daily-modal__head {
+        margin-bottom: 18px;
+      }
+
+      .daily-modal__head h2 {
+        margin: 6px 0 0;
+        font-size: 1.8rem;
+        line-height: 1.05;
+      }
+
+      .daily-modal__foot {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .icon-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 1.15rem;
+      }
+
+      .daily-lesson-card {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid rgba(18, 35, 63, 0.12);
+        border-radius: 8px;
+        background: linear-gradient(180deg, rgba(243, 247, 252, 0.98), rgba(255, 255, 255, 0.98));
+      }
+
+      .daily-lesson-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
+      }
+
+      .daily-word {
+        margin: 6px 0 0;
+        font-size: 2.05rem;
+        line-height: 1;
+      }
+
+      .daily-zh {
+        margin: 8px 0 0;
+        color: var(--teal);
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .daily-date {
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.84);
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .daily-section {
+        padding-top: 12px;
+        border-top: 1px dashed rgba(14, 27, 45, 0.14);
+      }
+
+      .daily-section strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+
+      .daily-section p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .daily-grid {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .daily-grid .tag {
+        justify-content: center;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 1100px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-grid,
+        .vocab-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .tips-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .topbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .topmeta {
+          justify-content: space-between;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .hero-inner {
+          padding-top: 38px;
+        }
+
+        .hero h1 {
+          max-width: none;
+          font-size: 2.9rem;
+        }
+
+        .section-head,
+        .phase-head,
+        .progress-row,
+        .vocab-head {
+          grid-template-columns: 1fr;
+          display: grid;
+          align-items: start;
+        }
+
+        .summary-grid,
+        .vocab-grid,
+        .frames-grid,
+        .day-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .daily-modal {
+          padding: 12px;
+        }
+
+        .daily-modal__head,
+        .daily-modal__foot,
+        .daily-lesson-top {
+          grid-template-columns: 1fr;
+          display: grid;
+          align-items: start;
+        }
+
+        .daily-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .daily-word {
+          font-size: 1.7rem;
+        }
+      }
+    </style>
+  </head>
+  <body data-phase="all" data-language="both">
+    <header class="topbar">
+      <a class="brand" href="#top">
+        <span class="brand-mark">IL</span>
+        <span>IELTS 90-Day Plan</span>
+      </a>
+      <nav class="toplinks" aria-label="Page sections">
+        <a href="#plan">Plan</a>
+        <a href="#vocab">Vocabulary</a>
+        <a href="#frames">Sentence frames</a>
+        <a href="#tips">Chinese learner tips</a>
+      </nav>
+      <div class="topmeta">
+        <button class="ghost-link" id="dailyLessonBtn" type="button">Daily lesson</button>
+        <a class="ghost-link" href="https://schuwaong.github.io/" target="_blank" rel="noreferrer">Site root</a>
+      </div>
+    </header>
+
+    <div class="daily-modal hidden" id="dailyModal" aria-hidden="true">
+      <div class="daily-modal__backdrop" id="dailyModalBackdrop"></div>
+      <div
+        class="daily-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dailyLessonTitle"
+      >
+        <div class="daily-modal__head">
+          <div>
+            <p class="eyebrow">Daily lesson / 每日一课</p>
+            <h2 id="dailyLessonTitle">One-minute vocabulary lesson</h2>
+          </div>
+          <button class="icon-btn" id="dailyModalClose" type="button" aria-label="Close daily lesson">
+            ×
+          </button>
+        </div>
+
+        <div class="daily-lesson-card">
+          <div class="daily-lesson-top">
+            <div>
+              <span class="cycle-index" id="dailyLessonCycle">Cycle</span>
+              <h3 class="daily-word" id="dailyLessonWord">word</h3>
+              <p class="daily-zh" id="dailyLessonZh">中文</p>
+            </div>
+            <div class="daily-date" id="dailyLessonDate">Today</div>
+          </div>
+
+          <div class="daily-section">
+            <strong>Quick meaning / 快速理解</strong>
+            <p class="en" id="dailyLessonMeaningEn"></p>
+            <p class="zh" id="dailyLessonMeaningZh"></p>
+          </div>
+
+          <div class="daily-section">
+            <strong>Example / 例句</strong>
+            <p class="en" id="dailyLessonExampleEn"></p>
+            <p class="zh" id="dailyLessonExampleZh"></p>
+          </div>
+
+          <div class="daily-section">
+            <strong>One-minute drill / 一分钟练习</strong>
+            <div class="daily-grid">
+              <span class="tag en" id="dailyLessonPromptEn"></span>
+              <span class="tag zh" id="dailyLessonPromptZh"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="daily-modal__foot">
+          <p class="en" id="dailyLessonSourceEn"></p>
+          <p class="zh" id="dailyLessonSourceZh"></p>
+          <button class="action-btn primary" id="dailyLessonGotIt" type="button">Got it</button>
+        </div>
+      </div>
+    </div>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-media"
+          src="../ic-educate/assets/lesson-ops-hero-DCoDSaqB.png"
+          alt="Study desk with a laptop, notebook, and planner board"
+        />
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <div>
+            <p class="eyebrow">IELTS study planner | 雅思复习计划</p>
+            <h1 id="hero-title">IELTS 90-Day Plan</h1>
+            <p class="lede">
+              A bilingual revision page for Chinese-speaking students. Use English and
+              Chinese together to train listening, reading, speaking, and writing with
+              examples, vocabulary, and a repeatable 90-day routine.
+            </p>
+
+            <div class="hero-controls">
+              <div class="segmented" role="tablist" aria-label="Phase filter">
+                <button class="active" type="button" data-phase-btn="all">All</button>
+                <button type="button" data-phase-btn="1">Phase 1</button>
+                <button type="button" data-phase-btn="2">Phase 2</button>
+                <button type="button" data-phase-btn="3">Phase 3</button>
+              </div>
+
+              <div class="segmented" role="tablist" aria-label="Language filter">
+                <button class="active" type="button" data-lang-btn="both">Both</button>
+                <button type="button" data-lang-btn="en">English</button>
+                <button type="button" data-lang-btn="zh">中文</button>
+              </div>
+
+              <label class="searchbox" for="searchInput">
+                <span>Find a word, day, or example / 搜索词汇、日程或例句</span>
+                <input id="searchInput" type="search" placeholder="Try: speaking, overview, collocation, opinion" />
+              </label>
+            </div>
+          </div>
+
+          <div class="hero-rail" aria-label="Quick summary">
+            <div class="hero-chip">
+              <div>
+                <strong>90 days</strong>
+                <span>15 study cycles / 15 个学习循环</span>
+              </div>
+              <span>01</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Bilingual</strong>
+                <span>English + Simplified Chinese</span>
+              </div>
+              <span>02</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Vocabulary bank</strong>
+                <span>Words, collocations, and examples</span>
+              </div>
+              <span>03</span>
+            </div>
+            <div class="hero-chip">
+              <div>
+                <strong>Progress tracking</strong>
+                <span>Mark each day as done</span>
+              </div>
+              <span>04</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="overview">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">How to use it / 使用方法</p>
+              <h2>Simple enough to keep using every day.</h2>
+            </div>
+            <p>
+              The plan uses 3 phases and 15 six-day cycles. Every cycle repeats the same
+              learning rhythm: spot the task, learn words, copy a model, produce your own
+              answer, do one timed set, then review and repeat.
+            </p>
+          </div>
+
+          <div class="summary-grid">
+            <article class="summary-card">
+              <span class="kicker">Step 1 / 第 1 步</span>
+              <strong>Read the question first, then Chinese.</strong>
+              <p>
+                Start with the English prompt, check the translation, and then say the task
+                back in simple words.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 2 / 第 2 步</span>
+              <strong>Build a useful word log.</strong>
+              <p>
+                Write the word, the meaning, the example, and the Chinese note. This is how
+                weak language becomes repeatable marks.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 3 / 第 3 步</span>
+              <strong>Use short answers first.</strong>
+              <p>
+                If you are stuck, write the simplest correct English. Short and clear beats a
+                blank page.
+              </p>
+            </article>
+            <article class="summary-card">
+              <span class="kicker">Step 4 / 第 4 步</span>
+              <strong>Review every sixth day.</strong>
+              <p>
+                The plan is built around a repeatable six-day loop so you can revise, test,
+                and recover without guessing what to do next.
+              </p>
+            </article>
+          </div>
+
+          <div class="band-slab">
+            <strong>Study rule / 学习规则</strong>
+            <p>
+              Learn one thing, practice it once, mark it once, and review it once. That small
+              loop is enough to change the way a revision day feels.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="plan">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">90-day route / 90天路线</p>
+              <h2>Three phases. Fifteen cycles. Ninety days.</h2>
+            </div>
+            <p>
+              Phase 1 builds the base, Phase 2 grows skill, and Phase 3 locks in exam mode.
+              Keep the same routine, and let the task type change instead of the method.
+            </p>
+          </div>
+
+          <div class="progress-row">
+            <div class="progress-meta">
+              <span id="doneCount">0</span> / 90 done
+            </div>
+            <div class="progress-bar" aria-label="Progress">
+              <span id="progressFill"></span>
+            </div>
+            <button class="action-btn" id="clearProgress" type="button">Clear progress</button>
+          </div>
+
+          <div class="phase-group" data-phase-group="1">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 1 / 第 1 阶段</p>
+                <h3>Build the base / 打基础</h3>
+                <p>
+                  Days 1-30 are for learning the test format, the question types, and how to
+                  spot answers faster.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Know what each IELTS section wants before you chase speed.</span>
+                <span class="zh">先看懂雅思每个部分要什么，再去追速度。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase1"></div>
+          </div>
+
+          <div class="phase-group" data-phase-group="2">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 2 / 第 2 阶段</p>
+                <h3>Build skill / 提升能力</h3>
+                <p>
+                  Days 31-60 move from notes to answer patterns: speak more smoothly, write
+                  cleaner paragraphs, and use better examples.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Turn vocabulary into natural answers and answers into marks.</span>
+                <span class="zh">把词汇变成自然的答案，把答案变成分数。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase2"></div>
+          </div>
+
+          <div class="phase-group" data-phase-group="3">
+            <div class="phase-head">
+              <div>
+                <p class="eyebrow">Phase 3 / 第 3 阶段</p>
+                <h3>Exam mode / 考试模式</h3>
+                <p>
+                  Days 61-90 are for timed full tests, weak-skill repair, and calm review
+                  before the real exam day.
+                </p>
+              </div>
+              <div class="phase-note">
+                <strong>Goal / 目标</strong>
+                <span class="en">Stay calm, check the question type, and finish strong.</span>
+                <span class="zh">保持冷静，先看题型，稳稳做完。</span>
+              </div>
+            </div>
+            <div class="cycle-grid" id="phase3"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="vocab">
+        <div class="inner">
+          <div class="vocab-head">
+            <div>
+              <p class="eyebrow">Vocabulary bank / 小词汇库</p>
+              <h2>Words, translations, and example lines.</h2>
+            </div>
+            <p>
+              Search a word, then read the translation and the example sentence. This is the
+              fastest way to build usable IELTS language.
+            </p>
+          </div>
+
+          <div class="category-row" id="categoryRow" aria-label="Vocabulary categories"></div>
+          <div class="vocab-grid" id="vocabGrid"></div>
+        </div>
+      </section>
+
+      <section class="band" id="frames">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Sentence frames / 句型框架</p>
+              <h2>Ready-made lines for answers.</h2>
+            </div>
+            <p>
+              Use these when you do not know how to start. They help with speaking, Task 1,
+              Task 2, and short written answers.
+            </p>
+          </div>
+          <div class="frames-grid" id="framesGrid"></div>
+        </div>
+      </section>
+
+      <section class="band" id="tips">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Chinese learner tips / 中文学习者技巧</p>
+              <h2>Small habits that make the page easier to use.</h2>
+            </div>
+            <p>
+              These are the little moves that keep Chinese-speaking students from getting
+              stuck when the English gets heavy.
+            </p>
+          </div>
+          <div class="tips-grid" id="tipsGrid"></div>
+          <div class="footer-note">
+            <strong>Final note / 最后说明</strong>
+            <span class="en">
+              This page is a general IELTS revision planner. Keep the same routine and swap
+              the topic content to match your own band goal.
+            </span>
+            <span class="zh">
+              这个页面是通用的 IELTS 复习计划。你只要保留同样的复习节奏，再替换成自己的
+              目标分和题材就可以。
+            </span>
+          </div>
+          <div class="footer-note daily-note">
+            <strong>Daily lesson / 每日一课</strong>
+            <span class="en">
+              A popup lesson opens once per day and rotates automatically by date. A scheduled
+              site update can also refresh the lesson bank on its own.
+            </span>
+            <span class="zh">
+              每天会自动弹出一课，内容按日期轮换。再配合定时更新，词汇库也可以自动刷新。
+            </span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const dayTemplates = [
+        {
+          nameEn: "Spot",
+          nameZh: "读题",
+          titleEn: "Spot the task",
+          titleZh: "读懂任务",
+          build: (cycle) => ({
+            taskEn: `Skim one IELTS prompt from ${cycle.titleEn.toLowerCase()} and underline the instruction words.`,
+            taskZh: `先看一题与${cycle.titleZh}有关的雅思题，把指令词划出来。`,
+            exampleEn: `Write the task in Chinese, then say what the examiner wants.`,
+            exampleZh: `先把题目翻成中文，再说出考官要你做什么。`,
+          }),
+        },
+        {
+          nameEn: "Words",
+          nameZh: "词块",
+          titleEn: "Build the word bank",
+          titleZh: "积累词块",
+          build: (cycle) => ({
+            taskEn: `Learn 8 to 10 useful words or collocations from ${cycle.titleEn.toLowerCase()} and write one IELTS sentence for each.`,
+            taskZh: `学习 8 到 10 个和${cycle.titleZh}有关的词或搭配，并给每个词写一句雅思句子。`,
+            exampleEn: `Read the word, the Chinese meaning, and the example out loud once.`,
+            exampleZh: `把单词、中文意思和例句大声读一遍。`,
+          }),
+        },
+        {
+          nameEn: "Model",
+          nameZh: "范文",
+          titleEn: "Copy a model answer",
+          titleZh: "精读范文",
+          build: (cycle) => ({
+            taskEn: `Copy one band 7+ sample answer or transcript related to ${cycle.titleEn.toLowerCase()}, then underline the structure.`,
+            taskZh: `抄写一份与${cycle.titleZh}相关的 7 分以上范文或口语稿，并标出结构。`,
+            exampleEn: `Label the opening, evidence, and conclusion in English and Chinese.`,
+            exampleZh: `用英语和中文分别标出开头、证据和结论。`,
+          }),
+        },
+        {
+          nameEn: "Output",
+          nameZh: "输出",
+          titleEn: "Produce your own answer",
+          titleZh: "独立输出答案",
+          build: (cycle) => ({
+            taskEn: `Answer 3 short prompts from ${cycle.titleEn.toLowerCase()} without looking at notes first.`,
+            taskZh: `先不看笔记，独立完成 3 道和${cycle.titleZh}有关的短题。`,
+            exampleEn: `If you miss a point, write the corrected version beside it.`,
+            exampleZh: `如果答错了，把正确版本写在旁边。`,
+          }),
+        },
+        {
+          nameEn: "Timed",
+          nameZh: "限时",
+          titleEn: "Do one timed drill",
+          titleZh: "完成限时练习",
+          build: (cycle) => ({
+            taskEn: `Set a timer for 10 to 20 minutes and finish one timed IELTS set on ${cycle.titleEn.toLowerCase()}.`,
+            taskZh: `设 10 到 20 分钟的计时器，完成一组${cycle.titleZh}的雅思限时练习。`,
+            exampleEn: `Check the question type first, then pace your answer.`,
+            exampleZh: `先看题型，再安排答题速度。`,
+          }),
+        },
+        {
+          nameEn: "Review",
+          nameZh: "复盘",
+          titleEn: "Review and repeat",
+          titleZh: "复盘并重复",
+          build: (cycle) => ({
+            taskEn: `Mark your work, fix the weak points, and explain the key idea from ${cycle.titleEn.toLowerCase()} in simple English.`,
+            taskZh: `批改自己的答案，修正薄弱点，再用简单英文讲一遍${cycle.titleZh}的核心意思。`,
+            exampleEn: `If you can teach it in 30 seconds, you probably know it well.`,
+            exampleZh: `如果你能在 30 秒内讲清楚，说明你已经比较会了。`,
+          }),
+        },
+      ];
+
+      const cycleData = [
+        {
+          number: 1,
+          phase: 1,
+          titleEn: "Test format and target band",
+          titleZh: "考试结构与目标分",
+          summaryEn: "Learn the four sections, the timing, and what a 6, 7, or 8 answer looks like.",
+          summaryZh: "先弄懂四个部分、时间安排，以及 6、7、8 分答案的样子。",
+          focusWords: ["band score / 分数档", "criteria / 评分标准", "timing / 时间安排", "format / 结构"],
+        },
+        {
+          number: 2,
+          phase: 1,
+          titleEn: "Listening basics and spelling",
+          titleZh: "听力基础与拼写",
+          summaryEn: "Train your ear for numbers, names, dates, and clean spelling.",
+          summaryZh: "先练数字、姓名、日期和拼写，把听力基础打稳。",
+          focusWords: ["spelling / 拼写", "numbers / 数字", "name / 姓名", "prediction / 预测"],
+        },
+        {
+          number: 3,
+          phase: 1,
+          titleEn: "Reading skimming and scanning",
+          titleZh: "阅读扫读与寻读",
+          summaryEn: "Find the answer fast by spotting paraphrases, headings, and key details.",
+          summaryZh: "练会扫读、寻读和同义改写，快速找到答案。",
+          focusWords: ["skim / 扫读", "scan / 寻读", "synonym / 同义词", "heading / 标题"],
+        },
+        {
+          number: 4,
+          phase: 1,
+          titleEn: "Speaking Part 1 basics",
+          titleZh: "口语 Part 1 基础",
+          summaryEn: "Answer short questions clearly and without too many pauses.",
+          summaryZh: "练习简短清楚地回答，不要卡太久。",
+          focusWords: ["fluency / 流利度", "pronunciation / 发音", "opinion / 观点", "topic / 话题"],
+        },
+        {
+          number: 5,
+          phase: 1,
+          titleEn: "Speaking Part 2 cue card",
+          titleZh: "口语 Part 2 口语卡",
+          summaryEn: "Build a 2-minute answer with a beginning, detail, example, and ending.",
+          summaryZh: "练出 2 分钟答案，包含开头、细节、例子和结尾。",
+          focusWords: ["cue card / 口语卡", "detail / 细节", "follow-up / 追问", "example / 例子"],
+        },
+        {
+          number: 6,
+          phase: 2,
+          titleEn: "Writing Task 1 overview",
+          titleZh: "写作 Task 1 总览",
+          summaryEn: "Learn how to describe trends, compare data, and write a proper overview.",
+          summaryZh: "学会描述趋势、比较数据，并写出像样的总览。",
+          focusWords: ["overview / 总览", "trend / 趋势", "compare / 比较", "data / 数据"],
+        },
+        {
+          number: 7,
+          phase: 2,
+          titleEn: "Writing Task 2 opinion essays",
+          titleZh: "写作 Task 2 观点作文",
+          summaryEn: "Practice opinion, advantage-disadvantage, and discussion style essays.",
+          summaryZh: "练习观点、利弊和讨论类作文。",
+          focusWords: ["thesis / 论点", "paragraph / 段落", "support / 支持", "conclusion / 结论"],
+        },
+        {
+          number: 8,
+          phase: 2,
+          titleEn: "Grammar and sentence control",
+          titleZh: "语法与句子控制",
+          summaryEn: "Build clean sentences with the right tense, articles, and clause control.",
+          summaryZh: "把时态、冠词和从句控制好，句子更稳。",
+          focusWords: ["tense / 时态", "clause / 从句", "article / 冠词", "accuracy / 准确性"],
+        },
+        {
+          number: 9,
+          phase: 2,
+          titleEn: "Vocabulary and collocations",
+          titleZh: "词汇与搭配",
+          summaryEn: "Learn useful word partnerships so your English sounds more natural.",
+          summaryZh: "学习常用搭配，让英语听起来更自然。",
+          focusWords: ["collocation / 搭配", "lexical resource / 词汇资源", "natural / 自然", "range / 范围"],
+        },
+        {
+          number: 10,
+          phase: 2,
+          titleEn: "Paraphrasing and coherence",
+          titleZh: "改写与连贯",
+          summaryEn: "Turn simple ideas into cleaner IELTS lines and link them smoothly.",
+          summaryZh: "把简单意思改成更像雅思答案的表达，并把句子连起来。",
+          focusWords: ["paraphrase / 改写", "coherence / 连贯性", "cohesion / 衔接", "linker / 连接词"],
+        },
+        {
+          number: 11,
+          phase: 3,
+          titleEn: "Timed mini tests",
+          titleZh: "限时小测",
+          summaryEn: "Use short sets to build speed, focus, and calm under pressure.",
+          summaryZh: "用短小测练速度、专注和压力下的稳定性。",
+          focusWords: ["timed / 限时", "focus / 专注", "pressure / 压力", "review / 复盘"],
+        },
+        {
+          number: 12,
+          phase: 3,
+          titleEn: "Mock listening and reading",
+          titleZh: "听读模拟",
+          summaryEn: "Do listening and reading like the real test, then check the mistakes right away.",
+          summaryZh: "像正式考试一样做听力和阅读，然后立刻订正。",
+          focusWords: ["mock / 模拟", "answer sheet / 答题卡", "mistake / 错误", "score / 分数"],
+        },
+        {
+          number: 13,
+          phase: 3,
+          titleEn: "Mock speaking and recording",
+          titleZh: "口语模拟与录音",
+          summaryEn: "Record your speaking, listen back, and fix hesitation and weak vocabulary.",
+          summaryZh: "把口语录下来，回听并修正卡顿和弱词汇。",
+          focusWords: ["record / 录音", "hesitation / 犹豫", "pronunciation / 发音", "natural / 自然"],
+        },
+        {
+          number: 14,
+          phase: 3,
+          titleEn: "Full writing practice",
+          titleZh: "完整写作练习",
+          summaryEn: "Write Task 1 and Task 2 under time, then improve the weakest paragraph.",
+          summaryZh: "限时写完 Task 1 和 Task 2，再修改最弱的一段。",
+          focusWords: ["task response / 任务回应", "paragraph / 段落", "band / 分数档", "polish / 打磨"],
+        },
+        {
+          number: 15,
+          phase: 3,
+          titleEn: "Final review and calm",
+          titleZh: "最后复习与稳定心态",
+          summaryEn: "Light review, good sleep, and simple answers on exam day.",
+          summaryZh: "轻复习、睡好觉，考试当天把答案写得简单清楚。",
+          focusWords: ["final / 最后", "calm / 冷静", "simple / 简单", "confidence / 自信"],
+        },
+      ];
+
+      const vocabItems = [
+        { category: "speaking", term: "fluency", zh: "流利度", exampleEn: "Fluency improves when you keep speaking.", exampleZh: "只要持续说，流利度就会提高。" },
+        { category: "speaking", term: "pronunciation", zh: "发音", exampleEn: "Pronunciation matters in the speaking test.", exampleZh: "口语考试里发音很重要。" },
+        { category: "speaking", term: "hesitation", zh: "停顿", exampleEn: "Too much hesitation can weaken your answer.", exampleZh: "停顿太多会让答案变弱。" },
+        { category: "speaking", term: "follow-up", zh: "追问", exampleEn: "Be ready for a follow-up question.", exampleZh: "要准备好回答追问。" },
+        { category: "listening", term: "spelling", zh: "拼写", exampleEn: "Check the spelling carefully in listening.", exampleZh: "听力里要认真检查拼写。" },
+        { category: "listening", term: "number", zh: "数字", exampleEn: "Write the number exactly as you hear it.", exampleZh: "数字要按你听到的准确写下来。" },
+        { category: "listening", term: "detail", zh: "细节", exampleEn: "Listen for the detail, not only the main idea.", exampleZh: "要听细节，不只是听大意。" },
+        { category: "listening", term: "prediction", zh: "预测", exampleEn: "Use the questions to make a prediction.", exampleZh: "先看题目来做预测。" },
+        { category: "reading", term: "skim", zh: "扫读", exampleEn: "Skim the article before reading the questions.", exampleZh: "先扫读文章，再看题目。" },
+        { category: "reading", term: "scan", zh: "寻读", exampleEn: "Scan for names, dates, and key words.", exampleZh: "寻读姓名、日期和关键词。" },
+        { category: "reading", term: "paraphrase", zh: "改写", exampleEn: "The passage may paraphrase the question.", exampleZh: "文章里可能会改写题目。" },
+        { category: "reading", term: "heading", zh: "标题", exampleEn: "Match each paragraph with the best heading.", exampleZh: "给每一段选最合适的标题。" },
+        { category: "writing", term: "overview", zh: "总览", exampleEn: "Write a clear overview in Task 1.", exampleZh: "Task 1 要写清楚总览。" },
+        { category: "writing", term: "trend", zh: "趋势", exampleEn: "Describe the trend instead of listing numbers.", exampleZh: "要写趋势，不要只列数字。" },
+        { category: "writing", term: "comparison", zh: "比较", exampleEn: "Make one strong comparison in each paragraph.", exampleZh: "每段都写一个有力的比较。" },
+        { category: "writing", term: "coherence", zh: "连贯性", exampleEn: "Coherence helps your essay flow better.", exampleZh: "连贯性能让作文更顺。" },
+        { category: "writing", term: "collocation", zh: "搭配", exampleEn: "Learn collocation, not single words only.", exampleZh: "不要只背单词，也要背搭配。" },
+        { category: "writing", term: "paragraph", zh: "段落", exampleEn: "Each paragraph should have one clear idea.", exampleZh: "每一段只放一个清楚观点。" },
+        { category: "writing", term: "thesis", zh: "论点", exampleEn: "State your thesis in the introduction.", exampleZh: "在引言里写出论点。" },
+        { category: "writing", term: "example", zh: "例子", exampleEn: "A real example makes your answer stronger.", exampleZh: "真实例子会让答案更强。" },
+        { category: "study", term: "band", zh: "分数档", exampleEn: "I want a band 7 in writing.", exampleZh: "我想把写作拿到 7 分。" },
+        { category: "study", term: "criteria", zh: "评分标准", exampleEn: "Read the criteria before you write.", exampleZh: "写之前先看评分标准。" },
+        { category: "study", term: "timed test", zh: "限时测试", exampleEn: "Do one timed test every few days.", exampleZh: "每隔几天做一次限时测试。" },
+        { category: "study", term: "review", zh: "复盘", exampleEn: "Review the recording after speaking practice.", exampleZh: "口语练习后要回听复盘。" },
+        { category: "study", term: "target", zh: "目标", exampleEn: "Set a target band for each skill.", exampleZh: "给每个技能设目标分。" },
+        { category: "study", term: "confidence", zh: "自信", exampleEn: "Confidence grows with repeated practice.", exampleZh: "练习多了，自信就会增加。" },
+        { category: "study", term: "accuracy", zh: "准确性", exampleEn: "Accuracy matters in listening and reading.", exampleZh: "听力和阅读里准确性很重要。" },
+        { category: "study", term: "routine", zh: "习惯", exampleEn: "A routine keeps your revision steady.", exampleZh: "固定习惯能让复习更稳定。" },
+        { category: "study", term: "feedback", zh: "反馈", exampleEn: "Use feedback to fix your weak points.", exampleZh: "用反馈来修正薄弱点。" },
+        { category: "study", term: "planner", zh: "计划表", exampleEn: "The planner keeps your practice organized.", exampleZh: "计划表能帮你整理练习。" },
+      ];
+
+      const frames = [
+        {
+          slot: "Speaking / 口语",
+          en: "What I mean is...",
+          zh: "我的意思是...",
+          useEn: "Use this to answer clearly and naturally.",
+          useZh: "用来让口语回答更清楚自然。",
+        },
+        {
+          slot: "Task 1 / 小作文",
+          en: "The overall trend is...",
+          zh: "总体趋势是...",
+          useEn: "Use in graph and chart descriptions.",
+          useZh: "适合图表描述和趋势题。",
+        },
+        {
+          slot: "Task 2 / 大作文",
+          en: "I strongly believe that...",
+          zh: "我强烈认为...",
+          useEn: "Use to give a clear opinion.",
+          useZh: "用来表达清晰观点。",
+        },
+        {
+          slot: "Evidence / 例子",
+          en: "For instance, ...",
+          zh: "例如...",
+          useEn: "Use to support your point with an example.",
+          useZh: "用例子支持观点。",
+        },
+        {
+          slot: "Compare / 比较",
+          en: "Compared with ..., ...",
+          zh: "与……相比，...",
+          useEn: "Use when comparing ideas or data.",
+          useZh: "用来比较观点或数据。",
+        },
+        {
+          slot: "Reason / 原因",
+          en: "This happens because...",
+          zh: "这是因为...",
+          useEn: "Use to explain why something happens.",
+          useZh: "用来解释原因。",
+        },
+        {
+          slot: "Result / 结果",
+          en: "As a result, ...",
+          zh: "因此，...",
+          useEn: "Use after showing cause and effect.",
+          useZh: "写因果关系时使用。",
+        },
+        {
+          slot: "Linking / 衔接",
+          en: "Moreover, ...",
+          zh: "此外，...",
+          useEn: "Use to connect ideas smoothly.",
+          useZh: "用来把句子连接起来。",
+        },
+        {
+          slot: "Opinion / 观点",
+          en: "In my view, ...",
+          zh: "在我看来，...",
+          useEn: "Use to show your opinion clearly.",
+          useZh: "用来清楚表达观点。",
+        },
+        {
+          slot: "Improvement / 改进",
+          en: "To improve this answer, I should...",
+          zh: "要改进这道题，我应该...",
+          useEn: "Use in self-review after marking.",
+          useZh: "批改后自我修正时使用。",
+        },
+        {
+          slot: "Close / 结尾",
+          en: "Overall, ...",
+          zh: "总的来说，...",
+          useEn: "Use at the end of an answer.",
+          useZh: "写在答案最后。",
+        },
+      ];
+
+      const tips = [
+        {
+          en: "Read the question type first.",
+          zh: "先看题型。",
+          detailEn: "It tells you whether you should give an opinion, describe a graph, or speak about a topic.",
+          detailZh: "它会告诉你要表达观点、描述图表，还是口语回答话题。",
+        },
+        {
+          en: "Translate once, then answer in English.",
+          zh: "先翻译一次，再用英文回答。",
+          detailEn: "Do not get stuck translating every single word.",
+          detailZh: "不要卡在每一个单词上。",
+        },
+        {
+          en: "Use a mistake log.",
+          zh: "用错题本。",
+          detailEn: "Write the wrong version, the corrected version, and one Chinese note.",
+          detailZh: "写错的版本、正确版本和中文备注。",
+        },
+        {
+          en: "Make short answers before long ones.",
+          zh: "先写短答案，再写长答案。",
+          detailEn: "A simple correct answer is better than a blank page.",
+          detailZh: "简单正确的答案，永远比空白卷子好。",
+        },
+        {
+          en: "Learn words with examples and collocations.",
+          zh: "单词要配例句和搭配。",
+          detailEn: "A word is easier to remember when you see it used in a sentence.",
+          detailZh: "词放进句子里更容易记住。",
+        },
+        {
+          en: "Review after every timed set.",
+          zh: "每次限时练习后都要复习。",
+          detailEn: "Check the answers, fix the weak points, and try the same type again later.",
+          detailZh: "批改答案，修正弱点，过一段时间再练同类题。",
+        },
+      ];
+
+      const planRoot = document.getElementById("phase1");
+      const planRoot2 = document.getElementById("phase2");
+      const planRoot3 = document.getElementById("phase3");
+      const vocabGrid = document.getElementById("vocabGrid");
+      const framesGrid = document.getElementById("framesGrid");
+      const tipsGrid = document.getElementById("tipsGrid");
+      const searchInput = document.getElementById("searchInput");
+      const categoryRow = document.getElementById("categoryRow");
+      const doneCount = document.getElementById("doneCount");
+      const progressFill = document.getElementById("progressFill");
+      const clearProgress = document.getElementById("clearProgress");
+      const dailyLessonBtn = document.getElementById("dailyLessonBtn");
+      const dailyModal = document.getElementById("dailyModal");
+      const dailyModalBackdrop = document.getElementById("dailyModalBackdrop");
+      const dailyModalClose = document.getElementById("dailyModalClose");
+      const dailyLessonGotIt = document.getElementById("dailyLessonGotIt");
+      const dailyLessonCycle = document.getElementById("dailyLessonCycle");
+      const dailyLessonWord = document.getElementById("dailyLessonWord");
+      const dailyLessonZh = document.getElementById("dailyLessonZh");
+      const dailyLessonDate = document.getElementById("dailyLessonDate");
+      const dailyLessonMeaningEn = document.getElementById("dailyLessonMeaningEn");
+      const dailyLessonMeaningZh = document.getElementById("dailyLessonMeaningZh");
+      const dailyLessonExampleEn = document.getElementById("dailyLessonExampleEn");
+      const dailyLessonExampleZh = document.getElementById("dailyLessonExampleZh");
+      const dailyLessonPromptEn = document.getElementById("dailyLessonPromptEn");
+      const dailyLessonPromptZh = document.getElementById("dailyLessonPromptZh");
+      const dailyLessonSourceEn = document.getElementById("dailyLessonSourceEn");
+      const dailyLessonSourceZh = document.getElementById("dailyLessonSourceZh");
+      const phaseButtons = document.querySelectorAll("[data-phase-btn]");
+      const langButtons = document.querySelectorAll("[data-lang-btn]");
+      const storageKey = "ielts-90-progress";
+      const dailyStorageKey = "ielts-90-daily-lesson";
+      const dailyLessonPath = "./daily-lesson.json";
+
+      const phaseMeta = {
+        1: { container: planRoot, label: "Phase 1" },
+        2: { container: planRoot2, label: "Phase 2" },
+        3: { container: planRoot3, label: "Phase 3" },
+      };
+
+      const categories = ["all", "speaking", "listening", "reading", "writing", "study"];
+      let activePhase = "all";
+      let activeLang = "both";
+      let activeCategory = "all";
+      let progressSet = loadProgress();
+
+      function loadProgress() {
+        try {
+          return new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+        } catch {
+          return new Set();
+        }
+      }
+
+      function loadDailyState() {
+        try {
+          return JSON.parse(localStorage.getItem(dailyStorageKey) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function saveProgress() {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify([...progressSet]));
+        } catch {
+          // No-op when storage is not available.
+        }
+      }
+
+      function saveDailyState(state) {
+        try {
+          localStorage.setItem(dailyStorageKey, JSON.stringify(state));
+        } catch {
+          // No-op when storage is not available.
+        }
+      }
+
+      function getKualaLumpurDateKey(date = new Date()) {
+        const parts = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kuala_Lumpur",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).formatToParts(date);
+        const map = Object.fromEntries(
+          parts.filter((part) => part.type !== "literal").map((part) => [part.type, part.value])
+        );
+        return `${map.year}-${map.month}-${map.day}`;
+      }
+
+      function hashString(value) {
+        let hash = 0;
+        for (let index = 0; index < value.length; index += 1) {
+          hash = (hash * 31 + value.charCodeAt(index)) >>> 0;
+        }
+        return hash;
+      }
+
+      function categoryMeaning(category, term) {
+        if (category === "pronunciation") {
+          return {
+            en: "This speaking word helps you sound clearer and more natural.",
+            zh: "这个口语词可以帮助你说得更清楚、更自然。",
+          };
+        }
+        if (category === "reading") {
+          return {
+            en: "This reading word helps you understand questions and paraphrases faster.",
+            zh: "这个阅读词可以帮助你更快看懂题目和改写。",
+          };
+        }
+        if (category === "writing") {
+          return {
+            en: "This writing word helps you build strong IELTS paragraphs and ideas.",
+            zh: "这个写作词可以帮助你写出更强的雅思段落和观点。",
+          };
+        }
+        if (category === "listening") {
+          return {
+            en: "This listening word helps you catch answers, numbers, and details.",
+            zh: "这个听力词可以帮助你抓住答案、数字和细节。",
+          };
+        }
+        return {
+          en: "This exam word helps you speak, write, read, or listen more effectively.",
+          zh: "这个考试词可以帮助你更有效地说、写、读或听。",
+        };
+      }
+
+      function buildDailyLesson(seedDateKey, source = "local") {
+        const hash = hashString(seedDateKey);
+        const vocab = vocabItems[hash % vocabItems.length];
+        const cycle = cycleData[hash % cycleData.length];
+        const frame = frames[hash % frames.length];
+        const meaning = categoryMeaning(vocab.category, vocab.term);
+        return {
+          seedDateKey,
+          source,
+          vocab,
+          cycle,
+          frame,
+          meaningEn: meaning.en,
+          meaningZh: meaning.zh,
+          promptEn: `Use this frame: ${frame.en}`,
+          promptZh: `使用这个句型：${frame.zh}`,
+          sourceEn: "This lesson is auto-picked from the word bank and refreshes every day.",
+          sourceZh: "这节课会从词汇库里自动抽取，并每天刷新。",
+        };
+      }
+
+      function renderDailyLesson(lesson) {
+        dailyLessonCycle.textContent = `Cycle ${lesson.cycle.number}`;
+        dailyLessonWord.textContent = lesson.vocab.term;
+        dailyLessonZh.textContent = lesson.vocab.zh;
+        dailyLessonDate.textContent = lesson.seedDateKey;
+        dailyLessonMeaningEn.textContent = lesson.meaningEn;
+        dailyLessonMeaningZh.textContent = lesson.meaningZh;
+        dailyLessonExampleEn.textContent = lesson.vocab.exampleEn;
+        dailyLessonExampleZh.textContent = lesson.vocab.exampleZh;
+        dailyLessonPromptEn.textContent = lesson.promptEn;
+        dailyLessonPromptZh.textContent = lesson.promptZh;
+        dailyLessonSourceEn.textContent = lesson.sourceEn;
+        dailyLessonSourceZh.textContent = lesson.sourceZh;
+      }
+
+      function openDailyLesson(lesson, auto = false) {
+        renderDailyLesson(lesson);
+        dailyModal.classList.remove("hidden");
+        dailyModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        if (auto) {
+          saveDailyState({ lastShown: lesson.seedDateKey, source: lesson.source });
+        }
+        window.setTimeout(() => {
+          dailyModalClose.focus({ preventScroll: true });
+        }, 0);
+      }
+
+      function closeDailyLesson() {
+        dailyModal.classList.add("hidden");
+        dailyModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        dailyLessonBtn.focus({ preventScroll: true });
+      }
+
+      async function loadDailyLesson() {
+        const fallbackDateKey = getKualaLumpurDateKey();
+        try {
+          const response = await fetch(`${dailyLessonPath}?v=${encodeURIComponent(fallbackDateKey)}`, {
+            cache: "no-store",
+          });
+          if (!response.ok) {
+            return buildDailyLesson(fallbackDateKey, "local");
+          }
+          const payload = await response.json();
+          if (payload && typeof payload.dateKey === "string" && payload.dateKey) {
+            if (payload.vocab && payload.cycle && payload.frame) {
+              return {
+                ...payload,
+                seedDateKey: payload.dateKey,
+              };
+            }
+            return buildDailyLesson(payload.dateKey, payload.source || "workflow");
+          }
+        } catch {
+          // Use the locally generated daily seed.
+        }
+        return buildDailyLesson(fallbackDateKey, "local");
+      }
+
+      async function initDailyLesson() {
+        const lesson = await loadDailyLesson();
+        const dailyState = loadDailyState();
+        renderDailyLesson(lesson);
+
+        if (dailyState.lastShown !== lesson.seedDateKey) {
+          window.setTimeout(() => openDailyLesson(lesson, true), 900);
+        }
+
+        dailyLessonBtn.addEventListener("click", () => openDailyLesson(lesson, false));
+
+        if (dailyModalBackdrop) {
+          dailyModalBackdrop.addEventListener("click", closeDailyLesson);
+        }
+        if (dailyModalClose) {
+          dailyModalClose.addEventListener("click", closeDailyLesson);
+        }
+        if (dailyLessonGotIt) {
+          dailyLessonGotIt.addEventListener("click", closeDailyLesson);
+        }
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !dailyModal.classList.contains("hidden")) {
+            closeDailyLesson();
+          }
+        });
+      }
+
+      function updateProgressSummary() {
+        const count = progressSet.size;
+        doneCount.textContent = String(count);
+        progressFill.style.width = `${(count / 90) * 100}%`;
+      }
+
+      function phaseLabel(phase) {
+        return phase === 1 ? "Phase 1" : phase === 2 ? "Phase 2" : "Phase 3";
+      }
+
+      function cycleSearchText(cycle) {
+        return [
+          cycle.titleEn,
+          cycle.titleZh,
+          cycle.summaryEn,
+          cycle.summaryZh,
+          cycle.focusWords.join(" "),
+        ]
+          .join(" ")
+          .toLowerCase();
+      }
+
+      function dayCardHtml(dayNumber, cycle, template) {
+        const built = template.build(cycle);
+        const search = [
+          cycle.titleEn,
+          cycle.titleZh,
+          template.titleEn,
+          template.titleZh,
+          template.nameEn,
+          template.nameZh,
+          built.taskEn,
+          built.taskZh,
+          built.exampleEn,
+          built.exampleZh,
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return `
+          <article class="day-card" data-day="${dayNumber}" data-search="${search}">
+            <div class="day-top">
+              <div>
+                <strong>Day ${dayNumber}</strong>
+                <span>${template.titleEn} / ${template.titleZh}</span>
+              </div>
+              <label class="done-toggle">
+                <input type="checkbox" data-progress-day="${dayNumber}" />
+                <span>Done</span>
+              </label>
+            </div>
+            <h5 class="en">${template.titleEn}</h5>
+            <h5 class="zh">${template.titleZh}</h5>
+            <p class="day-copy en">${built.taskEn}</p>
+            <p class="day-copy zh">${built.taskZh}</p>
+            <p class="day-example en">${built.exampleEn}</p>
+            <p class="day-example zh">${built.exampleZh}</p>
+          </article>
+        `;
+      }
+
+      function cycleCardHtml(cycle, indexInPhase) {
+        const dayStart = (cycle.number - 1) * 6 + 1;
+        const dayTemplateHtml = dayTemplates
+          .map((template, index) => dayCardHtml(dayStart + index, cycle, template))
+          .join("");
+        const search = cycleSearchText(cycle);
+        const chips = cycle.focusWords.map((word) => `<span>${word}</span>`).join("");
+
+        return `
+          <article class="cycle-card" data-search="${search}" data-phase="${cycle.phase}">
+            <div class="cycle-head">
+              <div>
+                <span class="cycle-index">Cycle ${cycle.number}</span>
+                <h4 class="en">${cycle.titleEn}</h4>
+                <h4 class="zh">${cycle.titleZh}</h4>
+              </div>
+              <span class="cycle-tag">${phaseLabel(cycle.phase)}</span>
+            </div>
+            <p class="cycle-summary en">${cycle.summaryEn}</p>
+            <p class="cycle-summary zh">${cycle.summaryZh}</p>
+            <div class="focus-chips" aria-label="Focus words">${chips}</div>
+            <div class="day-grid">${dayTemplateHtml}</div>
+          </article>
+        `;
+      }
+
+      function renderPlan() {
+        const phase1 = cycleData.slice(0, 5).map(cycleCardHtml).join("");
+        const phase2 = cycleData.slice(5, 10).map(cycleCardHtml).join("");
+        const phase3 = cycleData.slice(10, 15).map(cycleCardHtml).join("");
+        planRoot.innerHTML = phase1;
+        planRoot2.innerHTML = phase2;
+        planRoot3.innerHTML = phase3;
+      }
+
+      function renderVocab() {
+        vocabGrid.innerHTML = vocabItems
+          .map((item) => {
+            const search = [item.term, item.zh, item.exampleEn, item.exampleZh, item.category]
+              .join(" ")
+              .toLowerCase();
+            const categoryLabel =
+              item.category === "speaking"
+                ? "Speaking"
+                : item.category === "listening"
+                  ? "Listening"
+                  : item.category === "reading"
+                    ? "Reading"
+                    : item.category === "writing"
+                      ? "Writing"
+                      : "Study";
+
+            return `
+              <article class="vocab-card" data-category="${item.category}" data-search="${search}">
+                <div class="term">
+                  <div>
+                    <strong class="word">${item.term}</strong>
+                    <span class="cn">${item.zh}</span>
+                  </div>
+                  <span class="tag">${categoryLabel}</span>
+                </div>
+                <p class="en">${item.exampleEn}</p>
+                <p class="zh">${item.exampleZh}</p>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderFrames() {
+        framesGrid.innerHTML = frames
+          .map(
+            (item) => `
+              <article class="frame-card">
+                <span class="slot">${item.slot}</span>
+                <strong class="en">${item.en}</strong>
+                <strong class="zh">${item.zh}</strong>
+                <p class="en">${item.useEn}</p>
+                <p class="zh">${item.useZh}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function renderTips() {
+        tipsGrid.innerHTML = tips
+          .map(
+            (tip, index) => `
+              <article class="tip-card">
+                <span class="num">${index + 1}</span>
+                <strong class="en">${tip.en}</strong>
+                <strong class="zh">${tip.zh}</strong>
+                <p class="en">${tip.detailEn}</p>
+                <p class="zh">${tip.detailZh}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function updateCheckmarks() {
+        document.querySelectorAll("[data-progress-day]").forEach((checkbox) => {
+          const day = Number(checkbox.dataset.progressDay);
+          checkbox.checked = progressSet.has(day);
+        });
+        updateProgressSummary();
+      }
+
+      function applyFilters() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        document.querySelectorAll(".phase-group").forEach((group) => {
+          const phase = group.dataset.phaseGroup;
+          group.classList.toggle("hidden", activePhase !== "all" && activePhase !== phase);
+        });
+
+        document.querySelectorAll(".cycle-card").forEach((cycle) => {
+          const cycleMatches = !query || cycle.dataset.search.includes(query);
+          let anyDayVisible = false;
+
+          cycle.querySelectorAll(".day-card").forEach((day) => {
+            const matches = !query || day.dataset.search.includes(query);
+            day.classList.toggle("hidden", !matches);
+            anyDayVisible = anyDayVisible || matches;
+          });
+
+          cycle.classList.toggle("hidden", !cycleMatches && !anyDayVisible);
+        });
+
+        document.querySelectorAll(".vocab-card").forEach((card) => {
+          const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
+          const matchesQuery = !query || card.dataset.search.includes(query);
+          card.classList.toggle("hidden", !(matchesCategory && matchesQuery));
+        });
+      }
+
+      function setPhase(phase) {
+        activePhase = phase;
+        phaseButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.phaseBtn === phase);
+        });
+        applyFilters();
+      }
+
+      function setLanguage(lang) {
+        activeLang = lang;
+        document.body.dataset.language = lang;
+        langButtons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.langBtn === lang);
+        });
+      }
+
+      function setCategory(category) {
+        activeCategory = category;
+        document.querySelectorAll(".category-btn").forEach((button) => {
+          button.classList.toggle("active", button.dataset.categoryBtn === category);
+        });
+        applyFilters();
+      }
+
+      function buildCategoryRow() {
+        const labels = [
+          { key: "all", label: "All / 全部" },
+          { key: "speaking", label: "Speaking / 口语" },
+          { key: "listening", label: "Listening / 听力" },
+          { key: "reading", label: "Reading / 阅读" },
+          { key: "writing", label: "Writing / 写作" },
+          { key: "study", label: "Study / 学习" },
+        ];
+
+        categoryRow.innerHTML = labels
+          .map(
+            (item, index) =>
+              `<button class="category-btn ${index === 0 ? "active" : ""}" type="button" data-category-btn="${item.key}">${item.label}</button>`
+          )
+          .join("");
+
+        categoryRow.querySelectorAll(".category-btn").forEach((button) => {
+          button.addEventListener("click", () => setCategory(button.dataset.categoryBtn));
+        });
+      }
+
+      function attachEvents() {
+        phaseButtons.forEach((button) => {
+          button.addEventListener("click", () => setPhase(button.dataset.phaseBtn));
+        });
+
+        langButtons.forEach((button) => {
+          button.addEventListener("click", () => setLanguage(button.dataset.langBtn));
+        });
+
+        searchInput.addEventListener("input", applyFilters);
+        clearProgress.addEventListener("click", () => {
+          progressSet = new Set();
+          saveProgress();
+          updateCheckmarks();
+        });
+
+        document.addEventListener("change", (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLInputElement)) return;
+          if (!target.matches("[data-progress-day]")) return;
+
+          const day = Number(target.dataset.progressDay);
+          if (target.checked) {
+            progressSet.add(day);
+          } else {
+            progressSet.delete(day);
+          }
+
+          saveProgress();
+          updateProgressSummary();
+        });
+      }
+
+      renderPlan();
+      renderVocab();
+      renderFrames();
+      renderTips();
+      buildCategoryRow();
+      attachEvents();
+      updateCheckmarks();
+      applyFilters();
+      setLanguage("both");
+      initDailyLesson();
+    </script>
+  </body>
+</html>
