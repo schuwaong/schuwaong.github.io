@@ -4,10 +4,14 @@
   "source": "workflow",
   "vocab": {
     "category": "reading",
-    "term": "scan",
-    "zh": "寻读",
-    "exampleEn": "Scan for names, dates, and key words.",
-    "exampleZh": "寻读姓名、日期和关键词。"
+    "term": "significant",
+    "zh": "显著的；重要的",
+    "simpleEn": "important or large enough to notice",
+    "simpleZh": "重要或明显到能被注意到。",
+    "exampleEn": "There was a significant increase in the number of people studying online.",
+    "exampleZh": "线上学习的人数有显著增长。",
+    "upgradeEn": "Use significant increase, significant difference, or significant impact.",
+    "upgradeZh": "常用搭配：significant increase / difference / impact。"
   },
   "cycle": {
     "number": 10,
@@ -30,10 +34,10 @@
     "useEn": "Use to connect ideas smoothly.",
     "useZh": "用来把句子连接起来。"
   },
-  "meaningEn": "This reading word helps you understand questions and paraphrases faster.",
-  "meaningZh": "这个阅读词可以帮助你更快看懂题目和改写。",
-  "promptEn": "Use this frame: Moreover, ...",
-  "promptZh": "使用这个句型：此外，...",
-  "sourceEn": "This lesson is auto-picked from the word bank and refreshes every day.",
-  "sourceZh": "这节课会从词汇库里自动抽取，并每天刷新。"
+  "meaningEn": "This is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.",
+  "meaningZh": "这是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。",
+  "promptEn": "Write one IELTS sentence with \"significant\". Then try this frame: Moreover, ...",
+  "promptZh": "用 \"significant\" 写一句雅思句子，再试试这个句型：此外，...",
+  "sourceEn": "This harder word is auto-picked for Becky and refreshes every day.",
+  "sourceZh": "这个高分词会每天自动为 Becky 刷新。"
 }

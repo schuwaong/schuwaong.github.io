@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>IELTS 90-Day Plan | 90天复习计划</title>
+    <title>Becky's IELTS Plan | 雅思90天复习</title>
     <meta
       name="description"
-      content="A bilingual 90-day IELTS study planner with Chinese translations, vocabulary examples, speaking practice, and a day-by-day revision route."
+      content="A simpler bilingual IELTS planner for Becky with Chinese translations, harder daily vocabulary, sentence upgrades, and a disappearing checklist."
     />
     <style>
       :root {
@@ -134,7 +134,7 @@
 
       .hero {
         position: relative;
-        min-height: 74vh;
+        min-height: 66vh;
         overflow: hidden;
         border-bottom: 1px solid var(--line);
       }
@@ -179,9 +179,9 @@
 
       .hero h1 {
         margin: 0;
-        max-width: 12ch;
-        font-size: 4.2rem;
-        line-height: 0.95;
+        max-width: 14ch;
+        font-size: 3.8rem;
+        line-height: 1;
         letter-spacing: 0;
       }
 
@@ -384,7 +384,7 @@
       }
 
       .progress-meta {
-        min-width: 118px;
+        min-width: 148px;
         font-weight: 700;
       }
 
@@ -416,6 +416,13 @@
         border-color: transparent;
         color: #fff;
         background: var(--navy);
+      }
+
+      .progress-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
       }
 
       .phase-group {
@@ -535,6 +542,12 @@
         border: 1px solid var(--line);
         border-radius: var(--radius-sm);
         background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 248, 252, 0.96));
+      }
+
+      .day-card.is-complete {
+        border-color: rgba(13, 141, 123, 0.24);
+        background: rgba(232, 246, 239, 0.68);
+        opacity: 0.72;
       }
 
       .day-top {
@@ -944,6 +957,12 @@
         line-height: 1.55;
       }
 
+      .daily-section .daily-upgrade {
+        margin-top: 6px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
       .daily-grid {
         display: grid;
         gap: 10px;
@@ -1046,18 +1065,17 @@
   <body data-phase="all" data-language="both">
     <header class="topbar">
       <a class="brand" href="#top">
-        <span class="brand-mark">IL</span>
-        <span>IELTS 90-Day Plan</span>
+        <span class="brand-mark">BK</span>
+        <span>Becky's IELTS</span>
       </a>
       <nav class="toplinks" aria-label="Page sections">
-        <a href="#plan">Plan</a>
-        <a href="#vocab">Vocabulary</a>
-        <a href="#frames">Sentence frames</a>
-        <a href="#upgrade">Sentence upgrades</a>
-        <a href="#tips">Chinese learner tips</a>
+        <a href="#plan">Checklist</a>
+        <a href="#vocab">Words</a>
+        <a href="#upgrade">Chinese to English</a>
+        <a href="#frames">Frames</a>
       </nav>
       <div class="topmeta">
-        <button class="ghost-link" id="dailyLessonBtn" type="button">Daily lesson</button>
+        <button class="ghost-link" id="dailyLessonBtn" type="button">Hard word</button>
         <a class="ghost-link" href="https://schuwaong.github.io/" target="_blank" rel="noreferrer">Site root</a>
       </div>
     </header>
@@ -1072,8 +1090,8 @@
       >
         <div class="daily-modal__head">
           <div>
-            <p class="eyebrow">Daily lesson / 每日一课</p>
-            <h2 id="dailyLessonTitle">One-minute vocabulary lesson</h2>
+            <p class="eyebrow">Band 7+ word / 高分词汇</p>
+            <h2 id="dailyLessonTitle">One-minute hard word</h2>
           </div>
           <button class="icon-btn" id="dailyModalClose" type="button" aria-label="Close daily lesson">
             ×
@@ -1091,7 +1109,7 @@
           </div>
 
           <div class="daily-section">
-            <strong>Quick meaning / 快速理解</strong>
+            <strong>Meaning / 意思</strong>
             <p class="en" id="dailyLessonMeaningEn"></p>
             <p class="zh" id="dailyLessonMeaningZh"></p>
           </div>
@@ -1100,10 +1118,12 @@
             <strong>Example / 例句</strong>
             <p class="en" id="dailyLessonExampleEn"></p>
             <p class="zh" id="dailyLessonExampleZh"></p>
+            <p class="en daily-upgrade" id="dailyLessonUpgradeEn"></p>
+            <p class="zh daily-upgrade" id="dailyLessonUpgradeZh"></p>
           </div>
 
           <div class="daily-section">
-            <strong>One-minute drill / 一分钟练习</strong>
+            <strong>Use it now / 现在就用</strong>
             <div class="daily-grid">
               <span class="tag en" id="dailyLessonPromptEn"></span>
               <span class="tag zh" id="dailyLessonPromptZh"></span>
@@ -1130,20 +1150,19 @@
 
         <div class="hero-inner">
           <div>
-            <p class="eyebrow">IELTS study planner | 雅思复习计划</p>
-            <h1 id="hero-title">IELTS 90-Day Plan</h1>
+            <p class="eyebrow">For Becky | 给 Becky 的雅思复习</p>
+            <h1 id="hero-title">Becky's IELTS Plan</h1>
             <p class="lede">
-              A bilingual revision page for Chinese-speaking students. Use English and
-              Chinese together to train listening, reading, speaking, and writing with
-              examples, vocabulary, and a repeatable 90-day routine.
+              A cleaner 90-day IELTS page for Becky: tick one small card, make it disappear,
+              learn one harder word each day, and turn Chinese thoughts into natural English.
             </p>
 
             <div class="hero-controls">
               <div class="segmented" role="tablist" aria-label="Phase filter">
                 <button class="active" type="button" data-phase-btn="all">All</button>
-                <button type="button" data-phase-btn="1">Phase 1</button>
-                <button type="button" data-phase-btn="2">Phase 2</button>
-                <button type="button" data-phase-btn="3">Phase 3</button>
+                <button type="button" data-phase-btn="1">Days 1-30</button>
+                <button type="button" data-phase-btn="2">Days 31-60</button>
+                <button type="button" data-phase-btn="3">Days 61-90</button>
               </div>
 
               <div class="segmented" role="tablist" aria-label="Language filter">
@@ -1153,7 +1172,7 @@
               </div>
 
               <label class="searchbox" for="searchInput">
-                <span>Find a word, day, or example / 搜索词汇、日程或例句</span>
+                <span>Search / 搜索</span>
                 <input id="searchInput" type="search" placeholder="Try: speaking, overview, collocation, opinion" />
               </label>
             </div>
@@ -1162,29 +1181,29 @@
           <div class="hero-rail" aria-label="Quick summary">
             <div class="hero-chip">
               <div>
-                <strong>90 days</strong>
-                <span>15 study cycles / 15 个学习循环</span>
+                <strong>90 cards</strong>
+                <span>Tick one, it hides / 勾选后隐藏</span>
               </div>
               <span>01</span>
             </div>
             <div class="hero-chip">
               <div>
-                <strong>Bilingual</strong>
-                <span>English + Simplified Chinese</span>
+                <strong>Chinese support</strong>
+                <span>English + 中文解释</span>
               </div>
               <span>02</span>
             </div>
             <div class="hero-chip">
               <div>
-                <strong>Vocabulary bank</strong>
-                <span>Words, collocations, and examples</span>
+                <strong>Hard daily word</strong>
+                <span>Band 7+ vocabulary popup</span>
               </div>
               <span>03</span>
             </div>
             <div class="hero-chip">
               <div>
-                <strong>Progress tracking</strong>
-                <span>Mark each day as done</span>
+                <strong>Sentence upgrades</strong>
+                <span>中文想法变自然英文</span>
               </div>
               <span>04</span>
             </div>
@@ -1196,56 +1215,50 @@
         <div class="inner">
           <div class="section-head">
             <div>
-              <p class="eyebrow">How to use it / 使用方法</p>
-              <h2>Simple enough to keep using every day.</h2>
+              <p class="eyebrow">How Becky uses it / Becky 怎么用</p>
+              <h2>One card at a time.</h2>
             </div>
             <p>
-              The plan uses 3 phases and 15 six-day cycles. Every cycle repeats the same
-              learning rhythm: spot the task, learn words, copy a model, produce your own
-              answer, do one timed set, then review and repeat.
+              This page is intentionally simple: choose a card, finish the task, tick Done,
+              and the card disappears. The page keeps the words, frames, and Chinese support nearby.
             </p>
           </div>
 
           <div class="summary-grid">
             <article class="summary-card">
-              <span class="kicker">Step 1 / 第 1 步</span>
-              <strong>Read the question first, then Chinese.</strong>
+              <span class="kicker">1 / 第 1 步</span>
+              <strong>Pick one card.</strong>
               <p>
-                Start with the English prompt, check the translation, and then say the task
-                back in simple words.
+                Do not plan the whole day first. Start with the next visible card.
               </p>
             </article>
             <article class="summary-card">
-              <span class="kicker">Step 2 / 第 2 步</span>
-              <strong>Build a useful word log.</strong>
+              <span class="kicker">2 / 第 2 步</span>
+              <strong>Use Chinese to understand.</strong>
               <p>
-                Write the word, the meaning, the example, and the Chinese note. This is how
-                weak language becomes repeatable marks.
+                Read the Chinese note quickly, then answer in English.
               </p>
             </article>
             <article class="summary-card">
-              <span class="kicker">Step 3 / 第 3 步</span>
-              <strong>Use short answers first.</strong>
+              <span class="kicker">3 / 第 3 步</span>
+              <strong>Tick it when finished.</strong>
               <p>
-                If you are stuck, write the simplest correct English. Short and clear beats a
-                blank page.
+                Completed cards hide automatically, so the page feels lighter.
               </p>
             </article>
             <article class="summary-card">
-              <span class="kicker">Step 4 / 第 4 步</span>
-              <strong>Review every sixth day.</strong>
+              <span class="kicker">4 / 第 4 步</span>
+              <strong>Learn one harder word.</strong>
               <p>
-                The plan is built around a repeatable six-day loop so you can revise, test,
-                and recover without guessing what to do next.
+                The daily popup is now for stronger IELTS vocabulary and examples.
               </p>
             </article>
           </div>
 
           <div class="band-slab">
-            <strong>Study rule / 学习规则</strong>
+            <strong>Becky's rule / Becky 的规则</strong>
             <p>
-              Learn one thing, practice it once, mark it once, and review it once. That small
-              loop is enough to change the way a revision day feels.
+              One visible card is enough to start. The goal is steady practice, not a perfect mood.
             </p>
           </div>
         </div>
@@ -1255,12 +1268,12 @@
         <div class="inner">
           <div class="section-head">
             <div>
-              <p class="eyebrow">90-day route / 90天路线</p>
-              <h2>Three phases. Fifteen cycles. Ninety days.</h2>
+              <p class="eyebrow">Checklist / 勾选清单</p>
+              <h2>Finish a card. Watch it disappear.</h2>
             </div>
             <p>
-              Phase 1 builds the base, Phase 2 grows skill, and Phase 3 locks in exam mode.
-              Keep the same routine, and let the task type change instead of the method.
+              Done cards are hidden by default so Becky only sees what still needs attention.
+              Turn on Show done to review or untick something.
             </p>
           </div>
 
@@ -1271,7 +1284,10 @@
             <div class="progress-bar" aria-label="Progress">
               <span id="progressFill"></span>
             </div>
-            <button class="action-btn" id="clearProgress" type="button">Clear progress</button>
+            <div class="progress-actions">
+              <button class="action-btn" id="showDoneToggle" type="button">Show done</button>
+              <button class="action-btn" id="clearProgress" type="button">Clear</button>
+            </div>
           </div>
 
           <div class="phase-group" data-phase-group="1">
@@ -1687,6 +1703,119 @@
         { category: "study", term: "planner", zh: "计划表", exampleEn: "The planner keeps your practice organized.", exampleZh: "计划表能帮你整理练习。" },
       ];
 
+      const advancedDailyWords = [
+        {
+          category: "writing",
+          term: "nuanced",
+          zh: "有细微差别的；更有层次的",
+          simpleEn: "not too simple; showing small differences",
+          simpleZh: "不是很简单粗暴，而是能看出细微差别。",
+          exampleEn: "A nuanced answer considers both the benefits and the possible drawbacks.",
+          exampleZh: "有层次的答案会同时考虑好处和可能的缺点。",
+          upgradeEn: "Instead of saying something is simply good or bad, say it is a nuanced issue.",
+          upgradeZh: "不要只说好或坏，可以说这是一个 nuanced issue。",
+        },
+        {
+          category: "writing",
+          term: "substantial",
+          zh: "大量的；重要的",
+          simpleEn: "large enough to matter",
+          simpleZh: "数量或影响大到值得重视。",
+          exampleEn: "Online learning can save students a substantial amount of time.",
+          exampleZh: "线上学习可以为学生节省大量时间。",
+          upgradeEn: "Use substantial instead of very big when describing impact, cost, or change.",
+          upgradeZh: "描述影响、成本或变化时，用 substantial 比 very big 更像雅思表达。",
+        },
+        {
+          category: "writing",
+          term: "mitigate",
+          zh: "减轻；缓解",
+          simpleEn: "to make a problem less serious",
+          simpleZh: "让问题没那么严重。",
+          exampleEn: "Governments can mitigate traffic congestion by improving public transport.",
+          exampleZh: "政府可以通过改善公共交通来缓解交通拥堵。",
+          upgradeEn: "Use mitigate with problems: mitigate stress, risk, pressure, or pollution.",
+          upgradeZh: "mitigate 常搭配问题：stress、risk、pressure、pollution。",
+        },
+        {
+          category: "speaking",
+          term: "reluctant",
+          zh: "不太愿意的；犹豫的",
+          simpleEn: "not really willing to do something",
+          simpleZh: "不是很想做，心里有点抗拒。",
+          exampleEn: "I was reluctant to speak English at first because I was afraid of making mistakes.",
+          exampleZh: "一开始我不太愿意说英语，因为我怕犯错。",
+          upgradeEn: "Use I was reluctant to... when explaining fear or hesitation.",
+          upgradeZh: "解释害怕或犹豫时，可以用 I was reluctant to...",
+        },
+        {
+          category: "speaking",
+          term: "overwhelming",
+          zh: "令人难以承受的；压倒性的",
+          simpleEn: "too strong, too much, or hard to handle",
+          simpleZh: "太多、太强，让人有压力。",
+          exampleEn: "Preparing for several IELTS sections at the same time can feel overwhelming.",
+          exampleZh: "同时准备雅思几个部分可能会让人觉得压力很大。",
+          upgradeEn: "Use overwhelming for pressure, information, emotion, or workload.",
+          upgradeZh: "overwhelming 适合形容压力、信息、情绪或工作量。",
+        },
+        {
+          category: "reading",
+          term: "inconsistent",
+          zh: "不一致的；不稳定的",
+          simpleEn: "changing too much or not matching",
+          simpleZh: "前后不一致，或者表现不稳定。",
+          exampleEn: "The writer argues that inconsistent rules can confuse young learners.",
+          exampleZh: "作者认为不一致的规则会让年轻学习者困惑。",
+          upgradeEn: "Use inconsistent when two ideas, results, or habits do not match.",
+          upgradeZh: "两个观点、结果或习惯不一致时，用 inconsistent。",
+        },
+        {
+          category: "writing",
+          term: "consequently",
+          zh: "因此；结果是",
+          simpleEn: "as a result",
+          simpleZh: "表示结果，相当于 as a result。",
+          exampleEn: "Many people work long hours; consequently, they have less time for exercise.",
+          exampleZh: "许多人工作时间很长，因此他们锻炼的时间更少。",
+          upgradeEn: "Use consequently to link a cause to a formal result.",
+          upgradeZh: "consequently 用来把原因和正式结果连起来。",
+        },
+        {
+          category: "writing",
+          term: "prioritise",
+          zh: "优先考虑",
+          simpleEn: "to treat something as more important",
+          simpleZh: "把某件事放在更重要的位置。",
+          exampleEn: "Students should prioritise accuracy before trying to use complex vocabulary.",
+          exampleZh: "学生应该先重视准确性，再尝试复杂词汇。",
+          upgradeEn: "Use prioritise when giving advice or discussing choices.",
+          upgradeZh: "给建议或讨论选择时可以用 prioritise。",
+        },
+        {
+          category: "speaking",
+          term: "genuinely",
+          zh: "真正地；真诚地",
+          simpleEn: "really, in an honest way",
+          simpleZh: "真的、发自内心地。",
+          exampleEn: "I genuinely enjoy learning new expressions when I can use them in real conversations.",
+          exampleZh: "当我能在真实对话中使用新表达时，我真的很享受学习它们。",
+          upgradeEn: "Use genuinely to make personal answers sound more sincere.",
+          upgradeZh: "genuinely 能让个人回答更真诚自然。",
+        },
+        {
+          category: "reading",
+          term: "significant",
+          zh: "显著的；重要的",
+          simpleEn: "important or large enough to notice",
+          simpleZh: "重要或明显到能被注意到。",
+          exampleEn: "There was a significant increase in the number of people studying online.",
+          exampleZh: "线上学习的人数有显著增长。",
+          upgradeEn: "Use significant increase, significant difference, or significant impact.",
+          upgradeZh: "常用搭配：significant increase / difference / impact。",
+        },
+      ];
+
       const frames = [
         {
           slot: "Speaking / 口语",
@@ -1891,10 +2020,13 @@
       const dailyLessonMeaningZh = document.getElementById("dailyLessonMeaningZh");
       const dailyLessonExampleEn = document.getElementById("dailyLessonExampleEn");
       const dailyLessonExampleZh = document.getElementById("dailyLessonExampleZh");
+      const dailyLessonUpgradeEn = document.getElementById("dailyLessonUpgradeEn");
+      const dailyLessonUpgradeZh = document.getElementById("dailyLessonUpgradeZh");
       const dailyLessonPromptEn = document.getElementById("dailyLessonPromptEn");
       const dailyLessonPromptZh = document.getElementById("dailyLessonPromptZh");
       const dailyLessonSourceEn = document.getElementById("dailyLessonSourceEn");
       const dailyLessonSourceZh = document.getElementById("dailyLessonSourceZh");
+      const showDoneToggle = document.getElementById("showDoneToggle");
       const phaseButtons = document.querySelectorAll("[data-phase-btn]");
       const langButtons = document.querySelectorAll("[data-lang-btn]");
       const storageKey = "ielts-90-progress";
@@ -1911,6 +2043,7 @@
       let activePhase = "all";
       let activeLang = "both";
       let activeCategory = "all";
+      let showCompletedCards = false;
       let progressSet = loadProgress();
 
       function loadProgress() {
@@ -1967,7 +2100,13 @@
       }
 
       function categoryMeaning(category, term) {
-        if (category === "pronunciation") {
+        if (term) {
+          return {
+            en: `${term} is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.`,
+            zh: `${term} 是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。`,
+          };
+        }
+        if (category === "speaking") {
           return {
             en: "This speaking word helps you sound clearer and more natural.",
             zh: "这个口语词可以帮助你说得更清楚、更自然。",
@@ -1999,7 +2138,7 @@
 
       function buildDailyLesson(seedDateKey, source = "local") {
         const hash = hashString(seedDateKey);
-        const vocab = vocabItems[hash % vocabItems.length];
+        const vocab = advancedDailyWords[hash % advancedDailyWords.length];
         const cycle = cycleData[hash % cycleData.length];
         const frame = frames[hash % frames.length];
         const meaning = categoryMeaning(vocab.category, vocab.term);
@@ -2011,10 +2150,10 @@
           frame,
           meaningEn: meaning.en,
           meaningZh: meaning.zh,
-          promptEn: `Use this frame: ${frame.en}`,
-          promptZh: `使用这个句型：${frame.zh}`,
-          sourceEn: "This lesson is auto-picked from the word bank and refreshes every day.",
-          sourceZh: "这节课会从词汇库里自动抽取，并每天刷新。",
+          promptEn: `Write one IELTS sentence with "${vocab.term}". Then try this frame: ${frame.en}`,
+          promptZh: `用 "${vocab.term}" 写一句雅思句子，再试试这个句型：${frame.zh}`,
+          sourceEn: "This harder word is auto-picked for Becky and refreshes every day.",
+          sourceZh: "这个高分词会每天自动为 Becky 刷新。",
         };
       }
 
@@ -2027,6 +2166,8 @@
         dailyLessonMeaningZh.textContent = lesson.meaningZh;
         dailyLessonExampleEn.textContent = lesson.vocab.exampleEn;
         dailyLessonExampleZh.textContent = lesson.vocab.exampleZh;
+        dailyLessonUpgradeEn.textContent = lesson.vocab.upgradeEn || lesson.frame.useEn || "";
+        dailyLessonUpgradeZh.textContent = lesson.vocab.upgradeZh || lesson.frame.useZh || "";
         dailyLessonPromptEn.textContent = lesson.promptEn;
         dailyLessonPromptZh.textContent = lesson.promptZh;
         dailyLessonSourceEn.textContent = lesson.sourceEn;
@@ -2064,7 +2205,7 @@
           }
           const payload = await response.json();
           if (payload && typeof payload.dateKey === "string" && payload.dateKey) {
-            if (payload.vocab && payload.cycle && payload.frame) {
+            if (payload.vocab && payload.vocab.upgradeEn && payload.cycle && payload.frame) {
               return {
                 ...payload,
                 seedDateKey: payload.dateKey,
@@ -2153,7 +2294,7 @@
               </div>
               <label class="done-toggle">
                 <input type="checkbox" data-progress-day="${dayNumber}" />
-                <span>Done</span>
+                <span>Done / 完成</span>
               </label>
             </div>
             <h5 class="en">${template.titleEn}</h5>
@@ -2347,9 +2488,14 @@
       function updateCheckmarks() {
         document.querySelectorAll("[data-progress-day]").forEach((checkbox) => {
           const day = Number(checkbox.dataset.progressDay);
+          const card = checkbox.closest(".day-card");
           checkbox.checked = progressSet.has(day);
+          if (card) {
+            card.classList.toggle("is-complete", checkbox.checked);
+          }
         });
         updateProgressSummary();
+        applyFilters();
       }
 
       function applyFilters() {
@@ -2365,12 +2511,16 @@
           let anyDayVisible = false;
 
           cycle.querySelectorAll(".day-card").forEach((day) => {
-            const matches = !query || day.dataset.search.includes(query);
-            day.classList.toggle("hidden", !matches);
-            anyDayVisible = anyDayVisible || matches;
+            const dayNumber = Number(day.dataset.day);
+            const isComplete = progressSet.has(dayNumber);
+            const matchesSearch = !query || day.dataset.search.includes(query);
+            const isVisible = matchesSearch && (showCompletedCards || !isComplete);
+            day.classList.toggle("hidden", !isVisible);
+            day.classList.toggle("is-complete", isComplete);
+            anyDayVisible = anyDayVisible || isVisible;
           });
 
-          cycle.classList.toggle("hidden", !cycleMatches && !anyDayVisible);
+          cycle.classList.toggle("hidden", !anyDayVisible);
         });
 
         document.querySelectorAll(".vocab-card").forEach((card) => {
@@ -2378,6 +2528,10 @@
           const matchesQuery = !query || card.dataset.search.includes(query);
           card.classList.toggle("hidden", !(matchesCategory && matchesQuery));
         });
+      }
+
+      function updateShowDoneButton() {
+        showDoneToggle.textContent = showCompletedCards ? "Hide done" : "Show done";
       }
 
       function setPhase(phase) {
@@ -2401,6 +2555,12 @@
         document.querySelectorAll(".category-btn").forEach((button) => {
           button.classList.toggle("active", button.dataset.categoryBtn === category);
         });
+        applyFilters();
+      }
+
+      function toggleCompletedCards() {
+        showCompletedCards = !showCompletedCards;
+        updateShowDoneButton();
         applyFilters();
       }
 
@@ -2436,6 +2596,7 @@
         });
 
         searchInput.addEventListener("input", applyFilters);
+        showDoneToggle.addEventListener("click", toggleCompletedCards);
         upgradeButton.addEventListener("click", upgradeTypedSentence);
         upgradeInput.addEventListener("keydown", (event) => {
           if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
@@ -2462,7 +2623,7 @@
           }
 
           saveProgress();
-          updateProgressSummary();
+          updateCheckmarks();
         });
       }
 
@@ -2473,6 +2634,7 @@
       renderTips();
       buildCategoryRow();
       attachEvents();
+      updateShowDoneButton();
       updateCheckmarks();
       applyFilters();
       showUpgradeResult(upgradeExamples[0]);

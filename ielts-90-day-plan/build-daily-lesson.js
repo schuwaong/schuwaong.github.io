@@ -98,6 +98,7 @@ function extractValue(name) {
 }
 
 const vocabItems = eval(extractArray("vocabItems")); // local data from the page
+const advancedDailyWords = eval(extractArray("advancedDailyWords"));
 const cycleData = eval(extractArray("cycleData"));
 const frames = eval(extractArray("frames"));
 
@@ -110,6 +111,12 @@ function hashString(value) {
 }
 
 function categoryMeaning(category) {
+  if (category) {
+    return {
+      en: "This is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.",
+      zh: "这是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。",
+    };
+  }
   if (category === "speaking") {
     return {
       en: "This speaking word helps you sound clearer and more natural.",
@@ -155,7 +162,7 @@ function getKualaLumpurDateKey(date = new Date()) {
 
 const dateKey = getKualaLumpurDateKey();
 const hash = hashString(dateKey);
-const vocab = vocabItems[hash % vocabItems.length];
+const vocab = advancedDailyWords[hash % advancedDailyWords.length] || vocabItems[hash % vocabItems.length];
 const cycle = cycleData[hash % cycleData.length];
 const frame = frames[hash % frames.length];
 const meaning = categoryMeaning(vocab.category);
@@ -169,10 +176,10 @@ const lesson = {
   frame,
   meaningEn: meaning.en,
   meaningZh: meaning.zh,
-  promptEn: `Use this frame: ${frame.en}`,
-  promptZh: `使用这个句型：${frame.zh}`,
-  sourceEn: "This lesson is auto-picked from the word bank and refreshes every day.",
-  sourceZh: "这节课会从词汇库里自动抽取，并每天刷新。",
+  promptEn: `Write one IELTS sentence with "${vocab.term}". Then try this frame: ${frame.en}`,
+  promptZh: `用 "${vocab.term}" 写一句雅思句子，再试试这个句型：${frame.zh}`,
+  sourceEn: "This harder word is auto-picked for Becky and refreshes every day.",
+  sourceZh: "这个高分词会每天自动为 Becky 刷新。",
 };
 
 fs.writeFileSync(outputPath, `${JSON.stringify(lesson, null, 2)}\n`);
