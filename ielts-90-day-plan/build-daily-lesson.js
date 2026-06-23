@@ -111,39 +111,39 @@ function hashString(value) {
 }
 
 function categoryMeaning(category) {
-  if (category) {
-    return {
-      en: "This is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.",
-      zh: "这是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。",
-    };
-  }
   if (category === "speaking") {
     return {
-      en: "This speaking word helps you sound clearer and more natural.",
-      zh: "这个口语词可以帮助你说得更清楚、更自然。",
+      en: "This speaking word helps Becky sound clearer and more natural.",
+      zh: "这个口语词可以帮助 Becky 说得更清楚、更自然。",
     };
   }
   if (category === "listening") {
     return {
-      en: "This listening word helps you catch answers, numbers, and details.",
-      zh: "这个听力词可以帮助你抓住答案、数字和细节。",
+      en: "This listening word helps Becky catch answers, numbers, and details.",
+      zh: "这个听力词可以帮助 Becky 抓住答案、数字和细节。",
     };
   }
   if (category === "reading") {
     return {
-      en: "This reading word helps you understand questions and paraphrases faster.",
-      zh: "这个阅读词可以帮助你更快看懂题目和改写。",
+      en: "This reading word helps Becky understand questions and paraphrases faster.",
+      zh: "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
     };
   }
   if (category === "writing") {
     return {
-      en: "This writing word helps you build strong IELTS paragraphs and ideas.",
-      zh: "这个写作词可以帮助你写出更强的雅思段落和观点。",
+      en: "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
+      zh: "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
+    };
+  }
+  if (category === "study") {
+    return {
+      en: "This study word helps Becky talk about learning and progress more precisely.",
+      zh: "这个学习词可以帮助 Becky 更准确地表达学习和进步。",
     };
   }
   return {
-    en: "This exam word helps you speak, write, read, or listen more effectively.",
-    zh: "这个考试词可以帮助你更有效地说、写、读或听。",
+    en: "This is a stronger IELTS word. Learn the meaning, shadow the example, then use it in one sentence.",
+    zh: "这是一个更高分的雅思词。先理解意思，跟读例句，再用它造一句。",
   };
 }
 
@@ -176,10 +176,10 @@ const lesson = {
   frame,
   meaningEn: meaning.en,
   meaningZh: meaning.zh,
-  promptEn: `Write one IELTS sentence with "${vocab.term}". Then try this frame: ${frame.en}`,
-  promptZh: `用 "${vocab.term}" 写一句雅思句子，再试试这个句型：${frame.zh}`,
-  sourceEn: "This harder word is auto-picked for Becky and refreshes every day.",
-  sourceZh: "这个高分词会每天自动为 Becky 刷新。",
+  promptEn: `China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with "${vocab.term}" using ${frame.en}`,
+  promptZh: `中文母语者练法：先看中文意思，跟读例句两遍，再用 "${vocab.term}" 和 ${frame.zh} 写一句 Becky 自己的话。`,
+  sourceEn: "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
+  sourceZh: "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。",
 };
 
 fs.writeFileSync(outputPath, `${JSON.stringify(lesson, null, 2)}\n`);

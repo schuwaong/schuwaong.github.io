@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-06-23",
-  "seedDateKey": "2026-06-23",
+  "dateKey": "2026-06-24",
+  "seedDateKey": "2026-06-24",
   "source": "workflow",
   "vocab": {
-    "category": "speaking",
-    "term": "overwhelming",
-    "zh": "令人难以承受的；压倒性的",
-    "simpleEn": "too strong, too much, or hard to handle",
-    "simpleZh": "太多、太强，让人有压力。",
-    "exampleEn": "Preparing for several IELTS sections at the same time can feel overwhelming.",
-    "exampleZh": "同时准备雅思几个部分可能会让人觉得压力很大。",
-    "upgradeEn": "Use overwhelming for pressure, information, emotion, or workload.",
-    "upgradeZh": "overwhelming 适合形容压力、信息、情绪或工作量。"
+    "category": "reading",
+    "term": "precise",
+    "zh": "精确的；准确的",
+    "simpleEn": "exact and clear",
+    "simpleZh": "准确、清楚。",
+    "exampleEn": "Precise language makes an answer easier to understand.",
+    "exampleZh": "精确的语言让答案更容易理解。",
+    "upgradeEn": "Use precise language/details/data for IELTS reading and writing.",
+    "upgradeZh": "常用搭配：precise language / details / data。"
   },
   "cycle": {
-    "number": 10,
-    "phase": 2,
-    "titleEn": "Paraphrasing and coherence",
-    "titleZh": "改写与连贯",
-    "summaryEn": "Turn simple ideas into cleaner IELTS lines and link them smoothly.",
-    "summaryZh": "把简单意思改成更像雅思答案的表达，并把句子连起来。",
+    "number": 11,
+    "phase": 3,
+    "titleEn": "Timed mini tests",
+    "titleZh": "限时小测",
+    "summaryEn": "Use short sets to build speed, focus, and calm under pressure.",
+    "summaryZh": "用短小测练速度、专注和压力下的稳定性。",
     "focusWords": [
-      "paraphrase / 改写",
-      "coherence / 连贯性",
-      "cohesion / 衔接",
-      "linker / 连接词"
+      "timed / 限时",
+      "focus / 专注",
+      "pressure / 压力",
+      "review / 复盘"
     ]
   },
   "frame": {
-    "slot": "Linking / 衔接",
-    "en": "Moreover, ...",
-    "zh": "此外，...",
-    "useEn": "Use to connect ideas smoothly.",
-    "useZh": "用来把句子连接起来。"
+    "slot": "Opinion / 观点",
+    "en": "In my view, ...",
+    "zh": "在我看来，...",
+    "useEn": "Use to show your opinion clearly.",
+    "useZh": "用来清楚表达观点。"
   },
-  "meaningEn": "This is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.",
-  "meaningZh": "这是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。",
-  "promptEn": "Write one IELTS sentence with \"overwhelming\". Then try this frame: Moreover, ...",
-  "promptZh": "用 \"overwhelming\" 写一句雅思句子，再试试这个句型：此外，...",
-  "sourceEn": "This harder word is auto-picked for Becky and refreshes every day.",
-  "sourceZh": "这个高分词会每天自动为 Becky 刷新。"
+  "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
+  "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"precise\" using In my view, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"precise\" 和 在我看来，... 写一句 Becky 自己的话。",
+  "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
+  "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
