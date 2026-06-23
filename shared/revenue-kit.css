@@ -1,0 +1,202 @@
+.revenue-panel {
+  display: grid;
+  gap: 18px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(30, 41, 59, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+.revenue-panel[data-tone="dark"] {
+  color: #fffaf0;
+  background: #232323;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.revenue-panel[data-tone="warm"] {
+  background: #fffaf0;
+  border-color: rgba(124, 78, 19, 0.18);
+}
+
+.revenue-head {
+  display: grid;
+  gap: 8px;
+  max-width: 780px;
+}
+
+.revenue-kicker,
+.revenue-pill {
+  margin: 0;
+  color: #0f766e;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-kicker,
+.revenue-panel[data-tone="dark"] .revenue-pill {
+  color: #5eead4;
+}
+
+.revenue-head h2,
+.revenue-card h3 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.revenue-head p,
+.revenue-card p,
+.revenue-status {
+  margin: 0;
+  color: #64748b;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-head p,
+.revenue-panel[data-tone="dark"] .revenue-card p,
+.revenue-panel[data-tone="dark"] .revenue-status {
+  color: rgba(255, 250, 240, 0.72);
+}
+
+.revenue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.revenue-card {
+  display: grid;
+  gap: 10px;
+  min-height: 100%;
+  padding: 16px;
+  border: 1px solid rgba(30, 41, 59, 0.12);
+  border-radius: 8px;
+  background: rgba(248, 250, 252, 0.72);
+}
+
+.revenue-panel[data-tone="dark"] .revenue-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.revenue-price {
+  display: block;
+  color: #0f172a;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-price {
+  color: #ffffff;
+}
+
+.revenue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.revenue-button,
+.revenue-panel button[type="submit"] {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  color: #ffffff;
+  background: #0f172a;
+  font: inherit;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.revenue-button.secondary {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-button.secondary {
+  color: #fffaf0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.revenue-form {
+  display: grid;
+  gap: 12px;
+}
+
+.revenue-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.revenue-form label {
+  display: grid;
+  gap: 6px;
+  color: #475569;
+  font-size: 0.82rem;
+  font-weight: 820;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-form label {
+  color: rgba(255, 250, 240, 0.78);
+}
+
+.revenue-form input,
+.revenue-form select,
+.revenue-form textarea {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(100, 116, 139, 0.28);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #0f172a;
+  background: #ffffff;
+  font: inherit;
+}
+
+.revenue-form textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.revenue-status {
+  min-height: 20px;
+  font-size: 0.88rem;
+}
+
+.revenue-status[data-state="success"] {
+  color: #047857;
+}
+
+.revenue-status[data-state="warning"] {
+  color: #b45309;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-status[data-state="success"] {
+  color: #86efac;
+}
+
+.revenue-panel[data-tone="dark"] .revenue-status[data-state="warning"] {
+  color: #fbbf24;
+}
+
+@media (max-width: 860px) {
+  .revenue-grid,
+  .revenue-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .revenue-actions,
+  .revenue-button,
+  .revenue-panel button[type="submit"] {
+    width: 100%;
+  }
+}

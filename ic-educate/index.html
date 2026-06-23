@@ -9,129 +9,825 @@
       content="IC Educate is a student workflow for upload, worksheet generation, quiz practice, marking, and feedback loops."
     />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="../shared/revenue-kit.css" />
   </head>
   <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="IC Educate home">
+        <span class="brand-mark">IC</span>
+        <span>IC Educate</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#products">Products</a>
+        <a href="#free-plan">Free plan</a>
+        <a href="#top">Build paper</a>
+        <a href="#mistake-memory">Mistake memory</a>
+        <a href="#tools">Orders</a>
+        <a href="#tools">App</a>
+        <a href="./ai-tutor-prompts.html">Tutor prompts</a>
+      </nav>
+      <a class="button small primary" href="#top">Build paper</a>
+    </header>
+
     <main class="page">
-      <section class="hero">
-        <p class="eyebrow">IC Educate</p>
-        <h1>IC Educate</h1>
-        <p class="intro">
-          Build an end-to-end learning loop in one place: learn a topic, take a
-          quiz, generate worksheets, and get feedback on completed work.
-        </p>
-        <div class="status-row">
-          <span id="backendStatus" class="chip">Checking backend...</span>
-          <a class="chip ghost" href="./ai-tutor-prompts.html">AI Tutor Prompts</a>
+      <section id="top" class="hero hero-main">
+        <div class="hero-copy">
+          <p class="eyebrow">IC Educate</p>
+          <h1>Scan work. Save mistakes. Revise smarter.</h1>
+          <p class="intro">
+            One student app for worksheet uploads, live memory, and clean revision cards.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tools">Open app</a>
+            <a class="button secondary" href="#free-plan">See 7-day preview</a>
+          </div>
+          <div class="status-row">
+            <span id="leadCaptureStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Scan-ready</span>
+            <span id="backendStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> PDF bridge</span>
+            <span id="mistakeMemoryStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Memory loop</span>
+          </div>
+          <div class="hero-points">
+            <span class="mini-chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Scan</span>
+            <span class="mini-chip"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Cards</span>
+            <span class="mini-chip"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> History</span>
+            <span class="mini-chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Revise</span>
+          </div>
+        </div>
+
+        <aside class="paper-studio">
+          <div class="hero-visual-stack" aria-label="IC Educate visual preview">
+            <figure class="visual-frame visual-frame-large">
+              <img src="./assets/subjects-suite-Dbrq0XHT.png" alt="Worksheet scan and dashboard preview" />
+              <figcaption><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Scan</figcaption>
+            </figure>
+            <div class="visual-grid">
+              <figure class="visual-frame">
+                <img src="./assets/llm-portal-preview-D4AP98Cp.png" alt="Worksheet pages and notes preview" />
+                <figcaption><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Worksheet</figcaption>
+              </figure>
+              <figure class="visual-frame">
+                <img src="./assets/teacher-guidance-BjXlXmXR.png" alt="Teacher marking and guidance preview" />
+                <figcaption><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> History</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paper-studio-head">
+            <span class="tag">Live paper builder</span>
+            <h2>Personalized exam paper builder</h2>
+            <p>Set the level, topic, and target marks. The app turns it into a PDF paper plus key.</p>
+          </div>
+
+          <form id="paperRequestForm" class="paper-request-form studio-form">
+            <div class="grid">
+              <div class="field">
+                <label for="paperEmail">Email</label>
+                <input id="paperEmail" type="email" placeholder="parent@student.com" required />
+              </div>
+              <div class="field">
+                <label for="paperLevel">Level</label>
+                <input id="paperLevel" type="text" placeholder="P6, SPM Form 5, IGCSE" required />
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="field">
+                <label for="paperSubject">Subject</label>
+                <input id="paperSubject" type="text" placeholder="Mathematics" required />
+              </div>
+              <div class="field">
+                <label for="paperTopic">Main topic</label>
+                <input id="paperTopic" type="text" placeholder="Fractions, Algebra, Forces" />
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="field">
+                <label for="paperMarks">Target marks</label>
+                <select id="paperMarks">
+                  <option>20</option>
+                  <option>40</option>
+                  <option>60</option>
+                  <option>100</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="paperTier">Product</label>
+                <select id="paperTier">
+                  <option value="sample">Sample PDF preview</option>
+                  <option value="single">Single full paper</option>
+                  <option value="bundle">4-paper revision bundle</option>
+                  <option value="memory">Monthly mistake-memory plan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="paperWeaknesses">Weak topics or recent mistakes</label>
+              <textarea
+                id="paperWeaknesses"
+                rows="4"
+                placeholder="Example: careless denominator changes, ratio word problems, slow with pie charts."
+              ></textarea>
+            </div>
+
+            <div class="conversion-actions">
+              <button type="submit">Request personalized PDF</button>
+              <a class="button secondary" href="#mistake-memory">Review mistake memory</a>
+            </div>
+            <p id="paperRequestStatus" class="hint" aria-live="polite">
+              Demo mode stores requests locally. Configure an endpoint to trigger payment, PDF generation, or a sales follow-up.
+            </p>
+          </form>
+
+          <div id="paperPreview" class="paper-preview" aria-live="polite">
+            <p class="muted">Pick a level, topic, and target marks to see the paper brief.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="products" class="section-band">
+        <div class="section-heading">
+          <p class="eyebrow">Paid product stack</p>
+          <h2>The paid product is the paper engine.</h2>
+          <p>
+            The free starter opens the door. The paid product turns weak topics into a paper, a key, and the next revision step.
+          </p>
+        </div>
+
+        <div class="product-grid">
+          <article class="feature-card accent-blue">
+            <span class="tag">Core offer</span>
+            <h3>Personalized exam PDFs</h3>
+            <p>
+              Full paper generation based on syllabus, weak topics, target marks,
+              and question type.
+            </p>
+            <strong>Output: PDF paper</strong>
+          </article>
+          <article class="feature-card accent-green">
+            <span class="tag">Included</span>
+            <h3>Answer key and mark scheme</h3>
+            <p>
+              Every paper ships with worked answers, method notes, and marking
+              guidance.
+            </p>
+            <strong>Output: teacher-ready key</strong>
+          </article>
+          <article class="feature-card accent-amber">
+            <span class="tag">Retention layer</span>
+            <h3>Mistake-memory revision</h3>
+            <p>
+              Store mistakes by topic, reason, and question style so revision
+              becomes a short targeted list instead of a pile of old papers.
+            </p>
+            <strong>Output: next-paper inputs</strong>
+          </article>
+        </div>
+
+        <div class="revenue-panel" aria-label="IC Educate paid offers">
+          <div class="revenue-head">
+            <p class="revenue-kicker">Checkout path</p>
+            <h2>Sell the paper first, then upgrade serious families.</h2>
+            <p>
+              Keep the first purchase small enough to say yes today. Once the parent sees a useful paper and answer key, move them into monthly exam coaching.
+            </p>
+          </div>
+          <div class="revenue-grid">
+            <article class="revenue-card">
+              <span class="revenue-pill">Fast sale</span>
+              <h3>Single weak-topic paper</h3>
+              <strong class="revenue-price">from RM29</strong>
+              <p>One PDF paper, answer key, and mark scheme for a named topic.</p>
+              <a
+                class="revenue-button"
+                href="#"
+                data-revenue-checkout="ic-educate-single-paper"
+                data-project="ic_education"
+                data-status-target="#icEducateCheckoutStatus"
+              >Buy paper</a>
+            </article>
+            <article class="revenue-card">
+              <span class="revenue-pill">Subscription</span>
+              <h3>Monthly exam coach</h3>
+              <strong class="revenue-price">from RM149/mo</strong>
+              <p>Weekly paper, corrections, mistake memory, and the next revision plan.</p>
+              <a
+                class="revenue-button"
+                href="#"
+                data-revenue-checkout="ic-educate-monthly-coach"
+                data-project="ic_education"
+                data-status-target="#icEducateCheckoutStatus"
+              >Start monthly</a>
+            </article>
+            <article class="revenue-card">
+              <span class="revenue-pill">Lead capture</span>
+              <h3>Free 7-day plan</h3>
+              <strong class="revenue-price">Email first</strong>
+              <p>Use the free plan to qualify the subject, level, urgency, and parent contact.</p>
+              <a class="revenue-button secondary" href="#free-plan">Capture lead</a>
+            </article>
+          </div>
+          <p class="revenue-status" id="icEducateCheckoutStatus" aria-live="polite">
+            Add real checkout URLs to IC_REVENUE_CHECKOUT_LINKS when Stripe, PayPal, or Wise is ready.
+          </p>
         </div>
       </section>
 
-      <section class="panel">
-        <div class="mode-switch" role="group" aria-label="Workflow mode">
-          <button type="button" class="mode-btn active" data-mode="create">Create worksheet</button>
-          <button type="button" class="mode-btn" data-mode="learn">Learn with IC Educate</button>
-          <button type="button" class="mode-btn" data-mode="mark">Mark & feedback</button>
+      <section id="free-plan" class="lead-section">
+        <div class="lead-copy">
+          <p class="eyebrow">Free tier guardrails</p>
+          <h2>One free 7-day plan per email.</h2>
+          <p>Keep the starter short, visual, and useful enough to earn the sign-in.</p>
+          <div class="free-points">
+            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Scan</span>
+            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Cards</span>
+            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> History</span>
+          </div>
         </div>
 
-        <form id="worksheetForm" class="worksheet-form">
-          <div class="field">
-            <label for="uploadFile">Upload learning material or completed paper (PDF/image/word)</label>
-            <input id="uploadFile" type="file" />
-            <small class="hint">
-              Upload notes before creating worksheets or your completed paper when requesting
-              feedback.
-            </small>
+        <div class="lead-studio">
+          <figure class="lead-visual">
+            <img src="./assets/subjects-suite-Dbrq0XHT.png" alt="Desk with worksheets, tablet, and revision books" />
+            <figcaption>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Scan</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Cards</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Revise</span>
+            </figcaption>
+          </figure>
+
+          <form id="leadForm" class="lead-form">
+            <span class="tag">Free starter</span>
+            <div class="lead-fields">
+              <label>
+                <span>Email for the 7-day plan</span>
+                <input id="leadEmail" type="email" name="email" placeholder="student@example.com" required />
+              </label>
+              <label>
+                <span>Name</span>
+                <input id="leadName" type="text" name="name" placeholder="Student or parent name" />
+              </label>
+            </div>
+            <div class="lead-fields">
+              <label>
+                <span>Level</span>
+                <input id="leadLevel" type="text" name="level" placeholder="P6, SPM Form 5, IGCSE" />
+              </label>
+              <label>
+                <span>Subject</span>
+                <input id="leadSubject" type="text" name="subject" placeholder="Math, Science, Chemistry" />
+              </label>
+            </div>
+            <button type="submit">Unlock plan</button>
+            <p id="leadStatus" class="hint" aria-live="polite">
+              Demo mode saves the lead locally until the live endpoint is connected.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section id="seven-day-preview" class="seven-day-section">
+        <div class="section-heading compact">
+          <p class="eyebrow">7-day worksheet</p>
+          <h2>Scan, study, quiz, repeat.</h2>
+          <p>Short cards make the revision path clear at a glance.</p>
+        </div>
+        <div class="seven-day-layout">
+          <figure class="seven-day-visual">
+            <img src="./assets/llm-portal-preview-D4AP98Cp.png" alt="Workbook pages and notes laid out on a desk" />
+            <figcaption>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-worksheet"></use></svg> Worksheet</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> History</span>
+            </figcaption>
+          </figure>
+          <div class="seven-day-grid" aria-label="Seven day worksheet preview">
+            <article class="seven-day-card featured">
+              <span class="day-pill">Day 1</span>
+              <h3>Scan</h3>
+              <p>Upload the worksheet and save the first mistake snapshot.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 2</span>
+              <h3>Notes</h3>
+              <p>Pull the core idea into short cards.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 3</span>
+              <h3>Quiz</h3>
+              <p>Check recall with quick questions.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 4</span>
+              <h3>Practice</h3>
+              <p>Do a small worksheet set from the weak topic.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 5</span>
+              <h3>Mark</h3>
+              <p>Record the errors and why they happened.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 6</span>
+              <h3>Repeat</h3>
+              <p>Try the same idea in a new question style.</p>
+            </article>
+            <article class="seven-day-card">
+              <span class="day-pill">Day 7</span>
+              <h3>Revise</h3>
+              <p>Open the due cards and lock the topic in.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="paid-paper" class="conversion-section">
+        <div class="section-heading compact">
+          <p class="eyebrow">What the PDF contains</p>
+          <h2>A full paper, the answer key, and the mark scheme.</h2>
+          <p>
+            The builder turns each request into a paper package that can be sold,
+            emailed, or handed to a tutor for marking.
+          </p>
+        </div>
+
+        <div class="product-grid">
+          <article class="feature-card">
+            <span class="tag">PDF package</span>
+            <h3>Full exam paper</h3>
+            <p>
+              Generated from the student's level, subject, topic, and target
+              mark range.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="tag">Teacher pack</span>
+            <h3>Answer key</h3>
+            <p>
+              Includes worked answers and method cues so the paper can be marked
+              without extra prep.
+            </p>
+          </article>
+          <article class="feature-card">
+            <span class="tag">Repeat use</span>
+            <h3>Mistake-aware next paper</h3>
+            <p>
+              Uses saved errors to generate the next paper with more of the same
+              weak topics and less of the easy ones.
+            </p>
+          </article>
+        </div>
+
+        <div class="conversion-actions">
+          <a class="button primary" href="#top">Build a paper</a>
+          <a class="button secondary" href="#free-plan">Use the free starter</a>
+        </div>
+      </section>
+
+      <section id="mistake-memory" class="memory-section">
+        <div class="memory-copy">
+          <p class="eyebrow">Retention product</p>
+          <h2>Mistake memory turns marked papers into the next revision plan.</h2>
+          <p>
+            Add mistakes by topic and reason. IC Educate can then create the next
+            paper from the pattern instead of asking the student to explain their
+            weaknesses again.
+          </p>
+        </div>
+
+        <div class="memory-layout">
+          <form id="mistakeForm" class="mistake-form">
+            <div class="grid two">
+              <div class="field">
+                <label for="mistakeTopic">Topic</label>
+                <input id="mistakeTopic" type="text" placeholder="Fractions" required />
+              </div>
+              <div class="field">
+                <label for="mistakeType">Mistake type</label>
+                <select id="mistakeType">
+                  <option>Concept gap</option>
+                  <option>Careless error</option>
+                  <option>Method missing</option>
+                  <option>Time pressure</option>
+                  <option>Units or precision</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid two">
+              <div class="field">
+                <label for="mistakeSeverity">Severity</label>
+                <select id="mistakeSeverity">
+                  <option value="3">High</option>
+                  <option value="2">Medium</option>
+                  <option value="1">Low</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mistakeSource">Source</label>
+                <input id="mistakeSource" type="text" placeholder="Paper 1 Q4" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="mistakeNote">What happened?</label>
+              <textarea id="mistakeNote" rows="3" placeholder="Example: found common denominator but subtracted numerator incorrectly."></textarea>
+            </div>
+            <div class="conversion-actions">
+              <button type="submit">Save mistake</button>
+              <button id="clearMistakesBtn" type="button" class="secondary-btn">Clear demo memory</button>
+            </div>
+          </form>
+
+          <aside class="memory-panel">
+            <div class="memory-header">
+              <h3>Revision memory</h3>
+              <span id="mistakeCount" class="chip">0 saved</span>
+            </div>
+            <div id="mistakeSummary" class="mistake-summary"></div>
+            <div id="mistakeList" class="mistake-list"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-band">
+        <div class="section-heading compact">
+          <p class="eyebrow">How the paid flow should feel</p>
+          <h2>Every generated paper should make the next paper smarter.</h2>
+        </div>
+        <div class="workflow-strip" aria-label="IC Educate paid workflow">
+          <article>
+            <span>01</span>
+            <strong>Diagnose</strong>
+            <p>Start with syllabus, topic, target grade, and recent mistakes.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Generate PDF</strong>
+            <p>Create a realistic paper, answer key, and marking scheme.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Mark attempt</strong>
+            <p>Record wrong steps, careless errors, timing issues, and gaps.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <strong>Revise smarter</strong>
+            <p>Build the next paper from the mistake memory, not from scratch.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="panel tool-panel">
+        <div class="section-heading compact">
+          <p class="eyebrow">Authenticated app</p>
+          <h2>Sign in to load history, revise memory, and worksheet records.</h2>
+          <p>
+            The public page stays open for discovery, while the student app keeps the live
+            memory, revision cards, and worksheet history behind sign-in.
+          </p>
+        </div>
+
+        <div id="studentApp" class="student-app-shell">
+          <div id="authGate" class="auth-gate">
+            <article class="auth-copy">
+              <p class="eyebrow">Student access</p>
+              <h3>One account, one memory.</h3>
+              <p>
+                Each student gets their own profile, history, and revision deck. Sign in to
+                keep it synced across devices.
+              </p>
+            </article>
+
+            <form id="signInForm" class="auth-card">
+              <h3>Sign in</h3>
+              <div class="field">
+                <label for="signInEmail">Email</label>
+                <input id="signInEmail" type="email" autocomplete="email" placeholder="student@example.com" required />
+              </div>
+              <div class="field">
+                <label for="signInPassword">Password</label>
+                <input id="signInPassword" type="password" autocomplete="current-password" placeholder="Password" required />
+              </div>
+              <button type="submit">Sign in</button>
+            </form>
+
+            <form id="signUpForm" class="auth-card">
+              <h3>Create account</h3>
+              <div class="field">
+                <label for="signUpName">Name</label>
+                <input id="signUpName" type="text" autocomplete="name" placeholder="Student name" />
+              </div>
+              <div class="field">
+                <label for="signUpEmail">Email</label>
+                <input id="signUpEmail" type="email" autocomplete="email" placeholder="student@example.com" required />
+              </div>
+              <div class="field">
+                <label for="signUpPassword">Password</label>
+                <input id="signUpPassword" type="password" autocomplete="new-password" placeholder="Create a password" required />
+              </div>
+              <button type="submit">Create account</button>
+            </form>
           </div>
 
-          <div id="markingFields" class="marking-fields" hidden>
-            <div class="field">
-              <label for="rubricFile">Mark scheme or rubric (optional)</label>
-              <input id="rubricFile" type="file" accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp" />
-              <small class="hint">
-                Add the answer key, rubric, or model answer when you want stricter AAutograder marking.
-              </small>
+          <div id="appShell" class="app-shell" hidden>
+            <div class="app-topbar">
+              <div class="app-topbar-copy">
+                <span id="sessionChip" class="chip offline">Signed out</span>
+                <p id="authMessage" class="hint">Sign in to load your live memory.</p>
+              </div>
+              <div class="button-row app-actions">
+                <button id="refreshStudentDataBtn" type="button" class="secondary-btn">Refresh</button>
+                <button id="generateCardsBtn" type="button" class="secondary-btn">Generate cards</button>
+                <button id="clearCacheBtn" type="button" class="secondary-btn">Clear cache</button>
+                <button id="signOutBtn" type="button" class="secondary-btn">Sign out</button>
+              </div>
             </div>
 
-            <div class="field">
-              <label for="rubricText">Rubric notes (optional)</label>
-              <textarea
-                id="rubricText"
-                rows="4"
-                placeholder="Paste mark scheme, model answer, accepted points, or teacher notes."
-              ></textarea>
+            <div class="tab-bar" role="tablist" aria-label="Student app tabs">
+              <button type="button" class="tab-btn active" data-app-tab="dashboard"><svg class="icon" aria-hidden="true"><use href="#icon-dashboard"></use></svg>Dashboard</button>
+              <button type="button" class="tab-btn" data-app-tab="revise"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg>Revise</button>
+              <button type="button" class="tab-btn" data-app-tab="history"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg>History</button>
+              <button type="button" class="tab-btn" data-app-tab="orders"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg>Orders</button>
+              <button type="button" class="tab-btn" data-app-tab="worksheets"><svg class="icon" aria-hidden="true"><use href="#icon-worksheet"></use></svg>Worksheets</button>
+              <button type="button" class="tab-btn" data-app-tab="settings"><svg class="icon" aria-hidden="true"><use href="#icon-settings"></use></svg>Settings</button>
             </div>
+
+            <section class="app-view" data-app-view="dashboard">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <span>Due today</span>
+                  <strong id="dashboardDueCount">0</strong>
+                </article>
+                <article class="stat-card">
+                  <span>Weak topics</span>
+                  <strong id="dashboardWeakCount">0</strong>
+                </article>
+                <article class="stat-card">
+                  <span>Recent errors</span>
+                  <strong id="dashboardErrorCount">0</strong>
+                </article>
+                <article class="stat-card">
+                  <span>Worksheets</span>
+                  <strong id="dashboardWorksheetCount">0</strong>
+                </article>
+              </div>
+
+              <div class="app-grid">
+                <article class="app-card">
+                  <h3>Weak topics</h3>
+                  <div id="dashboardWeakTopics" class="stack-list"></div>
+                </article>
+                <article class="app-card">
+                  <h3>Recent errors</h3>
+                  <div id="dashboardRecentErrors" class="stack-list"></div>
+                </article>
+                <article class="app-card">
+                  <h3>Latest worksheets</h3>
+                  <div id="dashboardRecentWorksheets" class="stack-list"></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="app-view" data-app-view="revise" hidden>
+              <div id="reviseSummary" class="summary-bar"></div>
+              <p id="reviseStatus" class="hint"></p>
+              <div class="app-grid revise-grid">
+                <article class="app-card">
+                  <h3>Due today</h3>
+                  <div id="reviseDueCards" class="stack-list"></div>
+                </article>
+                <article class="app-card">
+                  <h3>Weak topics</h3>
+                  <div id="reviseWeakTopics" class="stack-list"></div>
+                </article>
+                <article class="app-card">
+                  <h3>Recent errors</h3>
+                  <div id="reviseRecentErrors" class="stack-list"></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="app-view" data-app-view="history" hidden>
+              <div id="historySummary" class="summary-bar"></div>
+              <div id="historyList" class="history-list"></div>
+            </section>
+
+            <section class="app-view" data-app-view="orders" hidden>
+              <div class="order-toolbar">
+                <div>
+                  <p class="eyebrow">Paper orders</p>
+                  <h3>Payments and PDF delivery</h3>
+                  <p id="orderAdminStatus" class="hint">Sign in as the owner account to review live orders.</p>
+                </div>
+                <button id="refreshOrdersBtn" type="button" class="secondary-btn">Refresh orders</button>
+              </div>
+              <div id="orderSummary" class="order-summary"></div>
+              <div id="orderList" class="order-list"></div>
+            </section>
+
+            <section class="app-view" data-app-view="worksheets" hidden>
+              <div class="mode-switch" role="group" aria-label="Workflow mode">
+                <button type="button" class="mode-btn active" data-mode="create">Create worksheet</button>
+                <button type="button" class="mode-btn" data-mode="learn">Free 7-day starter</button>
+                <button type="button" class="mode-btn" data-mode="mark">Mark & feedback</button>
+              </div>
+
+              <form id="worksheetForm" class="worksheet-form">
+                <div class="field">
+                  <label for="uploadFile">Upload learning material or completed paper</label>
+                  <input id="uploadFile" type="file" />
+                  <small class="hint">
+                    Use source notes for worksheet generation, or a completed paper when requesting feedback.
+                  </small>
+                </div>
+
+                <div id="markingFields" class="marking-fields" hidden>
+                  <div class="field">
+                    <label for="rubricFile">Mark scheme or rubric</label>
+                    <input id="rubricFile" type="file" accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg,.webp" />
+                    <small class="hint">
+                      Add the answer key, rubric, or model answer when you want stricter marking.
+                    </small>
+                  </div>
+
+                  <div class="field">
+                    <label for="rubricText">Rubric notes</label>
+                    <textarea
+                      id="rubricText"
+                      rows="4"
+                      placeholder="Paste mark scheme, model answer, accepted points, or teacher notes."
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="description">Describe the paper or revision goal</label>
+                  <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Example: Generate a P6 fractions practice paper from recent careless mistakes."
+                  ></textarea>
+                </div>
+
+                <div class="grid">
+                  <div class="field">
+                    <label for="syllabus">Syllabus</label>
+                    <select id="syllabus" required></select>
+                  </div>
+                  <div class="field">
+                    <label for="level">Level</label>
+                    <select id="level" required></select>
+                  </div>
+                </div>
+
+                <div class="grid">
+                  <div class="field">
+                    <label for="topic">Topic</label>
+                    <select id="topic" required></select>
+                  </div>
+                  <div class="field">
+                    <label for="subtopic">Subtopic</label>
+                    <select id="subtopic" required></select>
+                  </div>
+                </div>
+
+                <div class="grid">
+                  <div class="field">
+                    <label for="questionCount">Questions</label>
+                    <select id="questionCount">
+                      <option>8</option>
+                      <option>12</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="format">Answer format</label>
+                    <select id="format">
+                      <option>Short answer</option>
+                      <option>MCQ only</option>
+                      <option>Mix</option>
+                      <option>Structured practical</option>
+                    </select>
+                  </div>
+                  <div class="field" id="scoreWrap" hidden>
+                    <label for="score">Mark score (optional, /20)</label>
+                    <input id="score" type="number" min="0" max="20" />
+                  </div>
+                </div>
+
+                <button id="submitBtn" type="submit">Generate worksheet</button>
+              </form>
+
+              <section class="panel tutor-panel">
+                <div class="tutor-header">
+                  <div>
+                    <p class="eyebrow">Tutor flow</p>
+                    <h2>Snap a question and hand it to Gemini</h2>
+                  </div>
+                  <span class="chip">Photo -> OCR -> Prompt -> Gemini</span>
+                </div>
+                <p class="hint">
+                  Take a photo of a worksheet, textbook page, or exam question. IC Educate can read
+                  the text, build a tutoring prompt, copy it, and open Gemini when the bridge is available.
+                </p>
+                <div class="tutor-grid">
+                  <div class="field">
+                    <label for="tutorImage">Snap or upload a question photo</label>
+                    <input id="tutorImage" type="file" accept="image/*" capture="environment" />
+                    <small class="hint">
+                      On phone this opens the camera. On desktop you can upload a screenshot or photo.
+                    </small>
+                  </div>
+                  <div class="field">
+                    <label for="tutorGoal">Tutor instructions</label>
+                    <textarea
+                      id="tutorGoal"
+                      rows="4"
+                      placeholder="Example: explain step by step, give hints first, and only show the final answer at the end."
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="button-row">
+                  <button id="tutorLaunchBtn" type="button">Snap, read, copy and open Gemini</button>
+                  <button id="tutorPreviewBtn" type="button" class="secondary-btn">Preview prompt only</button>
+                  <button id="tutorCopyBtn" type="button" class="secondary-btn" hidden>Copy latest prompt</button>
+                </div>
+                <div id="tutorResult" class="result tutor-result" aria-live="polite">
+                  <p class="muted">No tutoring prompt generated yet.</p>
+                </div>
+              </section>
+
+              <section class="panel result-panel">
+                <h2>Result</h2>
+                <div id="result" class="result">
+                  <p class="muted">Pick a mode and run the workflow to see your result.</p>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="section-heading compact">
+                  <p class="eyebrow">Static library</p>
+                  <h2>Supported syllabus structure</h2>
+                  <p class="hint">
+                    These dropdowns expand from the shared syllabus files when the site is hosted.
+                  </p>
+                </div>
+                <div id="catalog" class="catalog"></div>
+              </section>
+
+              <section class="resource-band">
+                <div>
+                  <p class="eyebrow">Released resources</p>
+                  <h2>Start with static worksheets while the paid engine matures.</h2>
+                </div>
+                <div class="resource-actions">
+                  <a class="button secondary" href="./worksheets/psle_topical_math_science/README.md">Open worksheet folder</a>
+                  <a class="button secondary" href="./student-resources.html">Student hub</a>
+                </div>
+              </section>
+            </section>
+
+            <section class="app-view" data-app-view="settings" hidden>
+              <form id="profileForm" class="settings-form">
+                <div class="grid">
+                  <div class="field">
+                    <label for="profileDisplayName">Display name</label>
+                    <input id="profileDisplayName" type="text" placeholder="Student name" />
+                  </div>
+                  <div class="field">
+                    <label for="profileSchool">School</label>
+                    <input id="profileSchool" type="text" placeholder="School name" />
+                  </div>
+                </div>
+                <div class="grid">
+                  <div class="field">
+                    <label for="profileLevel">Level</label>
+                    <input id="profileLevel" type="text" placeholder="P6, Form 5, IGCSE" />
+                  </div>
+                  <div class="field">
+                    <label for="profileTimezone">Timezone</label>
+                    <input id="profileTimezone" type="text" placeholder="Asia/Kuala_Lumpur" />
+                  </div>
+                </div>
+                <p id="profileStatus" class="hint">Sign in to sync profile settings.</p>
+                <button type="submit">Save profile</button>
+              </form>
+            </section>
           </div>
-
-          <div class="field">
-            <label for="description">Describe what you want</label>
-            <textarea
-              id="description"
-              rows="4"
-              placeholder="Example: Learn algebra basics and generate a 12-question mixed worksheet."
-            ></textarea>
-          </div>
-
-          <div class="grid">
-            <div class="field">
-              <label for="syllabus">Syllabus</label>
-              <select id="syllabus" required></select>
-            </div>
-            <div class="field">
-              <label for="level">Level</label>
-              <select id="level" required></select>
-            </div>
-          </div>
-
-          <div class="grid">
-            <div class="field">
-              <label for="topic">Topic</label>
-              <select id="topic" required></select>
-            </div>
-            <div class="field">
-              <label for="subtopic">Subtopic</label>
-              <select id="subtopic" required></select>
-            </div>
-          </div>
-
-          <div class="grid">
-            <div class="field">
-              <label for="questionCount">Questions</label>
-              <select id="questionCount">
-                <option>8</option>
-                <option>12</option>
-                <option>15</option>
-                <option>20</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="format">Answer format</label>
-              <select id="format">
-                <option>Short answer</option>
-                <option>MCQ only</option>
-                <option>Mix</option>
-                <option>Structured practical</option>
-              </select>
-            </div>
-            <div class="field" id="scoreWrap" hidden>
-              <label for="score">Mark score (optional, /20)</label>
-              <input id="score" type="number" min="0" max="20" />
-            </div>
-          </div>
-
-          <button id="submitBtn" type="submit">Generate worksheet</button>
-        </form>
+        </div>
       </section>
 
       <section class="panel tutor-panel">
         <div class="tutor-header">
           <div>
-            <p class="eyebrow">Tutor Flow</p>
+            <p class="eyebrow">Tutor flow</p>
             <h2>Snap a question and hand it to Gemini</h2>
           </div>
-          <span class="chip ghost">Photo -> OCR -> Prompt -> Gemini</span>
+          <span class="chip">Photo -> OCR -> Prompt -> Gemini</span>
         </div>
         <p class="hint">
-          Take a photo of a worksheet, textbook page, or exam question. IC Educate will read
-          the text, build a tutoring prompt, copy it, and open Gemini for you.
+          Take a photo of a worksheet, textbook page, or exam question. IC Educate can read
+          the text, build a tutoring prompt, copy it, and open Gemini when the bridge is available.
         </p>
         <div class="tutor-grid">
           <div class="field">
@@ -142,7 +838,7 @@
             </small>
           </div>
           <div class="field">
-            <label for="tutorGoal">Tutor instructions (optional)</label>
+            <label for="tutorGoal">Tutor instructions</label>
             <textarea
               id="tutorGoal"
               rows="4"
@@ -160,7 +856,7 @@
         </div>
       </section>
 
-      <section class="panel">
+      <section class="panel result-panel">
         <h2>Result</h2>
         <div id="result" class="result">
           <p class="muted">Pick a mode and run the workflow to see your result.</p>
@@ -168,38 +864,68 @@
       </section>
 
       <section class="panel">
-        <h2>Library structure (starter list)</h2>
-        <p class="hint">This is a starter taxonomy. It is used for dropdowns first, then merged with backend options if available.</p>
+        <div class="section-heading compact">
+          <p class="eyebrow">Static library</p>
+          <h2>Supported syllabus structure</h2>
+          <p class="hint">
+            These dropdowns expand from the shared syllabus files when the site is hosted.
+          </p>
+        </div>
         <div id="catalog" class="catalog"></div>
       </section>
 
-      <section class="panel">
-        <h2>What IC Educate can do</h2>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <h3>Upload + Generate</h3>
-            <p>
-              Students upload source material, select syllabus/level/topic, and instantly
-              create topic-aligned worksheets.
-            </p>
-          </article>
-          <article class="feature-card">
-            <h3>Learn with IC Educate</h3>
-            <p>
-              Select a topic and auto-build a short lesson, checklist journey, and quiz.
-            </p>
-          </article>
-          <article class="feature-card">
-            <h3>Mark + Feedback</h3>
-            <p>
-              Upload completed work and ask for notes and improvement guidance, then
-              auto generate follow-up worksheets.
-            </p>
-          </article>
+      <section class="resource-band">
+        <div>
+          <p class="eyebrow">Released resources</p>
+          <h2>Start with static worksheets while the paid engine matures.</h2>
+        </div>
+        <div class="resource-actions">
+          <a class="button secondary" href="./worksheets/psle_topical_math_science/README.md">Open worksheet folder</a>
+          <a class="button secondary" href="./student-resources.html">Student hub</a>
         </div>
       </section>
     </main>
 
+    <script src="./config.js"></script>
+    <script src="../shared/revenue-kit.js"></script>
     <script src="./app.js" type="module"></script>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-scan" viewBox="0 0 24 24">
+        <path d="M4 8V6a2 2 0 0 1 2-2h2M20 8V6a2 2 0 0 0-2-2h-2M4 16v2a2 2 0 0 0 2 2h2M20 16v2a2 2 0 0 1-2 2h-2" />
+        <path d="M8 12h8" />
+        <path d="M12 8v8" />
+      </symbol>
+      <symbol id="icon-notes" viewBox="0 0 24 24">
+        <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z" />
+        <path d="M14 2v5h5" />
+        <path d="M8 11h8M8 15h8M8 19h5" />
+      </symbol>
+      <symbol id="icon-history" viewBox="0 0 24 24">
+        <path d="M3 12a9 9 0 1 0 3-6.7" />
+        <path d="M3 4v5h5" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="icon-repeat" viewBox="0 0 24 24">
+        <path d="M17 2l4 4-4 4" />
+        <path d="M7 22l-4-4 4-4" />
+        <path d="M21 6H7a4 4 0 0 0-4 4v2" />
+        <path d="M3 18h14a4 4 0 0 0 4-4v-2" />
+      </symbol>
+      <symbol id="icon-dashboard" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24">
+        <path d="M12 8.5A3.5 3.5 0 1 0 12 15.5A3.5 3.5 0 1 0 12 8.5Z" />
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.03.03a2 2 0 1 1-2.83 2.83l-.03-.03A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 1.56V21a2 2 0 1 1-4 0v-.04A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.03.03A2 2 0 1 1 4.27 17l.03-.03A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1H3a2 2 0 1 1 0-4h.04A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.03-.03A2 2 0 1 1 7.06 4.27l.03.03A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.04A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.87-.34l.03-.03A2 2 0 1 1 19.73 7.06l-.03.03A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.56 1H21a2 2 0 1 1 0 4h-.04A1.7 1.7 0 0 0 19.4 15Z" />
+      </symbol>
+      <symbol id="icon-worksheet" viewBox="0 0 24 24">
+        <path d="M7 2h7l5 5v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+        <path d="M14 2v5h5" />
+        <path d="M8 11h8M8 15h8M8 19h4" />
+      </symbol>
+    </svg>
   </body>
 </html>
