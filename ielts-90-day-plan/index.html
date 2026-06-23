@@ -303,6 +303,7 @@
       .tools-grid,
       .tips-grid,
       .frames-grid,
+      .upgrade-grid,
       .vocab-grid {
         display: grid;
         gap: 14px;
@@ -316,6 +317,8 @@
       .tool-card,
       .tip-card,
       .frame-card,
+      .upgrade-card,
+      .upgrade-tool,
       .vocab-card,
       .cycle-card {
         border: 1px solid var(--line);
@@ -686,6 +689,96 @@
         font-weight: 700;
       }
 
+      .upgrade-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .upgrade-tool {
+        padding: 16px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .upgrade-input {
+        display: grid;
+        gap: 8px;
+      }
+
+      .upgrade-input span {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .upgrade-input textarea {
+        width: 100%;
+        min-height: 116px;
+        resize: vertical;
+        padding: 12px 13px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.88);
+        color: var(--ink);
+        font: inherit;
+        line-height: 1.5;
+      }
+
+      .upgrade-result {
+        display: grid;
+        gap: 10px;
+        min-height: 176px;
+        padding: 14px;
+        border: 1px dashed rgba(14, 27, 45, 0.18);
+        border-radius: 8px;
+        background: rgba(243, 247, 251, 0.84);
+      }
+
+      .upgrade-result .label,
+      .upgrade-card .label {
+        display: inline-flex;
+        width: fit-content;
+        margin-bottom: 6px;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: rgba(35, 87, 209, 0.1);
+        color: var(--blue);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .upgrade-result strong,
+      .upgrade-card strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .upgrade-result p,
+      .upgrade-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.56;
+      }
+
+      .upgrade-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .upgrade-card {
+        padding: 14px;
+      }
+
+      .upgrade-card .zh-line {
+        color: var(--teal);
+        font-weight: 700;
+      }
+
+      .upgrade-card .ielts-line {
+        color: var(--ink);
+        font-size: 1.02rem;
+      }
+
       .tips-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -877,6 +970,7 @@
         }
 
         .summary-grid,
+        .upgrade-layout,
         .vocab-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
@@ -919,6 +1013,8 @@
         }
 
         .summary-grid,
+        .upgrade-grid,
+        .upgrade-layout,
         .vocab-grid,
         .frames-grid,
         .day-grid {
@@ -957,6 +1053,7 @@
         <a href="#plan">Plan</a>
         <a href="#vocab">Vocabulary</a>
         <a href="#frames">Sentence frames</a>
+        <a href="#upgrade">Sentence upgrades</a>
         <a href="#tips">Chinese learner tips</a>
       </nav>
       <div class="topmeta">
@@ -1267,6 +1364,41 @@
             </p>
           </div>
           <div class="frames-grid" id="framesGrid"></div>
+        </div>
+      </section>
+
+      <section class="band" id="upgrade">
+        <div class="inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Chinese to IELTS English / 中文变雅思英文</p>
+              <h2>Turn everyday Chinese into stronger English.</h2>
+            </div>
+            <p>
+              Type a Chinese sentence and use the suggested frame to make it sound more
+              natural for IELTS speaking or writing. The text stays in this browser and is
+              not saved by the page.
+            </p>
+          </div>
+
+          <div class="upgrade-layout">
+            <article class="upgrade-tool">
+              <label class="upgrade-input" for="upgradeInput">
+                <span>Chinese line / 中文句子</span>
+                <textarea
+                  id="upgradeInput"
+                  rows="4"
+                  placeholder="例如：我最近有点累，但是我想把英语学好。"
+                ></textarea>
+              </label>
+              <button class="action-btn primary" id="upgradeButton" type="button">
+                Upgrade sentence
+              </button>
+              <div class="upgrade-result" id="upgradeResult" aria-live="polite"></div>
+            </article>
+
+            <div class="upgrade-grid" id="upgradeGrid"></div>
+          </div>
         </div>
       </section>
 
@@ -1674,11 +1806,72 @@
         },
       ];
 
+      const upgradeExamples = [
+        {
+          zh: "我最近有点累，但是我想把英语学好。",
+          simpleEn: "I feel a bit tired recently, but I still want to improve my English.",
+          ieltsEn:
+            "Although I have been feeling rather tired lately, I still want to make steady progress in English.",
+          noteEn: "Use although + still to make contrast sound natural.",
+          noteZh: "用 although + still 来表达自然转折。",
+          keywords: ["累", "最近", "疲惫", "tired"],
+        },
+        {
+          zh: "今天好忙，没什么时间复习。",
+          simpleEn: "Today has been quite busy, so I have not had much time to revise.",
+          ieltsEn:
+            "It has been a fairly hectic day, which means I have had limited time for revision.",
+          noteEn: "Hectic and limited time sound more precise than very busy and no time.",
+          noteZh: "hectic 和 limited time 比 very busy、no time 更准确。",
+          keywords: ["忙", "没时间", "没有时间", "复习", "busy"],
+        },
+        {
+          zh: "我怕我口语会卡住。",
+          simpleEn: "I am worried I might get stuck during the speaking test.",
+          ieltsEn:
+            "One concern I have is that I may hesitate too much during the speaking test.",
+          noteEn: "One concern I have is... is a useful speaking frame.",
+          noteZh: "One concern I have is... 是很实用的口语句型。",
+          keywords: ["怕", "担心", "紧张", "卡住", "口语", "worried"],
+        },
+        {
+          zh: "这个题我看得懂，但是不知道怎么讲。",
+          simpleEn: "I understand the question, but I do not know how to express my answer.",
+          ieltsEn:
+            "Although I understand the question, I find it difficult to express my ideas clearly.",
+          noteEn: "Express my ideas clearly works for speaking and writing.",
+          noteZh: "express my ideas clearly 口语和写作都能用。",
+          keywords: ["看得懂", "看懂", "不知道", "怎么讲", "不会讲", "表达", "understand"],
+        },
+        {
+          zh: "我想要更自然一点。",
+          simpleEn: "I want to sound more natural.",
+          ieltsEn:
+            "My goal is to sound more natural and less translated when I speak English.",
+          noteEn: "Less translated means the English does not sound copied from Chinese.",
+          noteZh: "less translated 表示英文不像中文直译。",
+          keywords: ["自然", "一点", "想要", "sound"],
+        },
+        {
+          zh: "我今天进步一点点。",
+          simpleEn: "I made a little progress today.",
+          ieltsEn:
+            "I made a small but meaningful improvement today, especially in expressing my ideas.",
+          noteEn: "Small but meaningful is a natural way to describe gradual progress.",
+          noteZh: "small but meaningful 很适合表达一点点但有意义的进步。",
+          keywords: ["进步", "一点点", "提高", "improve"],
+        },
+      ];
+
       const planRoot = document.getElementById("phase1");
       const planRoot2 = document.getElementById("phase2");
       const planRoot3 = document.getElementById("phase3");
       const vocabGrid = document.getElementById("vocabGrid");
       const framesGrid = document.getElementById("framesGrid");
+      const upgradeGrid = document.getElementById("upgradeGrid");
+      const upgradeInput = document.getElementById("upgradeInput");
+      const upgradeButton = document.getElementById("upgradeButton");
+      const upgradeResult = document.getElementById("upgradeResult");
       const tipsGrid = document.getElementById("tipsGrid");
       const searchInput = document.getElementById("searchInput");
       const categoryRow = document.getElementById("categoryRow");
@@ -2058,6 +2251,83 @@
           .join("");
       }
 
+      function renderUpgradeExamples() {
+        upgradeGrid.innerHTML = upgradeExamples
+          .map(
+            (item) => `
+              <article class="upgrade-card">
+                <span class="label">Chinese line / 中文句子</span>
+                <p class="zh-line">${item.zh}</p>
+                <span class="label">Simple English / 简单英文</span>
+                <p>${item.simpleEn}</p>
+                <span class="label">IELTS upgrade / 雅思升级版</span>
+                <strong class="ielts-line">${item.ieltsEn}</strong>
+                <p class="en">${item.noteEn}</p>
+                <p class="zh">${item.noteZh}</p>
+              </article>
+            `
+          )
+          .join("");
+      }
+
+      function findUpgradeMatch(value) {
+        const text = value.toLowerCase();
+        return (
+          upgradeExamples.find((item) =>
+            item.keywords.some((keyword) => text.includes(keyword.toLowerCase()))
+          ) || null
+        );
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function showUpgradeResult(item, originalText = "") {
+        const intro = originalText
+          ? `<p><strong>Original / 原句</strong>${escapeHtml(originalText)}</p>`
+          : `
+            <p class="en">Try the example below, or type a Chinese line about study, IELTS, worry, time, or progress.</p>
+            <p class="zh">可以先看下面的例子，也可以输入关于学习、雅思、紧张、时间或进步的中文句子。</p>
+          `;
+
+        upgradeResult.innerHTML = `
+          ${intro}
+          <div>
+            <span class="label">Natural English / 自然英文</span>
+            <p>${item.simpleEn}</p>
+          </div>
+          <div>
+            <span class="label">IELTS upgrade / 雅思升级版</span>
+            <strong>${item.ieltsEn}</strong>
+          </div>
+          <div>
+            <span class="label">Why it works / 为什么好用</span>
+            <p class="en">${item.noteEn}</p>
+            <p class="zh">${item.noteZh}</p>
+          </div>
+        `;
+      }
+
+      function upgradeTypedSentence() {
+        const text = upgradeInput.value.trim();
+        const fallback = {
+          simpleEn: "I want to express this idea more clearly in English.",
+          ieltsEn:
+            "What I mean is that I would like to express this idea in a clearer and more natural way.",
+          noteEn:
+            "This page uses local sentence frames. For an exact rewrite, paste the sentence to Codex and ask for an IELTS-style version.",
+          noteZh: "这个页面用本地句型框架。如果要精确改写，可以把句子发给 Codex 做雅思版英文。",
+        };
+
+        showUpgradeResult(findUpgradeMatch(text) || fallback, text);
+      }
+
       function renderTips() {
         tipsGrid.innerHTML = tips
           .map(
@@ -2166,6 +2436,13 @@
         });
 
         searchInput.addEventListener("input", applyFilters);
+        upgradeButton.addEventListener("click", upgradeTypedSentence);
+        upgradeInput.addEventListener("keydown", (event) => {
+          if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+            upgradeTypedSentence();
+          }
+        });
+
         clearProgress.addEventListener("click", () => {
           progressSet = new Set();
           saveProgress();
@@ -2192,11 +2469,13 @@
       renderPlan();
       renderVocab();
       renderFrames();
+      renderUpgradeExamples();
       renderTips();
       buildCategoryRow();
       attachEvents();
       updateCheckmarks();
       applyFilters();
+      showUpgradeResult(upgradeExamples[0]);
       setLanguage("both");
       initDailyLesson();
     </script>
