@@ -3,15 +3,15 @@
   "seedDateKey": "2026-06-23",
   "source": "workflow",
   "vocab": {
-    "category": "reading",
-    "term": "significant",
-    "zh": "显著的；重要的",
-    "simpleEn": "important or large enough to notice",
-    "simpleZh": "重要或明显到能被注意到。",
-    "exampleEn": "There was a significant increase in the number of people studying online.",
-    "exampleZh": "线上学习的人数有显著增长。",
-    "upgradeEn": "Use significant increase, significant difference, or significant impact.",
-    "upgradeZh": "常用搭配：significant increase / difference / impact。"
+    "category": "speaking",
+    "term": "overwhelming",
+    "zh": "令人难以承受的；压倒性的",
+    "simpleEn": "too strong, too much, or hard to handle",
+    "simpleZh": "太多、太强，让人有压力。",
+    "exampleEn": "Preparing for several IELTS sections at the same time can feel overwhelming.",
+    "exampleZh": "同时准备雅思几个部分可能会让人觉得压力很大。",
+    "upgradeEn": "Use overwhelming for pressure, information, emotion, or workload.",
+    "upgradeZh": "overwhelming 适合形容压力、信息、情绪或工作量。"
   },
   "cycle": {
     "number": 10,
@@ -36,8 +36,8 @@
   },
   "meaningEn": "This is a stronger IELTS word. Learn the meaning, copy the example, then use it in one sentence about study or daily life.",
   "meaningZh": "这是一个更高分的雅思词。先理解意思，抄一遍例句，再用它写一句关于学习或生活的话。",
-  "promptEn": "Write one IELTS sentence with \"significant\". Then try this frame: Moreover, ...",
-  "promptZh": "用 \"significant\" 写一句雅思句子，再试试这个句型：此外，...",
+  "promptEn": "Write one IELTS sentence with \"overwhelming\". Then try this frame: Moreover, ...",
+  "promptZh": "用 \"overwhelming\" 写一句雅思句子，再试试这个句型：此外，...",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新。"
 }

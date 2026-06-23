@@ -652,12 +652,32 @@
         background: var(--blue);
       }
 
+      .word-tools {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .word-progress {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
       .vocab-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .vocab-card {
         padding: 14px;
+      }
+
+      .vocab-card.is-learned {
+        border-color: rgba(13, 141, 123, 0.24);
+        background: rgba(232, 246, 239, 0.68);
+        opacity: 0.72;
       }
 
       .vocab-card .term {
@@ -681,6 +701,26 @@
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px dashed rgba(14, 27, 45, 0.12);
+      }
+
+      .vocab-card .meaning {
+        margin-bottom: 10px;
+      }
+
+      .vocab-card .upgrade-note {
+        margin-top: 10px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .empty-note {
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px dashed var(--line-strong);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--muted);
+        line-height: 1.55;
       }
 
       .frames-grid {
@@ -1353,17 +1393,26 @@
         <div class="inner">
           <div class="vocab-head">
             <div>
-              <p class="eyebrow">Vocabulary bank / 小词汇库</p>
-              <h2>Words, translations, and example lines.</h2>
+              <p class="eyebrow">Hard words / 高分词清单</p>
+              <h2>Tick a word when Becky can use it.</h2>
             </div>
             <p>
-              Search a word, then read the translation and the example sentence. This is the
-              fastest way to build usable IELTS language.
+              These are stronger IELTS words with Chinese meaning, examples, and use notes.
+              Learned word cards disappear after ticking.
             </p>
           </div>
 
-          <div class="category-row" id="categoryRow" aria-label="Vocabulary categories"></div>
+          <div class="word-tools">
+            <div class="category-row" id="categoryRow" aria-label="Vocabulary categories"></div>
+            <div class="progress-actions">
+              <span class="word-progress" id="learnedWordCount">0 / 0 learned</span>
+              <button class="action-btn" id="showLearnedToggle" type="button">Show learned</button>
+            </div>
+          </div>
           <div class="vocab-grid" id="vocabGrid"></div>
+          <div class="empty-note hidden" id="wordEmptyNote">
+            All matching hard words are learned. Turn on Show learned to review them again.
+          </div>
         </div>
       </section>
 
@@ -1814,6 +1863,237 @@
           upgradeEn: "Use significant increase, significant difference, or significant impact.",
           upgradeZh: "常用搭配：significant increase / difference / impact。",
         },
+        {
+          category: "writing",
+          term: "controversial",
+          zh: "有争议的",
+          simpleEn: "causing strong disagreement",
+          simpleZh: "会引起不同意见或争论。",
+          exampleEn: "Whether children should use smartphones at school remains controversial.",
+          exampleZh: "孩子是否应该在学校使用智能手机仍然有争议。",
+          upgradeEn: "Use controversial for topics with two strong sides.",
+          upgradeZh: "controversial 适合有明显正反观点的话题。",
+        },
+        {
+          category: "writing",
+          term: "detrimental",
+          zh: "有害的；不利的",
+          simpleEn: "harmful or damaging",
+          simpleZh: "有害的，会造成负面影响。",
+          exampleEn: "Excessive screen time can be detrimental to children's concentration.",
+          exampleZh: "过多屏幕时间可能不利于孩子的专注力。",
+          upgradeEn: "Use detrimental to instead of bad for in formal writing.",
+          upgradeZh: "正式写作用 detrimental to 比 bad for 更高分。",
+        },
+        {
+          category: "writing",
+          term: "beneficial",
+          zh: "有益的",
+          simpleEn: "helpful or good for someone",
+          simpleZh: "有帮助、有好处。",
+          exampleEn: "Regular feedback is beneficial for students who want to improve quickly.",
+          exampleZh: "定期反馈对想快速进步的学生很有帮助。",
+          upgradeEn: "Use beneficial for education, health, work, and society topics.",
+          upgradeZh: "beneficial 适合教育、健康、工作和社会类话题。",
+        },
+        {
+          category: "speaking",
+          term: "practical",
+          zh: "实用的；实际的",
+          simpleEn: "useful in real life",
+          simpleZh: "在现实生活中有用。",
+          exampleEn: "I prefer practical advice because I can apply it immediately.",
+          exampleZh: "我更喜欢实用建议，因为我可以马上用。",
+          upgradeEn: "Use practical when explaining why something is useful.",
+          upgradeZh: "解释某件事为什么有用时，用 practical。",
+        },
+        {
+          category: "speaking",
+          term: "memorable",
+          zh: "难忘的",
+          simpleEn: "easy to remember",
+          simpleZh: "容易记住、让人印象深刻。",
+          exampleEn: "The most memorable lesson I had was the one that changed my study habits.",
+          exampleZh: "我最难忘的一节课是改变了我学习习惯的那节课。",
+          upgradeEn: "Use memorable for people, places, lessons, events, and experiences.",
+          upgradeZh: "memorable 可形容人、地方、课程、事件和经历。",
+        },
+        {
+          category: "speaking",
+          term: "straightforward",
+          zh: "简单明了的；直接的",
+          simpleEn: "clear and easy to understand",
+          simpleZh: "清楚、不复杂、容易理解。",
+          exampleEn: "The instructions were straightforward, so I knew exactly what to do.",
+          exampleZh: "说明很清楚，所以我知道该做什么。",
+          upgradeEn: "Use straightforward instead of very easy when talking about tasks or explanations.",
+          upgradeZh: "说任务或解释很简单时，用 straightforward 比 very easy 更自然。",
+        },
+        {
+          category: "reading",
+          term: "assumption",
+          zh: "假设；想当然的看法",
+          simpleEn: "something people believe without proof",
+          simpleZh: "没有证据但先相信的想法。",
+          exampleEn: "The article challenges the assumption that technology always saves time.",
+          exampleZh: "文章挑战了技术总能节省时间这个假设。",
+          upgradeEn: "Use challenge the assumption that... for reading and Task 2 ideas.",
+          upgradeZh: "challenge the assumption that... 适合阅读理解和大作文。",
+        },
+        {
+          category: "reading",
+          term: "evidence",
+          zh: "证据",
+          simpleEn: "facts that support an idea",
+          simpleZh: "支持观点的事实或依据。",
+          exampleEn: "The writer provides evidence to support the claim.",
+          exampleZh: "作者提供证据来支持这个说法。",
+          upgradeEn: "Use evidence shows/suggests/indicates for formal answers.",
+          upgradeZh: "正式表达可用 evidence shows / suggests / indicates。",
+        },
+        {
+          category: "reading",
+          term: "imply",
+          zh: "暗示；意味着",
+          simpleEn: "to suggest something without saying it directly",
+          simpleZh: "没有直接说，但暗示出某个意思。",
+          exampleEn: "The data imply that younger people are spending more time online.",
+          exampleZh: "数据暗示年轻人花在网上的时间更多。",
+          upgradeEn: "Use imply when the meaning is suggested, not directly stated.",
+          upgradeZh: "意思没有明说但能推出来时，用 imply。",
+        },
+        {
+          category: "listening",
+          term: "approximately",
+          zh: "大约",
+          simpleEn: "about; not exact",
+          simpleZh: "大概，不是精确数字。",
+          exampleEn: "The tour takes approximately two hours.",
+          exampleZh: "这次游览大约需要两个小时。",
+          upgradeEn: "Use approximately for time, cost, distance, and number answers.",
+          upgradeZh: "approximately 常用于时间、费用、距离和数字。",
+        },
+        {
+          category: "listening",
+          term: "alternative",
+          zh: "替代选择",
+          simpleEn: "another possible choice",
+          simpleZh: "另一个可以选择的方案。",
+          exampleEn: "If the morning class is full, the afternoon class is an alternative.",
+          exampleZh: "如果上午班满了，下午班是一个替代选择。",
+          upgradeEn: "Use alternative when the speaker changes a plan or offers another choice.",
+          upgradeZh: "听到改计划或给另一个选择时，注意 alternative。",
+        },
+        {
+          category: "listening",
+          term: "available",
+          zh: "可用的；有空的",
+          simpleEn: "free or ready to use",
+          simpleZh: "可以使用，或有空。",
+          exampleEn: "Only three seats are available for Friday's workshop.",
+          exampleZh: "周五的工作坊只剩三个名额。",
+          upgradeEn: "Use available for seats, rooms, time slots, dates, and services.",
+          upgradeZh: "available 常搭配座位、房间、时间段、日期和服务。",
+        },
+        {
+          category: "study",
+          term: "consistent",
+          zh: "稳定的；持续的",
+          simpleEn: "happening regularly in the same way",
+          simpleZh: "稳定地、持续地做。",
+          exampleEn: "Consistent practice is more useful than one long study session.",
+          exampleZh: "持续练习比一次性长时间学习更有用。",
+          upgradeEn: "Use consistent practice, consistent effort, and consistent improvement.",
+          upgradeZh: "常用搭配：consistent practice / effort / improvement。",
+        },
+        {
+          category: "study",
+          term: "effective",
+          zh: "有效的",
+          simpleEn: "working well and producing results",
+          simpleZh: "有用，能产生结果。",
+          exampleEn: "Recording yourself is an effective way to improve speaking fluency.",
+          exampleZh: "录下自己的口语是提高流利度的有效方法。",
+          upgradeEn: "Use effective way/method/strategy instead of good way.",
+          upgradeZh: "用 effective way / method / strategy 替代 good way。",
+        },
+        {
+          category: "study",
+          term: "realistic",
+          zh: "现实可行的",
+          simpleEn: "possible to achieve",
+          simpleZh: "现实中能做到的。",
+          exampleEn: "A realistic goal makes daily study easier to maintain.",
+          exampleZh: "现实可行的目标让每天学习更容易坚持。",
+          upgradeEn: "Use realistic goal, realistic plan, and realistic expectation.",
+          upgradeZh: "常用搭配：realistic goal / plan / expectation。",
+        },
+        {
+          category: "writing",
+          term: "inevitable",
+          zh: "不可避免的",
+          simpleEn: "certain to happen",
+          simpleZh: "一定会发生，无法避免。",
+          exampleEn: "Some level of stress is inevitable before an important exam.",
+          exampleZh: "重要考试前有一定压力是不可避免的。",
+          upgradeEn: "Use inevitable when something cannot be completely avoided.",
+          upgradeZh: "无法完全避免的事情，可以用 inevitable。",
+        },
+        {
+          category: "writing",
+          term: "sustainable",
+          zh: "可持续的",
+          simpleEn: "able to continue for a long time",
+          simpleZh: "可以长期继续下去。",
+          exampleEn: "A sustainable study routine is better than a perfect one-day plan.",
+          exampleZh: "可持续的学习习惯比完美的一天计划更有用。",
+          upgradeEn: "Use sustainable for environment, habits, work, and study routines.",
+          upgradeZh: "sustainable 可用于环境、习惯、工作和学习节奏。",
+        },
+        {
+          category: "speaking",
+          term: "occasionally",
+          zh: "偶尔",
+          simpleEn: "sometimes, but not often",
+          simpleZh: "有时候，但不经常。",
+          exampleEn: "I occasionally practise speaking with friends when we have time.",
+          exampleZh: "有时间的时候，我偶尔会和朋友练口语。",
+          upgradeEn: "Use occasionally to avoid repeating sometimes.",
+          upgradeZh: "用 occasionally 替代 sometimes，让表达更丰富。",
+        },
+        {
+          category: "speaking",
+          term: "personally",
+          zh: "就我个人而言",
+          simpleEn: "used to give your own opinion",
+          simpleZh: "用来表达个人观点。",
+          exampleEn: "Personally, I find short daily practice easier to maintain.",
+          exampleZh: "就我个人而言，我觉得短时间每日练习更容易坚持。",
+          upgradeEn: "Use personally at the start of a speaking opinion.",
+          upgradeZh: "口语表达个人观点时，可以用 personally 开头。",
+        },
+        {
+          category: "reading",
+          term: "reliable",
+          zh: "可靠的",
+          simpleEn: "able to be trusted",
+          simpleZh: "可以信任的、可靠的。",
+          exampleEn: "Reliable sources are important when students research a topic.",
+          exampleZh: "学生研究一个话题时，可靠来源很重要。",
+          upgradeEn: "Use reliable source, reliable method, and reliable data.",
+          upgradeZh: "常用搭配：reliable source / method / data。",
+        },
+        {
+          category: "study",
+          term: "efficient",
+          zh: "高效的",
+          simpleEn: "using time or energy well",
+          simpleZh: "很好地利用时间或精力。",
+          exampleEn: "An efficient review system helps students remember more in less time.",
+          exampleZh: "高效的复习系统能帮助学生在更短时间记住更多。",
+          upgradeEn: "Use efficient for time, systems, methods, and work.",
+          upgradeZh: "efficient 适合时间、系统、方法和工作类表达。",
+        },
       ];
 
       const frames = [
@@ -2005,8 +2285,11 @@
       const searchInput = document.getElementById("searchInput");
       const categoryRow = document.getElementById("categoryRow");
       const doneCount = document.getElementById("doneCount");
+      const learnedWordCount = document.getElementById("learnedWordCount");
       const progressFill = document.getElementById("progressFill");
       const clearProgress = document.getElementById("clearProgress");
+      const showLearnedToggle = document.getElementById("showLearnedToggle");
+      const wordEmptyNote = document.getElementById("wordEmptyNote");
       const dailyLessonBtn = document.getElementById("dailyLessonBtn");
       const dailyModal = document.getElementById("dailyModal");
       const dailyModalBackdrop = document.getElementById("dailyModalBackdrop");
@@ -2030,6 +2313,7 @@
       const phaseButtons = document.querySelectorAll("[data-phase-btn]");
       const langButtons = document.querySelectorAll("[data-lang-btn]");
       const storageKey = "ielts-90-progress";
+      const learnedWordsStorageKey = "ielts-hard-words-learned";
       const dailyStorageKey = "ielts-90-daily-lesson";
       const dailyLessonPath = "./daily-lesson.json";
 
@@ -2044,11 +2328,21 @@
       let activeLang = "both";
       let activeCategory = "all";
       let showCompletedCards = false;
+      let showLearnedWords = false;
       let progressSet = loadProgress();
+      let learnedWordSet = loadLearnedWords();
 
       function loadProgress() {
         try {
           return new Set(JSON.parse(localStorage.getItem(storageKey) || "[]"));
+        } catch {
+          return new Set();
+        }
+      }
+
+      function loadLearnedWords() {
+        try {
+          return new Set(JSON.parse(localStorage.getItem(learnedWordsStorageKey) || "[]"));
         } catch {
           return new Set();
         }
@@ -2065,6 +2359,14 @@
       function saveProgress() {
         try {
           localStorage.setItem(storageKey, JSON.stringify([...progressSet]));
+        } catch {
+          // No-op when storage is not available.
+        }
+      }
+
+      function saveLearnedWords() {
+        try {
+          localStorage.setItem(learnedWordsStorageKey, JSON.stringify([...learnedWordSet]));
         } catch {
           // No-op when storage is not available.
         }
@@ -2252,6 +2554,10 @@
         progressFill.style.width = `${(count / 90) * 100}%`;
       }
 
+      function updateWordSummary() {
+        learnedWordCount.textContent = `${learnedWordSet.size} / ${advancedDailyWords.length} learned`;
+      }
+
       function phaseLabel(phase) {
         return phase === 1 ? "Phase 1" : phase === 2 ? "Phase 2" : "Phase 3";
       }
@@ -2343,9 +2649,19 @@
       }
 
       function renderVocab() {
-        vocabGrid.innerHTML = vocabItems
+        vocabGrid.innerHTML = advancedDailyWords
           .map((item) => {
-            const search = [item.term, item.zh, item.exampleEn, item.exampleZh, item.category]
+            const search = [
+              item.term,
+              item.zh,
+              item.simpleEn,
+              item.simpleZh,
+              item.exampleEn,
+              item.exampleZh,
+              item.upgradeEn,
+              item.upgradeZh,
+              item.category,
+            ]
               .join(" ")
               .toLowerCase();
             const categoryLabel =
@@ -2360,16 +2676,24 @@
                       : "Study";
 
             return `
-              <article class="vocab-card" data-category="${item.category}" data-search="${search}">
+              <article class="vocab-card" data-word="${item.term}" data-category="${item.category}" data-search="${search}">
                 <div class="term">
                   <div>
                     <strong class="word">${item.term}</strong>
                     <span class="cn">${item.zh}</span>
                   </div>
-                  <span class="tag">${categoryLabel}</span>
+                  <label class="done-toggle">
+                    <input type="checkbox" data-hard-word="${item.term}" />
+                    <span>Done / 会了</span>
+                  </label>
                 </div>
+                <span class="tag">${categoryLabel}</span>
+                <p class="meaning en">${item.simpleEn}</p>
+                <p class="meaning zh">${item.simpleZh}</p>
                 <p class="en">${item.exampleEn}</p>
                 <p class="zh">${item.exampleZh}</p>
+                <p class="upgrade-note en">${item.upgradeEn}</p>
+                <p class="upgrade-note zh">${item.upgradeZh}</p>
               </article>
             `;
           })
@@ -2498,6 +2822,19 @@
         applyFilters();
       }
 
+      function updateWordCheckmarks() {
+        document.querySelectorAll("[data-hard-word]").forEach((checkbox) => {
+          const word = checkbox.dataset.hardWord;
+          const card = checkbox.closest(".vocab-card");
+          checkbox.checked = learnedWordSet.has(word);
+          if (card) {
+            card.classList.toggle("is-learned", checkbox.checked);
+          }
+        });
+        updateWordSummary();
+        applyFilters();
+      }
+
       function applyFilters() {
         const query = searchInput.value.trim().toLowerCase();
 
@@ -2524,14 +2861,27 @@
         });
 
         document.querySelectorAll(".vocab-card").forEach((card) => {
+          const word = card.dataset.word;
+          const isLearned = learnedWordSet.has(word);
           const matchesCategory = activeCategory === "all" || card.dataset.category === activeCategory;
           const matchesQuery = !query || card.dataset.search.includes(query);
-          card.classList.toggle("hidden", !(matchesCategory && matchesQuery));
+          const isVisible = matchesCategory && matchesQuery && (showLearnedWords || !isLearned);
+          card.classList.toggle("hidden", !isVisible);
+          card.classList.toggle("is-learned", isLearned);
         });
+
+        const hasVisibleWords = [...document.querySelectorAll(".vocab-card")].some(
+          (card) => !card.classList.contains("hidden")
+        );
+        wordEmptyNote.classList.toggle("hidden", hasVisibleWords);
       }
 
       function updateShowDoneButton() {
         showDoneToggle.textContent = showCompletedCards ? "Hide done" : "Show done";
+      }
+
+      function updateShowLearnedButton() {
+        showLearnedToggle.textContent = showLearnedWords ? "Hide learned" : "Show learned";
       }
 
       function setPhase(phase) {
@@ -2561,6 +2911,12 @@
       function toggleCompletedCards() {
         showCompletedCards = !showCompletedCards;
         updateShowDoneButton();
+        applyFilters();
+      }
+
+      function toggleLearnedWords() {
+        showLearnedWords = !showLearnedWords;
+        updateShowLearnedButton();
         applyFilters();
       }
 
@@ -2597,6 +2953,7 @@
 
         searchInput.addEventListener("input", applyFilters);
         showDoneToggle.addEventListener("click", toggleCompletedCards);
+        showLearnedToggle.addEventListener("click", toggleLearnedWords);
         upgradeButton.addEventListener("click", upgradeTypedSentence);
         upgradeInput.addEventListener("keydown", (event) => {
           if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
@@ -2613,17 +2970,31 @@
         document.addEventListener("change", (event) => {
           const target = event.target;
           if (!(target instanceof HTMLInputElement)) return;
-          if (!target.matches("[data-progress-day]")) return;
 
-          const day = Number(target.dataset.progressDay);
-          if (target.checked) {
-            progressSet.add(day);
-          } else {
-            progressSet.delete(day);
+          if (target.matches("[data-progress-day]")) {
+            const day = Number(target.dataset.progressDay);
+            if (target.checked) {
+              progressSet.add(day);
+            } else {
+              progressSet.delete(day);
+            }
+
+            saveProgress();
+            updateCheckmarks();
+            return;
           }
 
-          saveProgress();
-          updateCheckmarks();
+          if (target.matches("[data-hard-word]")) {
+            const word = target.dataset.hardWord;
+            if (target.checked) {
+              learnedWordSet.add(word);
+            } else {
+              learnedWordSet.delete(word);
+            }
+
+            saveLearnedWords();
+            updateWordCheckmarks();
+          }
         });
       }
 
@@ -2635,7 +3006,9 @@
       buildCategoryRow();
       attachEvents();
       updateShowDoneButton();
+      updateShowLearnedButton();
       updateCheckmarks();
+      updateWordCheckmarks();
       applyFilters();
       showUpgradeResult(upgradeExamples[0]);
       setLanguage("both");
