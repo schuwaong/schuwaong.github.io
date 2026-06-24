@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IC Property | Darren's Damansara Shortlist</title>
+  <meta name="description" content="IC Property shortlist for Darren: landed homes around Damansara under RM1M with live comp-based gross ROI estimates.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef2f5;
+      --paper: #ffffff;
+      --paper-soft: #f8fafb;
+      --ink: #101418;
+      --muted: #5b6672;
+      --line: #d9dee5;
+      --green: #14714f;
+      --green-soft: #e8f5ee;
+      --blue: #1d5f9f;
+      --blue-soft: #eaf2fb;
+      --amber: #ad6f15;
+      --amber-soft: #fff4db;
+      --red: #b42318;
+      --red-soft: #fee4e2;
+      --shadow: 0 18px 46px rgba(16, 24, 40, 0.08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(241, 244, 247, 0.96)),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    a,
+    button,
+    input,
+    select {
+      color: inherit;
+      font: inherit;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(20, 113, 79, 0.28);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: min(1360px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      font-weight: 900;
+    }
+
+    .brand strong,
+    .brand span {
+      display: block;
+      line-height: 1.1;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .btn {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 8px 12px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .btn.primary {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .band,
+    .metric,
+    .analysis-card,
+    .source-item,
+    .listing-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.95) contrast(1.02);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(15, 19, 24, 0.94) 0%, rgba(15, 19, 24, 0.82) 44%, rgba(15, 19, 24, 0.3) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 16px;
+      align-items: end;
+      padding: 28px;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 12px;
+      align-content: end;
+      color: #fffaf2;
+      padding-right: 10px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: #a7f3d0;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      max-width: 12ch;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      margin: 0;
+      max-width: 62ch;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .profile {
+      align-self: stretch;
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      color: #fff;
+    }
+
+    .profile-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fff, #d1fae5);
+      color: #0f172a;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .profile-role {
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+    }
+
+    .profile-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .profile-row:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .profile-row span {
+      color: rgba(255, 255, 255, 0.66);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .profile-row strong {
+      text-align: right;
+      font-weight: 850;
+    }
+
+    .summary-band {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 100px;
+      display: grid;
+      align-content: space-between;
+      padding: 14px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .metric small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .section-band {
+      margin-top: 16px;
+      padding: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      max-width: 76ch;
+      color: var(--muted);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(160px, 220px) minmax(160px, 220px);
+      gap: 12px;
+      align-items: end;
+    }
+
+    .control {
+      display: grid;
+      gap: 6px;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px 12px;
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .listing-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .listing-card {
+      overflow: hidden;
+      display: grid;
+      min-height: 100%;
+      box-shadow: var(--shadow);
+    }
+
+    .card-media {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 14px 14px 0;
+    }
+
+    .photo-tile {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      color: inherit;
+    }
+
+    .photo-frame {
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f5f7fa;
+    }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-caption {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-top {
+      display: grid;
+      gap: 10px;
+      padding: 14px 14px 12px;
+      background: linear-gradient(180deg, rgba(20, 113, 79, 0.05), rgba(20, 113, 79, 0));
+    }
+
+    .card-kicker {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .area {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .price {
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.15;
+      font-weight: 850;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .badge.green {
+      border-color: rgba(20, 113, 79, 0.24);
+      background: rgba(20, 113, 79, 0.08);
+      color: var(--green);
+    }
+
+    .badge.amber {
+      border-color: rgba(173, 111, 21, 0.24);
+      background: rgba(173, 111, 21, 0.09);
+      color: var(--amber);
+    }
+
+    .badge.red {
+      border-color: rgba(180, 35, 24, 0.24);
+      background: rgba(180, 35, 24, 0.08);
+      color: var(--red);
+    }
+
+    .card-body {
+      padding: 0 14px 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfd;
+    }
+
+    .stat span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .roi-band {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f8fafc;
+    }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .roi-grid div {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .roi-grid span {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .roi-grid strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1.15;
+    }
+
+    .roi-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .link-btn {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 0 11px;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .link-btn.primary {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .analysis-card {
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .analysis-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .analysis-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .sources {
+      display: grid;
+      gap: 10px;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .source-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .source-item strong {
+      display: block;
+      line-height: 1.2;
+    }
+
+    .source-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .footer-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .empty-state {
+      padding: 18px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--muted);
+    }
+
+    @media (max-width: 1040px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-band,
+      .analysis-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .listing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(100%, calc(100% - 20px));
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .hero-grid {
+        padding: 20px;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+
+      .summary-band,
+      .analysis-grid,
+      .controls,
+      .stats,
+      .roi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top">
+        <div class="brand-mark">IC</div>
+        <div>
+          <strong>IC Property</strong>
+          <span>Damansara landed shortlist</span>
+        </div>
+      </a>
+      <nav class="actions" aria-label="Page navigation">
+        <a class="btn" href="#roi">ROI scan</a>
+        <a class="btn" href="#listings">Listings</a>
+        <a class="btn primary" href="#sources">Sources</a>
+      </nav>
+    </header>
+
+    <section class="band hero" id="top" aria-label="Hero">
+      <img class="hero-media" src="./assets/section17-pj.jpg" alt="Petaling Jaya skyline and landed homes">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">IC Property / Malaysia landed scan</p>
+          <h1>Darren's Damansara shortlist under RM1M</h1>
+          <p class="lede">
+            A clean scan of landed homes in Damansara Jaya, Ara Damansara, Kota Damansara, and Sunway Damansara.
+            ROI here means gross rental yield from asking-rent anchors, before loan, stamp duty, renovation, and vacancy.
+          </p>
+          <div class="hero-actions">
+            <span class="chip">Landed only</span>
+            <span class="chip">Below RM1M</span>
+            <span class="chip">Gross ROI screen</span>
+            <span class="chip">Captured 24 Jun 2026</span>
+          </div>
+          <div class="hero-actions">
+            <a class="btn primary" href="#listings">Open shortlist</a>
+            <a class="btn" href="#roi">Check ROI</a>
+            <a class="btn" href="#sources">See sources</a>
+          </div>
+        </div>
+
+        <aside class="profile" aria-label="Darren profile">
+          <div class="profile-head">
+            <div class="avatar">D</div>
+            <div>
+              <div class="profile-name">Darren</div>
+              <div class="profile-role">Owner-investor brief</div>
+            </div>
+          </div>
+          <div class="profile-grid">
+            <div class="profile-row">
+              <span>Budget cap</span>
+              <strong>RM1,000,000</strong>
+            </div>
+            <div class="profile-row">
+              <span>Target ROI</span>
+              <strong>4.0% gross</strong>
+            </div>
+            <div class="profile-row">
+              <span>Area focus</span>
+              <strong>Damansara belt</strong>
+            </div>
+            <div class="profile-row">
+              <span>Selection rule</span>
+              <strong>Landed, simple, rentable</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="summary-band" aria-label="Snapshot metrics">
+      <article class="metric">
+        <span>Visible options</span>
+        <strong id="visibleCount">5</strong>
+        <small>all landed, all under RM1M</small>
+      </article>
+      <article class="metric">
+        <span>Price range</span>
+        <strong id="priceRange">RM720k - RM900k</strong>
+        <small>asking prices only</small>
+      </article>
+      <article class="metric">
+        <span>Gross ROI band</span>
+        <strong id="roiRange">3.65% - 5.33%</strong>
+        <small>midpoint rent estimate</small>
+      </article>
+      <article class="metric">
+        <span>Top match</span>
+        <strong id="topMatch">Freehold landed house near SS2</strong>
+        <small id="topMatchNote">highest base-yield option</small>
+      </article>
+    </section>
+
+    <section class="band section-band" id="roi">
+      <div class="section-head">
+        <div>
+          <h2>ROI scan</h2>
+          <p>Change the target yield and filter the shortlist by area or name. The math stays gross and readable.</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="control">
+          <label for="searchInput">Search listings</label>
+          <input id="searchInput" type="search" placeholder="Damansara Jaya, Parkville, Ara Damansara..." autocomplete="off">
+        </div>
+        <div class="control">
+          <label for="targetRoiInput">Target ROI %</label>
+          <input id="targetRoiInput" inputmode="decimal" value="4.0">
+        </div>
+        <div class="control">
+          <label for="sortInput">Sort by</label>
+          <select id="sortInput">
+            <option value="roi-desc">Yield high to low</option>
+            <option value="price-asc">Price low to high</option>
+            <option value="rent-desc">Rent high to low</option>
+            <option value="area-asc">Area A to Z</option>
+          </select>
+        </div>
+      </div>
+      <p class="note">
+        Gross ROI = annual rent estimate divided by asking price. Nothing here includes financing, stamp duty, legal fees, renovation, or vacancy. Verify title, tenure, and actual rentability before acting.
+      </p>
+    </section>
+
+    <section id="listings" class="listing-grid" aria-label="Shortlisted properties"></section>
+
+    <section class="analysis-grid" aria-label="Key takeaways">
+      <article class="analysis-card">
+        <h3>Best yield story</h3>
+        <p>
+          The lowest-ticket Damansara Jaya freehold house gives the clearest gross-yield edge. It is the sharpest
+          starting point if Darren wants simple ROI before anything fancy.
+        </p>
+      </article>
+      <article class="analysis-card">
+        <h3>Best balance</h3>
+        <p>
+          DJ Villa and Ara Damansara sit closer to the middle: still under RM1M, still landed, and still backed by
+          rental comps that can support a clean 4% class of return.
+        </p>
+      </article>
+      <article class="analysis-card">
+        <h3>What to verify</h3>
+        <p>
+          Check title status, extension legality, maintenance charges, renovation quality, parking, and whether the
+          stated rent is realistic for the exact unit condition.
+        </p>
+      </article>
+    </section>
+
+    <section class="band section-band sources" id="sources">
+      <div class="section-head">
+        <div>
+          <h2>Sources</h2>
+          <p>Current search snippets and live photo galleries captured from PropertyGuru on 24 Jun 2026.</p>
+        </div>
+      </div>
+      <div class="source-list" id="sourceList"></div>
+      <p class="footer-note">
+        Educational screen only. This is not property, legal, tax, or financial advice. Photo previews open the live listing galleries.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const listings = [
+      {
+        area: "Damansara Jaya",
+        title: "Freehold landed house near SS2",
+        subtitle: "2-storey terraced house with the strongest gross-yield case in the set.",
+        price: 720000,
+        type: "2-storey terraced house",
+        tenure: "Freehold",
+        listed: "15 Jun 2026",
+        beds: "4 beds / 3 baths",
+        size: "1,596 sqft floor / 1,200 sqft land",
+        saleUrl: "https://www.propertyguru.com.my/property-listing/freehold-landed-house-25-minutes-from-ss2-for-sale-by-karl-phang-500158330",
+        rentLow: 2900,
+        rentHigh: 3500,
+        rentUrl: "https://www.propertyguru.com.my/property-for-rent/in-damansara-jaya-l9msm/partially-furnished",
+        photos: [
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/500158330/UPHO.275778324.V800/Freehold-landed-house-25-minutes-from-SS2-Petaling-Jaya-Malaysia.jpg",
+            caption: "Living room"
+          },
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/500158330/UPHO.275778323.V800/Freehold-landed-house-25-minutes-from-SS2-Petaling-Jaya-Malaysia.jpg",
+            caption: "Dining room"
+          }
+        ],
+        note: "Lowest ticket and best base-case ROI. Good fit if Darren wants the cleanest entry point."
+      },
+      {
+        area: "Damansara Jaya",
+        title: "DJ Villa, Damansara Jaya",
+        subtitle: "A 2,000 sqft townhouse on the Damansara Jaya under-RM1M search page.",
+        price: 900000,
+        type: "Townhouse",
+        tenure: "Leasehold",
+        listed: "12 Jun 2026",
+        beds: "3 beds / 3 baths",
+        size: "2,000 sqft floor / 1,000 sqft land",
+        saleUrl: "https://www.propertyguru.com.my/property-for-sale/in-damansara-jaya-l9msm/priced-under-1m-rm",
+        rentLow: 2900,
+        rentHigh: 3500,
+        rentUrl: "https://www.propertyguru.com.my/property-for-rent/in-damansara-jaya-l9msm/partially-furnished",
+        photos: [
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/41053231/UPHO.268678825.V800/dj-villa-2-Damansara-jaya-Petaling-Jaya-Malaysia.jpg",
+            caption: "Living room"
+          },
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/41053231/UPHO.243058702.V800/dj-villa-2-Damansara-jaya-Petaling-Jaya-Malaysia.jpg",
+            caption: "Kitchen"
+          }
+        ],
+        note: "Same rent engine as the cheaper Damansara Jaya house, but the price tag is higher."
+      },
+      {
+        area: "Ara Damansara",
+        title: "Taman Kelana Idaman",
+        subtitle: "A well-priced Ara Damansara 2-storey terrace with direct LRT adjacency in the search result.",
+        price: 900000,
+        type: "2-storey terraced house",
+        tenure: "Leasehold",
+        listed: "18 Jun 2026",
+        beds: "3+1 beds / 3 baths",
+        size: "1,600 sqft floor / 1,950 sqft land",
+        saleUrl: "https://www.propertyguru.com.my/terrace-for-sale/in-ara-damansara-662zm/priced-under-1m-rm",
+        rentLow: 2700,
+        rentHigh: 3000,
+        rentUrl: "https://www.propertyguru.com.my/property-for-rent/in-ara-damansara-662zm/priced-under-7k-rm",
+        photos: [
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/500518242/UPHO.281679924.V800/Taman-Kelana-Idaman-Ara-Damansara-Malaysia.jpg",
+            caption: "Living room"
+          },
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/500518242/UPHO.281679926.V800/Taman-Kelana-Idaman-Ara-Damansara-Malaysia.jpg",
+            caption: "Exterior"
+          }
+        ],
+        note: "A straightforward 4% screen if the unit condition is solid and the rent comes in near the midpoint."
+      },
+      {
+        area: "Kota Damansara",
+        title: "Section 5 terrace house",
+        subtitle: "A 2-storey terrace in the Kota Damansara under-RM1M search results.",
+        price: 900000,
+        type: "2-storey terraced house",
+        tenure: "Leasehold",
+        listed: "18 Jun 2026",
+        beds: "4 beds / 3 baths",
+        size: "2,000 sqft floor / 1,650 sqft land",
+        saleUrl: "https://www.propertyguru.com.my/terrace-for-sale/in-kota-damansara-6jbfp/priced-under-1m-rm/3",
+        rentLow: 2700,
+        rentHigh: 2800,
+        rentUrl: "https://www.propertyguru.com.my/property-for-rent/in-kota-damansara-6jbfp/with-4-bedrooms",
+        photos: [
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/501554861/UPHO.383896160.V800/Seksyen-5-Kota-Damansara-Kota-Damansara-Malaysia.jpg",
+            caption: "Exterior"
+          },
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/501554861/UPHO.383896161.V800/Seksyen-5-Kota-Damansara-Kota-Damansara-Malaysia.jpg",
+            caption: "Living room"
+          }
+        ],
+        note: "Nice size for the price, but the rent band is tighter and the yield gap is smaller."
+      },
+      {
+        area: "Kota Damansara",
+        title: "Section 6 @ Kota Damansara",
+        subtitle: "A larger terrace in the Kota Damansara under-RM1M search results.",
+        price: 920000,
+        type: "2-storey terraced house",
+        tenure: "Leasehold",
+        listed: "22 Jun 2026",
+        beds: "5+1 beds / 3 baths",
+        size: "2,200 sqft floor / 3,239 sqft land",
+        saleUrl: "https://www.propertyguru.com.my/terrace-for-sale/in-kota-damansara-6jbfp/priced-under-1m-rm/2",
+        rentLow: 2800,
+        rentHigh: 2800,
+        rentUrl: "https://www.propertyguru.com.my/property-for-rent/in-kota-damansara-6jbfp/freehold",
+        photos: [
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/501367205/UPHO.381625628.V800/Section-6-Kota-Damansara-Kota-Damansara-Malaysia.jpg",
+            caption: "Exterior"
+          },
+          {
+            src: "https://my1-cdn.pgimgs.com/listing/501367205/UPHO.381625633.V800/Section-6-Kota-Damansara-Kota-Damansara-Malaysia.jpg",
+            caption: "Interior"
+          }
+        ],
+        note: "This one stays comfortably under RM1M and still keeps a healthy base-yield profile."
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const targetRoiInput = document.getElementById("targetRoiInput");
+    const sortInput = document.getElementById("sortInput");
+    const listingsEl = document.getElementById("listings");
+    const sourceListEl = document.getElementById("sourceList");
+
+    function formatRM(value) {
+      return `RM${Math.round(Number(value) || 0).toLocaleString("en-MY")}`;
+    }
+
+    function formatCompactRM(value) {
+      const number = Number(value) || 0;
+      if (number >= 1000000) return `RM${(number / 1000000).toFixed(1)}M`;
+      return `RM${(number / 1000).toFixed(0)}k`;
+    }
+
+    function formatPct(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function compactText(value) {
+      return String(value || "").replace(/\s+/g, " ").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function parseNumber(value) {
+      const cleaned = String(value || "").replace(/[^0-9.]/g, "");
+      const number = Number(cleaned);
+      return Number.isFinite(number) ? number : 0;
+    }
+
+    function grossYield(price, rent) {
+      return price ? (rent * 12 / price) * 100 : 0;
+    }
+
+    function targetRent(price, targetPct) {
+      return price ? (price * (targetPct / 100)) / 12 : 0;
+    }
+
+    function matchQuery(listing, query) {
+      if (!query) return true;
+      const haystack = [
+        listing.area,
+        listing.title,
+        listing.subtitle,
+        listing.type,
+        listing.tenure,
+        listing.note
+      ].join(" ").toLowerCase();
+      return haystack.includes(query.toLowerCase());
+    }
+
+    function sortListings(items, mode) {
+      const sorted = items.slice();
+      switch (mode) {
+        case "price-asc":
+          sorted.sort((a, b) => a.price - b.price || a.area.localeCompare(b.area));
+          break;
+        case "rent-desc":
+          sorted.sort((a, b) => b.midRent - a.midRent || b.price - a.price);
+          break;
+        case "area-asc":
+          sorted.sort((a, b) => a.area.localeCompare(b.area) || b.price - a.price);
+          break;
+        case "roi-desc":
+        default:
+          sorted.sort((a, b) => b.midYield - a.midYield || a.price - b.price);
+          break;
+      }
+      return sorted;
+    }
+
+    function roiClass(delta) {
+      if (delta >= 0.25) return "green";
+      if (delta >= -0.15) return "amber";
+      return "red";
+    }
+
+    function renderSummary(visible, targetPct) {
+      const priceValues = visible.map((item) => item.price);
+      const yields = visible.map((item) => item.midYield);
+      const minPrice = priceValues.length ? Math.min(...priceValues) : 0;
+      const maxPrice = priceValues.length ? Math.max(...priceValues) : 0;
+      const minYield = yields.length ? Math.min(...yields) : 0;
+      const maxYield = yields.length ? Math.max(...yields) : 0;
+      const top = visible[0];
+
+      document.getElementById("visibleCount").textContent = String(visible.length);
+      document.getElementById("priceRange").textContent = visible.length ? `${formatCompactRM(minPrice)} - ${formatCompactRM(maxPrice)}` : "-";
+      document.getElementById("roiRange").textContent = visible.length ? `${formatPct(minYield)} - ${formatPct(maxYield)}` : "-";
+      document.getElementById("topMatch").textContent = top ? top.title : "No matches";
+      document.getElementById("topMatchNote").textContent = top
+        ? `${formatPct(top.midYield)} base ROI vs ${formatPct(targetPct)} target`
+        : "Try a different search term";
+    }
+
+    function renderCard(listing, targetPct) {
+      const midRent = listing.midRent;
+      const targetMonthly = targetRent(listing.price, targetPct);
+      const midYield = listing.midYield;
+      const delta = midYield - targetPct;
+      const bandMin = grossYield(listing.price, listing.rentLow);
+      const bandMax = grossYield(listing.price, listing.rentHigh);
+      const deltaMonthly = midRent - targetMonthly;
+      const badgeTone = roiClass(delta);
+      const photos = (listing.photos || []).slice(0, 2);
+
+      return `
+        <article class="listing-card">
+          <div class="card-media">
+            ${photos.map((photo) => `
+              <a class="photo-tile" href="${escapeHtml(listing.saleUrl)}" target="_blank" rel="noreferrer">
+                <div class="photo-frame">
+                  <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(`${listing.title} ${photo.caption}`)}" loading="lazy" decoding="async">
+                </div>
+                <span class="photo-caption">${escapeHtml(photo.caption)}</span>
+              </a>
+            `).join("")}
+          </div>
+          <div class="card-top">
+            <div class="card-kicker">
+              <div>
+                <div class="area">${escapeHtml(listing.area)}</div>
+                <div class="price">${escapeHtml(formatCompactRM(listing.price))}</div>
+              </div>
+              <span class="badge ${badgeTone}">${delta >= 0 ? "Above" : "Below"} target</span>
+            </div>
+            <h3 class="title">${escapeHtml(listing.title)}</h3>
+            <p class="subtitle">${escapeHtml(listing.subtitle)}</p>
+            <div class="badges">
+              <span class="badge">${escapeHtml(listing.type)}</span>
+              <span class="badge">${escapeHtml(listing.tenure)}</span>
+              <span class="badge">${escapeHtml(listing.beds)}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="stats">
+              <div class="stat">
+                <span>Size</span>
+                <strong>${escapeHtml(listing.size)}</strong>
+              </div>
+              <div class="stat">
+                <span>Listed</span>
+                <strong>${escapeHtml(listing.listed)}</strong>
+              </div>
+            </div>
+            <div class="roi-band">
+              <div class="roi-grid">
+                <div>
+                  <span>Rent comp band</span>
+                  <strong>${escapeHtml(formatCompactRM(listing.rentLow))} - ${escapeHtml(formatCompactRM(listing.rentHigh))}</strong>
+                </div>
+                <div>
+                  <span>Base rent</span>
+                  <strong>${escapeHtml(formatRM(midRent))}</strong>
+                </div>
+                <div>
+                  <span>Gross ROI</span>
+                  <strong>${escapeHtml(formatPct(midYield))}</strong>
+                </div>
+                <div>
+                  <span>Target ${escapeHtml(formatPct(targetPct))}</span>
+                  <strong>${escapeHtml(formatRM(targetMonthly))}</strong>
+                </div>
+              </div>
+              <div class="roi-footer">
+                <span class="badge ${badgeTone}">${deltaMonthly >= 0 ? "+" : "-"}${escapeHtml(formatRM(Math.abs(deltaMonthly)))} / mo vs target</span>
+                <span class="badge">ROI band ${escapeHtml(formatPct(bandMin))} - ${escapeHtml(formatPct(bandMax))}</span>
+                <span class="badge">Asking price / rent only</span>
+              </div>
+            </div>
+            <p class="subtitle">${escapeHtml(listing.note)}</p>
+            <div class="actions" style="justify-content:flex-start">
+              <a class="link-btn primary" href="${escapeHtml(listing.saleUrl)}" target="_blank" rel="noreferrer">Open sale source</a>
+              <a class="link-btn" href="${escapeHtml(listing.rentUrl)}" target="_blank" rel="noreferrer">Open rent source</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderSources() {
+      const items = [
+        ["Damansara Jaya sale page", "Freehold landed house, plus DJ Villa and the Damansara Jaya under-RM1M search page.", "https://www.propertyguru.com.my/property-for-sale/in-damansara-jaya-l9msm/priced-under-1m-rm"],
+        ["Damansara Jaya rent page", "Damansara Jaya landed rent page with RM3.5k and RM4.5k anchors.", "https://www.propertyguru.com.my/property-for-rent/in-damansara-jaya-l9msm/partially-furnished"],
+        ["Ara Damansara sale page", "Taman Kelana Idaman 2-storey terrace under RM1M.", "https://www.propertyguru.com.my/terrace-for-sale/in-ara-damansara-662zm/priced-under-1m-rm"],
+        ["Ara Damansara rent page", "Ara Damansara rent search with RM2.7k and RM2.8k anchors.", "https://www.propertyguru.com.my/property-for-rent/in-ara-damansara-662zm/priced-under-7k-rm"],
+        ["Kota Damansara sale page", "Section 5 and Section 6 landed options under RM1M.", "https://www.propertyguru.com.my/terrace-for-sale/in-kota-damansara-6jbfp/priced-under-1m-rm/3"],
+        ["Kota Damansara rent page", "Kota Damansara rent search with RM2.7k to RM2.8k anchors.", "https://www.propertyguru.com.my/property-for-rent/in-kota-damansara-6jbfp/with-4-bedrooms"],
+        ["Listing photos", "Live gallery previews linked from the shortlisted PropertyGuru listings.", "https://www.propertyguru.com.my/"],
+        ["Hero image", "Section 17, Petaling Jaya skyline image used as generic local visual context.", "https://commons.wikimedia.org/wiki/File:Section_17_PJ_4.jpg"]
+      ];
+
+      sourceListEl.innerHTML = items.map(([label, detail, url]) => `
+        <div class="source-item">
+          <div>
+            <strong>${escapeHtml(label)}</strong>
+            <span>${escapeHtml(detail)}</span>
+          </div>
+          <a class="link-btn" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Open</a>
+        </div>
+      `).join("");
+    }
+
+    function render() {
+      const query = compactText(searchInput.value).toLowerCase();
+      const targetPct = Math.max(0, parseNumber(targetRoiInput.value) || 4);
+      const sortMode = sortInput.value || "roi-desc";
+
+      const enriched = listings.map((listing) => ({
+        ...listing,
+        midRent: (listing.rentLow + listing.rentHigh) / 2,
+      })).map((listing) => ({
+        ...listing,
+        midYield: grossYield(listing.price, listing.midRent),
+      }));
+
+      const visible = sortListings(
+        enriched.filter((listing) => matchQuery(listing, query)),
+        sortMode
+      );
+
+      renderSummary(visible, targetPct);
+
+      listingsEl.innerHTML = visible.length
+        ? visible.map((listing) => renderCard(listing, targetPct)).join("")
+        : `<div class="empty-state">No matches. Try clearing the search field or changing the area term.</div>`;
+    }
+
+    searchInput.addEventListener("input", render);
+    targetRoiInput.addEventListener("input", render);
+    sortInput.addEventListener("change", render);
+
+    renderSources();
+    render();
+  </script>
+</body>
+</html>
