@@ -51,9 +51,10 @@ function formatPct(value) {
   return `${sign}${number.toFixed(2)}%`;
 }
 
-function formatExportValue(value) {
-  if (value === null || value === undefined || value === "") return "n/a";
-  return String(value).replace(/\s+/g, " ").trim();
+function formatWeight(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+  return `${number.toFixed(2)}%`;
 }
 
 function pctClass(value) {
@@ -194,12 +195,6 @@ function watchlistItems() {
   return state.cache?.watchlist?.items || [];
 }
 
-function watchlistExportRows(cache = state.cache) {
-  const tableRows = cache?.watchlist?.table || [];
-  const items = cache?.watchlist?.items || [];
-  return tableRows.length ? tableRows : items;
-}
-
 function findWatchlistItem(symbol) {
   return watchlistItems().find((item) => item.symbol === symbol || item.raw_code === symbol);
 }
@@ -225,105 +220,6 @@ function gateSummary(gates = []) {
 
 function gateBySource(item, source) {
   return (item.agent_gates || []).find((gate) => gate.source === source) || {};
-}
-
-function formatWatchlistExport(cache = state.cache) {
-  const rows = watchlistExportRows(cache);
-  if (!rows.length) return "";
-
-  const updated = cache?.watchlist?.table_generated_at || cache?.watchlist?.updated_at || cache?.generated_at;
-  const grouped = new Map();
-  for (const item of rows) {
-    const region = watchlistRegionForItem(item);
-    if (!grouped.has(region)) grouped.set(region, []);
-    grouped.get(region).push(item);
-  }
-
-  const orderedRegions = [
-    ...WATCHLIST_REGIONS.map((region) => region.key),
-    "other",
-    ...[...grouped.keys()].filter((region) => !WATCHLIST_REGIONS.some((known) => known.key === region) && region !== "other"),
-  ];
-  const lines = [
-    "IC Investing Watchlist",
-    `Updated: ${formatExportValue(updated)}`,
-    `Names: ${rows.length}`,
-    "Educational only - not financial advice.",
-  ];
-
-  for (const regionKey of orderedRegions) {
-    const regionRows = grouped.get(regionKey);
-    if (!regionRows?.length) continue;
-    lines.push("", `${watchlistRegionLabel(regionKey)} (${regionRows.length})`);
-    regionRows.forEach((item, index) => {
-      const label = item.setup_label || item.name || item.market || "";
-      const symbol = item.raw_code || item.symbol || "UNKNOWN";
-      const name = label ? ` - ${label}` : "";
-      lines.push(`${index + 1}. ${symbol}${name}`);
-      lines.push(`   Status: ${formatExportValue(item.status_label || item.status || item.confidence)}`);
-      lines.push(`   Last: ${formatExportValue(item.last ?? item.current_price)} (${formatPct(item.change_pct)})`);
-      lines.push(`   Decision: ${formatExportValue(item.decision_score)} | ML: ${formatExportValue(item.ml_score ?? item.ml_status)}`);
-      lines.push(`   Entry/Add: ${formatExportValue(item.entry_zone || item.entry_point)} / ${formatExportValue(item.add_zone)}`);
-      lines.push(`   Invalidation: ${formatExportValue(item.invalidation ?? item.stoploss)}`);
-      lines.push(`   Thesis: ${formatExportValue(item.thesis || item.reason_tag || item.reason)}`);
-      if (item.reason && item.reason !== item.thesis) lines.push(`   Reason: ${formatExportValue(item.reason)}`);
-    });
-  }
-
-  return lines.join("\n");
-}
-
-async function copyTextToClipboard(text) {
-  if (navigator.clipboard?.writeText && window.isSecureContext) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.setAttribute("readonly", "");
-  textArea.style.position = "fixed";
-  textArea.style.left = "-9999px";
-  textArea.style.top = "0";
-  document.body.appendChild(textArea);
-  textArea.select();
-  const copied = document.execCommand("copy");
-  textArea.remove();
-  if (!copied) throw new Error("Clipboard copy was blocked.");
-}
-
-function setCopyWatchlistStatus(message, isError = false) {
-  const status = $("#copyWatchlistStatus");
-  if (!status) return;
-  status.textContent = message;
-  status.dataset.state = isError ? "error" : message ? "ok" : "";
-  window.clearTimeout(setCopyWatchlistStatus.timeoutId);
-  if (message) {
-    setCopyWatchlistStatus.timeoutId = window.setTimeout(() => {
-      status.textContent = "";
-      status.dataset.state = "";
-    }, 2600);
-  }
-}
-
-async function copyFullWatchlist() {
-  const button = $("#copyWatchlistButton");
-  const text = formatWatchlistExport();
-  if (!text) {
-    setCopyWatchlistStatus("No list loaded", true);
-    return;
-  }
-
-  try {
-    if (button) button.disabled = true;
-    await copyTextToClipboard(text);
-    setCopyWatchlistStatus(`Copied ${watchlistExportRows().length}`);
-  } catch (error) {
-    console.error(error);
-    setCopyWatchlistStatus("Copy blocked", true);
-  } finally {
-    if (button) button.disabled = false;
-  }
 }
 
 function sentenceList(...values) {
@@ -930,6 +826,91 @@ function renderWatchlist(cache) {
           .join("");
 }
 
+function renderPortfolioAnalysis(cache) {
+  const analysis = cache.portfolio_analysis || {};
+  const trims = analysis.trim_candidates || [];
+  const holds = analysis.hold_review || [];
+  const summary = analysis.summary || {};
+  const notes = analysis.notes || [];
+
+  if (!trims.length && !holds.length) {
+    $("#portfolioAnalysis").innerHTML = empty("No sample portfolio analysis is cached yet.");
+    return;
+  }
+
+  const summaryCards = [
+    ["Names reviewed", summary.positions_reviewed ?? "n/a"],
+    ["Trim candidates", summary.trim_candidates ?? 0],
+    ["Hold review", summary.hold_review_names ?? 0],
+    ["Focus", summary.focus || "Current sample trim plan"],
+  ];
+
+  const renderItem = (item, tone) => `
+    <article class="item-card portfolio-analysis-card ${tone}">
+      <div class="item-topline">
+        <div>
+          <h3><span class="ticker">${escapeHtml(item.symbol || "n/a")}</span> ${escapeHtml(item.name || "")}</h3>
+          <div class="status">${escapeHtml(item.sample_action || "Sample review")}</div>
+        </div>
+        <span class="status">${escapeHtml(item.status || "review")}</span>
+      </div>
+      <div class="portfolio-analysis-metrics">
+        <span><small>Last</small><strong>${escapeHtml(item.last_price || "n/a")}</strong></span>
+        <span><small>Weight</small><strong>${escapeHtml(formatWeight(item.portfolio_weight_pct))}</strong></span>
+        <span><small>Unrealized</small><strong class="${pctClass(item.unrealized_pct)}">${escapeHtml(item.unrealized_pct || "n/a")}</strong></span>
+        <span><small>Sample sell zone</small><strong>${escapeHtml(item.sample_sell_band || "n/a")}</strong></span>
+      </div>
+      <div class="reason">${escapeHtml(item.why || "No reason saved.")}</div>
+      <div class="portfolio-analysis-when">${escapeHtml(item.when_to_sell || "No sample sell timing saved.")}</div>
+    </article>
+  `;
+
+  $("#portfolioAnalysis").innerHTML = `
+    <div class="portfolio-analysis-intro">
+      <p class="portfolio-analysis-disclaimer">${escapeHtml(analysis.disclaimer || "Educational sample only.")}</p>
+      <div class="portfolio-analysis-meta">
+        <span>Updated ${escapeHtml(formatDate(analysis.updated_at || cache.generated_at))}</span>
+        <span>Sample framing for the public website</span>
+      </div>
+    </div>
+    <div class="portfolio-summary-grid">
+      ${summaryCards
+        .map(
+          ([label, value]) => `
+            <div class="portfolio-summary-card">
+              <small>${escapeHtml(label)}</small>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+    <div class="portfolio-analysis-columns">
+      <div>
+        <div class="panel-subheading">
+          <p class="section-kicker">Sample trim plan</p>
+          <h3>When to sell</h3>
+        </div>
+        <div class="stack-list">
+          ${trims.length ? trims.map((item) => renderItem(item, "trim")).join("") : empty("No trim candidates were generated.")}
+        </div>
+      </div>
+      <div>
+        <div class="panel-subheading">
+          <p class="section-kicker">Hold review</p>
+          <h3>Sell discipline</h3>
+        </div>
+        <div class="stack-list">
+          ${holds.length ? holds.map((item) => renderItem(item, "hold")).join("") : empty("No hold review names were generated.")}
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-analysis-notes">
+      ${notes.map((note) => `<div class="meta-line">${escapeHtml(note)}</div>`).join("")}
+    </div>
+  `;
+}
+
 function renderMarket(cache) {
   const index = cache.market?.index_pulse || [];
   $("#indexPulse").innerHTML =
@@ -1314,6 +1295,7 @@ function render() {
   $("#heroMeta").textContent = `Workspace ${cache.workspace}. Source ${state.cacheSource || "cache"}. Refresh ${formatDate(cache.generated_at)}. Latest market cache ${formatDate(cache.files?.market_mover?.modified_at)}.`;
   renderKpis(summary);
   renderWatchlist(cache);
+  renderPortfolioAnalysis(cache);
   renderMarket(cache);
   renderReddit(cache);
   renderRisk(cache);
@@ -1329,7 +1311,6 @@ $("#watchlistSearch").addEventListener("input", (event) => {
   state.watchlistQuery = event.target.value;
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#copyWatchlistButton").addEventListener("click", copyFullWatchlist);
 $("#watchlistRegionTabs").addEventListener("click", (event) => {
   const tab = event.target.closest("[data-region]");
   if (!tab) return;

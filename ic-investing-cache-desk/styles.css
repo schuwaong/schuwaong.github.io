@@ -331,7 +331,6 @@ h3 {
 .panel-heading {
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
@@ -1054,9 +1053,7 @@ h3,
 .watchlist-tools {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
-  justify-content: flex-end;
 }
 
 .watchlist-tools input {
@@ -1073,45 +1070,6 @@ h3,
 
 .watchlist-tools input::placeholder {
   color: rgba(210, 232, 224, 0.48);
-}
-
-.copy-list-button {
-  min-height: 32px;
-  padding: 0 11px;
-  border: 1px solid rgba(0, 230, 167, 0.26);
-  border-radius: 8px;
-  color: #03100d;
-  background: var(--teal);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 850;
-  white-space: nowrap;
-}
-
-.copy-list-button:hover {
-  background: #58ffd0;
-}
-
-.copy-list-button:disabled {
-  cursor: wait;
-  opacity: 0.64;
-}
-
-.copy-status {
-  min-width: 66px;
-  color: rgba(210, 232, 224, 0.68);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 11px;
-  font-weight: 800;
-  text-align: right;
-}
-
-.copy-status[data-state="ok"] {
-  color: var(--green);
-}
-
-.copy-status[data-state="error"] {
-  color: var(--red);
 }
 
 .signal-controls {
@@ -2154,12 +2112,149 @@ h3,
   color: rgba(210, 232, 224, 0.68);
 }
 
+.portfolio-analysis-intro {
+  display: grid;
+  gap: 8px;
+}
+
+.portfolio-analysis-disclaimer {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.portfolio-analysis-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.portfolio-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.portfolio-summary-card {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(236, 245, 238, 0.1);
+  border-radius: 8px;
+  background: rgba(236, 245, 238, 0.045);
+}
+
+.portfolio-summary-card small {
+  display: block;
+  color: rgba(210, 232, 224, 0.62);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.portfolio-summary-card strong {
+  display: block;
+  margin-top: 7px;
+  color: #f4fff9;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.portfolio-analysis-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.panel-subheading {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.panel-subheading h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.portfolio-analysis-card {
+  display: grid;
+  gap: 10px;
+  border-color: rgba(0, 230, 167, 0.14);
+  background:
+    linear-gradient(135deg, rgba(0, 230, 167, 0.08), transparent 34%),
+    rgba(4, 10, 9, 0.92);
+}
+
+.portfolio-analysis-card.trim {
+  border-color: rgba(255, 77, 109, 0.36);
+}
+
+.portfolio-analysis-card.hold {
+  border-color: rgba(244, 193, 82, 0.3);
+}
+
+.portfolio-analysis-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.portfolio-analysis-metrics span {
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(236, 245, 238, 0.1);
+  border-radius: 8px;
+  background: rgba(236, 245, 238, 0.045);
+}
+
+.portfolio-analysis-metrics small {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(210, 232, 224, 0.62);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.portfolio-analysis-metrics strong {
+  display: block;
+  color: #f4fff9;
+  font-size: 13px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.portfolio-analysis-when {
+  padding: 11px 12px;
+  border: 1px solid rgba(236, 245, 238, 0.1);
+  border-radius: 8px;
+  color: rgba(236, 245, 238, 0.84);
+  background: rgba(236, 245, 238, 0.035);
+  line-height: 1.45;
+}
+
+.portfolio-analysis-notes {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+}
+
 @media (max-width: 760px) {
   .section-grid.two-col:has(#watchlist) {
     grid-template-columns: 1fr;
   }
 
   .watch-metrics,
+  .portfolio-summary-grid,
+  .portfolio-analysis-columns,
+  .portfolio-analysis-metrics,
   .report-hero,
   .thesis-grid,
   .report-summary,
@@ -2171,22 +2266,6 @@ h3,
 
   .signal-controls {
     justify-content: stretch;
-  }
-
-  .watchlist-tools {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .watchlist-tools input {
-    flex: 1 1 135px;
-    width: auto;
-  }
-
-  .copy-status {
-    flex: 1 0 100%;
-    min-height: 14px;
-    text-align: left;
   }
 
   .watchlist-region-tabs {
