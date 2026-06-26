@@ -71,6 +71,13 @@ function empty(message = "No cached data found yet.") {
   return `<div class="empty-state">${escapeHtml(message)}</div>`;
 }
 
+function githubRawCacheUrl() {
+  const basePath = window.location.pathname.includes("ic-investing-cache-desk-latest")
+    ? "ic-investing-cache-desk-latest"
+    : "ic-investing-cache-desk";
+  return `https://raw.githubusercontent.com/schuwaong/schuwaong.github.io/main/${basePath}/cache-snapshot.json?ts=${Date.now()}`;
+}
+
 function compactText(value, max = 220) {
   const text = String(value ?? "").replace(/\s+/g, " ").trim();
   if (text.length <= max) return text;
@@ -630,6 +637,7 @@ async function loadCache() {
 async function fetchCachePayload() {
   const attempts = [
     { url: "/api/cache", source: "live local API" },
+    { url: githubRawCacheUrl(), source: "GitHub raw snapshot" },
     { url: "./cache-snapshot.json", source: "GitHub snapshot" },
   ];
   const errors = [];
