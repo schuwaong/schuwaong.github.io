@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IC Investing Cache Desk</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Dashboard navigation">
+        <div class="brand">
+          <div class="brand-mark">IC</div>
+          <div>
+            <div class="brand-title">IC Investing</div>
+            <div class="brand-subtitle">Cache Desk</div>
+          </div>
+        </div>
+        <nav class="nav-list">
+          <a href="#overview">Overview</a>
+          <a href="#watchlist">Watchlist</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#news">News</a>
+          <a href="#reddit">Reddit</a>
+          <a href="#risk">Risk</a>
+          <a href="#signals">Signals</a>
+          <a href="#context">Context</a>
+          <a href="#reports">Reports</a>
+          <a href="#sources">Sources</a>
+        </nav>
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          <span id="sidebarStatus">Loading cache</span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="hero-panel" id="overview">
+          <img src="./assets/market-command-center.png" alt="" class="hero-image">
+          <div class="hero-copy">
+            <div class="eyebrow">Live local cache</div>
+            <h1>Trading pipeline, watchlist checks, and geopolitical context.</h1>
+            <p id="heroMeta">Reading cache files...</p>
+            <div class="hero-actions">
+              <button class="primary-action" id="refreshButton" type="button">Refresh cache</button>
+              <span class="read-only-pill">Read-only dashboard</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="panel weekly-brief-panel" id="weekly-brief">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Weekly brief</p>
+              <h2>Get the process-first market note</h2>
+            </div>
+            <span class="risk-badge">Education only</span>
+          </div>
+          <form class="brief-form" action="mailto:hello@example.com" method="post" enctype="text/plain">
+            <label>
+              Email
+              <input name="email" type="email" placeholder="you@example.com" required>
+            </label>
+            <label>
+              Market focus
+              <select name="market_focus">
+                <option>US equities</option>
+                <option>Asia equities</option>
+                <option>Crypto risk notes</option>
+                <option>Macro learning notes</option>
+              </select>
+            </label>
+            <button class="primary-action" type="submit">Request weekly brief</button>
+          </form>
+          <p class="brief-disclaimer">
+            Educational only. This is not financial advice, a recommendation, or a signal to buy or sell.
+          </p>
+        </section>
+
+        <section class="kpi-grid" aria-label="Cache summary" id="kpiGrid"></section>
+
+        <section class="section-grid two-col">
+          <article class="panel" id="watchlist">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Active thesis</p>
+                <h2>Watchlist</h2>
+              </div>
+              <div class="watchlist-tools">
+                <input id="watchlistSearch" type="search" placeholder="META, AMZN..." aria-label="Search watchlist symbol">
+                <span class="mini-count" id="watchlistCount">0</span>
+              </div>
+            </div>
+            <div id="watchlistRegionTabs" class="watchlist-region-tabs" role="tablist" aria-label="Watchlist regions"></div>
+            <div id="watchlistItems" class="stack-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Removed names</p>
+                <h2>Rejected Setups</h2>
+              </div>
+              <span class="mini-count" id="removedCount">0</span>
+            </div>
+            <div id="removedItems" class="compact-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid one-col" id="portfolio">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Sample only</p>
+                <h2>Portfolio Analysis</h2>
+              </div>
+              <span class="risk-badge">Educational sample</span>
+            </div>
+            <div id="portfolioAnalysis"></div>
+          </article>
+        </section>
+
+        <section class="section-grid market-grid" id="news">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Market tape</p>
+                <h2>Index Pulse</h2>
+              </div>
+            </div>
+            <div id="indexPulse" class="quote-grid"></div>
+            <div id="trendingSymbols" class="tag-cloud"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Why now</p>
+                <h2>Market Movers</h2>
+              </div>
+            </div>
+            <div id="marketMovers" class="stack-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Headlines</p>
+                <h2>News Intelligence</h2>
+              </div>
+            </div>
+            <div id="headlineList" class="headline-list"></div>
+          </article>
+
+          <article class="panel" id="reddit">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Attention data</p>
+                <h2>Reddit Pulse</h2>
+              </div>
+            </div>
+            <div id="redditItems" class="stack-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid two-col">
+          <article class="panel" id="risk">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Guardrails</p>
+                <h2>News Risk State</h2>
+              </div>
+              <span id="riskBadge" class="risk-badge">UNKNOWN</span>
+            </div>
+            <div id="riskDetails" class="risk-details"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Pipeline input</p>
+                <h2>Social Leads</h2>
+              </div>
+            </div>
+            <div id="socialLeads" class="compact-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid two-col" id="signals">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Research lens</p>
+                <h2>Watchlist Signals</h2>
+              </div>
+              <div class="signal-controls">
+                <select id="signalTickerSelect" aria-label="Choose ticker"></select>
+              </div>
+            </div>
+            <div id="signalLens" class="stack-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Context feed</p>
+                <h2>News + Geopolitics Sources</h2>
+              </div>
+            </div>
+            <div id="signalFeed" class="stack-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid one-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Data notes</p>
+                <h2>Limitations</h2>
+              </div>
+            </div>
+            <div id="limitationsList" class="compact-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid two-col" id="context">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Structured context</p>
+                <h2>Debate Candidates</h2>
+              </div>
+            </div>
+            <div id="candidateList" class="candidate-table"></div>
+          </article>
+
+          <article class="panel" id="sources">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Freshness</p>
+                <h2>Cache Sources</h2>
+              </div>
+            </div>
+            <div id="sourceList" class="source-list"></div>
+          </article>
+        </section>
+
+        <section class="section-grid two-col">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Headline filter</p>
+                <h2>News Event Log</h2>
+              </div>
+            </div>
+            <div id="newsEvents" class="compact-list"></div>
+          </article>
+
+          <article class="panel" id="reports">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">Local reports</p>
+                <h2>Latest Markdown</h2>
+              </div>
+            </div>
+            <div id="reportList" class="report-list"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="visit-popout" id="visitPopout" role="dialog" aria-modal="true" aria-labelledby="visitPopoutTitle" aria-describedby="visitPopoutIntro">
+      <div class="visit-popout-panel" role="document">
+        <button class="visit-popout-close" id="closeVisitPopout" type="button" aria-label="Close explanation">×</button>
+
+        <div class="paywall-brand" aria-hidden="true">
+          <div class="paywall-logo">
+            <span>IC</span>
+          </div>
+          <div class="paywall-brand-word">INVESTING</div>
+          <div class="paywall-brand-subtitle">HOW THE AGENTS HELP</div>
+        </div>
+
+        <div class="paywall-content">
+          <p class="paywall-kicker">Plain English</p>
+          <h2 id="visitPopoutTitle">What each agent does.</h2>
+          <p id="visitPopoutIntro">Each agent does one job, so you can scan faster, avoid obvious mistakes, and compare ideas the same way.</p>
+        </div>
+
+        <div class="agent-list" aria-label="Investing agents">
+          <div class="agent-row">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M13 2 4 14h7l-1 8 10-13h-7l1-7Z"></path>
+              </svg>
+            </span>
+            <div>
+              <h3>Setup Finder</h3>
+              <p>Finds stocks near an entry, add-on, or pullback zone so traders can start with a shorter watchlist.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 18V6m0 12h16M8 15l3-4 3 2 5-7"></path>
+              </svg>
+            </span>
+            <div>
+              <h3>Trend Check</h3>
+              <p>Shows whether momentum and price action are helping or fading, so you do not chase weak moves.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 19h16M7 16l3-8 4 5 3-7"></path>
+                <path d="M7 16h10"></path>
+              </svg>
+            </span>
+            <div>
+              <h3>Value Check</h3>
+              <p>Compares price with valuation context so investors can avoid overpaying.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 4h12v16H4V4Zm14 3h2v12h-2V7ZM7 8h6M7 12h6M7 16h4"></path>
+              </svg>
+            </span>
+            <div>
+              <h3>News Watch</h3>
+              <p>Flags headlines, policy, and macro shifts so you can explain sudden moves before you size up.</p>
+            </div>
+          </div>
+          <div class="agent-row">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3 4 6v6c0 5 3.4 7.6 8 9 4.6-1.4 8-4 8-9V6l-8-3Z"></path>
+                <path d="m9 12 2 2 4-5"></path>
+              </svg>
+            </span>
+            <div>
+              <h3>Risk Challenge</h3>
+              <p>Looks for the weakest part of the idea before you act, so shaky setups get challenged early.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-chip-cloud" aria-label="Active agent names">
+          <span>setup finder</span>
+          <span>trend check</span>
+          <span>value check</span>
+          <span>news watch</span>
+          <span>risk challenge</span>
+        </div>
+
+        <button class="paywall-cta" id="openAgentDesk" type="button">Open the desk</button>
+
+        <div class="paywall-links">
+          <a href="#watchlist">Watchlist</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#signals">Signals</a>
+          <a href="#sources">Sources</a>
+        </div>
+      </div>
+    </div>
+
+    <template id="emptyTemplate">
+      <div class="empty-state">No cached data found yet.</div>
+    </template>
+
+    <dialog class="stock-dialog" id="stockDialog" aria-labelledby="stockDialogTitle">
+      <div class="dialog-shell">
+        <div class="dialog-head">
+          <div>
+            <p class="section-kicker">Agent report</p>
+            <h2 id="stockDialogTitle">Watchlist report</h2>
+          </div>
+          <button class="icon-action" id="closeStockDialog" type="button" aria-label="Close stock report">×</button>
+        </div>
+        <div id="stockDialogBody" class="stock-report"></div>
+      </div>
+    </dialog>
+
+    <script src="./app.js?v=7f350e8"></script>
+  </body>
+</html>
