@@ -537,7 +537,7 @@
           selectedId = listings[0].id;
         }
       } catch (error) {
-        console.warn("Using fallback listings. Run scripts/refresh-wanchai-listings.ps1 for live data.", error);
+        console.warn("Using fallback listings. Run scripts/refresh-wanchai-listings.mjs for live data.", error);
       }
     }
 
@@ -546,7 +546,7 @@
     }
 
     function weeklyPlan() {
-      if (!listings.length) return "No live listings loaded. Run scripts/refresh-wanchai-listings.ps1 first.";
+      if (!listings.length) return "No live listings loaded. Run scripts/refresh-wanchai-listings.mjs first.";
       return listings.map((listing, index) => `${index + 1}. ${listing.name} - ${listing.price} - ${listing.hook} - ${listing.cta}`).join("\n");
     }
 
@@ -572,7 +572,7 @@
     function renderQueue() {
       const listing = selectedListing();
       if (!listing) {
-        queue.innerHTML = `<article class="post-card"><div class="post-copy"><h3>No live listing data loaded</h3><p style="margin:0;color:var(--muted)">Run <code>powershell -ExecutionPolicy Bypass -File .\\scripts\\refresh-wanchai-listings.ps1</code>, then reload this page.</p></div></article>`;
+        queue.innerHTML = `<article class="post-card"><div class="post-copy"><h3>No live listing data loaded</h3><p style="margin:0;color:var(--muted)">Run <code>node .\\scripts\\refresh-wanchai-listings.mjs</code>, then reload this page.</p></div></article>`;
         return;
       }
       const angle = selectedAngle();

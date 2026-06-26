@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wan Chai Rental Candidates</title>
+  <title>IC Property | Wan Chai Rental Candidates</title>
   <style>
     :root {
       --bg: #f5f3ee;
@@ -93,10 +93,22 @@
       border-color: var(--green);
     }
 
+    .btn.ghost {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
     .status {
       margin: 18px 0;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 10px;
     }
 
@@ -474,6 +486,40 @@
 
     .listing-card { overflow: hidden; }
 
+    .listing-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .listing-head h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .listing-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .label-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8faf7;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
     .listing-photo {
       width: 100%;
       aspect-ratio: 4 / 3;
@@ -647,13 +693,14 @@
     <header>
       <div>
         <div class="kicker">IC Property Pipeline - Hong Kong rentals</div>
-        <h1>Find the property numbers that actually matter.</h1>
-        <p class="intro">Start with budget, location, and target return. The dashboard turns live listing candidates into market context, risk flags, and a short "check first" list.</p>
+        <h1>Wan Chai rental shortlist that stays refreshable.</h1>
+        <p class="intro">Start with budget, location, and target return. This version reads live Wan Chai listings, shows real photos, and keeps Darren's Damansara page as the original Malaysia sample.</p>
       </div>
       <nav class="btn-row" aria-label="Project links">
         <a class="btn primary" href="social-content-app.html">Open content app</a>
         <a class="btn" href="marketing-agency.html">Marketing setup</a>
         <a class="btn" href="license.html">Licence setup</a>
+        <a class="btn ghost" href="darren-damansara.html">Darren sample</a>
       </nav>
     </header>
 
@@ -686,6 +733,10 @@
           </label>
         </div>
         <p id="budgetHelp">For rent, budget is monthly HKD. For invest or buy, budget is purchase budget HKD.</p>
+        <div class="button-row">
+          <button class="btn primary" type="button" id="refreshButton">Refresh feed</button>
+          <a class="btn" href="data/live-wanchai-listings.json" target="_blank" rel="noreferrer">Open JSON</a>
+        </div>
       </div>
 
       <aside class="decision-card">
@@ -743,6 +794,7 @@
       <div class="stat"><strong id="priceBand">-</strong><span>target rent band</span></div>
       <div class="stat"><strong id="sourceCount">-</strong><span>source result count</span></div>
       <div class="stat"><strong id="fetchedAt">-</strong><span>last refresh</span></div>
+      <div class="stat"><strong id="geoFocus">Wan Chai</strong><span>district focus</span></div>
     </section>
 
     <div class="notice">
@@ -796,13 +848,14 @@
     <section class="empty" id="empty" hidden>
       No refreshed listing data loaded. From the project root, run:
       <br><br>
-      <code>powershell -ExecutionPolicy Bypass -File .\scripts\refresh-wanchai-listings.ps1</code>
+      <code>node .\scripts\refresh-wanchai-listings.mjs</code>
     </section>
   </main>
 
   <script>
     const listingsEl = document.getElementById("listings");
     const emptyEl = document.getElementById("empty");
+    const refreshButton = document.getElementById("refreshButton");
     const segmentButtons = Array.from(document.querySelectorAll(".segment"));
     const locationInput = document.getElementById("locationInput");
     const budgetInput = document.getElementById("budgetInput");
@@ -831,6 +884,14 @@
       const number = Number(value || 0);
       if (!Number.isFinite(number) || number <= 0) return "-";
       return `HK$${Math.round(number).toLocaleString("en-US")}`;
+    }
+
+    function formatHKDCompact(value) {
+      const number = Number(value || 0);
+      if (!Number.isFinite(number) || number <= 0) return "-";
+      if (number >= 1000000) return `HK$${(number / 1000000).toFixed(1)}M`;
+      if (number >= 10000) return `HK$${(number / 1000).toFixed(1)}K`;
+      return `HK$${(number / 1000).toFixed(1)}K`;
     }
 
     function formatPercent(value) {
@@ -933,12 +994,19 @@
     }
 
     function renderListing(listing) {
-      const image = listing.image ? `<img class="listing-photo" src="${escapeHtml(listing.image)}" alt="">` : "";
+      const image = listing.imageUrl ? `<img class="listing-photo" src="${escapeHtml(listing.imageUrl)}" alt="" loading="lazy" decoding="async">` : "";
+      const tags = Array.isArray(listing.tags) ? listing.tags.slice(0, 4) : [];
       return `
         <article class="listing-card">
           ${image}
           <div class="listing-body">
-            <h2>${escapeHtml(text(listing.name, "Wan Chai listing"))}</h2>
+            <div class="listing-head">
+              <div>
+                <div class="kicker">${escapeHtml(text(listing.district, "Wan Chai"))}</div>
+                <h2>${escapeHtml(text(listing.name, "Wan Chai listing"))}</h2>
+              </div>
+              <div class="score">${escapeHtml(text(listing.valueScore, "-"))}</div>
+            </div>
             <p>${escapeHtml(text(listing.highlight || listing.title, "Current listing candidate"))}</p>
             <div class="meta">
               <div><span>Rent</span><strong>${escapeHtml(text(listing.price))}</strong></div>
@@ -946,9 +1014,13 @@
               <div><span>Rent / sq ft</span><strong>${escapeHtml(text(listing.rentPerSqftLabel, "Confirm"))}</strong></div>
               <div><span>Value check</span><strong>${escapeHtml(text(listing.valueLabel, "Confirm live"))}</strong></div>
             </div>
+            <div class="listing-badges">
+              ${tags.map((tag) => `<span class="label-chip">${escapeHtml(tag)}</span>`).join("")}
+            </div>
             <div class="btn-row" style="justify-content:flex-start">
               <a class="btn primary" href="social-content-app.html">Make post</a>
               <a class="btn" href="${safeListingUrl(listing.link)}" target="_blank" rel="noreferrer">Open listing</a>
+              <a class="btn" href="${escapeHtml(listing.sourceUrl || 'https://www.28hse.com/en/rent/apartment/a1/dg4/di4-22')}" target="_blank" rel="noreferrer">Source page</a>
             </div>
           </div>
         </article>`;
@@ -1047,9 +1119,11 @@
         appState.modules = Array.isArray(moduleData.modules) ? moduleData.modules : [];
 
         document.getElementById("count").textContent = listings.length;
-        document.getElementById("priceBand").textContent = `HK$${data.priceMin / 1000}K-${data.priceMax / 1000}K`;
+        document.getElementById("priceBand").textContent = `${formatHKDCompact(data.priceMin)} - ${formatHKDCompact(data.priceMax)}`;
         document.getElementById("sourceCount").textContent = text(data.resultCount);
         document.getElementById("fetchedAt").textContent = text(data.fetchedAt).split(" ")[0];
+        const geoFocus = document.getElementById("geoFocus");
+        if (geoFocus) geoFocus.textContent = "Wan Chai + Causeway Bay";
 
         renderAnalytics(data, listings);
         renderDecision();
@@ -1074,6 +1148,14 @@
       input.addEventListener("input", renderCalculator);
       input.addEventListener("change", renderCalculator);
     });
+
+    refreshButton.addEventListener("click", () => {
+      refreshButton.textContent = "Refreshing...";
+      init().finally(() => {
+        refreshButton.textContent = "Refresh feed";
+      });
+    });
+
     init();
   </script>
 </body>

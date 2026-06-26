@@ -44,7 +44,7 @@ Treat Instagram Edits as a manual editing/export destination unless Meta exposes
 This sample now uses refreshed listing data and real listing photos:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\refresh-wanchai-listings.ps1
+node .\scripts\refresh-wanchai-listings.mjs
 powershell -ExecutionPolicy Bypass -File .\scripts\make-listing-image-reel.ps1
 ```
 

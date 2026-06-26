@@ -17,6 +17,6 @@ The prototype app is one level up:
 Refresh the current listing candidates from the project root:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\refresh-wanchai-listings.ps1
+node .\scripts\refresh-wanchai-listings.mjs
 powershell -ExecutionPolicy Bypass -File .\scripts\make-listing-image-reel.ps1
 ```
