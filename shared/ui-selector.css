@@ -1,0 +1,465 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;650;800&family=Nunito:wght@600;800;900&family=Space+Grotesk:wght@600;700&display=swap");
+
+:root {
+  --ui-font: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --ui-display: "Space Grotesk", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --ui-play: "Nunito", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --ui-ink: #17211d;
+  --ui-muted: #64706b;
+  --ui-paper: #ffffff;
+  --ui-soft: #f5f7f4;
+  --ui-line: rgba(23, 33, 29, 0.13);
+  --ui-radius: 8px;
+  --ui-shadow: 0 16px 34px rgba(21, 31, 27, 0.09);
+  --ui-shadow-soft: 0 8px 18px rgba(21, 31, 27, 0.07);
+  --ui-green: #0f8b6f;
+  --ui-blue: #175cd3;
+  --ui-gold: #b7791f;
+  --ui-coral: #d7584b;
+  --ui-pink: #f05c93;
+}
+
+html[data-ui-mode] {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+html[data-ui-mode] body {
+  color: var(--ink, var(--ui-ink));
+  font-family: var(--ui-font);
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-ui-mode] h1,
+html[data-ui-mode] h2,
+html[data-ui-mode] h3,
+html[data-ui-mode] .brand-title,
+html[data-ui-mode] .brand strong {
+  font-family: var(--ui-display);
+  letter-spacing: 0;
+}
+
+html[data-ui-mode] a,
+html[data-ui-mode] button,
+html[data-ui-mode] input,
+html[data-ui-mode] select,
+html[data-ui-mode] textarea {
+  font-family: inherit;
+}
+
+html[data-ui-mode] :focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--ui-accent, var(--ui-green)) 34%, transparent);
+  outline-offset: 3px;
+}
+
+html[data-ui-mode] .button,
+html[data-ui-mode] .btn,
+html[data-ui-mode] .primary-action,
+html[data-ui-mode] .secondary-action,
+html[data-ui-mode] .main-action,
+html[data-ui-mode] .copy-action,
+html[data-ui-mode] .ghost-button,
+html[data-ui-mode] .revenue-button,
+html[data-ui-mode] button[type="submit"] {
+  min-height: 40px;
+  border-radius: var(--ui-radius);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+html[data-ui-mode] input,
+html[data-ui-mode] select,
+html[data-ui-mode] textarea {
+  border-radius: var(--ui-radius);
+}
+
+html[data-ui-mode] .chip,
+html[data-ui-mode] .tag,
+html[data-ui-mode] .badge,
+html[data-ui-mode] .pill,
+html[data-ui-mode] .mini-chip,
+html[data-ui-mode] .risk-badge,
+html[data-ui-mode] .price-pill,
+html[data-ui-mode] .open-pill {
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+html[data-ui-mode] img {
+  max-width: 100%;
+}
+
+/* Exploratory / gamified: learning, playful pages, and progress loops. */
+html[data-ui-mode="exploratory"] {
+  --bg: #fff7ec;
+  --surface: #ffffff;
+  --surface-2: #fff0db;
+  --ink: #262134;
+  --muted: #72677a;
+  --line: rgba(61, 47, 77, 0.14);
+  --accent: var(--ui-pink);
+  --primary: var(--ui-pink);
+  --ui-accent: var(--ui-pink);
+  --ui-accent-2: #2a76dd;
+  --ui-accent-3: #f2b84b;
+  --green: #149b7b;
+  --blue: #2a76dd;
+  --gold: #cf8f20;
+  --pink: var(--ui-pink);
+  --ui-radius: 18px;
+  --radius: var(--ui-radius);
+  --ui-shadow: 0 22px 54px rgba(40, 47, 74, 0.14);
+  --ui-shadow-soft: 0 10px 24px rgba(40, 47, 74, 0.09);
+  --shadow: var(--ui-shadow);
+}
+
+html[data-ui-mode="exploratory"] body {
+  font-family: var(--ui-play);
+  background:
+    linear-gradient(135deg, rgba(255, 241, 221, 0.92), rgba(238, 248, 255, 0.92)),
+    repeating-linear-gradient(135deg, rgba(23, 33, 29, 0.035) 0 1px, transparent 1px 18px);
+}
+
+html[data-ui-mode="exploratory"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 16%, rgba(240, 92, 147, 0.16), transparent 22%),
+    radial-gradient(circle at 86% 12%, rgba(39, 118, 221, 0.15), transparent 20%),
+    radial-gradient(circle at 70% 78%, rgba(242, 184, 75, 0.14), transparent 18%);
+}
+
+html[data-ui-mode="exploratory"] h1,
+html[data-ui-mode="exploratory"] h2,
+html[data-ui-mode="exploratory"] h3 {
+  font-family: var(--ui-play);
+  font-weight: 900;
+}
+
+html[data-ui-mode="exploratory"] .hero,
+html[data-ui-mode="exploratory"] .card,
+html[data-ui-mode="exploratory"] .panel,
+html[data-ui-mode="exploratory"] .feature-card,
+html[data-ui-mode="exploratory"] .summary-card,
+html[data-ui-mode="exploratory"] .tool-card,
+html[data-ui-mode="exploratory"] .cycle-card,
+html[data-ui-mode="exploratory"] .activity-card,
+html[data-ui-mode="exploratory"] .search-panel {
+  border-color: rgba(255, 255, 255, 0.74);
+  border-radius: calc(var(--ui-radius) + 2px);
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  box-shadow: 0 24px 60px rgba(40, 47, 74, 0.14);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+html[data-ui-mode="exploratory"] .button,
+html[data-ui-mode="exploratory"] .btn,
+html[data-ui-mode="exploratory"] .primary-action,
+html[data-ui-mode="exploratory"] button[type="submit"] {
+  border-radius: 999px;
+  box-shadow: 0 14px 24px rgba(40, 47, 74, 0.08);
+}
+
+html[data-ui-mode="exploratory"] .badge,
+html[data-ui-mode="exploratory"] .tag,
+html[data-ui-mode="exploratory"] .chip,
+html[data-ui-mode="exploratory"] .pill,
+html[data-ui-mode="exploratory"] .mini-chip {
+  border-radius: 999px;
+}
+
+/* Analytical / data-dense: property, investing, listings, and research dashboards. */
+html[data-ui-mode="analytical"] {
+  --bg: #f4f7f6;
+  --surface: #ffffff;
+  --surface-2: #eef5f2;
+  --ink: #17211d;
+  --muted: #64706b;
+  --line: rgba(23, 33, 29, 0.13);
+  --accent: var(--ui-green);
+  --primary: var(--ui-green);
+  --ui-accent: var(--ui-green);
+  --ui-accent-2: var(--ui-blue);
+  --ui-accent-3: var(--ui-gold);
+  --green: var(--ui-green);
+  --blue: var(--ui-blue);
+  --gold: var(--ui-gold);
+  --danger: #b42318;
+  --ui-radius: 8px;
+  --radius: var(--ui-radius);
+  --ui-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
+  --shadow: var(--ui-shadow);
+}
+
+html[data-ui-mode="analytical"] body {
+  background:
+    linear-gradient(90deg, rgba(23, 92, 211, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(15, 139, 111, 0.04) 1px, transparent 1px),
+    #f4f7f6;
+  background-size: 32px 32px;
+}
+
+html[data-ui-mode="analytical"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.48), transparent 16%, transparent 84%, rgba(255, 255, 255, 0.2)),
+    radial-gradient(circle at 92% 8%, rgba(23, 92, 211, 0.09), transparent 18%),
+    radial-gradient(circle at 8% 92%, rgba(15, 139, 111, 0.08), transparent 18%);
+}
+
+html[data-ui-mode="analytical"] .shell,
+html[data-ui-mode="analytical"] .workspace,
+html[data-ui-mode="analytical"] main {
+  gap: 12px;
+}
+
+html[data-ui-mode="analytical"] .hero,
+html[data-ui-mode="analytical"] .hero-panel,
+html[data-ui-mode="analytical"] .panel,
+html[data-ui-mode="analytical"] .metric,
+html[data-ui-mode="analytical"] .listing-card,
+html[data-ui-mode="analytical"] .analysis-card,
+html[data-ui-mode="analytical"] .source-item,
+html[data-ui-mode="analytical"] .summary-band,
+html[data-ui-mode="analytical"] .revenue-panel,
+html[data-ui-mode="analytical"] .revenue-card,
+html[data-ui-mode="analytical"] .decision-card,
+html[data-ui-mode="analytical"] .stat,
+html[data-ui-mode="analytical"] .notice {
+  border-color: var(--ui-line);
+  border-radius: var(--ui-radius);
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+}
+
+html[data-ui-mode="analytical"] .summary-band,
+html[data-ui-mode="analytical"] .decision-panel,
+html[data-ui-mode="analytical"] .calculator-panel,
+html[data-ui-mode="analytical"] .modules-panel,
+html[data-ui-mode="analytical"] .revenue-panel,
+html[data-ui-mode="analytical"] .status,
+html[data-ui-mode="analytical"] .analytics,
+html[data-ui-mode="analytical"] .grid {
+  position: relative;
+}
+
+html[data-ui-mode="analytical"] .summary-band::before,
+html[data-ui-mode="analytical"] .decision-panel::before,
+html[data-ui-mode="analytical"] .calculator-panel::before,
+html[data-ui-mode="analytical"] .modules-panel::before,
+html[data-ui-mode="analytical"] .revenue-panel::before,
+html[data-ui-mode="analytical"] .status::before,
+html[data-ui-mode="analytical"] .analytics::before,
+html[data-ui-mode="analytical"] .grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(23, 92, 211, 0.03), rgba(15, 139, 111, 0.02));
+}
+
+html[data-ui-mode="analytical"] h1 {
+  line-height: 0.98;
+}
+
+html[data-ui-mode="analytical"] table,
+html[data-ui-mode="analytical"] .candidate-table,
+html[data-ui-mode="analytical"] .stack-list,
+html[data-ui-mode="analytical"] .compact-list {
+  font-size: 0.94rem;
+}
+
+html[data-ui-mode="analytical"] .btn,
+html[data-ui-mode="analytical"] .button,
+html[data-ui-mode="analytical"] .primary-action,
+html[data-ui-mode="analytical"] .secondary-btn,
+html[data-ui-mode="analytical"] .revenue-button {
+  border-radius: 8px;
+}
+
+/* Utility / action-oriented: planners, admin forms, generated documents, redirects. */
+html[data-ui-mode="utility"] {
+  --bg: #f6f8f9;
+  --surface: #ffffff;
+  --surface-2: #eef3f5;
+  --ink: #15232b;
+  --muted: #5f6f78;
+  --line: rgba(15, 23, 42, 0.12);
+  --accent: #155e75;
+  --primary: #155e75;
+  --ui-accent: #155e75;
+  --ui-accent-2: #334155;
+  --green: #0f766e;
+  --blue: #155e75;
+  --gold: #a16207;
+  --danger: #b42318;
+  --ui-radius: 8px;
+  --radius: var(--ui-radius);
+  --ui-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  --shadow: var(--ui-shadow);
+}
+
+html[data-ui-mode="utility"] body {
+  background: #f6f8f9;
+}
+
+html[data-ui-mode="utility"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.35)),
+    repeating-linear-gradient(90deg, rgba(21, 94, 117, 0.025) 0 1px, transparent 1px 36px);
+}
+
+html[data-ui-mode="utility"] header,
+html[data-ui-mode="utility"] .topbar,
+html[data-ui-mode="utility"] .site-header {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+html[data-ui-mode="utility"] header,
+html[data-ui-mode="utility"] .topbar,
+html[data-ui-mode="utility"] .project,
+html[data-ui-mode="utility"] .panel,
+html[data-ui-mode="utility"] .card,
+html[data-ui-mode="utility"] .revenue-card,
+html[data-ui-mode="utility"] .audit-card,
+html[data-ui-mode="utility"] .health-card,
+html[data-ui-mode="utility"] .summary-band,
+html[data-ui-mode="utility"] .decision-card,
+html[data-ui-mode="utility"] .stat,
+html[data-ui-mode="utility"] .listing-card,
+html[data-ui-mode="utility"] .project,
+html[data-ui-mode="utility"] .section-band,
+html[data-ui-mode="utility"] .paper-studio,
+html[data-ui-mode="utility"] .lead-form,
+html[data-ui-mode="utility"] .paper-preview,
+html[data-ui-mode="utility"] .route,
+html[data-ui-mode="utility"] .cluster {
+  border-radius: var(--ui-radius);
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06);
+}
+
+html[data-ui-mode="utility"] .tab,
+html[data-ui-mode="utility"] .btn,
+html[data-ui-mode="utility"] .button,
+html[data-ui-mode="utility"] button,
+html[data-ui-mode="utility"] input,
+html[data-ui-mode="utility"] select,
+html[data-ui-mode="utility"] textarea {
+  border-radius: 8px;
+}
+
+html[data-ui-mode="utility"] h1,
+html[data-ui-mode="utility"] h2,
+html[data-ui-mode="utility"] h3 {
+  font-family: var(--ui-font);
+}
+
+/* Immersive / modern: brand, product, and showcase pages. */
+html[data-ui-mode="immersive"] {
+  --bg: #eef4f5;
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-2: rgba(255, 255, 255, 0.52);
+  --ink: #10201f;
+  --muted: #60716e;
+  --line: rgba(15, 139, 111, 0.16);
+  --accent: #0f8b6f;
+  --primary: #0f8b6f;
+  --ui-accent: #0f8b6f;
+  --ui-accent-2: #1d5f9f;
+  --ui-accent-3: #b7791f;
+  --green: #0f8b6f;
+  --blue: #1d5f9f;
+  --gold: #b7791f;
+  --ui-radius: 10px;
+  --radius: var(--ui-radius);
+  --ui-shadow: 0 22px 54px rgba(10, 18, 31, 0.12);
+  --shadow: var(--ui-shadow);
+}
+
+html[data-ui-mode="immersive"] body {
+  background:
+    linear-gradient(180deg, rgba(248, 251, 252, 0.96), rgba(238, 244, 245, 0.98)),
+    repeating-linear-gradient(90deg, rgba(15, 139, 111, 0.04) 0 1px, transparent 1px 42px);
+}
+
+html[data-ui-mode="immersive"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(15, 139, 111, 0.12), transparent 20%),
+    radial-gradient(circle at 84% 16%, rgba(29, 95, 159, 0.13), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 15%, transparent 88%, rgba(255, 255, 255, 0.22));
+}
+
+html[data-ui-mode="immersive"] .hero,
+html[data-ui-mode="immersive"] .static-hero,
+html[data-ui-mode="immersive"] .panel,
+html[data-ui-mode="immersive"] .card,
+html[data-ui-mode="immersive"] .static-card,
+html[data-ui-mode="immersive"] .feature-card {
+  border-radius: var(--ui-radius);
+  background: color-mix(in srgb, var(--surface) 76%, transparent);
+  border-color: color-mix(in srgb, var(--line) 72%, transparent);
+  box-shadow: 0 26px 58px rgba(10, 18, 31, 0.13);
+  backdrop-filter: blur(18px) saturate(122%);
+}
+
+html[data-ui-mode="immersive"] .hero h1,
+html[data-ui-mode="immersive"] .static-hero h1 {
+  font-family: var(--ui-display);
+  letter-spacing: 0;
+}
+
+html[data-ui-mode="immersive"] .static-badge,
+html[data-ui-mode="immersive"] .button,
+html[data-ui-mode="immersive"] .btn,
+html[data-ui-mode="immersive"] .primary-action,
+html[data-ui-mode="immersive"] .secondary-action {
+  border-radius: 999px;
+}
+
+@media (max-width: 680px) {
+  html[data-ui-mode] h1 {
+    max-width: none;
+  }
+
+  html[data-ui-mode] .button,
+  html[data-ui-mode] .btn,
+  html[data-ui-mode] .primary-action,
+  html[data-ui-mode] .secondary-action,
+  html[data-ui-mode] .main-action,
+  html[data-ui-mode] .copy-action,
+  html[data-ui-mode] .revenue-button {
+    min-height: 44px;
+  }
+}
+
+@media print {
+  html[data-ui-mode] body {
+    background: #fff !important;
+  }
+
+  html[data-ui-mode] .hero,
+  html[data-ui-mode] .panel,
+  html[data-ui-mode] .card,
+  html[data-ui-mode] .project,
+  html[data-ui-mode] .listing-card {
+    box-shadow: none !important;
+  }
+}

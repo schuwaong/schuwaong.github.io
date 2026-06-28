@@ -14,6 +14,13 @@ const paperTopicInput = document.getElementById("paperTopic");
 const paperMarksSelect = document.getElementById("paperMarks");
 const paperNameInput = document.getElementById("paperName");
 const paperWeaknessesInput = document.getElementById("paperWeaknesses");
+const subjectSelectedEl = document.getElementById("subjectSelected");
+const topicSelectedEl = document.getElementById("topicSelected");
+
+const selections = {
+  paperSubject: [],
+  paperTopic: [],
+};
 
 const readSavedLeads = () => {
   try {
@@ -39,12 +46,105 @@ const escapeHtml = (value = "") =>
 
 let latestSubmittedPayload = null;
 
+const getSelection = (id) => selections[id] || [];
+
+const syncSelectionInput = (id) => {
+  const input = document.getElementById(id);
+  if (input) input.value = getSelection(id).join(", ");
+};
+
+const renderSelectedPills = (id) => {
+  const target = id === "paperSubject" ? subjectSelectedEl : topicSelectedEl;
+  if (!target) return;
+  target.innerHTML = getSelection(id)
+    .map((value) => `
+      <span class="selected-choice">
+        ${escapeHtml(value)}
+        <button type="button" data-remove="${escapeHtml(value)}" aria-label="Remove ${escapeHtml(value)}">x</button>
+      </span>
+    `)
+    .join("");
+};
+
+const updateOptionState = (id) => {
+  document.querySelectorAll(`[data-multi-select][data-target="${id}"] .option-pill`).forEach((button) => {
+    button.classList.toggle("active", getSelection(id).includes(button.dataset.value || button.textContent.trim()));
+  });
+};
+
+const setSelection = (id, values, options = {}) => {
+  selections[id] = [...new Set(values.filter(Boolean))];
+  syncSelectionInput(id);
+  renderSelectedPills(id);
+  updateOptionState(id);
+  latestSubmittedPayload = null;
+  if (!options.silent) renderPreview();
+};
+
+document.querySelectorAll("[data-multi-select]").forEach((field) => {
+  const id = field.dataset.target;
+  if (!id) return;
+  const control = field.querySelector(".multi-select-control");
+  const setOpen = (isOpen) => {
+    field.classList.toggle("open", isOpen);
+    control?.setAttribute("aria-expanded", String(isOpen));
+  };
+  control?.addEventListener("click", () => {
+    document.querySelectorAll("[data-multi-select].open").forEach((openField) => {
+      if (openField !== field) openField.classList.remove("open");
+    });
+    setOpen(!field.classList.contains("open"));
+  });
+  control?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setOpen(false);
+      return;
+    }
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setOpen(true);
+      field.querySelector(".option-pill")?.focus();
+    }
+  });
+  field.querySelectorAll(".option-pill").forEach((button) => {
+    button.addEventListener("click", () => {
+      const value = button.dataset.value || button.textContent.trim();
+      const current = getSelection(id);
+      setSelection(id, current.includes(value) ? current.filter((item) => item !== value) : [...current, value]);
+      setOpen(false);
+    });
+  });
+  field.addEventListener("click", (event) => {
+    const removeButton = event.target.closest("[data-remove]");
+    if (!removeButton) return;
+    const value = removeButton.dataset.remove;
+    setSelection(id, getSelection(id).filter((item) => item !== value));
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-multi-select]")) return;
+  document.querySelectorAll("[data-multi-select].open").forEach((field) => {
+    field.classList.remove("open");
+    field.querySelector(".multi-select-control")?.setAttribute("aria-expanded", "false");
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  document.querySelectorAll("[data-multi-select].open").forEach((field) => {
+    field.classList.remove("open");
+    field.querySelector(".multi-select-control")?.setAttribute("aria-expanded", "false");
+  });
+});
+
 const buildPayload = () => ({
   email: paperEmailInput?.value.trim() || "",
   name: paperNameInput?.value.trim() || "",
   level: paperLevelInput?.value.trim() || "",
-  subject: paperSubjectInput?.value.trim() || "",
-  topic: paperTopicInput?.value.trim() || "",
+  subject: getSelection("paperSubject").join(", ") || paperSubjectInput?.value.trim() || "",
+  topics: getSelection("paperTopic"),
+  topic: getSelection("paperTopic").join(", ") || paperTopicInput?.value.trim() || "",
   targetMarks: Number(paperMarksSelect?.value || 20),
   weaknesses: paperWeaknessesInput?.value.trim() || "",
   source: "free-7-day-plan",
@@ -56,28 +156,57 @@ const renderPreview = (overridePayload = null) => {
   if (!paperPreviewEl) return;
   const payload = overridePayload || buildPayload();
   const marks = payload.targetMarks;
-  const title = payload.subject || "Personalized paper";
-  const weakText = payload.weaknesses || "Add weak topics or recent mistakes to shape the next paper.";
+  const subjects = payload.subject || "Select subject";
+  const topics = payload.topics?.length ? payload.topics : payload.topic ? payload.topic.split(",").map((item) => item.trim()).filter(Boolean) : [];
+  const focusTopics = topics.length ? topics : ["weak topic", "practice accuracy", "exam timing"];
+  const weakText = payload.weaknesses || "Add parent notes or recent mistakes to sharpen the daily plan.";
+  const dayPlans = [
+    ["Day 1", "Diagnose", `Quick check on ${focusTopics[0] || "core gaps"}.`],
+    ["Day 2", "Fix", `Teach the clean method for ${focusTopics[0] || "the first weak area"}.`],
+    ["Day 3", "Drill", `Short targeted practice on ${focusTopics[1] || focusTopics[0] || "accuracy"}.`],
+    ["Day 4", "Apply", "Mixed questions with one worked example first."],
+    ["Day 5", "Speed", "Timed mini-set and careless-mistake check."],
+    ["Day 6", "Redo", "Redo missed questions without looking at notes."],
+    ["Day 7", "Review", "Parent summary plus next paid paper brief."],
+  ];
 
   paperPreviewEl.innerHTML = `
-    <div class="paper-preview-head">
-      <span class="tag">Live brief</span>
-      <h3>${escapeHtml(title)}</h3>
+    <div class="recovery-preview">
+      <div class="recovery-preview-head">
+        <div>
+          <span class="tag">Live parent diagnostic</span>
+          <h3>${escapeHtml(payload.level || "Student")} recovery plan</h3>
+          <p>${escapeHtml(subjects)} - ${escapeHtml(focusTopics.join(", "))}</p>
+        </div>
+        <div class="plan-score">
+          <strong>7</strong>
+          <span>day reset</span>
+        </div>
+      </div>
+      <div class="recovery-tags">
+        <span>${escapeHtml(payload.level || "Add level")}</span>
+        <span>${escapeHtml(String(marks))} mark target</span>
+        <span>${escapeHtml(topics.length ? `${topics.length} chapter${topics.length > 1 ? "s" : ""}` : "Pick chapters")}</span>
+        <span>Paid paper from RM29</span>
+      </div>
+      <p>${escapeHtml(weakText)}</p>
+      <div class="recovery-days">
+        ${dayPlans.map(([day, label, copy]) => `
+          <article class="recovery-day">
+            <span>${escapeHtml(day)}</span>
+            <strong>${escapeHtml(label)}</strong>
+            <p>${escapeHtml(copy)}</p>
+          </article>
+        `).join("")}
+      </div>
+      <div class="recovery-next">
+        <div>
+          <strong>Next paid step: targeted PDF paper + answer key</strong>
+          <p>The selected chapters become the paper brief, and missed questions feed the next plan.</p>
+        </div>
+        <a class="button" href="#pricing">See upgrade</a>
+      </div>
     </div>
-    <div class="result-links">
-      <span class="chip">Level: ${escapeHtml(payload.level || "add one")}</span>
-      <span class="chip">Topic: ${escapeHtml(payload.topic || "optional")}</span>
-      <span class="chip">Target: ${escapeHtml(String(marks))} marks</span>
-      <span class="chip">Starter: Free</span>
-      <span class="chip">Paid paper: from RM29</span>
-    </div>
-    <p>${escapeHtml(weakText)}</p>
-    <p class="hint">The free starter shows the brief; the paid product turns it into a full PDF paper and key.</p>
-    <ul class="paper-preview-list">
-      <li>One free 7-day plan per email</li>
-      <li>PDF paper and answer key on the paid path</li>
-      <li>Mistake memory keeps the next paper sharper</li>
-    </ul>
   `;
 };
 
@@ -103,14 +232,11 @@ paperRequestForm?.addEventListener("submit", (event) => {
   }
   latestSubmittedPayload = payload;
   renderPreview(payload);
-  paperRequestForm.reset();
 });
 
 [
   paperEmailInput,
   paperLevelInput,
-  paperSubjectInput,
-  paperTopicInput,
   paperMarksSelect,
   paperNameInput,
   paperWeaknessesInput,
@@ -125,4 +251,6 @@ paperRequestForm?.addEventListener("submit", (event) => {
   });
 });
 
+setSelection("paperSubject", ["Mathematics"]);
+setSelection("paperTopic", ["Fractions", "Ratio"]);
 renderPreview(latestSubmittedPayload);

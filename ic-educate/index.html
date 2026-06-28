@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ui-mode="exploratory">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,6 +8,7 @@
       name="description"
       content="IC Educate generates personalized exam papers, answer keys, and mistake-based revision plans for parents and tutors."
     />
+    <link rel="stylesheet" href="/shared/ui-selector.css">
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -17,31 +18,31 @@
         <span>IC Educate</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#products">Core offer</a>
-        <a href="#free-plan">Free plan</a>
+        <a href="#products">Offer</a>
+        <a href="#free-plan">Diagnostic</a>
         <a href="#pricing">Pricing</a>
-        <a href="#mistake-memory">Mistake memory</a>
+        <a href="#mistake-memory">Recovery loop</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="button small primary" href="#free-plan">Get free plan</a>
+      <a class="button small primary" href="#free-plan">Build 7-day plan</a>
     </header>
 
     <main class="page">
       <section id="top" class="hero hero-main">
         <div class="hero-copy">
-          <p class="eyebrow">IC Educate</p>
-          <h1>Personalized exam papers for weak topics.</h1>
+          <p class="eyebrow">Parent diagnostic</p>
+          <h1>Find the weak topic. Fix it in 7 days.</h1>
           <p class="intro">
-            Generate a clean PDF paper, answer key, and revision memory from one brief. Keep the free starter useful, then move serious parents into the paid paper pack.
+            Pick the subject, chapters, and recent mistakes. IC Educate turns that into a parent-friendly recovery plan, then upgrades into a full PDF paper and answer key when the family is ready.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#free-plan">Get free plan</a>
+            <a class="button primary" href="#free-plan">Build 7-day plan</a>
             <a class="button secondary" href="#pricing">See pricing</a>
           </div>
           <div class="status-row">
-            <span id="leadCaptureStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Free plan</span>
-            <span id="backendStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> PDF paper</span>
-            <span id="mistakeMemoryStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Mistake memory</span>
+            <span id="leadCaptureStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Parent brief</span>
+            <span id="backendStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-history"></use></svg> 7-day recovery</span>
+            <span id="mistakeMemoryStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Mistake loop</span>
           </div>
           <div class="hero-points">
             <span class="mini-chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Paper</span>
@@ -53,17 +54,17 @@
 
         <aside class="paper-studio">
           <div class="paper-studio-head">
-            <span class="tag">Main product</span>
-            <h2>Paper first. Memory second.</h2>
-            <p>The free plan warms up the lead. The paid product turns one weak topic into a paper pack that feels complete.</p>
+            <span class="tag">Parent view</span>
+            <h2>A clean recovery plan, not another messy worksheet dump.</h2>
+            <p>The free diagnostic gives parents confidence. The paid path turns the selected gaps into a complete paper pack.</p>
           </div>
           <ul class="clean-list">
-            <li>PDF paper built from level, subject, topic, and marks</li>
-            <li>Answer key and marking guide included</li>
-            <li>Mistake memory shapes the next revision brief</li>
+            <li>Multi-subject and multi-chapter selection</li>
+            <li>7-day parent recovery plan with daily focus</li>
+            <li>Paid PDF paper, answer key, and redo loop</li>
           </ul>
           <div class="conversion-actions">
-            <a class="button primary" href="#free-plan">Get free plan</a>
+            <a class="button primary" href="#free-plan">Start diagnostic</a>
             <a class="button secondary" href="#pricing">See pricing</a>
           </div>
         </aside>
@@ -72,9 +73,9 @@
       <section id="products" class="section-band">
         <div class="section-heading">
           <p class="eyebrow">Core offer</p>
-          <h2>Three pieces that make the offer clear.</h2>
+          <h2>Attractive to parents, useful for students.</h2>
           <p>
-            Start with a free starter, then move into the PDF product and the mistake-memory loop when the family is ready.
+            The product starts with a simple diagnostic, then turns selected weak chapters into targeted practice and a paid paper pack.
           </p>
         </div>
 
@@ -111,15 +112,29 @@
 
       <section id="free-plan" class="section-band lead-section">
         <div class="lead-copy">
-          <p class="eyebrow">Free plan</p>
-          <h2>One free 7-day plan per email.</h2>
+          <p class="eyebrow">Free diagnostic</p>
+          <h2>Parent diagnostic + 7-day recovery plan.</h2>
           <p>
-            Capture the lead, note the level and subject, and show a useful next step before the paid paper.
+            Parents do not want a confusing form. They want to see the weakness, the recovery path, and what to do tonight.
           </p>
+          <div class="diagnostic-card" aria-label="Diagnostic flow">
+            <div>
+              <strong>1. Pick subjects</strong>
+              <span>Math, Science, English, Chinese, or exam track.</span>
+            </div>
+            <div>
+              <strong>2. Select chapters</strong>
+              <span>Choose multiple weak chapters in one clean picker.</span>
+            </div>
+            <div>
+              <strong>3. Get the plan</strong>
+              <span>Seven days of focused recovery, not random drills.</span>
+            </div>
+          </div>
           <div class="free-points">
             <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Email</span>
-            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Topic</span>
-            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Next step</span>
+            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Multi-topic</span>
+            <span class="free-point"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> 7-day fix</span>
           </div>
           <p class="hint">
             Keep the free starter short and useful enough to earn the follow-up.
@@ -137,7 +152,7 @@
           </figure>
 
           <form id="paperRequestForm" class="lead-form paper-request-form">
-            <span class="tag">Request sample</span>
+            <span class="tag">Build diagnostic</span>
             <div class="lead-fields">
               <label>
                 <span>Email</span>
@@ -148,15 +163,46 @@
                 <input id="paperLevel" type="text" placeholder="P6, SPM Form 5, IGCSE" required />
               </label>
             </div>
-            <div class="lead-fields">
-              <label>
+            <div class="field multi-select-field" data-multi-select data-target="paperSubject">
+              <div class="field-label-row">
                 <span>Subject</span>
-                <input id="paperSubject" type="text" placeholder="Mathematics" required />
-              </label>
-              <label>
-                <span>Main topic</span>
-                <input id="paperTopic" type="text" placeholder="Fractions, Algebra, Forces" />
-              </label>
+                <small>Choose one or more</small>
+              </div>
+              <input id="paperSubject" type="hidden" />
+              <div class="multi-select-control" role="button" tabindex="0" aria-expanded="false" aria-controls="subjectOptions">
+                <div id="subjectSelected" class="selected-pill-list" data-placeholder="Select subjects"></div>
+                <span class="select-caret" aria-hidden="true">+</span>
+              </div>
+              <div id="subjectOptions" class="option-grid" role="listbox" aria-multiselectable="true">
+                <button type="button" class="option-pill" data-value="Mathematics">Mathematics</button>
+                <button type="button" class="option-pill" data-value="Science">Science</button>
+                <button type="button" class="option-pill" data-value="English">English</button>
+                <button type="button" class="option-pill" data-value="Chinese">Chinese</button>
+                <button type="button" class="option-pill" data-value="IGCSE">IGCSE</button>
+                <button type="button" class="option-pill" data-value="SPM">SPM</button>
+              </div>
+            </div>
+            <div class="field multi-select-field" data-multi-select data-target="paperTopic">
+              <div class="field-label-row">
+                <span>Topic / chapter</span>
+                <small>Multi-select weak areas</small>
+              </div>
+              <input id="paperTopic" type="hidden" />
+              <div class="multi-select-control" role="button" tabindex="0" aria-expanded="false" aria-controls="topicOptions">
+                <div id="topicSelected" class="selected-pill-list" data-placeholder="Select chapters"></div>
+                <span class="select-caret" aria-hidden="true">+</span>
+              </div>
+              <div id="topicOptions" class="option-grid topic-grid" role="listbox" aria-multiselectable="true">
+                <button type="button" class="option-pill" data-value="Fractions">Fractions</button>
+                <button type="button" class="option-pill" data-value="Ratio">Ratio</button>
+                <button type="button" class="option-pill" data-value="Algebra">Algebra</button>
+                <button type="button" class="option-pill" data-value="Geometry">Geometry</button>
+                <button type="button" class="option-pill" data-value="Graphs">Graphs</button>
+                <button type="button" class="option-pill" data-value="Forces">Forces</button>
+                <button type="button" class="option-pill" data-value="Electricity">Electricity</button>
+                <button type="button" class="option-pill" data-value="Comprehension">Comprehension</button>
+                <button type="button" class="option-pill" data-value="Essay structure">Essay structure</button>
+              </div>
             </div>
             <div class="lead-fields">
               <label>
@@ -174,22 +220,22 @@
               </label>
             </div>
             <div class="field">
-              <label for="paperWeaknesses">Weak topics or recent mistakes</label>
+              <label for="paperWeaknesses">Parent notes or recent mistakes</label>
               <textarea
                 id="paperWeaknesses"
                 rows="4"
-                placeholder="Example: careless denominator changes, ratio word problems, slow with pie charts."
+                placeholder="Example: careless denominator changes, ratio word problems, forgets formula under time pressure."
               ></textarea>
             </div>
-            <button type="submit">Get free plan</button>
+            <button type="submit">Generate recovery plan</button>
             <p id="paperRequestStatus" class="hint" aria-live="polite">
-              One free plan per email. The preview below will show the sample brief.
+              Pick a level, subject, and chapter. The preview below updates instantly.
             </p>
           </form>
         </div>
 
         <div id="paperPreview" class="paper-preview" aria-live="polite">
-          <p class="muted">Enter a level and subject to see the sample plan.</p>
+          <p class="muted">Enter a level, choose subjects, and select chapters to see the 7-day recovery plan.</p>
         </div>
       </section>
 
