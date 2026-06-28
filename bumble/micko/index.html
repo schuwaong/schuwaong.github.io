@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Micko's Tiny Recess</title>
+    <meta
+      name="description"
+      content="A cute lawyer-themed follow-up page for Micko with one tiny dating-law quiz."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Nunito:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #261d2c;
+        --muted: #725f76;
+        --paper: rgba(255, 255, 255, 0.84);
+        --paper-solid: #fffdf8;
+        --rose: #ff6f9c;
+        --coral: #ff8a64;
+        --sun: #ffe36e;
+        --mint: #75e2a8;
+        --sky: #6bc8ff;
+        --lilac: #cab8ff;
+        --line: rgba(38, 29, 44, 0.14);
+        --shadow: 0 24px 68px rgba(92, 54, 86, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Nunito", system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 12% 10%, rgba(255, 111, 156, 0.28), transparent 18rem),
+          radial-gradient(circle at 86% 9%, rgba(107, 200, 255, 0.28), transparent 18rem),
+          radial-gradient(circle at 47% 106%, rgba(117, 226, 168, 0.22), transparent 20rem),
+          linear-gradient(135deg, #fff5df 0%, #fff9fc 48%, #edfaff 100%);
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        z-index: -1;
+        border: 3px solid rgba(38, 29, 44, 0.08);
+        pointer-events: none;
+      }
+
+      body::before {
+        width: 17rem;
+        height: 17rem;
+        left: -6rem;
+        top: 8rem;
+        border-radius: 999px;
+        background: rgba(255, 227, 110, 0.18);
+      }
+
+      body::after {
+        width: 14rem;
+        height: 14rem;
+        right: -5rem;
+        bottom: 4rem;
+        border-radius: 999px;
+        background: rgba(202, 184, 255, 0.2);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1040px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 42px;
+      }
+
+      .hero,
+      .panel {
+        border: 4px solid rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 253, 248, 0.82)),
+          linear-gradient(90deg, rgba(255, 111, 156, 0.1), rgba(107, 200, 255, 0.1));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.95fr);
+        gap: 26px;
+        align-items: center;
+        padding: 28px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 13px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        color: #b43c66;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .badge::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--rose), var(--sun));
+        box-shadow: 16px 0 0 var(--sky);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 9ch;
+        margin-top: 16px;
+        font-size: 5rem;
+      }
+
+      h2 {
+        font-size: 2.25rem;
+      }
+
+      h3 {
+        font-size: 1.35rem;
+      }
+
+      .lede {
+        max-width: 42rem;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+        line-height: 1.72;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .chip {
+        min-height: 42px;
+        padding: 10px 14px;
+        border: 2px solid rgba(38, 29, 44, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--ink);
+        font-weight: 900;
+        box-shadow: 0 10px 24px rgba(92, 54, 86, 0.08);
+      }
+
+      .profile-stage {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .profile-card {
+        position: relative;
+        min-height: 330px;
+        padding: 13px;
+        border: 3px solid var(--ink);
+        border-radius: 12px;
+        background: var(--paper-solid);
+        box-shadow: 10px 10px 0 rgba(38, 29, 44, 0.12);
+        overflow: hidden;
+      }
+
+      .profile-card:nth-child(1) {
+        transform: rotate(-2deg);
+      }
+
+      .profile-card:nth-child(2) {
+        transform: rotate(2deg);
+      }
+
+      .profile-photo {
+        position: relative;
+        min-height: 225px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border: 2px solid rgba(38, 29, 44, 0.12);
+        border-radius: 9px;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(255, 227, 110, 0.55), transparent 7rem),
+          linear-gradient(135deg, rgba(255, 111, 156, 0.18), rgba(107, 200, 255, 0.18));
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        min-height: 225px;
+        object-fit: cover;
+      }
+
+      .initial {
+        width: 106px;
+        height: 106px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--rose), var(--coral), var(--sun));
+        color: white;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 3.8rem;
+        font-weight: 800;
+      }
+
+      .profile-name {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .profile-name span {
+        color: var(--muted);
+        font-weight: 900;
+      }
+
+      .mini-law {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .mini-law div {
+        min-height: 76px;
+        padding: 10px;
+        border: 2px solid rgba(38, 29, 44, 0.12);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.66);
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      .mini-law svg {
+        display: block;
+        width: 38px;
+        height: 38px;
+        margin-bottom: 7px;
+      }
+
+      .panel {
+        margin-top: 18px;
+        padding: 24px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .kicker {
+        margin: 0 0 7px;
+        color: #b43c66;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .micro {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .quiz-card {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border: 3px solid var(--ink);
+        border-radius: 12px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 248, 215, 0.86)),
+          repeating-linear-gradient(#fff9df 0 31px, rgba(38, 29, 44, 0.08) 31px 32px);
+        box-shadow: 10px 10px 0 rgba(38, 29, 44, 0.1);
+      }
+
+      .question {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1.85rem;
+        line-height: 1.08;
+      }
+
+      .answers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .answer {
+        min-height: 112px;
+        padding: 14px;
+        border: 3px solid var(--ink);
+        border-radius: 12px;
+        background: var(--paper-solid);
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        box-shadow: 7px 7px 0 rgba(38, 29, 44, 0.1);
+        transition:
+          transform 0.16s ease,
+          box-shadow 0.16s ease,
+          background 0.16s ease;
+      }
+
+      .answer:hover,
+      .answer:focus-visible,
+      .answer.is-picked {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 rgba(38, 29, 44, 0.12);
+      }
+
+      .answer.is-picked {
+        background: #eefcf3;
+      }
+
+      .answer strong {
+        display: block;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 1.28rem;
+        line-height: 1;
+      }
+
+      .answer span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-weight: 800;
+        line-height: 1.35;
+      }
+
+      .verdict {
+        min-height: 58px;
+        padding: 15px 16px;
+        border: 2px dashed rgba(38, 29, 44, 0.24);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.64);
+        color: var(--muted);
+        font-weight: 900;
+        line-height: 1.55;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: var(--ink);
+        color: white;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 10px 0 rgba(38, 29, 44, 0.12);
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .button.soft {
+        background: var(--paper-solid);
+        color: var(--ink);
+      }
+
+      .answer-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 2px;
+      }
+
+      .answer-actions[hidden] {
+        display: none;
+      }
+
+      .answer-status {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--muted);
+        font-weight: 900;
+      }
+
+      .answer-hint {
+        margin-top: -4px;
+        font-size: 0.95rem;
+      }
+
+      footer {
+        padding: 18px 0 0;
+        color: var(--muted);
+        text-align: center;
+        font-weight: 900;
+      }
+
+      @media (max-width: 840px) {
+        .shell {
+          width: min(100% - 18px, 640px);
+          padding-top: 12px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3.35rem;
+        }
+
+        .profile-stage,
+        .mini-law,
+        .answers {
+          grid-template-columns: 1fr;
+        }
+
+        .profile-card:nth-child(1),
+        .profile-card:nth-child(2) {
+          transform: none;
+        }
+
+        .section-head {
+          display: block;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero,
+        .panel {
+          padding: 18px;
+        }
+
+        h1 {
+          font-size: 2.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="pageTitle">
+        <div>
+          <span class="badge">Micko v. Busy Day</span>
+          <h1 id="pageTitle">A tiny recess for Micko.</h1>
+          <p class="lede">
+            Noticed you have been busy, lawyer, so Joshua prepared one very
+            serious court filing: a small cute page, one ridiculous dating-law
+            question, and zero pressure to reply fast.
+          </p>
+          <div class="chips" aria-label="Tiny page promises">
+            <span class="chip">one question only</span>
+            <span class="chip">no cross-exam stress</span>
+            <span class="chip">verdict: smile maybe</span>
+          </div>
+          <div class="mini-law" aria-label="Tiny law doodles">
+            <div>
+              <svg viewBox="0 0 80 80" aria-hidden="true">
+                <path d="M40 12v48" stroke="#261d2c" stroke-width="4" />
+                <path d="M24 26h32" stroke="#261d2c" stroke-width="5" />
+                <path d="M18 27 8 47h20L18 27Z" fill="#6bc8ff" stroke="#261d2c" stroke-width="3" />
+                <path d="M62 27 52 47h20L62 27Z" fill="#ff6f9c" stroke="#261d2c" stroke-width="3" />
+                <path d="M27 64h26l4 8H23l4-8Z" fill="#ffe36e" stroke="#261d2c" stroke-width="3" />
+              </svg>
+              balance of flirting
+            </div>
+            <div>
+              <svg viewBox="0 0 80 80" aria-hidden="true">
+                <path d="M17 26h46c5 0 8 3 8 8v25c0 5-3 8-8 8H17c-5 0-8-3-8-8V34c0-5 3-8 8-8Z" fill="#fffdf8" stroke="#261d2c" stroke-width="4" />
+                <path d="M29 26v-8h22v8" fill="none" stroke="#261d2c" stroke-width="4" />
+                <path d="M10 42h60" stroke="#261d2c" stroke-width="4" />
+                <path d="M34 38h12v10H34z" fill="#75e2a8" stroke="#261d2c" stroke-width="3" />
+              </svg>
+              case file: cute
+            </div>
+            <div>
+              <svg viewBox="0 0 80 80" aria-hidden="true">
+                <path d="M44 14l22 22-9 9-22-22 9-9Z" fill="#ff8a64" stroke="#261d2c" stroke-width="4" />
+                <path d="M27 31l22 22-8 8-22-22 8-8Z" fill="#ffe36e" stroke="#261d2c" stroke-width="4" />
+                <path d="M45 50l20 20" stroke="#261d2c" stroke-width="7" stroke-linecap="round" />
+              </svg>
+              objection: overruled
+            </div>
+          </div>
+        </div>
+
+        <aside class="profile-stage" aria-label="Micko and Joshua profile cards">
+          <article class="profile-card">
+            <div class="profile-photo">
+              <img id="mickoPhoto" alt="Micko" hidden />
+              <span id="mickoFallback" class="initial">M</span>
+            </div>
+            <div class="profile-name">
+              <h3>Micko</h3>
+              <span>lawyer mode</span>
+            </div>
+          </article>
+
+          <article class="profile-card">
+            <div class="profile-photo">
+              <img id="joshPhoto" alt="Joshua" hidden />
+              <span id="joshFallback" class="initial">J</span>
+            </div>
+            <div class="profile-name">
+              <h3>Joshua</h3>
+              <span>asking nicely</span>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="panel" aria-labelledby="quizTitle">
+        <div class="section-head">
+          <div>
+            <p class="kicker">one question quiz</p>
+            <h2 id="quizTitle">The Dating Court of Appeal</h2>
+          </div>
+          <p class="micro">Choose one ruling. No wrong answer, counsel.</p>
+        </div>
+
+        <div class="quiz-card">
+          <p class="question">
+            If Joshua asks Micko out after her busy lawyer week, what should the court order?
+          </p>
+          <div class="answers">
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Ruling entered: one relaxed coffee date, scheduled only when Micko is no longer buried in lawyer mode."
+            >
+              <strong>A. Coffee injunction</strong>
+              <span>One calm drink, no legal memo required.</span>
+            </button>
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Ruling entered: Joshua may ask again, but only with charm, patience, and absolutely no rush."
+            >
+              <strong>B. Adjourn politely</strong>
+              <span>Allowed, if the invitation stays patient and cute.</span>
+            </button>
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Ruling entered: Micko may be busy, but she is still awarded one tiny reason to smile today."
+            >
+              <strong>C. Smile damages</strong>
+              <span>Payable immediately, in good vibes.</span>
+            </button>
+          </div>
+          <div class="verdict" id="verdict" aria-live="polite">
+            Awaiting judgment. The court is currently admiring how busy Micko has been.
+          </div>
+          <div class="answer-actions" id="answerActions" hidden>
+            <a class="button" id="sendAnswer" href="mailto:joshuajian93@gmail.com">Send verdict to Joshua</a>
+            <button class="button soft" id="copyAnswer" type="button">Copy verdict</button>
+            <span class="answer-status" id="answerStatus" aria-live="polite">Pick an answer first.</span>
+          </div>
+          <p class="micro answer-hint">
+            Pick one, then send the tiny ruling if Joshua should know the judgment.
+          </p>
+        </div>
+      </section>
+
+      <footer>Verdict: tiny break granted.</footer>
+    </main>
+
+    <script>
+      const keys = {
+        answer: "micko-quiz-answer-v2"
+      };
+
+      const joshEmail = "joshuajian93@gmail.com";
+
+      const photoSets = {
+        micko: {
+          img: document.querySelector("#mickoPhoto"),
+          fallback: document.querySelector("#mickoFallback"),
+          candidates: ["micko-real.jpg", "micko-real.jpeg", "micko-real.png", "micko-real.webp", "micko-1.jpg", "micko-1.png", "micko-1.webp"]
+        },
+        josh: {
+          img: document.querySelector("#joshPhoto"),
+          fallback: document.querySelector("#joshFallback"),
+          candidates: ["josh-real.jpg", "josh-real.jpeg", "josh-real.png", "josh-real.webp", "linkedin-profile-photo-desktop.jpeg"]
+        }
+      };
+
+      const verdict = document.querySelector("#verdict");
+      const answers = [...document.querySelectorAll(".answer")];
+      const answerActions = document.querySelector("#answerActions");
+      const sendAnswer = document.querySelector("#sendAnswer");
+      const copyAnswer = document.querySelector("#copyAnswer");
+      const answerStatus = document.querySelector("#answerStatus");
+
+      function showPhoto(set, src) {
+        set.img.src = src;
+        set.img.hidden = false;
+        set.fallback.hidden = true;
+      }
+
+      function tryCandidate(src) {
+        return new Promise((resolve) => {
+          const testImage = new Image();
+          testImage.onload = () => resolve(src);
+          testImage.onerror = () => resolve("");
+          testImage.src = `${src}?v=${Date.now()}`;
+        });
+      }
+
+      async function loadPhoto(set) {
+        const found = (await Promise.all(set.candidates.map(tryCandidate))).find(Boolean);
+        if (found) showPhoto(set, found);
+      }
+
+      function answerLabel(button) {
+        return button.querySelector("strong").textContent.replace(/^[A-C]\.\s*/, "").trim();
+      }
+
+      function buildAnswer(button) {
+        const label = answerLabel(button);
+        const ruling = button.dataset.verdict || "";
+        return {
+          label,
+          ruling,
+          body: [
+            "Joshua, my ruling is:",
+            label,
+            "",
+            ruling,
+            "",
+            "Filed from Micko's Tiny Recess."
+          ].join("\n")
+        };
+      }
+
+      function getSavedAnswer() {
+        try {
+          return JSON.parse(localStorage.getItem(keys.answer) || "null");
+        } catch {
+          return null;
+        }
+      }
+
+      function updateAnswerActions(answer, status = "Ready to send to Joshua.") {
+        const subject = encodeURIComponent("Micko's Dating Court verdict");
+        sendAnswer.href = `mailto:${joshEmail}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
+        answerActions.hidden = false;
+        answerStatus.textContent = status;
+      }
+
+      function setVerdict(button, shouldSave = true) {
+        const answer = buildAnswer(button);
+        answers.forEach((answer) => answer.classList.toggle("is-picked", answer === button));
+        verdict.textContent = answer.ruling;
+        if (shouldSave) localStorage.setItem(keys.answer, JSON.stringify(answer));
+        updateAnswerActions(answer);
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.setAttribute("readonly", "");
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.append(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+
+      answers.forEach((button) => {
+        button.addEventListener("click", () => setVerdict(button));
+      });
+
+      copyAnswer.addEventListener("click", async () => {
+        const answer = getSavedAnswer();
+        if (!answer) {
+          answerStatus.textContent = "Pick an answer first.";
+          return;
+        }
+
+        try {
+          await copyText(answer.body);
+          answerStatus.textContent = "Copied. Now Joshua can receive the ruling.";
+        } catch {
+          answerStatus.textContent = "Copy failed. Use Send verdict instead.";
+        }
+      });
+
+      Object.values(photoSets).forEach(loadPhoto);
+
+      const savedAnswer = getSavedAnswer();
+      if (savedAnswer) {
+        const savedButton = answers.find((button) => answerLabel(button) === savedAnswer.label);
+        if (savedButton) {
+          setVerdict(savedButton, false);
+          answerStatus.textContent = "Saved here. Tap send so Joshua sees it.";
+        } else {
+          verdict.textContent = savedAnswer.ruling;
+          updateAnswerActions(savedAnswer, "Saved here. Tap send so Joshua sees it.");
+        }
+      }
+    </script>
+  </body>
+</html>
