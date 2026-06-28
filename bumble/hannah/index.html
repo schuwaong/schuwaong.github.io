@@ -3,39 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hannah's Tiny Singapore Checkpoint</title>
+    <title>Hannah&#x27;s Tiny Singapore Checkpoint</title>
     <meta name="description" content="A tiny personalized follow-up page for Hannah." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fraunces:opsz,wght@9..144,750&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
     <style>
       :root {
         color-scheme: light;
-        --ink: #22223b;
-        --muted: color-mix(in srgb, #22223b 58%, white);
+        --ink: #202039;
+        --muted: color-mix(in srgb, var(--ink) 58%, white);
         --a: #ffb000;
-        --b: #6bd5ff;
+        --b: #69d2ff;
         --c: #ff6f91;
-        --paper: rgba(255, 252, 244, 0.9);
-        --solid: #fffaf0;
-        --line: color-mix(in srgb, #22223b 17%, transparent);
-        --shadow: 0 28px 90px color-mix(in srgb, #22223b 24%, transparent);
+        --paper: rgba(255, 252, 244, .92);
+        --line: color-mix(in srgb, var(--ink) 17%, transparent);
+        --shadow: 0 28px 90px color-mix(in srgb, var(--ink) 22%, transparent);
       }
 
       * { box-sizing: border-box; }
 
-      html { scroll-behavior: smooth; }
-
       body {
-        margin: 0;
         min-height: 100vh;
-        font-family: "Manrope", system-ui, sans-serif;
+        margin: 0;
+        font-family: "Manrope", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--a) 48%, transparent), transparent 18rem),
-          radial-gradient(circle at 86% 10%, color-mix(in srgb, var(--b) 50%, transparent), transparent 18rem),
-          radial-gradient(circle at 46% 108%, color-mix(in srgb, var(--c) 36%, transparent), transparent 22rem),
-          linear-gradient(135deg, #fff8df 0%, #fffaf7 48%, color-mix(in srgb, var(--c) 18%, white) 100%);
+          radial-gradient(circle at 8% 13%, color-mix(in srgb, var(--a) 52%, transparent), transparent 18rem),
+          radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--b) 56%, transparent), transparent 19rem),
+          radial-gradient(circle at 48% 108%, color-mix(in srgb, var(--c) 40%, transparent), transparent 24rem),
+          linear-gradient(135deg, #fff8df, #fffaf7 48%, color-mix(in srgb, var(--c) 16%, white));
         overflow-x: hidden;
       }
 
@@ -47,33 +44,32 @@
         background-image:
           linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
           linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
-        background-size: 44px 44px;
-        mask-image: radial-gradient(circle at 50% 28%, black, transparent 72%);
-        pointer-events: none;
+        background-size: 42px 42px;
+        mask-image: radial-gradient(circle at 50% 25%, black, transparent 72%);
       }
 
-      button, input { font: inherit; }
+      button { font: inherit; }
 
       .shell {
-        width: min(1060px, calc(100% - 28px));
+        width: min(1080px, calc(100% - 28px));
         margin: 0 auto;
-        padding: 28px 0 42px;
+        padding: 24px 0 42px;
       }
 
       .hero, .panel {
-        border: 4px solid rgba(255, 255, 255, 0.82);
+        border: 4px solid rgba(255, 255, 255, .78);
         border-radius: 34px;
-        background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,250,240,.78));
+        background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,250,240,.80));
         box-shadow: var(--shadow);
         backdrop-filter: blur(18px);
       }
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(310px, .88fr);
+        grid-template-columns: minmax(0, 1fr) minmax(310px, .92fr);
         gap: 28px;
-        align-items: center;
-        padding: 30px;
+        align-items: stretch;
+        padding: clamp(18px, 4vw, 32px);
       }
 
       .badge {
@@ -83,10 +79,11 @@
         padding: 9px 14px;
         border: 2px solid var(--line);
         border-radius: 999px;
-        background: rgba(255,255,255,.72);
+        background: rgba(255,255,255,.74);
         font-size: .78rem;
         font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: .04em;
       }
 
       .badge::before {
@@ -100,28 +97,28 @@
 
       h1, h2 {
         margin: 0;
-        font-family: "Bagel Fat One", Georgia, serif;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
         font-weight: 400;
         line-height: .92;
-        letter-spacing: -.03em;
+        letter-spacing: -.035em;
       }
 
       h1 {
-        max-width: 10ch;
-        margin-top: 16px;
-        font-size: clamp(3.25rem, 9vw, 6.4rem);
+        max-width: 11ch;
+        margin-top: 18px;
+        font-size: clamp(3.25rem, 8.4vw, 6.35rem);
       }
 
       h2 {
-        font-size: clamp(2.15rem, 5vw, 3.5rem);
+        font-size: clamp(2.05rem, 5vw, 3.4rem);
       }
 
       .lede {
-        max-width: 42rem;
+        max-width: 43rem;
         margin: 18px 0 0;
         color: var(--muted);
-        font-size: 1.12rem;
-        line-height: 1.72;
+        font-size: clamp(1rem, 2vw, 1.13rem);
+        line-height: 1.75;
       }
 
       .chips {
@@ -135,64 +132,52 @@
         padding: 10px 14px;
         border: 2px solid var(--line);
         border-radius: 999px;
-        background: rgba(255,255,255,.75);
+        background: rgba(255,255,255,.78);
         font-weight: 900;
-        box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 8%, transparent);
       }
 
-      .art-card {
+      .visual-card {
         position: relative;
-        min-height: 480px;
+        min-height: 510px;
         display: grid;
+        gap: 16px;
         align-content: space-between;
-        gap: 18px;
-        padding: 20px;
+        padding: 18px;
         border: 4px solid var(--ink);
         border-radius: 30px;
         background:
-          radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--b) 52%, transparent), transparent 10rem),
-          linear-gradient(145deg, color-mix(in srgb, var(--a) 25%, white), var(--solid));
-        box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 14%, transparent);
+          radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--b) 52%, transparent), transparent 10rem),
+          linear-gradient(145deg, color-mix(in srgb, var(--a) 22%, white), #fffaf0);
+        box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 13%, transparent);
         overflow: hidden;
       }
 
-      .art-card::before, .art-card::after {
+      .visual-card::before, .visual-card::after {
         content: "";
         position: absolute;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        opacity: .45;
+        width: 156px;
+        height: 156px;
+        border-radius: 999px;
+        opacity: .42;
         animation: drift 8s ease-in-out infinite;
       }
 
-      .art-card::before {
-        right: -46px;
-        top: -36px;
-        background: var(--a);
-      }
+      .visual-card::before { right: -50px; top: -44px; background: var(--a); }
+      .visual-card::after { left: -54px; bottom: 58px; background: var(--c); animation-delay: -2.4s; }
 
-      .art-card::after {
-        left: -52px;
-        bottom: 46px;
-        background: var(--c);
-        animation-delay: -2.6s;
-      }
-
-      .art-window {
+      .portrait {
         position: relative;
         z-index: 1;
         display: grid;
         place-items: center;
-        min-height: 305px;
+        min-height: 332px;
         border: 3px solid var(--ink);
         border-radius: 26px;
-        background: rgba(255,255,255,.62);
-        overflow: hidden;
+        background: rgba(255,255,255,.64);
       }
 
-      .art-window svg {
-        width: min(82%, 310px);
+      .portrait svg {
+        width: min(92%, 345px);
         transform-origin: 50% 70%;
         animation: float 4.8s ease-in-out infinite;
       }
@@ -201,13 +186,14 @@
         position: relative;
         z-index: 1;
         padding: 16px;
+        border: 2px solid rgba(255,255,255,.82);
         border-radius: 22px;
-        background: rgba(255,255,255,.68);
+        background: rgba(255,255,255,.72);
       }
 
       .poster-copy strong {
         display: block;
-        font-family: "Bagel Fat One", Georgia, serif;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
         font-size: 2rem;
         line-height: .94;
       }
@@ -216,35 +202,70 @@
         display: block;
         margin-top: 8px;
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 850;
         line-height: 1.45;
       }
 
       .panel {
         margin-top: 18px;
-        padding: 24px;
+        padding: clamp(18px, 3vw, 25px);
       }
 
       .section-head {
         display: flex;
         align-items: end;
         justify-content: space-between;
-        gap: 14px;
+        gap: 16px;
         margin-bottom: 18px;
       }
 
       .kicker {
         margin: 0 0 7px;
-        color: color-mix(in srgb, var(--a) 70%, var(--ink));
+        color: color-mix(in srgb, var(--a) 72%, var(--ink));
         font-size: .78rem;
         font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: .06em;
       }
 
       .micro {
+        max-width: 23rem;
         margin: 0;
         color: var(--muted);
-        line-height: 1.6;
+        font-weight: 800;
+        line-height: 1.55;
+      }
+
+      .receipts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 11px;
+      }
+
+      .receipt {
+        min-height: 126px;
+        padding: 15px;
+        border: 2px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255,255,255,.70);
+      }
+
+      .receipt span {
+        display: inline-flex;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--b) 48%, white);
+        font-size: .75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+
+      .receipt p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-weight: 850;
+        line-height: 1.45;
       }
 
       .quiz {
@@ -253,14 +274,14 @@
         padding: 20px;
         border: 3px solid var(--ink);
         border-radius: 28px;
-        background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,250,240,.92));
+        background: linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,250,240,.94));
         box-shadow: 12px 12px 0 color-mix(in srgb, var(--ink) 10%, transparent);
       }
 
       .question {
         margin: 0;
-        font-family: "Bagel Fat One", Georgia, serif;
-        font-size: clamp(1.9rem, 4vw, 3rem);
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
+        font-size: clamp(1.85rem, 4vw, 2.9rem);
         line-height: 1;
       }
 
@@ -271,7 +292,7 @@
       }
 
       .answer {
-        min-height: 132px;
+        min-height: 136px;
         padding: 15px;
         border: 3px solid var(--ink);
         border-radius: 22px;
@@ -289,13 +310,13 @@
       }
 
       .answer.is-picked {
-        background: color-mix(in srgb, var(--c) 20%, white);
+        background: color-mix(in srgb, var(--c) 22%, white);
       }
 
       .answer strong {
         display: block;
-        font-family: "Bagel Fat One", Georgia, serif;
-        font-size: 1.48rem;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
+        font-size: 1.45rem;
         line-height: .96;
       }
 
@@ -303,7 +324,7 @@
         display: block;
         margin-top: 9px;
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 850;
         line-height: 1.35;
       }
 
@@ -353,23 +374,6 @@
         font-weight: 900;
       }
 
-      .memory-strip {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .memory-card {
-        padding: 14px;
-        border: 2px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255,255,255,.68);
-        color: var(--muted);
-        font-weight: 850;
-        line-height: 1.45;
-      }
-
       footer {
         padding: 18px 0 0;
         color: var(--muted);
@@ -387,76 +391,102 @@
         50% { transform: translate(12px, 10px) scale(1.06); }
       }
 
-      @media (max-width: 840px) {
+      @media (max-width: 860px) {
         .shell { width: min(100% - 18px, 650px); padding-top: 12px; }
-        .hero, .answers, .memory-strip { grid-template-columns: 1fr; }
+        .hero, .answers, .receipts { grid-template-columns: 1fr; }
         .section-head { display: block; }
-        .art-card { min-height: 420px; }
+        .micro { margin-top: 9px; }
+        .visual-card { min-height: 430px; }
       }
 
       @media (max-width: 480px) {
         .hero, .panel { padding: 18px; border-radius: 24px; }
-        .art-card { min-height: 390px; }
+        .visual-card { min-height: 390px; }
       }
     </style>
   </head>
-  <body>
+  <body data-page="{&quot;slug&quot;: &quot;hannah&quot;, &quot;name&quot;: &quot;Hannah&quot;, &quot;email&quot;: &quot;joshuajian93@gmail.com&quot;}">
     <main class="shell">
       <section class="hero" aria-labelledby="pageTitle">
         <div>
-          <span class="badge">Hannah v. chaotic Monday</span>
-          <h1 id="pageTitle">Singapore trip needs a tiny ruling.</h1>
-          <p class="lede">That sounded like a properly chaotic Monday, so Joshua made Hannah a tiny checkpoint: one travel-card moment, one little question, and no spreadsheet energy.</p>
+          <span class="badge">quick-trip checkpoint</span>
+          <h1 id="pageTitle">A tiny checkpoint for the chaotic Monday survivor.</h1>
+          <p class="lede">The chat somehow went from smoke cross-examination, to international-school chaos, to a properly chaotic Monday, to Singapore for a quick trip. That deserves one tiny checkpoint card.</p>
           <div class="chips" aria-label="Tiny page clues">
-            <span class="chip">chaotic Monday recovery</span>
-            <span class="chip">Singapore checkpoint</span>
-            <span class="chip">no work memo</span>
+            <span class="chip">quick trip</span>
+            <span class="chip">chaotic Monday</span>
+            <span class="chip">sarcasm-safe</span>
           </div>
         </div>
 
-        <aside class="art-card" aria-label="travel checkpoint illustration">
-          <div class="art-window">
+        <aside class="visual-card" aria-label="Singapore checkpoint illustration">
+          <div class="portrait">
 
-              <svg viewBox="0 0 320 260" role="img" aria-label="Cute boarding pass illustration">
-                <path d="M44 68h232c15 0 26 11 26 26v92c0 15-11 26-26 26H44c-15 0-26-11-26-26v-92c0-15 11-26 26-26Z" fill="#fff8ea" stroke="#22223b" stroke-width="8" />
-                <path d="M220 72v136" stroke="#22223b" stroke-width="6" stroke-dasharray="13 10" />
-                <path d="M56 108h104M56 140h82M56 172h122" stroke="#22223b" stroke-width="8" stroke-linecap="round" />
-                <path d="M245 118l42 22-42 22v-16h-34v-12h34v-16Z" fill="#ffb000" stroke="#22223b" stroke-width="6" />
-                <circle cx="74" cy="54" r="20" fill="#6bd5ff" stroke="#22223b" stroke-width="6" />
-                <path d="M126 44c22 0 40 18 40 40-25-5-44-2-64 14 0-30 8-54 24-54Z" fill="#ff6f91" stroke="#22223b" stroke-width="6" />
+              <svg viewBox="0 0 360 300" role="img" aria-label="Illustrated Singapore quick trip checkpoint">
+                <rect x="31" y="55" width="298" height="190" rx="28" fill="#fff8e8" stroke="#202039" stroke-width="8" />
+                <path d="M78 95h128M78 129h86M78 164h124" stroke="#202039" stroke-width="8" stroke-linecap="round" />
+                <path d="M245 82l55 30-55 30v-19h-45v-22h45V82Z" fill="#ffb000" stroke="#202039" stroke-width="7" />
+                <path d="M251 185c23 0 42 19 42 42h-84c0-23 19-42 42-42Z" fill="#69d2ff" stroke="#202039" stroke-width="7" />
+                <circle cx="251" cy="178" r="18" fill="#ff6f91" stroke="#202039" stroke-width="7" />
+                <path d="M60 57c16-31 47-31 63 0" fill="none" stroke="#ff6f91" stroke-width="9" stroke-linecap="round" />
+                <circle cx="77" cy="238" r="16" fill="#ffb000" stroke="#202039" stroke-width="6" />
               </svg>
         
           </div>
           <div class="poster-copy">
-            <strong>Travel Checkpoint.</strong>
-            <span>A tiny custom card for Hannah, made to feel simple, clean, and a little playful.</span>
+            <strong>Singapore checkpoint.</strong>
+            <span>Tiny note: this checkpoint has no spreadsheet energy.</span>
           </div>
         </aside>
+      </section>
+
+      <section class="panel" aria-labelledby="receiptsTitle">
+        <div class="section-head">
+          <div>
+            <p class="kicker">chat receipts</p>
+            <h2 id="receiptsTitle">Proof it is actually for Hannah.</h2>
+          </div>
+          <p class="micro">Short receipts only. Enough to feel personal, not enough to turn a cute page into a transcript dump.</p>
+        </div>
+        <div class="receipts">
+          <article class="receipt">
+            <span>Banter file</span>
+            <p>The smoke question became unexpectedly investigative.</p>
+          </article>
+          <article class="receipt">
+            <span>Work file</span>
+            <p>Joshua: international-school chaos. Hannah: corporate/project mystery.</p>
+          </article>
+          <article class="receipt">
+            <span>Travel file</span>
+            <p>Singapore quick trip, back in Malaysia tomorrow.</p>
+          </article>
+        </div>
       </section>
 
       <section class="panel" id="answerPanel" aria-labelledby="quizTitle">
         <div class="section-head">
           <div>
             <p class="kicker">trip ruling</p>
-            <h2 id="quizTitle">The Singapore Checkpoint Board</h2>
+            <h2 id="quizTitle">The Quick Trip Board</h2>
           </div>
-          <p class="micro">Choose one. This is legally not admin work.</p>
+          <p class="micro">Choose the most accurate Hannah status update.</p>
         </div>
 
         <div class="quiz">
-          <p class="question">If Hannah is heading Singapore-side, what should Joshua assume?</p>
+          <p class="question">If Joshua follows up after the Singapore quick trip, what tone should he bring?</p>
           <div class="answers">
-            <button class="answer" type="button" data-verdict="Hannah's ruling: work mission. Joshua should send snacks, sympathy, and no extra chaos.">
-              <strong>A. Work mission</strong>
-              <span>Efficient, slightly tired, probably needs snacks.</span>
+            <button class="answer" type="button" data-verdict="Hannah&#x27;s ruling: recovery snacks. Joshua should bring easy energy and not add admin to the day.">
+              <strong>A. Recovery snacks</strong>
+              <span>Chaotic Monday tax must be paid in snacks.</span>
             </button>
-            <button class="answer" type="button" data-verdict="Hannah's ruling: quick escape. Joshua approves the tiny change-of-scene energy.">
-              <strong>B. Quick escape</strong>
-              <span>A tiny change of scene counts as character development.</span>
+            <button class="answer" type="button" data-verdict="Hannah&#x27;s ruling: smoke-free banter. Joshua may joke, but must keep it light and human.">
+              <strong>B. Smoke-free banter</strong>
+              <span>Keep the questions funny, not courtroom intense.</span>
             </button>
-            <button class="answer" type="button" data-verdict="Hannah's ruling: ask me later. Monday brain may recover before further evidence is released.">
-              <strong>C. Ask me later</strong>
-              <span>Information classified until Monday brain recovers.</span>
+            <button class="answer" type="button" data-verdict="Hannah&#x27;s ruling: ask later. Joshua should wait for the quick-trip dust to settle.">
+              <strong>C. Ask later</strong>
+              <span>Timing classified until the trip brain settles.</span>
             </button>
           </div>
           <div class="verdict" id="verdict" aria-live="polite">
@@ -468,21 +498,14 @@
             <span class="status" id="answerStatus" aria-live="polite">Pick an answer first.</span>
           </div>
         </div>
-
-        <div class="memory-strip" aria-label="Tiny memory cards">
-          <div class="memory-card">Case note: properly chaotic Monday.</div>
-          <div class="memory-card">Tiny question: work or quick trip?</div>
-          <div class="memory-card">Pressure note: zero hurry to answer.</div>
-        </div>
       </section>
 
-      <footer>Verdict: tiny break granted.</footer>
+      <footer>Made as a tiny follow-up, not a pitch deck.</footer>
     </main>
 
     <script>
-      const key = "hannah-tiny-answer-v1";
-      const joshEmail = "joshuajian93@gmail.com";
-      const personName = "Hannah";
+      const payload = JSON.parse(document.body.dataset.page);
+      const key = `${payload.slug}-personalized-answer-v2`;
       const answers = [...document.querySelectorAll(".answer")];
       const verdict = document.querySelector("#verdict");
       const answerActions = document.querySelector("#answerActions");
@@ -501,12 +524,12 @@
           label,
           ruling,
           body: [
-            `Joshua, ${personName}'s tiny answer is:`,
+            `Joshua, ${payload.name}'s answer is:`,
             label,
             "",
             ruling,
             "",
-            `Filed from ${personName}'s tiny follow-up page.`
+            `Filed from ${payload.name}'s tiny follow-up page.`
           ].join("\n")
         };
       }
@@ -520,8 +543,8 @@
       }
 
       function updateActions(answer, status = "Ready to send to Joshua.") {
-        const subject = encodeURIComponent(`${personName}'s tiny answer`);
-        sendAnswer.href = `mailto:${joshEmail}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
+        const subject = encodeURIComponent(`${payload.name}'s tiny answer`);
+        sendAnswer.href = `mailto:${payload.email}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
         answerActions.hidden = false;
         answerStatus.textContent = status;
       }

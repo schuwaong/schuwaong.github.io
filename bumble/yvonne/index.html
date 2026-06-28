@@ -3,39 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yvonne's Tiny Night Garden</title>
+    <title>Yvonne&#x27;s Falling With Style Scorecard</title>
     <meta name="description" content="A tiny personalized follow-up page for Yvonne." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fraunces:opsz,wght@9..144,750&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
     <style>
       :root {
         color-scheme: light;
         --ink: #18213b;
-        --muted: color-mix(in srgb, #18213b 58%, white);
+        --muted: color-mix(in srgb, var(--ink) 58%, white);
         --a: #8fd3ff;
         --b: #ffd166;
         --c: #b8a1ff;
-        --paper: rgba(255, 252, 244, 0.9);
-        --solid: #fffaf0;
-        --line: color-mix(in srgb, #18213b 17%, transparent);
-        --shadow: 0 28px 90px color-mix(in srgb, #18213b 24%, transparent);
+        --paper: rgba(255, 252, 244, .92);
+        --line: color-mix(in srgb, var(--ink) 17%, transparent);
+        --shadow: 0 28px 90px color-mix(in srgb, var(--ink) 22%, transparent);
       }
 
       * { box-sizing: border-box; }
 
-      html { scroll-behavior: smooth; }
-
       body {
-        margin: 0;
         min-height: 100vh;
-        font-family: "Manrope", system-ui, sans-serif;
+        margin: 0;
+        font-family: "Manrope", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--a) 48%, transparent), transparent 18rem),
-          radial-gradient(circle at 86% 10%, color-mix(in srgb, var(--b) 50%, transparent), transparent 18rem),
-          radial-gradient(circle at 46% 108%, color-mix(in srgb, var(--c) 36%, transparent), transparent 22rem),
-          linear-gradient(135deg, #fff8df 0%, #fffaf7 48%, color-mix(in srgb, var(--c) 18%, white) 100%);
+          radial-gradient(circle at 8% 13%, color-mix(in srgb, var(--a) 52%, transparent), transparent 18rem),
+          radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--b) 56%, transparent), transparent 19rem),
+          radial-gradient(circle at 48% 108%, color-mix(in srgb, var(--c) 40%, transparent), transparent 24rem),
+          linear-gradient(135deg, #fff8df, #fffaf7 48%, color-mix(in srgb, var(--c) 16%, white));
         overflow-x: hidden;
       }
 
@@ -47,33 +44,32 @@
         background-image:
           linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
           linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
-        background-size: 44px 44px;
-        mask-image: radial-gradient(circle at 50% 28%, black, transparent 72%);
-        pointer-events: none;
+        background-size: 42px 42px;
+        mask-image: radial-gradient(circle at 50% 25%, black, transparent 72%);
       }
 
-      button, input { font: inherit; }
+      button { font: inherit; }
 
       .shell {
-        width: min(1060px, calc(100% - 28px));
+        width: min(1080px, calc(100% - 28px));
         margin: 0 auto;
-        padding: 28px 0 42px;
+        padding: 24px 0 42px;
       }
 
       .hero, .panel {
-        border: 4px solid rgba(255, 255, 255, 0.82);
+        border: 4px solid rgba(255, 255, 255, .78);
         border-radius: 34px;
-        background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,250,240,.78));
+        background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,250,240,.80));
         box-shadow: var(--shadow);
         backdrop-filter: blur(18px);
       }
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(310px, .88fr);
+        grid-template-columns: minmax(0, 1fr) minmax(310px, .92fr);
         gap: 28px;
-        align-items: center;
-        padding: 30px;
+        align-items: stretch;
+        padding: clamp(18px, 4vw, 32px);
       }
 
       .badge {
@@ -83,10 +79,11 @@
         padding: 9px 14px;
         border: 2px solid var(--line);
         border-radius: 999px;
-        background: rgba(255,255,255,.72);
+        background: rgba(255,255,255,.74);
         font-size: .78rem;
         font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: .04em;
       }
 
       .badge::before {
@@ -100,28 +97,28 @@
 
       h1, h2 {
         margin: 0;
-        font-family: "Bagel Fat One", Georgia, serif;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
         font-weight: 400;
         line-height: .92;
-        letter-spacing: -.03em;
+        letter-spacing: -.035em;
       }
 
       h1 {
-        max-width: 10ch;
-        margin-top: 16px;
-        font-size: clamp(3.25rem, 9vw, 6.4rem);
+        max-width: 11ch;
+        margin-top: 18px;
+        font-size: clamp(3.25rem, 8.4vw, 6.35rem);
       }
 
       h2 {
-        font-size: clamp(2.15rem, 5vw, 3.5rem);
+        font-size: clamp(2.05rem, 5vw, 3.4rem);
       }
 
       .lede {
-        max-width: 42rem;
+        max-width: 43rem;
         margin: 18px 0 0;
         color: var(--muted);
-        font-size: 1.12rem;
-        line-height: 1.72;
+        font-size: clamp(1rem, 2vw, 1.13rem);
+        line-height: 1.75;
       }
 
       .chips {
@@ -135,64 +132,52 @@
         padding: 10px 14px;
         border: 2px solid var(--line);
         border-radius: 999px;
-        background: rgba(255,255,255,.75);
+        background: rgba(255,255,255,.78);
         font-weight: 900;
-        box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 8%, transparent);
       }
 
-      .art-card {
+      .visual-card {
         position: relative;
-        min-height: 480px;
+        min-height: 510px;
         display: grid;
+        gap: 16px;
         align-content: space-between;
-        gap: 18px;
-        padding: 20px;
+        padding: 18px;
         border: 4px solid var(--ink);
         border-radius: 30px;
         background:
-          radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--b) 52%, transparent), transparent 10rem),
-          linear-gradient(145deg, color-mix(in srgb, var(--a) 25%, white), var(--solid));
-        box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 14%, transparent);
+          radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--b) 52%, transparent), transparent 10rem),
+          linear-gradient(145deg, color-mix(in srgb, var(--a) 22%, white), #fffaf0);
+        box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 13%, transparent);
         overflow: hidden;
       }
 
-      .art-card::before, .art-card::after {
+      .visual-card::before, .visual-card::after {
         content: "";
         position: absolute;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        opacity: .45;
+        width: 156px;
+        height: 156px;
+        border-radius: 999px;
+        opacity: .42;
         animation: drift 8s ease-in-out infinite;
       }
 
-      .art-card::before {
-        right: -46px;
-        top: -36px;
-        background: var(--a);
-      }
+      .visual-card::before { right: -50px; top: -44px; background: var(--a); }
+      .visual-card::after { left: -54px; bottom: 58px; background: var(--c); animation-delay: -2.4s; }
 
-      .art-card::after {
-        left: -52px;
-        bottom: 46px;
-        background: var(--c);
-        animation-delay: -2.6s;
-      }
-
-      .art-window {
+      .portrait {
         position: relative;
         z-index: 1;
         display: grid;
         place-items: center;
-        min-height: 305px;
+        min-height: 332px;
         border: 3px solid var(--ink);
         border-radius: 26px;
-        background: rgba(255,255,255,.62);
-        overflow: hidden;
+        background: rgba(255,255,255,.64);
       }
 
-      .art-window svg {
-        width: min(82%, 310px);
+      .portrait svg {
+        width: min(92%, 345px);
         transform-origin: 50% 70%;
         animation: float 4.8s ease-in-out infinite;
       }
@@ -201,13 +186,14 @@
         position: relative;
         z-index: 1;
         padding: 16px;
+        border: 2px solid rgba(255,255,255,.82);
         border-radius: 22px;
-        background: rgba(255,255,255,.68);
+        background: rgba(255,255,255,.72);
       }
 
       .poster-copy strong {
         display: block;
-        font-family: "Bagel Fat One", Georgia, serif;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
         font-size: 2rem;
         line-height: .94;
       }
@@ -216,35 +202,70 @@
         display: block;
         margin-top: 8px;
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 850;
         line-height: 1.45;
       }
 
       .panel {
         margin-top: 18px;
-        padding: 24px;
+        padding: clamp(18px, 3vw, 25px);
       }
 
       .section-head {
         display: flex;
         align-items: end;
         justify-content: space-between;
-        gap: 14px;
+        gap: 16px;
         margin-bottom: 18px;
       }
 
       .kicker {
         margin: 0 0 7px;
-        color: color-mix(in srgb, var(--a) 70%, var(--ink));
+        color: color-mix(in srgb, var(--a) 72%, var(--ink));
         font-size: .78rem;
         font-weight: 900;
         text-transform: uppercase;
+        letter-spacing: .06em;
       }
 
       .micro {
+        max-width: 23rem;
         margin: 0;
         color: var(--muted);
-        line-height: 1.6;
+        font-weight: 800;
+        line-height: 1.55;
+      }
+
+      .receipts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 11px;
+      }
+
+      .receipt {
+        min-height: 126px;
+        padding: 15px;
+        border: 2px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255,255,255,.70);
+      }
+
+      .receipt span {
+        display: inline-flex;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--b) 48%, white);
+        font-size: .75rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+
+      .receipt p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-weight: 850;
+        line-height: 1.45;
       }
 
       .quiz {
@@ -253,14 +274,14 @@
         padding: 20px;
         border: 3px solid var(--ink);
         border-radius: 28px;
-        background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,250,240,.92));
+        background: linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,250,240,.94));
         box-shadow: 12px 12px 0 color-mix(in srgb, var(--ink) 10%, transparent);
       }
 
       .question {
         margin: 0;
-        font-family: "Bagel Fat One", Georgia, serif;
-        font-size: clamp(1.9rem, 4vw, 3rem);
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
+        font-size: clamp(1.85rem, 4vw, 2.9rem);
         line-height: 1;
       }
 
@@ -271,7 +292,7 @@
       }
 
       .answer {
-        min-height: 132px;
+        min-height: 136px;
         padding: 15px;
         border: 3px solid var(--ink);
         border-radius: 22px;
@@ -289,13 +310,13 @@
       }
 
       .answer.is-picked {
-        background: color-mix(in srgb, var(--c) 20%, white);
+        background: color-mix(in srgb, var(--c) 22%, white);
       }
 
       .answer strong {
         display: block;
-        font-family: "Bagel Fat One", Georgia, serif;
-        font-size: 1.48rem;
+        font-family: "Bagel Fat One", "Fraunces", Georgia, serif;
+        font-size: 1.45rem;
         line-height: .96;
       }
 
@@ -303,7 +324,7 @@
         display: block;
         margin-top: 9px;
         color: var(--muted);
-        font-weight: 800;
+        font-weight: 850;
         line-height: 1.35;
       }
 
@@ -353,23 +374,6 @@
         font-weight: 900;
       }
 
-      .memory-strip {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .memory-card {
-        padding: 14px;
-        border: 2px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255,255,255,.68);
-        color: var(--muted);
-        font-weight: 850;
-        line-height: 1.45;
-      }
-
       footer {
         padding: 18px 0 0;
         color: var(--muted);
@@ -387,78 +391,103 @@
         50% { transform: translate(12px, 10px) scale(1.06); }
       }
 
-      @media (max-width: 840px) {
+      @media (max-width: 860px) {
         .shell { width: min(100% - 18px, 650px); padding-top: 12px; }
-        .hero, .answers, .memory-strip { grid-template-columns: 1fr; }
+        .hero, .answers, .receipts { grid-template-columns: 1fr; }
         .section-head { display: block; }
-        .art-card { min-height: 420px; }
+        .micro { margin-top: 9px; }
+        .visual-card { min-height: 430px; }
       }
 
       @media (max-width: 480px) {
         .hero, .panel { padding: 18px; border-radius: 24px; }
-        .art-card { min-height: 390px; }
+        .visual-card { min-height: 390px; }
       }
     </style>
   </head>
-  <body>
+  <body data-page="{&quot;slug&quot;: &quot;yvonne&quot;, &quot;name&quot;: &quot;Yvonne&quot;, &quot;email&quot;: &quot;joshuajian93@gmail.com&quot;}">
     <main class="shell">
       <section class="hero" aria-labelledby="pageTitle">
         <div>
-          <span class="badge">Yvonne's tiny night garden</span>
-          <h1 id="pageTitle">One little glowing choice.</h1>
-          <p class="lede">A small follow-up for Yvonne: a calm night-garden card, a tiny question, and a way to send Joshua one simple answer if she wants.</p>
+          <span class="badge">gymnastics scorecard</span>
+          <h1 id="pageTitle">A tiny 10/10 for falling with style.</h1>
+          <p class="lede">Yvonne clocked the sports-falling pattern, Joshua pleaded guilty, and the chat somehow ended up at gymnastics. So this is a little scorecard for graceful chaos.</p>
           <div class="chips" aria-label="Tiny page clues">
-            <span class="chip">night garden</span>
-            <span class="chip">one glow card</span>
-            <span class="chip">easy reply</span>
+            <span class="chip">sports fall audit</span>
+            <span class="chip">gymnastics lore</span>
+            <span class="chip">kudos received</span>
           </div>
         </div>
 
-        <aside class="art-card" aria-label="lantern garden illustration">
-          <div class="art-window">
+        <aside class="visual-card" aria-label="Falling with style illustration">
+          <div class="portrait">
 
-              <svg viewBox="0 0 320 260" role="img" aria-label="Cute lantern garden illustration">
-                <path d="M160 34v42" stroke="#18213b" stroke-width="8" stroke-linecap="round" />
-                <path d="M106 76h108l16 34-16 88H106l-16-88 16-34Z" fill="#8fd3ff" stroke="#18213b" stroke-width="8" />
-                <path d="M118 112h84M118 146h84M118 180h84" stroke="#fff7c7" stroke-width="8" stroke-linecap="round" opacity=".82" />
-                <path d="M118 200c14 28 70 28 84 0" fill="#ffd166" stroke="#18213b" stroke-width="7" />
-                <circle cx="60" cy="72" r="15" fill="#ffd166" />
-                <circle cx="265" cy="78" r="11" fill="#b8a1ff" />
-                <circle cx="248" cy="196" r="18" fill="#ffd166" stroke="#18213b" stroke-width="6" />
-                <path d="M52 198c35-22 58-20 86 0" fill="none" stroke="#b8a1ff" stroke-width="8" stroke-linecap="round" />
+              <svg viewBox="0 0 360 300" role="img" aria-label="Illustrated gymnastics scorecard">
+                <rect x="28" y="38" width="304" height="218" rx="34" fill="#fff8e8" stroke="#18213b" stroke-width="8" />
+                <path d="M83 211c49 26 98 26 146 0 26-14 47-15 63-4" fill="none" stroke="#b8a1ff" stroke-width="10" stroke-linecap="round" />
+                <circle cx="155" cy="94" r="20" fill="#ffd166" stroke="#18213b" stroke-width="7" />
+                <path d="M157 117c-26 22-46 43-60 72M161 118c29 13 59 16 91 10M125 153c29 9 58 8 87-3M104 191c28 17 55 20 82 11" fill="none" stroke="#18213b" stroke-width="8" stroke-linecap="round" />
+                <rect x="220" y="62" width="76" height="56" rx="15" fill="#8fd3ff" stroke="#18213b" stroke-width="7" />
+                <text x="258" y="99" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#18213b">10</text>
+                <circle cx="82" cy="74" r="15" fill="#8fd3ff" stroke="#18213b" stroke-width="6" />
+                <circle cx="285" cy="222" r="18" fill="#ffd166" stroke="#18213b" stroke-width="6" />
               </svg>
         
           </div>
           <div class="poster-copy">
-            <strong>Lantern Garden.</strong>
-            <span>A tiny custom card for Yvonne, made to feel simple, clean, and a little playful.</span>
+            <strong>Falling with style.</strong>
+            <span>Tiny note: some people flirt. Some people produce a scorecard.</span>
           </div>
         </aside>
+      </section>
+
+      <section class="panel" aria-labelledby="receiptsTitle">
+        <div class="section-head">
+          <div>
+            <p class="kicker">chat receipts</p>
+            <h2 id="receiptsTitle">Proof it is actually for Yvonne.</h2>
+          </div>
+          <p class="micro">Short receipts only. Enough to feel personal, not enough to turn a cute page into a transcript dump.</p>
+        </div>
+        <div class="receipts">
+          <article class="receipt">
+            <span>Audit</span>
+            <p>Player falling every time in sports.</p>
+          </article>
+          <article class="receipt">
+            <span>Plea</span>
+            <p>Guilty. Fully committed to the fall.</p>
+          </article>
+          <article class="receipt">
+            <span>Lore</span>
+            <p>Gymnastics started pretty young, exact age uncertain.</p>
+          </article>
+        </div>
       </section>
 
       <section class="panel" id="answerPanel" aria-labelledby="quizTitle">
         <div class="section-head">
           <div>
-            <p class="kicker">glow rating</p>
-            <h2 id="quizTitle">The Tiny Lantern Board</h2>
+            <p class="kicker">scorecard ruling</p>
+            <h2 id="quizTitle">The Graceful Chaos Scorecard</h2>
           </div>
-          <p class="micro">Pick the glow level. No complicated essay required.</p>
+          <p class="micro">Pick one score. The judges are biased but sincere.</p>
         </div>
 
         <div class="quiz">
-          <p class="question">If Joshua asks Yvonne out, what glow level should the invite have?</p>
+          <p class="question">How should Joshua follow up after being exposed as a sports-falling person?</p>
           <div class="answers">
-            <button class="answer" type="button" data-verdict="Yvonne's ruling: soft glow. Joshua should keep the invite calm, thoughtful, and easy.">
-              <strong>A. Soft glow</strong>
-              <span>Calm, thoughtful, not trying too hard.</span>
+            <button class="answer" type="button" data-verdict="Yvonne&#x27;s ruling: 10/10 recovery. Joshua may keep the joke and pretend the fall was artistic.">
+              <strong>A. 10/10 recovery</strong>
+              <span>Fall committed. Landing optional.</span>
             </button>
-            <button class="answer" type="button" data-verdict="Yvonne's ruling: spark mode. Joshua may add a little playful energy.">
-              <strong>B. Spark mode</strong>
-              <span>A little playful energy is allowed.</span>
+            <button class="answer" type="button" data-verdict="Yvonne&#x27;s ruling: safer sport please. Joshua should choose something less likely to require ice packs.">
+              <strong>B. Safer sport please</strong>
+              <span>Less impact, more dignity.</span>
             </button>
-            <button class="answer" type="button" data-verdict="Yvonne's ruling: moon delay. Joshua may ask again later with patience.">
-              <strong>C. Moon delay</strong>
-              <span>Cute, but ask again when timing is better.</span>
+            <button class="answer" type="button" data-verdict="Yvonne&#x27;s ruling: gymnastics lore. Joshua should ask for the story, not just the scoreboard.">
+              <strong>C. Gymnastics lore</strong>
+              <span>Ask the origin story properly.</span>
             </button>
           </div>
           <div class="verdict" id="verdict" aria-live="polite">
@@ -470,21 +499,14 @@
             <span class="status" id="answerStatus" aria-live="polite">Pick an answer first.</span>
           </div>
         </div>
-
-        <div class="memory-strip" aria-label="Tiny memory cards">
-          <div class="memory-card">Glow note: gentle beats loud.</div>
-          <div class="memory-card">Timing note: patience is attractive.</div>
-          <div class="memory-card">Reply note: only if she feels like it.</div>
-        </div>
       </section>
 
-      <footer>Verdict: tiny break granted.</footer>
+      <footer>Made as a tiny follow-up, not a pitch deck.</footer>
     </main>
 
     <script>
-      const key = "yvonne-tiny-answer-v1";
-      const joshEmail = "joshuajian93@gmail.com";
-      const personName = "Yvonne";
+      const payload = JSON.parse(document.body.dataset.page);
+      const key = `${payload.slug}-personalized-answer-v2`;
       const answers = [...document.querySelectorAll(".answer")];
       const verdict = document.querySelector("#verdict");
       const answerActions = document.querySelector("#answerActions");
@@ -503,12 +525,12 @@
           label,
           ruling,
           body: [
-            `Joshua, ${personName}'s tiny answer is:`,
+            `Joshua, ${payload.name}'s answer is:`,
             label,
             "",
             ruling,
             "",
-            `Filed from ${personName}'s tiny follow-up page.`
+            `Filed from ${payload.name}'s tiny follow-up page.`
           ].join("\n")
         };
       }
@@ -522,8 +544,8 @@
       }
 
       function updateActions(answer, status = "Ready to send to Joshua.") {
-        const subject = encodeURIComponent(`${personName}'s tiny answer`);
-        sendAnswer.href = `mailto:${joshEmail}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
+        const subject = encodeURIComponent(`${payload.name}'s tiny answer`);
+        sendAnswer.href = `mailto:${payload.email}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
         answerActions.hidden = false;
         answerStatus.textContent = status;
       }
