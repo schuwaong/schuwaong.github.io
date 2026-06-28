@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dhea's Tiny Episode Break</title>
+    <meta
+      name="description"
+      content="A small cozy follow-up page for Dhea with one tiny episode-one review quiz."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #201a2e;
+        --muted: #756a83;
+        --night: #19142c;
+        --plum: #3b2758;
+        --cream: #fff7e6;
+        --paper: rgba(255, 250, 239, 0.9);
+        --peach: #ff9e7d;
+        --honey: #ffd66b;
+        --blue: #7bd4ff;
+        --mint: #9ff2c8;
+        --rose: #ff78a8;
+        --line: rgba(32, 26, 46, 0.14);
+        --shadow: 0 28px 90px rgba(25, 20, 44, 0.28);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Bricolage Grotesque", system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 15% 12%, rgba(255, 214, 107, 0.32), transparent 15rem),
+          radial-gradient(circle at 82% 8%, rgba(123, 212, 255, 0.32), transparent 18rem),
+          radial-gradient(circle at 52% 104%, rgba(255, 120, 168, 0.25), transparent 20rem),
+          linear-gradient(135deg, #17122a 0%, #2b2148 42%, #fff2d2 43%, #fff8eb 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.5px),
+          radial-gradient(circle, rgba(255, 214, 107, 0.65) 0 1px, transparent 1.5px);
+        background-position:
+          24px 40px,
+          90px 118px;
+        background-size:
+          140px 140px,
+          190px 190px;
+        opacity: 0.42;
+        pointer-events: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1060px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 42px;
+      }
+
+      .hero,
+      .panel {
+        border: 3px solid rgba(255, 255, 255, 0.78);
+        border-radius: 30px;
+        background:
+          linear-gradient(135deg, rgba(255, 250, 239, 0.95), rgba(255, 255, 255, 0.78)),
+          linear-gradient(90deg, rgba(255, 214, 107, 0.18), rgba(123, 212, 255, 0.16));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(310px, 0.86fr);
+        gap: 28px;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.74);
+        color: #7a4a13;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .badge::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--honey);
+        box-shadow:
+          17px 0 0 var(--rose),
+          34px 0 0 var(--blue);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-family: "DM Serif Display", Georgia, serif;
+        font-weight: 400;
+        line-height: 0.98;
+      }
+
+      h1 {
+        max-width: 10ch;
+        margin-top: 16px;
+        font-size: clamp(3.2rem, 9vw, 6.4rem);
+      }
+
+      h2 {
+        font-size: clamp(2.1rem, 5vw, 3.4rem);
+      }
+
+      h3 {
+        font-size: 1.55rem;
+      }
+
+      .lede {
+        max-width: 42rem;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+        line-height: 1.72;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .chip {
+        padding: 10px 14px;
+        border: 2px solid rgba(32, 26, 46, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        color: var(--ink);
+        font-weight: 800;
+        box-shadow: 0 10px 26px rgba(32, 26, 46, 0.08);
+      }
+
+      .poster {
+        position: relative;
+        min-height: 480px;
+        padding: 18px;
+        border: 4px solid var(--ink);
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, rgba(25, 20, 44, 0.05), rgba(255, 247, 230, 0.92)),
+          radial-gradient(circle at 50% 18%, rgba(255, 214, 107, 0.55), transparent 11rem),
+          linear-gradient(145deg, #271d44, #fff0d0 58%, #fff8ec);
+        box-shadow: 14px 14px 0 rgba(32, 26, 46, 0.14);
+        overflow: hidden;
+      }
+
+      .poster::before {
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        right: -38px;
+        top: -42px;
+        border: 28px solid rgba(255, 214, 107, 0.72);
+        border-radius: 50%;
+        box-shadow: 0 0 0 18px rgba(255, 255, 255, 0.22);
+      }
+
+      .poster::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        left: -50px;
+        bottom: 44px;
+        border-radius: 50%;
+        background: rgba(123, 212, 255, 0.3);
+      }
+
+      .episode-card {
+        position: relative;
+        z-index: 1;
+        min-height: 100%;
+        display: grid;
+        align-content: space-between;
+        gap: 20px;
+        padding: 20px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .tiny-tv {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 250px;
+        border: 3px solid var(--ink);
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at 50% 35%, rgba(255, 214, 107, 0.55), transparent 8rem),
+          linear-gradient(145deg, var(--night), var(--plum));
+        box-shadow: inset 0 -18px 45px rgba(0, 0, 0, 0.16);
+        overflow: hidden;
+      }
+
+      .tiny-tv svg {
+        width: min(72%, 240px);
+        filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.28));
+      }
+
+      .play-dot {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--honey);
+        animation: floaty 4s ease-in-out infinite;
+      }
+
+      .play-dot:nth-child(1) {
+        left: 28px;
+        top: 26px;
+      }
+
+      .play-dot:nth-child(2) {
+        right: 36px;
+        bottom: 34px;
+        background: var(--blue);
+        animation-delay: 0.8s;
+      }
+
+      .play-dot:nth-child(3) {
+        left: 48px;
+        bottom: 54px;
+        background: var(--rose);
+        animation-delay: 1.4s;
+      }
+
+      .poster-copy {
+        display: grid;
+        gap: 10px;
+      }
+
+      .poster-title {
+        margin: 0;
+        font-family: "DM Serif Display", Georgia, serif;
+        font-size: 2.4rem;
+        line-height: 0.94;
+      }
+
+      .poster-copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .panel {
+        margin-top: 18px;
+        padding: 24px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .kicker {
+        margin: 0 0 7px;
+        color: #8d5a17;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .micro {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .quiz {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border: 3px solid var(--ink);
+        border-radius: 26px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 247, 230, 0.92)),
+          repeating-linear-gradient(90deg, rgba(255, 214, 107, 0.08) 0 18px, transparent 18px 36px);
+        box-shadow: 12px 12px 0 rgba(32, 26, 46, 0.1);
+      }
+
+      .question {
+        margin: 0;
+        font-family: "DM Serif Display", Georgia, serif;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 1.02;
+      }
+
+      .answers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .answer {
+        min-height: 128px;
+        padding: 15px;
+        border: 3px solid var(--ink);
+        border-radius: 22px;
+        background: var(--paper);
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        box-shadow: 7px 7px 0 rgba(32, 26, 46, 0.12);
+        transition:
+          transform 0.16s ease,
+          box-shadow 0.16s ease,
+          background 0.16s ease;
+      }
+
+      .answer:hover,
+      .answer:focus-visible,
+      .answer.is-picked {
+        transform: translate(-2px, -2px) rotate(-0.5deg);
+        box-shadow: 10px 10px 0 rgba(32, 26, 46, 0.15);
+      }
+
+      .answer.is-picked {
+        background: #edfff4;
+      }
+
+      .answer strong {
+        display: block;
+        font-family: "DM Serif Display", Georgia, serif;
+        font-size: 1.5rem;
+        line-height: 0.98;
+      }
+
+      .answer span {
+        display: block;
+        margin-top: 9px;
+        color: var(--muted);
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .verdict {
+        min-height: 58px;
+        padding: 15px 16px;
+        border: 2px dashed rgba(32, 26, 46, 0.24);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.66);
+        color: var(--muted);
+        font-weight: 800;
+        line-height: 1.55;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .actions[hidden] {
+        display: none;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 17px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: var(--ink);
+        color: white;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 10px 0 rgba(32, 26, 46, 0.12);
+      }
+
+      .button.soft {
+        background: white;
+        color: var(--ink);
+      }
+
+      .status {
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .chat-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .memory-card {
+        padding: 14px;
+        border: 2px solid rgba(32, 26, 46, 0.12);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.68);
+        color: var(--muted);
+        font-weight: 750;
+        line-height: 1.45;
+      }
+
+      footer {
+        padding: 18px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+        text-align: center;
+        font-weight: 800;
+      }
+
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @media (max-width: 840px) {
+        .shell {
+          width: min(100% - 18px, 650px);
+          padding-top: 12px;
+        }
+
+        .hero,
+        .answers,
+        .chat-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .poster {
+          min-height: 420px;
+        }
+
+        .section-head {
+          display: block;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero,
+        .panel {
+          padding: 18px;
+          border-radius: 24px;
+        }
+
+        .poster {
+          min-height: 390px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="pageTitle">
+        <div>
+          <span class="badge">Dhea's tiny intermission</span>
+          <h1 id="pageTitle">Episode one needs a verdict.</h1>
+          <p class="lede">
+            Because Joshua's memory is apparently terrible, he made Dhea a tiny
+            follow-up page: one cozy review card, one ridiculous show question,
+            and zero pressure to answer fast.
+          </p>
+          <div class="chips" aria-label="Page clues">
+            <span class="chip">Lucifer watch note</span>
+            <span class="chip">British-accent approval</span>
+            <span class="chip">midnight-friends energy</span>
+          </div>
+        </div>
+
+        <aside class="poster" aria-label="Cozy episode card">
+          <div class="episode-card">
+            <div class="tiny-tv" aria-hidden="true">
+              <span class="play-dot"></span>
+              <span class="play-dot"></span>
+              <span class="play-dot"></span>
+              <svg viewBox="0 0 260 220" role="img" aria-label="Tiny night TV illustration">
+                <path d="M42 70h176c14 0 24 10 24 24v86c0 14-10 24-24 24H42c-14 0-24-10-24-24V94c0-14 10-24 24-24Z" fill="#fff7e6" stroke="#201a2e" stroke-width="7" />
+                <path d="M74 70 48 34M188 70l26-36" stroke="#201a2e" stroke-width="7" stroke-linecap="round" />
+                <path d="M70 102h92c9 0 16 7 16 16v34c0 9-7 16-16 16H70c-9 0-16-7-16-16v-34c0-9 7-16 16-16Z" fill="#7bd4ff" stroke="#201a2e" stroke-width="6" />
+                <path d="M194 114h24M194 136h24M194 158h24" stroke="#201a2e" stroke-width="6" stroke-linecap="round" />
+                <path d="M100 118v36l34-18-34-18Z" fill="#ff78a8" stroke="#201a2e" stroke-width="5" />
+                <path d="M84 41c9-22 29-31 44-31-10 17-7 33 7 47-24 1-39-4-51-16Z" fill="#ffd66b" stroke="#201a2e" stroke-width="6" />
+              </svg>
+            </div>
+            <div class="poster-copy">
+              <p class="poster-title">Tiny watch party court.</p>
+              <p>
+                Dhea gets the remote. Joshua gets one humble request: tell him
+                whether episode one survives the review.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel" aria-labelledby="quizTitle">
+        <div class="section-head">
+          <div>
+            <p class="kicker">one question quiz</p>
+            <h2 id="quizTitle">The Episode-One Approval Board</h2>
+          </div>
+          <p class="micro">Choose one review. No long essay required.</p>
+        </div>
+
+        <div class="quiz">
+          <p class="question">
+            If Dhea watches episode one, what is the official verdict?
+          </p>
+          <div class="answers">
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Review filed: episode one is approved, and Lucifer may proceed to the next round of British-accent judgment."
+            >
+              <strong>A. Approved</strong>
+              <span>Lucifer gets one more episode and a polite nod from Dhea.</span>
+            </button>
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Review filed: episode one is suspiciously charming, but Dhea requires snacks and further evidence."
+            >
+              <strong>B. Needs snacks</strong>
+              <span>Not rejected. Just under delicious investigation.</span>
+            </button>
+            <button
+              class="answer"
+              type="button"
+              data-verdict="Review filed: Joshua's recommendation survives only if he remembers the plot better next time."
+            >
+              <strong>C. Memory penalty</strong>
+              <span>Joshua may continue, but must stop forgetting his own pitch.</span>
+            </button>
+          </div>
+          <div class="verdict" id="verdict" aria-live="polite">
+            Awaiting Dhea's episode-one review. The remote is in very capable hands.
+          </div>
+          <div class="actions" id="answerActions" hidden>
+            <a class="button" id="sendAnswer" href="mailto:joshuajian93@gmail.com">Send review to Joshua</a>
+            <button class="button soft" id="copyAnswer" type="button">Copy review</button>
+            <span class="status" id="answerStatus" aria-live="polite">Pick a review first.</span>
+          </div>
+        </div>
+
+        <div class="chat-strip" aria-label="Tiny memory notes">
+          <div class="memory-card">Memory note: Joshua asked for the episode-one report.</div>
+          <div class="memory-card">Vibe note: midnight with friends usually means the night was good.</div>
+          <div class="memory-card">Pressure note: reply fast? absolutely not required.</div>
+        </div>
+      </section>
+
+      <footer>Verdict: tiny break granted.</footer>
+    </main>
+
+    <script>
+      const key = "dhea-episode-answer-v1";
+      const joshEmail = "joshuajian93@gmail.com";
+      const answers = [...document.querySelectorAll(".answer")];
+      const verdict = document.querySelector("#verdict");
+      const answerActions = document.querySelector("#answerActions");
+      const sendAnswer = document.querySelector("#sendAnswer");
+      const copyAnswer = document.querySelector("#copyAnswer");
+      const answerStatus = document.querySelector("#answerStatus");
+
+      function answerLabel(button) {
+        return button.querySelector("strong").textContent.replace(/^[A-C]\.\s*/, "").trim();
+      }
+
+      function buildAnswer(button) {
+        const label = answerLabel(button);
+        const ruling = button.dataset.verdict || "";
+        return {
+          label,
+          ruling,
+          body: [
+            "Joshua, Dhea's episode-one review is:",
+            label,
+            "",
+            ruling,
+            "",
+            "Filed from Dhea's Tiny Episode Break."
+          ].join("\n")
+        };
+      }
+
+      function getSavedAnswer() {
+        try {
+          return JSON.parse(localStorage.getItem(key) || "null");
+        } catch {
+          return null;
+        }
+      }
+
+      function updateActions(answer, status = "Ready to send to Joshua.") {
+        const subject = encodeURIComponent("Dhea's episode-one review");
+        sendAnswer.href = `mailto:${joshEmail}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
+        answerActions.hidden = false;
+        answerStatus.textContent = status;
+      }
+
+      function setAnswer(button, shouldSave = true) {
+        const answer = buildAnswer(button);
+        answers.forEach((option) => option.classList.toggle("is-picked", option === button));
+        verdict.textContent = answer.ruling;
+        if (shouldSave) localStorage.setItem(key, JSON.stringify(answer));
+        updateActions(answer);
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.setAttribute("readonly", "");
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.append(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+
+      answers.forEach((button) => {
+        button.addEventListener("click", () => setAnswer(button));
+      });
+
+      copyAnswer.addEventListener("click", async () => {
+        const answer = getSavedAnswer();
+        if (!answer) {
+          answerStatus.textContent = "Pick a review first.";
+          return;
+        }
+
+        try {
+          await copyText(answer.body);
+          answerStatus.textContent = "Copied. Joshua can receive the review.";
+        } catch {
+          answerStatus.textContent = "Copy failed. Use Send review instead.";
+        }
+      });
+
+      const savedAnswer = getSavedAnswer();
+      if (savedAnswer) {
+        const savedButton = answers.find((button) => answerLabel(button) === savedAnswer.label);
+        if (savedButton) {
+          setAnswer(savedButton, false);
+          answerStatus.textContent = "Saved here. Tap send so Joshua sees it.";
+        } else {
+          verdict.textContent = savedAnswer.ruling;
+          updateActions(savedAnswer, "Saved here. Tap send so Joshua sees it.");
+        }
+      }
+    </script>
+  </body>
+</html>
