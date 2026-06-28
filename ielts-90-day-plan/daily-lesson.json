@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-06-27",
-  "seedDateKey": "2026-06-27",
+  "dateKey": "2026-06-28",
+  "seedDateKey": "2026-06-28",
   "source": "workflow",
   "vocab": {
     "category": "writing",
-    "term": "substantial",
-    "zh": "大量的；重要的",
-    "simpleEn": "large enough to matter",
-    "simpleZh": "数量或影响大到值得重视。",
-    "exampleEn": "Online learning can save students a substantial amount of time.",
-    "exampleZh": "线上学习可以为学生节省大量时间。",
-    "upgradeEn": "Use substantial instead of very big when describing impact, cost, or change.",
-    "upgradeZh": "描述影响、成本或变化时，用 substantial 比 very big 更像雅思表达。"
+    "term": "mitigate",
+    "zh": "减轻；缓解",
+    "simpleEn": "to make a problem less serious",
+    "simpleZh": "让问题没那么严重。",
+    "exampleEn": "Governments can mitigate traffic congestion by improving public transport.",
+    "exampleZh": "政府可以通过改善公共交通来缓解交通拥堵。",
+    "upgradeEn": "Use mitigate with problems: mitigate stress, risk, pressure, or pollution.",
+    "upgradeZh": "mitigate 常搭配问题：stress、risk、pressure、pollution。"
   },
   "cycle": {
-    "number": 14,
+    "number": 15,
     "phase": 3,
-    "titleEn": "Full writing practice",
-    "titleZh": "完整写作练习",
-    "summaryEn": "Write Task 1 and Task 2 under time, then improve the weakest paragraph.",
-    "summaryZh": "限时写完 Task 1 和 Task 2，再修改最弱的一段。",
+    "titleEn": "Final review and calm",
+    "titleZh": "最后复习与稳定心态",
+    "summaryEn": "Light review, good sleep, and simple answers on exam day.",
+    "summaryZh": "轻复习、睡好觉，考试当天把答案写得简单清楚。",
     "focusWords": [
-      "task response / 任务回应",
-      "paragraph / 段落",
-      "band / 分数档",
-      "polish / 打磨"
+      "final / 最后",
+      "calm / 冷静",
+      "simple / 简单",
+      "confidence / 自信"
     ]
   },
   "frame": {
-    "slot": "Speaking / 口语",
-    "en": "What I mean is...",
-    "zh": "我的意思是...",
-    "useEn": "Use this to answer clearly and naturally.",
-    "useZh": "用来让口语回答更清楚自然。"
+    "slot": "Task 1 / 小作文",
+    "en": "The overall trend is...",
+    "zh": "总体趋势是...",
+    "useEn": "Use in graph and chart descriptions.",
+    "useZh": "适合图表描述和趋势题。"
   },
   "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
   "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"substantial\" using What I mean is...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"substantial\" 和 我的意思是... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"mitigate\" using The overall trend is...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"mitigate\" 和 总体趋势是... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
