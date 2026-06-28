@@ -20,6 +20,7 @@
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#products">Offer</a>
         <a href="#free-plan">Diagnostic</a>
+        <a href="#find-tutor">Find a tutor</a>
         <a href="#pricing">Pricing</a>
         <a href="#mistake-memory">Recovery loop</a>
         <a href="#faq">FAQ</a>
@@ -37,7 +38,7 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#free-plan">Build 7-day plan</a>
-            <a class="button secondary" href="#pricing">See pricing</a>
+            <a class="button secondary" href="#find-tutor">Find a tutor</a>
           </div>
           <div class="status-row">
             <span id="leadCaptureStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Parent brief</span>
@@ -52,20 +53,18 @@
           </div>
         </div>
 
-        <aside class="paper-studio">
-          <div class="paper-studio-head">
+        <aside class="paper-studio hero-diagnostic-visual" aria-label="Weak topic recovery visual">
+          <figure class="premium-visual">
+            <img src="./assets/weak-topic-recovery-hero.svg" alt="Premium IC Educate diagnostic dashboard showing weak topic detection and a seven day recovery plan" />
+          </figure>
+          <div class="hero-insight-card">
             <span class="tag">Parent view</span>
             <h2>A clean recovery plan, not another messy worksheet dump.</h2>
-            <p>The free diagnostic gives parents confidence. The paid path turns the selected gaps into a complete paper pack.</p>
-          </div>
-          <ul class="clean-list">
-            <li>Multi-subject and multi-chapter selection</li>
-            <li>7-day parent recovery plan with daily focus</li>
-            <li>Paid PDF paper, answer key, and redo loop</li>
-          </ul>
-          <div class="conversion-actions">
-            <a class="button primary" href="#free-plan">Start diagnostic</a>
-            <a class="button secondary" href="#pricing">See pricing</a>
+            <p>The diagnostic gives parents confidence, then turns selected gaps into a tutor-ready brief or a complete paper pack.</p>
+            <div class="conversion-actions">
+              <a class="button primary" href="#free-plan">Start diagnostic</a>
+              <a class="button secondary" href="#find-tutor">Find a tutor</a>
+            </div>
           </div>
         </aside>
       </section>
@@ -143,11 +142,11 @@
 
         <div class="lead-studio">
           <figure class="lead-visual">
-            <img src="./assets/materials-preview-BxrShBP-.png" alt="Open exam papers and study materials on a desk" />
+            <img src="./assets/seven-day-recovery-board.svg" alt="Seven day recovery plan board with daily actions and tutor handoff" />
             <figcaption>
-              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-worksheet"></use></svg> Worksheet</span>
-              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Notes</span>
-              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Revise</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Diagnose</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-notes"></use></svg> Fix</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-repeat"></use></svg> Retest</span>
             </figcaption>
           </figure>
 
@@ -267,6 +266,37 @@
         </div>
       </section>
 
+      <section id="find-tutor" class="section-band tutor-match-section">
+        <div class="tutor-match-copy">
+          <p class="eyebrow">Tutor handoff</p>
+          <h2>Find a tutor with the weak-topic brief already prepared.</h2>
+          <p>
+            Parents should not have to explain the problem from scratch. The diagnostic turns weak chapters, missed steps, and the 7-day plan into a clean tutor brief.
+          </p>
+          <div class="diagnostic-card" aria-label="Tutor handoff flow">
+            <div>
+              <strong>1. Share the diagnostic</strong>
+              <span>Subject, weak chapters, and parent notes are already structured.</span>
+            </div>
+            <div>
+              <strong>2. Match the session focus</strong>
+              <span>The tutor starts with the exact method gap, not generic revision.</span>
+            </div>
+            <div>
+              <strong>3. Continue the recovery loop</strong>
+              <span>Missed questions feed the next paper and the next lesson.</span>
+            </div>
+          </div>
+          <div class="conversion-actions">
+            <a class="button primary" href="#free-plan">Build tutor brief</a>
+            <a class="button secondary" href="./ai-tutor-prompts.html">Open AI tutor prompts</a>
+          </div>
+        </div>
+        <figure class="tutor-match-visual">
+          <img src="./assets/tutor-match-visual.svg" alt="Tutor match handoff visual showing a weak topic brief becoming a tutor session plan" />
+        </figure>
+      </section>
+
       <section id="pricing" class="section-band">
         <div class="section-heading compact">
           <p class="eyebrow">Pricing</p>
@@ -299,7 +329,7 @@
 
         <div class="conversion-actions">
           <a class="button primary" href="#free-plan">Start free plan</a>
-          <a class="button secondary" href="#faq">Read FAQ</a>
+          <a class="button secondary" href="#find-tutor">Find a tutor</a>
         </div>
       </section>
 

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
+  <title id="title">Find a tutor handoff visual</title>
+  <desc id="desc">A diagnostic result flowing into a tutor match card with lesson focus and parent notes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf2"/>
+      <stop offset=".52" stop-color="#eef7ff"/>
+      <stop offset="1" stop-color="#fff2f8"/>
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241b2f"/>
+      <stop offset=".62" stop-color="#2f3b74"/>
+      <stop offset="1" stop-color="#0f8b6f"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8578a"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#241b2f" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="1100" height="760" rx="54" fill="url(#bg)"/>
+  <circle cx="150" cy="120" r="156" fill="#e8578a" opacity=".13"/>
+  <circle cx="960" cy="122" r="170" fill="#2563eb" opacity=".13"/>
+  <circle cx="900" cy="650" r="190" fill="#0f8b6f" opacity=".12"/>
+  <g filter="url(#shadow)">
+    <rect x="78" y="84" width="414" height="568" rx="38" fill="#ffffff" fill-opacity=".82" stroke="#ffffff" stroke-width="3"/>
+    <rect x="608" y="84" width="414" height="568" rx="38" fill="#ffffff" fill-opacity=".82" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <g transform="translate(122 132)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="2" fill="#2563eb">DIAGNOSTIC</text>
+    <text x="0" y="48" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#241b2f">Weak topic brief</text>
+    <rect x="0" y="84" width="326" height="76" rx="22" fill="#fff2f7" stroke="#f4cadc"/>
+    <text x="24" y="116" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#c73d72">Focus</text>
+    <text x="24" y="142" font-family="Arial, sans-serif" font-size="21" font-weight="900" fill="#241b2f">Ratio word problems</text>
+    <rect x="0" y="180" width="326" height="76" rx="22" fill="#eef7ff" stroke="#c8dcff"/>
+    <text x="24" y="212" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#2563eb">Pattern</text>
+    <text x="24" y="238" font-family="Arial, sans-serif" font-size="21" font-weight="900" fill="#241b2f">Sets equation too late</text>
+    <rect x="0" y="276" width="326" height="76" rx="22" fill="#effaf6" stroke="#b9e7d7"/>
+    <text x="24" y="308" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#0f8b6f">Next action</text>
+    <text x="24" y="334" font-family="Arial, sans-serif" font-size="21" font-weight="900" fill="#241b2f">One tutor session</text>
+    <g transform="translate(0 394)">
+      <rect width="326" height="86" rx="26" fill="url(#primary)"/>
+      <text x="28" y="38" font-family="Arial, sans-serif" font-size="18" font-weight="900" fill="#ffffff">Parent-ready summary</text>
+      <text x="28" y="64" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#dce7ff">No guessing what to ask the tutor.</text>
+    </g>
+  </g>
+  <g transform="translate(515 330)">
+    <path d="M0 50h70" stroke="#241b2f" stroke-opacity=".22" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="88" cy="50" r="30" fill="url(#pulse)"/>
+    <path d="M78 50h20M88 40v20" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M118 50h70" stroke="#241b2f" stroke-opacity=".22" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(652 132)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="2" fill="#0f8b6f">TUTOR MATCH</text>
+    <text x="0" y="48" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#241b2f">Recovery coach</text>
+    <g transform="translate(0 90)">
+      <circle cx="72" cy="72" r="72" fill="url(#pulse)"/>
+      <circle cx="72" cy="60" r="28" fill="#fff4dc"/>
+      <path d="M24 132c16-36 48-54 96-54s80 18 96 54" transform="translate(-24 -10)" fill="#ffffff" opacity=".86"/>
+      <rect x="168" y="24" width="180" height="34" rx="17" fill="#effaf6"/>
+      <text x="188" y="47" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#0f8b6f">Math specialist</text>
+      <rect x="168" y="72" width="214" height="34" rx="17" fill="#eef7ff"/>
+      <text x="188" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#2563eb">7-day reset ready</text>
+    </g>
+    <g transform="translate(0 252)">
+      <rect width="326" height="226" rx="30" fill="#241b2f"/>
+      <text x="28" y="44" font-family="Arial, sans-serif" font-size="15" font-weight="900" letter-spacing="2" fill="#ffcee0">SESSION PLAN</text>
+      <text x="28" y="86" font-family="Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff">Teach, drill, retest</text>
+      <g transform="translate(30 116)">
+        <circle cx="12" cy="12" r="12" fill="#0f8b6f"/>
+        <text x="36" y="18" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff">Explain the weak method</text>
+      </g>
+      <g transform="translate(30 154)">
+        <circle cx="12" cy="12" r="12" fill="#f59e0b"/>
+        <text x="36" y="18" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff">Redo missed question type</text>
+      </g>
+      <g transform="translate(30 192)">
+        <circle cx="12" cy="12" r="12" fill="#e8578a"/>
+        <text x="36" y="18" font-family="Arial, sans-serif" font-size="16" font-weight="800" fill="#ffffff">Update the next paper</text>
+      </g>
+    </g>
+  </g>
+</svg>

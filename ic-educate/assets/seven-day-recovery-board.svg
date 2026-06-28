@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Seven day recovery plan board</title>
+  <desc id="desc">A premium study plan board with seven focused recovery days and parent notes.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf2"/>
+      <stop offset=".55" stop-color="#f0f8ff"/>
+      <stop offset="1" stop-color="#fff2f7"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#241b2f"/>
+      <stop offset="1" stop-color="#263d75"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8578a"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="20" flood-color="#241b2f" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="920" height="1120" rx="56" fill="url(#paper)"/>
+  <circle cx="760" cy="146" r="160" fill="#2563eb" opacity=".12"/>
+  <circle cx="126" cy="980" r="190" fill="#e8578a" opacity=".13"/>
+  <g filter="url(#shadow)">
+    <rect x="76" y="76" width="768" height="968" rx="42" fill="#ffffff" fill-opacity=".78" stroke="#ffffff" stroke-width="3"/>
+  </g>
+  <g transform="translate(124 124)">
+    <rect width="672" height="170" rx="34" fill="url(#dark)"/>
+    <text x="40" y="60" font-family="Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="2" fill="#ffcee0">PARENT DIAGNOSTIC</text>
+    <text x="40" y="108" font-family="Arial, sans-serif" font-size="42" font-weight="900" fill="#ffffff">7-day recovery plan</text>
+    <text x="40" y="142" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#dce7ff">From weak topic to tutor-ready action brief.</text>
+    <circle cx="590" cy="86" r="48" fill="#ffffff" fill-opacity=".14"/>
+    <text x="590" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#ffffff">7</text>
+  </g>
+  <g transform="translate(124 334)">
+    <g>
+      <rect width="318" height="120" rx="26" fill="#fff7ec" stroke="#f4dbc0"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#a16207">DAY 1</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Diagnose</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">Find the exact weak step.</text>
+    </g>
+    <g transform="translate(354)">
+      <rect width="318" height="120" rx="26" fill="#fff2f7" stroke="#f3cade"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#c73d72">DAY 2</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Fix method</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">One clean worked example.</text>
+    </g>
+    <g transform="translate(0 146)">
+      <rect width="318" height="120" rx="26" fill="#eef7ff" stroke="#c8dcff"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#2563eb">DAY 3</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Target drill</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">Short set, fast feedback.</text>
+    </g>
+    <g transform="translate(354 146)">
+      <rect width="318" height="120" rx="26" fill="#effaf6" stroke="#b9e7d7"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#0f8b6f">DAY 4</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Apply</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">Mixed questions, same pattern.</text>
+    </g>
+    <g transform="translate(0 292)">
+      <rect width="318" height="120" rx="26" fill="#fff7ec" stroke="#f4dbc0"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#a16207">DAY 5</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Speed check</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">Careless mistake filter.</text>
+    </g>
+    <g transform="translate(354 292)">
+      <rect width="318" height="120" rx="26" fill="#f5f3ff" stroke="#ddd6fe"/>
+      <text x="28" y="42" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#5b4ad1">DAY 6</text>
+      <text x="28" y="72" font-family="Arial, sans-serif" font-size="25" font-weight="900" fill="#241b2f">Redo misses</text>
+      <text x="28" y="98" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#745f69">No notes, no guessing.</text>
+    </g>
+    <g transform="translate(0 438)">
+      <rect width="672" height="136" rx="30" fill="url(#accent)"/>
+      <text x="34" y="48" font-family="Arial, sans-serif" font-size="15" font-weight="900" letter-spacing="2" fill="#ffffff" opacity=".8">DAY 7</text>
+      <text x="34" y="84" font-family="Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff">Retest + tutor handoff</text>
+      <text x="34" y="112" font-family="Arial, sans-serif" font-size="17" font-weight="700" fill="#ffffff" opacity=".82">Parent summary, next paper brief, and tutor focus.</text>
+    </g>
+  </g>
+  <g transform="translate(124 944)">
+    <rect width="672" height="54" rx="27" fill="#ffffff" fill-opacity=".78"/>
+    <circle cx="36" cy="27" r="14" fill="#0f8b6f"/>
+    <path d="M29 27l5 5 10-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="64" y="34" font-family="Arial, sans-serif" font-size="17" font-weight="800" fill="#241b2f">Simple enough for parents. Specific enough for tutors.</text>
+  </g>
+</svg>

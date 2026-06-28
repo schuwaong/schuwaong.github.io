@@ -1443,6 +1443,55 @@ h2 {
   font-size: clamp(1.7rem, 3vw, 2.55rem);
 }
 
+.hero-diagnostic-visual {
+  align-self: center;
+  padding: 12px;
+  gap: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 250, 242, 0.72)),
+    radial-gradient(circle at 82% 12%, rgba(37, 99, 235, 0.16), transparent 34%);
+}
+
+.premium-visual,
+.tutor-match-visual {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 22px 50px rgba(54, 37, 54, 0.12);
+}
+
+.premium-visual::after,
+.tutor-match-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 38%, rgba(255, 255, 255, 0.18));
+}
+
+.premium-visual img,
+.tutor-match-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-insight-card {
+  padding: 14px 16px 16px;
+}
+
+.hero-insight-card h2 {
+  margin-bottom: 8px;
+}
+
+.hero-insight-card p {
+  margin-bottom: 14px;
+}
+
 .section-band {
   border-radius: 28px;
   border-color: rgba(255, 255, 255, 0.76);
@@ -1503,6 +1552,9 @@ h2 {
 
 .lead-visual {
   border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 250, 242, 0.78));
+  box-shadow: 0 24px 52px rgba(54, 37, 54, 0.12);
 }
 
 .lead-form {
@@ -1828,6 +1880,30 @@ textarea {
   background: rgba(255, 255, 255, 0.78);
 }
 
+.tutor-match-section {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(18px, 3vw, 30px);
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(37, 99, 235, 0.13), transparent 28%),
+    linear-gradient(135deg, rgba(255, 250, 242, 0.94), rgba(239, 248, 255, 0.9));
+}
+
+.tutor-match-copy {
+  display: grid;
+  align-content: center;
+}
+
+.tutor-match-copy h2 {
+  max-width: 680px;
+}
+
+.tutor-match-visual {
+  border-radius: 30px;
+}
+
 .button,
 button {
   border-radius: 999px;
@@ -1837,6 +1913,7 @@ button {
   .hero,
   .lead-section,
   .lead-studio,
+  .tutor-match-section,
   .recovery-preview-head,
   .recovery-next {
     grid-template-columns: 1fr;
@@ -1882,5 +1959,14 @@ button {
 
   .lead-visual {
     display: none;
+  }
+
+  .premium-visual,
+  .tutor-match-visual {
+    border-radius: 18px;
+  }
+
+  .hero-insight-card {
+    padding: 8px 4px 4px;
   }
 }
