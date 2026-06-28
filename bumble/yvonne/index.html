@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yvonne's Tiny Night Garden</title>
+    <meta name="description" content="A tiny personalized follow-up page for Yvonne." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Manrope:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #18213b;
+        --muted: color-mix(in srgb, #18213b 58%, white);
+        --a: #8fd3ff;
+        --b: #ffd166;
+        --c: #b8a1ff;
+        --paper: rgba(255, 252, 244, 0.9);
+        --solid: #fffaf0;
+        --line: color-mix(in srgb, #18213b 17%, transparent);
+        --shadow: 0 28px 90px color-mix(in srgb, #18213b 24%, transparent);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Manrope", system-ui, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--a) 48%, transparent), transparent 18rem),
+          radial-gradient(circle at 86% 10%, color-mix(in srgb, var(--b) 50%, transparent), transparent 18rem),
+          radial-gradient(circle at 46% 108%, color-mix(in srgb, var(--c) 36%, transparent), transparent 22rem),
+          linear-gradient(135deg, #fff8df 0%, #fffaf7 48%, color-mix(in srgb, var(--c) 18%, white) 100%);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
+          linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: radial-gradient(circle at 50% 28%, black, transparent 72%);
+        pointer-events: none;
+      }
+
+      button, input { font: inherit; }
+
+      .shell {
+        width: min(1060px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 42px;
+      }
+
+      .hero, .panel {
+        border: 4px solid rgba(255, 255, 255, 0.82);
+        border-radius: 34px;
+        background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,250,240,.78));
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(310px, .88fr);
+        gap: 28px;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 14px;
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255,255,255,.72);
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .badge::before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: var(--a);
+        box-shadow: 17px 0 0 var(--b), 34px 0 0 var(--c);
+      }
+
+      h1, h2 {
+        margin: 0;
+        font-family: "Bagel Fat One", Georgia, serif;
+        font-weight: 400;
+        line-height: .92;
+        letter-spacing: -.03em;
+      }
+
+      h1 {
+        max-width: 10ch;
+        margin-top: 16px;
+        font-size: clamp(3.25rem, 9vw, 6.4rem);
+      }
+
+      h2 {
+        font-size: clamp(2.15rem, 5vw, 3.5rem);
+      }
+
+      .lede {
+        max-width: 42rem;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.12rem;
+        line-height: 1.72;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .chip {
+        padding: 10px 14px;
+        border: 2px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255,255,255,.75);
+        font-weight: 900;
+        box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 8%, transparent);
+      }
+
+      .art-card {
+        position: relative;
+        min-height: 480px;
+        display: grid;
+        align-content: space-between;
+        gap: 18px;
+        padding: 20px;
+        border: 4px solid var(--ink);
+        border-radius: 30px;
+        background:
+          radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--b) 52%, transparent), transparent 10rem),
+          linear-gradient(145deg, color-mix(in srgb, var(--a) 25%, white), var(--solid));
+        box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 14%, transparent);
+        overflow: hidden;
+      }
+
+      .art-card::before, .art-card::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        opacity: .45;
+        animation: drift 8s ease-in-out infinite;
+      }
+
+      .art-card::before {
+        right: -46px;
+        top: -36px;
+        background: var(--a);
+      }
+
+      .art-card::after {
+        left: -52px;
+        bottom: 46px;
+        background: var(--c);
+        animation-delay: -2.6s;
+      }
+
+      .art-window {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        min-height: 305px;
+        border: 3px solid var(--ink);
+        border-radius: 26px;
+        background: rgba(255,255,255,.62);
+        overflow: hidden;
+      }
+
+      .art-window svg {
+        width: min(82%, 310px);
+        transform-origin: 50% 70%;
+        animation: float 4.8s ease-in-out infinite;
+      }
+
+      .poster-copy {
+        position: relative;
+        z-index: 1;
+        padding: 16px;
+        border-radius: 22px;
+        background: rgba(255,255,255,.68);
+      }
+
+      .poster-copy strong {
+        display: block;
+        font-family: "Bagel Fat One", Georgia, serif;
+        font-size: 2rem;
+        line-height: .94;
+      }
+
+      .poster-copy span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .panel {
+        margin-top: 18px;
+        padding: 24px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .kicker {
+        margin: 0 0 7px;
+        color: color-mix(in srgb, var(--a) 70%, var(--ink));
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .micro {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .quiz {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border: 3px solid var(--ink);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,250,240,.92));
+        box-shadow: 12px 12px 0 color-mix(in srgb, var(--ink) 10%, transparent);
+      }
+
+      .question {
+        margin: 0;
+        font-family: "Bagel Fat One", Georgia, serif;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 1;
+      }
+
+      .answers {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .answer {
+        min-height: 132px;
+        padding: 15px;
+        border: 3px solid var(--ink);
+        border-radius: 22px;
+        background: var(--paper);
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+        box-shadow: 7px 7px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+        transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      }
+
+      .answer:hover, .answer:focus-visible, .answer.is-picked {
+        transform: translate(-2px, -2px) rotate(-.5deg);
+        box-shadow: 10px 10px 0 color-mix(in srgb, var(--ink) 15%, transparent);
+      }
+
+      .answer.is-picked {
+        background: color-mix(in srgb, var(--c) 20%, white);
+      }
+
+      .answer strong {
+        display: block;
+        font-family: "Bagel Fat One", Georgia, serif;
+        font-size: 1.48rem;
+        line-height: .96;
+      }
+
+      .answer span {
+        display: block;
+        margin-top: 9px;
+        color: var(--muted);
+        font-weight: 800;
+        line-height: 1.35;
+      }
+
+      .verdict {
+        min-height: 58px;
+        padding: 15px 16px;
+        border: 2px dashed color-mix(in srgb, var(--ink) 25%, transparent);
+        border-radius: 18px;
+        background: rgba(255,255,255,.66);
+        color: var(--muted);
+        font-weight: 900;
+        line-height: 1.55;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .actions[hidden] { display: none; }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 17px;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        background: var(--ink);
+        color: white;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 10px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+      }
+
+      .button.soft {
+        background: white;
+        color: var(--ink);
+      }
+
+      .status {
+        color: var(--muted);
+        font-weight: 900;
+      }
+
+      .memory-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .memory-card {
+        padding: 14px;
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,.68);
+        color: var(--muted);
+        font-weight: 850;
+        line-height: 1.45;
+      }
+
+      footer {
+        padding: 18px 0 0;
+        color: var(--muted);
+        text-align: center;
+        font-weight: 900;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(-1deg); }
+        50% { transform: translateY(-12px) rotate(1.5deg); }
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(12px, 10px) scale(1.06); }
+      }
+
+      @media (max-width: 840px) {
+        .shell { width: min(100% - 18px, 650px); padding-top: 12px; }
+        .hero, .answers, .memory-strip { grid-template-columns: 1fr; }
+        .section-head { display: block; }
+        .art-card { min-height: 420px; }
+      }
+
+      @media (max-width: 480px) {
+        .hero, .panel { padding: 18px; border-radius: 24px; }
+        .art-card { min-height: 390px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="pageTitle">
+        <div>
+          <span class="badge">Yvonne's tiny night garden</span>
+          <h1 id="pageTitle">One little glowing choice.</h1>
+          <p class="lede">A small follow-up for Yvonne: a calm night-garden card, a tiny question, and a way to send Joshua one simple answer if she wants.</p>
+          <div class="chips" aria-label="Tiny page clues">
+            <span class="chip">night garden</span>
+            <span class="chip">one glow card</span>
+            <span class="chip">easy reply</span>
+          </div>
+        </div>
+
+        <aside class="art-card" aria-label="lantern garden illustration">
+          <div class="art-window">
+
+              <svg viewBox="0 0 320 260" role="img" aria-label="Cute lantern garden illustration">
+                <path d="M160 34v42" stroke="#18213b" stroke-width="8" stroke-linecap="round" />
+                <path d="M106 76h108l16 34-16 88H106l-16-88 16-34Z" fill="#8fd3ff" stroke="#18213b" stroke-width="8" />
+                <path d="M118 112h84M118 146h84M118 180h84" stroke="#fff7c7" stroke-width="8" stroke-linecap="round" opacity=".82" />
+                <path d="M118 200c14 28 70 28 84 0" fill="#ffd166" stroke="#18213b" stroke-width="7" />
+                <circle cx="60" cy="72" r="15" fill="#ffd166" />
+                <circle cx="265" cy="78" r="11" fill="#b8a1ff" />
+                <circle cx="248" cy="196" r="18" fill="#ffd166" stroke="#18213b" stroke-width="6" />
+                <path d="M52 198c35-22 58-20 86 0" fill="none" stroke="#b8a1ff" stroke-width="8" stroke-linecap="round" />
+              </svg>
+        
+          </div>
+          <div class="poster-copy">
+            <strong>Lantern Garden.</strong>
+            <span>A tiny custom card for Yvonne, made to feel simple, clean, and a little playful.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel" id="answerPanel" aria-labelledby="quizTitle">
+        <div class="section-head">
+          <div>
+            <p class="kicker">glow rating</p>
+            <h2 id="quizTitle">The Tiny Lantern Board</h2>
+          </div>
+          <p class="micro">Pick the glow level. No complicated essay required.</p>
+        </div>
+
+        <div class="quiz">
+          <p class="question">If Joshua asks Yvonne out, what glow level should the invite have?</p>
+          <div class="answers">
+            <button class="answer" type="button" data-verdict="Yvonne's ruling: soft glow. Joshua should keep the invite calm, thoughtful, and easy.">
+              <strong>A. Soft glow</strong>
+              <span>Calm, thoughtful, not trying too hard.</span>
+            </button>
+            <button class="answer" type="button" data-verdict="Yvonne's ruling: spark mode. Joshua may add a little playful energy.">
+              <strong>B. Spark mode</strong>
+              <span>A little playful energy is allowed.</span>
+            </button>
+            <button class="answer" type="button" data-verdict="Yvonne's ruling: moon delay. Joshua may ask again later with patience.">
+              <strong>C. Moon delay</strong>
+              <span>Cute, but ask again when timing is better.</span>
+            </button>
+          </div>
+          <div class="verdict" id="verdict" aria-live="polite">
+            Awaiting Yvonne's tiny ruling. The board is taking this very seriously.
+          </div>
+          <div class="actions" id="answerActions" hidden>
+            <a class="button" id="sendAnswer" href="mailto:joshuajian93@gmail.com">Send answer to Joshua</a>
+            <button class="button soft" id="copyAnswer" type="button">Copy answer</button>
+            <span class="status" id="answerStatus" aria-live="polite">Pick an answer first.</span>
+          </div>
+        </div>
+
+        <div class="memory-strip" aria-label="Tiny memory cards">
+          <div class="memory-card">Glow note: gentle beats loud.</div>
+          <div class="memory-card">Timing note: patience is attractive.</div>
+          <div class="memory-card">Reply note: only if she feels like it.</div>
+        </div>
+      </section>
+
+      <footer>Verdict: tiny break granted.</footer>
+    </main>
+
+    <script>
+      const key = "yvonne-tiny-answer-v1";
+      const joshEmail = "joshuajian93@gmail.com";
+      const personName = "Yvonne";
+      const answers = [...document.querySelectorAll(".answer")];
+      const verdict = document.querySelector("#verdict");
+      const answerActions = document.querySelector("#answerActions");
+      const sendAnswer = document.querySelector("#sendAnswer");
+      const copyAnswer = document.querySelector("#copyAnswer");
+      const answerStatus = document.querySelector("#answerStatus");
+
+      function answerLabel(button) {
+        return button.querySelector("strong").textContent.replace(/^[A-C]\.\s*/, "").trim();
+      }
+
+      function buildAnswer(button) {
+        const label = answerLabel(button);
+        const ruling = button.dataset.verdict || "";
+        return {
+          label,
+          ruling,
+          body: [
+            `Joshua, ${personName}'s tiny answer is:`,
+            label,
+            "",
+            ruling,
+            "",
+            `Filed from ${personName}'s tiny follow-up page.`
+          ].join("\n")
+        };
+      }
+
+      function getSavedAnswer() {
+        try {
+          return JSON.parse(localStorage.getItem(key) || "null");
+        } catch {
+          return null;
+        }
+      }
+
+      function updateActions(answer, status = "Ready to send to Joshua.") {
+        const subject = encodeURIComponent(`${personName}'s tiny answer`);
+        sendAnswer.href = `mailto:${joshEmail}?subject=${subject}&body=${encodeURIComponent(answer.body)}`;
+        answerActions.hidden = false;
+        answerStatus.textContent = status;
+      }
+
+      function setAnswer(button, shouldSave = true) {
+        const answer = buildAnswer(button);
+        answers.forEach((option) => option.classList.toggle("is-picked", option === button));
+        verdict.textContent = answer.ruling;
+        if (shouldSave) localStorage.setItem(key, JSON.stringify(answer));
+        updateActions(answer);
+      }
+
+      async function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        temp.setAttribute("readonly", "");
+        temp.style.position = "fixed";
+        temp.style.opacity = "0";
+        document.body.append(temp);
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+
+      answers.forEach((button) => {
+        button.addEventListener("click", () => setAnswer(button));
+      });
+
+      copyAnswer.addEventListener("click", async () => {
+        const answer = getSavedAnswer();
+        if (!answer) {
+          answerStatus.textContent = "Pick an answer first.";
+          return;
+        }
+
+        try {
+          await copyText(answer.body);
+          answerStatus.textContent = "Copied. Joshua can receive the ruling.";
+        } catch {
+          answerStatus.textContent = "Copy failed. Use Send answer instead.";
+        }
+      });
+
+      const savedAnswer = getSavedAnswer();
+      if (savedAnswer) {
+        const savedButton = answers.find((button) => answerLabel(button) === savedAnswer.label);
+        if (savedButton) {
+          setAnswer(savedButton, false);
+          answerStatus.textContent = "Saved here. Tap send so Joshua sees it.";
+        } else {
+          verdict.textContent = savedAnswer.ruling;
+          updateActions(savedAnswer, "Saved here. Tap send so Joshua sees it.");
+        }
+      }
+    </script>
+  </body>
+</html>
