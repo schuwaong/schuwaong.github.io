@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-ui-mode="exploratory">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IC Educate Admin Queue</title>
+    <meta
+      name="description"
+      content="Admin queue for IC Educate teacher leads, student tutor requests, matching, and WhatsApp follow-up."
+    />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="IC Educate Admin" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/shared/ui-selector.css" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="admin-page">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="IC Educate home">
+        <span class="brand-mark">IC</span>
+        <span>IC Educate</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./index.html">IC Educate</a>
+        <a href="./find-tutor.html">Tutor Finder</a>
+        <a href="./teachers.html">Teachers</a>
+        <a href="./leads.html">Lead Kit</a>
+        <a href="./hong-kong.html">Hong Kong</a>
+      </nav>
+      <button id="refreshAdminBtn" class="button small primary" type="button">Refresh queue</button>
+    </header>
+
+    <main class="page">
+      <section class="hero admin-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Operator queue</p>
+          <h1>Turn tutor interest into matched WhatsApp follow-ups.</h1>
+          <p class="intro">
+            Pull teacher signups, student requests, local lead-kit notes, and shared Supabase leads into one queue. Work them from new to closed, with top matches ranked by subject, market, location, lesson type, and timing.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="./teachers.html">Recruit teachers</a>
+            <a class="button secondary" href="./find-tutor.html">Find students</a>
+            <a class="button secondary" href="./leads.html">Open lead kit</a>
+          </div>
+          <div class="status-row">
+            <span id="adminBackendStatus" class="chip warn">Local queue ready</span>
+            <span id="adminLeadCount" class="chip">0 leads</span>
+            <span id="adminUpdatedAt" class="chip">Not synced yet</span>
+          </div>
+        </div>
+
+        <aside class="admin-console">
+          <div class="admin-console-head">
+            <span class="tag">Shared database</span>
+            <h2>Supabase admin login</h2>
+            <p class="hint">Optional. The queue works locally now; sign in when your Supabase admin account is ready.</p>
+          </div>
+          <form id="adminLoginForm" class="admin-login-form">
+            <div class="field">
+              <label for="adminEmail">Admin email</label>
+              <input id="adminEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="adminPassword">Password</label>
+              <input id="adminPassword" name="password" type="password" autocomplete="current-password" placeholder="Supabase password" />
+            </div>
+            <div class="button-row">
+              <button id="adminSignInBtn" type="submit">Sign in</button>
+              <button id="adminSignOutBtn" class="secondary-btn" type="button">Sign out</button>
+            </div>
+          </form>
+        </aside>
+      </section>
+
+      <section class="section-band admin-stats-section" aria-label="Queue stats">
+        <div id="adminStats" class="admin-stats-grid"></div>
+      </section>
+
+      <section class="section-band admin-workbench">
+        <div class="section-heading compact">
+          <p class="eyebrow">Daily queue</p>
+          <h2>New, contacted, matched, closed.</h2>
+          <p>
+            Filter the queue, message the right person, and use the match suggestions to decide who gets the next job first.
+          </p>
+        </div>
+
+        <div class="admin-filter-grid">
+          <div class="field">
+            <label for="adminMarketFilter">Market</label>
+            <select id="adminMarketFilter">
+              <option value="all">All markets</option>
+              <option value="malaysia">Malaysia</option>
+              <option value="hongkong">Hong Kong</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="adminTypeFilter">Lead type</label>
+            <select id="adminTypeFilter">
+              <option value="all">All leads</option>
+              <option value="teacher">Teachers</option>
+              <option value="student">Students</option>
+              <option value="parent">Parents</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="adminStatusFilter">Status</label>
+            <select id="adminStatusFilter">
+              <option value="all">All statuses</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="matched">Matched</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="field field-wide">
+            <label for="adminSearchFilter">Search</label>
+            <input id="adminSearchFilter" type="search" placeholder="Name, subject, area, syllabus, phone" />
+          </div>
+        </div>
+
+        <div class="admin-layout">
+          <div>
+            <div class="admin-list-head">
+              <h3>Lead queue</h3>
+              <span id="adminVisibleCount" class="chip">0 visible</span>
+            </div>
+            <div id="adminLeadList" class="admin-lead-list" aria-live="polite"></div>
+          </div>
+
+          <aside id="adminMatchPanel" class="admin-match-panel" aria-live="polite">
+            <span class="tag">Match view</span>
+            <h3>Select a lead</h3>
+            <p class="hint">
+              Pick a student request to see teacher matches, or pick a teacher to see relevant student jobs.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <nav class="page-switcher" aria-label="Site switcher">
+      <a class="chip ghost" href="../index.html">Hub</a>
+      <a class="chip ghost" href="./index.html">IC Educate</a>
+      <a class="chip ghost" href="./admin.html">Admin</a>
+      <a class="chip ghost" href="./teachers.html">Teachers</a>
+      <a class="chip ghost" href="./find-tutor.html">Tutor Finder</a>
+      <a class="chip ghost" href="./leads.html">Lead Kit</a>
+      <a class="chip ghost" href="./hong-kong.html">Hong Kong</a>
+    </nav>
+
+    <script src="./config.js"></script>
+    <script src="./pwa.js"></script>
+    <script src="./admin.js"></script>
+  </body>
+</html>

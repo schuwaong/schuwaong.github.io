@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IC Educate Tutor Finder</title>
+    <meta
+      name="description"
+      content="Looking for a tutor? IC Educate helps students share their subject, level, area, and schedule, then ranks tutor matches and saves the request for follow-up."
+    />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="IC Educate" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="tutor-page">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="IC Educate home">
+        <span class="brand-mark">IC</span>
+        <span>IC Educate</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./index.html#products">Core offer</a>
+        <a href="#tutor-form">Find a tutor</a>
+        <a href="#matches">Tutor matches</a>
+        <a href="./leads.html">Lead kit</a>
+      </nav>
+      <a class="button small primary" href="#tutor-form">Start request</a>
+    </header>
+
+    <main class="page tutor-page-main">
+      <section class="tutor-hero">
+        <div class="tutor-hero-copy">
+          <p class="eyebrow">IC Educate Tutor Finder</p>
+          <h1>Looking for a tutor? Give us the details and get a clean shortlist.</h1>
+          <p class="intro">
+            Tell us the subject, level, area, and lesson type. We'll rank tutors by fit,
+            save the request for follow-up, and keep the handoff simple.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tutor-form">Start request</a>
+            <a class="button secondary" href="#matches">See sample matches</a>
+            <a class="button secondary" href="./leads.html">Open lead kit</a>
+          </div>
+          <div class="status-row">
+            <span class="chip">Subject match</span>
+            <span class="chip">Schedule fit</span>
+            <span class="chip">Area routing</span>
+            <span class="chip">WhatsApp ready</span>
+          </div>
+          <div class="hero-points">
+            <span class="mini-chip">Step 1: details</span>
+            <span class="mini-chip">Step 2: shortlist</span>
+            <span class="mini-chip">Step 3: follow-up</span>
+          </div>
+        </div>
+
+        <aside class="tutor-hero-aside">
+          <figure class="lead-visual tutor-hero-image">
+            <img src="./assets/space-dashboard.svg" alt="Premium tutor finder dashboard visualization" />
+            <figcaption>
+              <span class="chip">DSE</span>
+              <span class="chip">IGCSE</span>
+              <span class="chip">IB</span>
+            </figcaption>
+          </figure>
+          <div class="visual-grid tutor-hero-grid">
+            <figure class="visual-frame">
+              <img src="./assets/space-teacher-orbit.svg" alt="Tutor orbit visualization" />
+            </figure>
+            <figure class="visual-frame">
+              <img src="./assets/space-memory-loop.svg" alt="Mistake memory visualization" />
+            </figure>
+          </div>
+          <article class="tutor-kicker-card">
+            <span class="tag">Fast routing</span>
+            <h2>We match by subject, syllabus, timing, and location.</h2>
+            <p>One request goes into the same queue the marketplace can reuse later.</p>
+            <div class="tutor-kicker-stats">
+              <span class="chip">Malaysia</span>
+              <span class="chip">Hong Kong</span>
+              <span class="chip">Online</span>
+              <span class="chip">Physical</span>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section-band">
+        <div class="section-heading compact">
+          <p class="eyebrow">Why this works</p>
+          <h2>Keep the first request short, then let the matching do the heavy lifting.</h2>
+          <p>That keeps parents and students moving without making them fill a huge form up front.</p>
+        </div>
+        <div class="product-grid">
+          <article class="feature-card accent-blue">
+            <span class="tag">Step 1</span>
+            <h3>Share the basics</h3>
+            <p>Subject, topic, level, syllabus, area, and lesson type are enough to begin.</p>
+          </article>
+          <article class="feature-card accent-green">
+            <span class="tag">Step 2</span>
+            <h3>See strong tutor fits</h3>
+            <p>Matches are ranked by subject, timing, and location so the shortlist feels useful.</p>
+          </article>
+          <article class="feature-card accent-amber">
+            <span class="tag">Step 3</span>
+            <h3>Save and route</h3>
+            <p>The request is stored locally and can be pushed into the lead flow when needed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tutor-form" class="section-band tutor-intake">
+        <div class="section-heading compact">
+          <p class="eyebrow">Tutor request</p>
+          <h2>Input your details to find a tutor.</h2>
+          <p>Fill this in once, and IC Educate will build a ranked shortlist for you.</p>
+        </div>
+
+        <div class="tutor-intake-grid">
+          <form id="tutorRequestForm" class="lead-form tutor-request-form">
+            <span class="tag">Find my tutor</span>
+            <div class="grid">
+              <div class="field">
+                <label for="tutorName">Student / parent name</label>
+                <input id="tutorName" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="tutorPhone">WhatsApp number</label>
+                <input id="tutorPhone" type="text" placeholder="+60..." />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="tutorSubject">Subject</label>
+                <input id="tutorSubject" type="text" placeholder="Mathematics" required />
+              </div>
+              <div class="field">
+                <label for="tutorTopic">Topic</label>
+                <input id="tutorTopic" type="text" placeholder="Algebra, fractions, waves" />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="tutorSyllabus">Syllabus</label>
+                <select id="tutorSyllabus">
+                  <option value="">Any syllabus</option>
+                  <option>Cambridge IGCSE</option>
+                  <option>HK DSE</option>
+                  <option>IB</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="tutorLevel">Level</label>
+                <input id="tutorLevel" type="text" placeholder="IGCSE, Junior, Form 5" required />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="tutorArea">Area</label>
+                <input id="tutorArea" type="text" placeholder="Kuala Lumpur, Petaling Jaya, Kowloon" />
+              </div>
+              <div class="field">
+                <label for="tutorMode">Lesson type</label>
+                <select id="tutorMode">
+                  <option value="online">Online</option>
+                  <option value="physical">Physical</option>
+                  <option value="both">Either</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="tutorTime">Preferred time</label>
+                <select id="tutorTime">
+                  <option value="">Any time</option>
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                  <option>Evening</option>
+                  <option>Weekend</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="tutorBudget">Budget</label>
+                <input id="tutorBudget" type="text" placeholder="RM80/hr" />
+              </div>
+            </div>
+            <div class="field field-wide">
+              <label for="tutorNote">What should the tutor focus on?</label>
+              <textarea
+                id="tutorNote"
+                rows="4"
+                placeholder="Example: exam drilling, weak topics, homework help, or confidence building."
+              ></textarea>
+            </div>
+            <label class="check-row consent-row">
+              <input id="tutorConsent" type="checkbox" />
+              <span>
+                <strong>WhatsApp consent</strong>
+                <small>Allow IC Educate to use this number to send tutor matches and follow-up.</small>
+              </span>
+            </label>
+            <div class="button-row">
+              <button id="tutorRequestBtn" type="submit">Find my tutor</button>
+              <button id="tutorSampleBtn" type="button" class="secondary-btn">Use sample details</button>
+              <button id="tutorResetBtn" type="button" class="secondary-btn">Clear form</button>
+            </div>
+            <p id="tutorRequestStatus" class="hint" aria-live="polite">
+              Your request will be saved locally and can be routed into the IC Educate lead queue.
+            </p>
+          </form>
+
+          <div id="matches" class="tutor-results-shell" aria-live="polite">
+            <article id="tutorSummary" class="tutor-summary-card">
+              <span class="tag">Tutor preview</span>
+              <h3>Tell us what you need to see a shortlist.</h3>
+              <p class="hint">We'll show tutor matches here once the form is filled in.</p>
+              <div class="result-links">
+                <span class="chip">Subject</span>
+                <span class="chip">Level</span>
+                <span class="chip">Area</span>
+                <span class="chip">Time</span>
+              </div>
+            </article>
+
+            <div id="tutorMatches" class="tutor-match-grid"></div>
+
+            <article class="tutor-next-step">
+              <div>
+                <span class="tag">Next step</span>
+                <h3>Send the request to WhatsApp or keep it in the queue.</h3>
+                <p>The same request can be reused by the lead kit and the main marketplace.</p>
+              </div>
+              <div class="button-row">
+                <a
+                  id="tutorWhatsappLink"
+                  class="button primary"
+                  href="https://wa.me/60178265300"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open WhatsApp route
+                </a>
+                <button id="copyTutorBriefBtn" type="button" class="secondary-btn" hidden>Copy brief</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="page-switcher" aria-label="Site switcher">
+      <a class="chip ghost" href="../index.html">Hub</a>
+      <a class="chip ghost" href="./index.html">IC Educate</a>
+      <a class="chip ghost" href="./admin.html">Admin</a>
+      <a class="chip ghost" href="./find-tutor.html">Tutor Finder</a>
+      <a class="chip ghost" href="./leads.html">Lead Kit</a>
+      <a class="chip ghost" href="./hong-kong.html">Hong Kong</a>
+    </nav>
+
+    <script src="./pwa.js"></script>
+    <script src="./find-tutor.js"></script>
+  </body>
+</html>

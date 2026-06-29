@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Premium space dashboard">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060a17" />
+      <stop offset="52%" stop-color="#0b1630" />
+      <stop offset="100%" stop-color="#03060d" />
+    </linearGradient>
+    <linearGradient id="halo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#68e6ff" stop-opacity="0.42" />
+      <stop offset="55%" stop-color="#68e6ff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#68e6ff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101c38" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#0b1325" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04" />
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#54d9ff" />
+      <stop offset="100%" stop-color="#6e92ff" />
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#30e0a0" />
+      <stop offset="100%" stop-color="#82f7c3" />
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb84d" />
+      <stop offset="100%" stop-color="#ffde93" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <rect width="1600" height="1000" fill="url(#halo)" />
+  <g opacity="0.18" stroke="#9db1d4" stroke-width="1">
+    <path d="M120 120H1480M120 220H1480M120 320H1480M120 420H1480M120 520H1480M120 620H1480M120 720H1480M120 820H1480" />
+    <path d="M240 80V920M460 80V920M680 80V920M900 80V920M1120 80V920M1340 80V920" />
+  </g>
+  <g opacity="0.25" fill="none" stroke="#69e6ff" stroke-width="2">
+    <circle cx="1040" cy="300" r="220" />
+    <circle cx="1040" cy="300" r="300" />
+    <circle cx="1040" cy="300" r="380" />
+  </g>
+  <g filter="url(#glow)" opacity="0.7" fill="#56d9ff">
+    <circle cx="1130" cy="240" r="5" />
+    <circle cx="1240" cy="190" r="4" />
+    <circle cx="1360" cy="258" r="4" />
+    <circle cx="1184" cy="410" r="4" />
+    <circle cx="1328" cy="380" r="4" />
+  </g>
+  <g transform="translate(170 200)">
+    <rect x="0" y="0" width="520" height="560" rx="34" fill="url(#panel)" stroke="rgba(145,170,215,0.22)" stroke-width="2"/>
+    <rect x="34" y="34" width="452" height="82" rx="24" fill="url(#card)" stroke="rgba(255,255,255,0.08)" />
+    <rect x="34" y="134" width="210" height="186" rx="26" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" />
+    <rect x="268" y="134" width="218" height="186" rx="26" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" />
+    <rect x="34" y="344" width="452" height="182" rx="26" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" />
+    <circle cx="82" cy="76" r="15" fill="url(#blue)" />
+    <circle cx="128" cy="76" r="15" fill="url(#green)" />
+    <circle cx="174" cy="76" r="15" fill="url(#amber)" />
+    <text x="214" y="85" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">Premium workspace</text>
+
+    <g transform="translate(58 172)">
+      <text x="0" y="0" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">7-day plan</text>
+      <text x="0" y="34" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="18">free starter</text>
+      <rect x="0" y="64" width="126" height="18" rx="9" fill="#153051" />
+      <rect x="0" y="96" width="96" height="18" rx="9" fill="#153051" />
+      <rect x="0" y="128" width="140" height="18" rx="9" fill="#153051" />
+    </g>
+
+    <g transform="translate(290 170)">
+      <text x="0" y="0" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">Exam PDFs</text>
+      <text x="0" y="34" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="18">paid core</text>
+      <path d="M0 108h126l-24-22-26 10-22-14-26 22-28-10" fill="none" stroke="url(#blue)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="0" cy="108" r="8" fill="#54d9ff" />
+      <circle cx="48" cy="82" r="8" fill="#6e92ff" />
+      <circle cx="94" cy="96" r="8" fill="#30e0a0" />
+    </g>
+
+    <g transform="translate(58 392)">
+      <text x="0" y="0" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">Mistake memory</text>
+      <text x="0" y="34" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="18">next-set loop</text>
+      <rect x="0" y="62" width="150" height="18" rx="9" fill="#153051" />
+      <rect x="0" y="94" width="116" height="18" rx="9" fill="#153051" />
+      <rect x="0" y="126" width="92" height="18" rx="9" fill="#153051" />
+    </g>
+  </g>
+  <g transform="translate(780 160)">
+    <rect x="0" y="0" width="320" height="430" rx="34" fill="url(#panel)" stroke="rgba(145,170,215,0.22)" stroke-width="2"/>
+    <text x="28" y="54" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="700">Tutor match</text>
+    <text x="28" y="84" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="16">subject + timing + area</text>
+    <g transform="translate(28 118)">
+      <rect x="0" y="0" width="264" height="54" rx="18" fill="rgba(255,255,255,0.05)" />
+      <circle cx="28" cy="27" r="14" fill="url(#blue)" />
+      <rect x="56" y="16" width="118" height="8" rx="4" fill="#edf4ff" opacity="0.9" />
+      <rect x="56" y="30" width="82" height="8" rx="4" fill="#9fb0cb" />
+      <rect x="198" y="17" width="44" height="20" rx="10" fill="rgba(86,217,255,0.18)" />
+    </g>
+    <g transform="translate(28 188)">
+      <rect x="0" y="0" width="264" height="54" rx="18" fill="rgba(255,255,255,0.05)" />
+      <circle cx="28" cy="27" r="14" fill="url(#green)" />
+      <rect x="56" y="16" width="108" height="8" rx="4" fill="#edf4ff" opacity="0.9" />
+      <rect x="56" y="30" width="92" height="8" rx="4" fill="#9fb0cb" />
+      <rect x="198" y="17" width="44" height="20" rx="10" fill="rgba(48,224,160,0.18)" />
+    </g>
+    <g transform="translate(28 258)">
+      <rect x="0" y="0" width="264" height="54" rx="18" fill="rgba(255,255,255,0.05)" />
+      <circle cx="28" cy="27" r="14" fill="url(#amber)" />
+      <rect x="56" y="16" width="116" height="8" rx="4" fill="#edf4ff" opacity="0.9" />
+      <rect x="56" y="30" width="74" height="8" rx="4" fill="#9fb0cb" />
+      <rect x="198" y="17" width="44" height="20" rx="10" fill="rgba(255,184,77,0.18)" />
+    </g>
+    <rect x="28" y="332" width="264" height="56" rx="18" fill="rgba(86,217,255,0.12)" stroke="rgba(86,217,255,0.24)" />
+    <text x="52" y="366" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600">Premium shortlist ready</text>
+  </g>
+  <g opacity="0.85" fill="#eef7ff">
+    <circle cx="150" cy="120" r="2.5" />
+    <circle cx="258" cy="78" r="1.6" opacity="0.7" />
+    <circle cx="412" cy="180" r="2" opacity="0.8" />
+    <circle cx="514" cy="98" r="1.4" opacity="0.65" />
+    <circle cx="1400" cy="120" r="2.6" opacity="0.9" />
+    <circle cx="1460" cy="210" r="1.6" opacity="0.7" />
+    <circle cx="1480" cy="760" r="2.2" opacity="0.84" />
+    <circle cx="1240" cy="840" r="1.8" opacity="0.7" />
+  </g>
+</svg>

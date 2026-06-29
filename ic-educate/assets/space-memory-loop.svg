@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-label="Mistake memory visualization">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#060a17" />
+      <stop offset="58%" stop-color="#09152c" />
+      <stop offset="100%" stop-color="#03060d" />
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#ffd27d" stop-opacity="0.34" />
+      <stop offset="42%" stop-color="#ffd27d" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#ffd27d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101d39" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#0a1224" stop-opacity="0.96" />
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#54d9ff" />
+      <stop offset="100%" stop-color="#6e92ff" />
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#30e0a0" />
+      <stop offset="100%" stop-color="#82f7c3" />
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb84d" />
+      <stop offset="100%" stop-color="#ffde93" />
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff6f61" />
+      <stop offset="100%" stop-color="#ff9b8f" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <rect width="1600" height="1000" fill="url(#core)" />
+  <g opacity="0.22" stroke="#9fb6d9" stroke-width="1">
+    <path d="M110 190H1490M110 340H1490M110 490H1490M110 640H1490M110 790H1490" />
+    <path d="M250 80V920M510 80V920M770 80V920M1030 80V920M1290 80V920" />
+  </g>
+  <g opacity="0.34" fill="none" stroke="#ffd27d" stroke-width="2">
+    <path d="M260 210C430 90 590 80 760 180s260 250 470 160 250-20 360-120" />
+    <path d="M260 820C430 700 590 690 760 790s260 250 470 160 250-20 360-120" />
+  </g>
+  <g transform="translate(170 180)">
+    <rect x="0" y="0" width="480" height="620" rx="34" fill="url(#panel)" stroke="rgba(145,170,215,0.22)" stroke-width="2"/>
+    <text x="34" y="58" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="30" font-weight="700">Mistake memory</text>
+    <text x="34" y="92" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="17">store the pattern, then shape the next paper</text>
+    <g transform="translate(34 128)">
+      <rect x="0" y="0" width="412" height="74" rx="22" fill="rgba(255,255,255,0.05)" />
+      <circle cx="34" cy="37" r="16" fill="url(#red)" />
+      <text x="68" y="33" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700">Careless slips</text>
+      <rect x="68" y="44" width="176" height="12" rx="6" fill="#153051" />
+      <rect x="272" y="26" width="102" height="20" rx="10" fill="rgba(255,111,97,0.18)" />
+    </g>
+    <g transform="translate(34 220)">
+      <rect x="0" y="0" width="412" height="74" rx="22" fill="rgba(255,255,255,0.05)" />
+      <circle cx="34" cy="37" r="16" fill="url(#amber)" />
+      <text x="68" y="33" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700">Concept gaps</text>
+      <rect x="68" y="44" width="136" height="12" rx="6" fill="#153051" />
+      <rect x="272" y="26" width="102" height="20" rx="10" fill="rgba(255,184,77,0.18)" />
+    </g>
+    <g transform="translate(34 312)">
+      <rect x="0" y="0" width="412" height="74" rx="22" fill="rgba(255,255,255,0.05)" />
+      <circle cx="34" cy="37" r="16" fill="url(#blue)" />
+      <text x="68" y="33" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700">Timing pressure</text>
+      <rect x="68" y="44" width="198" height="12" rx="6" fill="#153051" />
+      <rect x="272" y="26" width="102" height="20" rx="10" fill="rgba(86,217,255,0.18)" />
+    </g>
+    <g transform="translate(34 436)">
+      <rect x="0" y="0" width="412" height="112" rx="24" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" />
+      <text x="24" y="38" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700">Revision loop</text>
+      <path d="M26 82C80 40 114 28 162 28s70 28 120 28 82-18 144-12" fill="none" stroke="url(#green)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="26" cy="82" r="8" fill="#30e0a0" />
+      <circle cx="88" cy="48" r="8" fill="#82f7c3" />
+      <circle cx="150" cy="30" r="8" fill="#54d9ff" />
+      <circle cx="220" cy="56" r="8" fill="#ffb84d" />
+      <circle cx="286" cy="46" r="8" fill="#ff6f61" />
+      <circle cx="392" cy="70" r="8" fill="#6e92ff" />
+    </g>
+  </g>
+  <g transform="translate(760 220)">
+    <rect x="0" y="0" width="580" height="540" rx="34" fill="url(#panel)" stroke="rgba(145,170,215,0.22)" stroke-width="2"/>
+    <text x="34" y="58" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700">Next paper brief</text>
+    <text x="34" y="90" fill="#9fb0cb" font-family="Inter, system-ui, sans-serif" font-size="17">focused on the weak pattern and the next step</text>
+    <g transform="translate(34 130)">
+      <rect x="0" y="0" width="512" height="70" rx="22" fill="rgba(255,255,255,0.05)" />
+      <text x="24" y="42" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600">Q1</text>
+      <rect x="78" y="30" width="320" height="10" rx="5" fill="#153051" />
+      <rect x="78" y="30" width="220" height="10" rx="5" fill="url(#blue)" />
+    </g>
+    <g transform="translate(34 214)">
+      <rect x="0" y="0" width="512" height="70" rx="22" fill="rgba(255,255,255,0.05)" />
+      <text x="24" y="42" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600">Q2</text>
+      <rect x="78" y="30" width="320" height="10" rx="5" fill="#153051" />
+      <rect x="78" y="30" width="260" height="10" rx="5" fill="url(#green)" />
+    </g>
+    <g transform="translate(34 298)">
+      <rect x="0" y="0" width="512" height="70" rx="22" fill="rgba(255,255,255,0.05)" />
+      <text x="24" y="42" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600">Q3</text>
+      <rect x="78" y="30" width="320" height="10" rx="5" fill="#153051" />
+      <rect x="78" y="30" width="174" height="10" rx="5" fill="url(#amber)" />
+    </g>
+    <g transform="translate(34 382)">
+      <rect x="0" y="0" width="512" height="102" rx="24" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" />
+      <text x="24" y="38" fill="#edf4ff" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700">Paper flow</text>
+      <rect x="24" y="58" width="102" height="18" rx="9" fill="rgba(86,217,255,0.16)" />
+      <rect x="138" y="58" width="120" height="18" rx="9" fill="rgba(48,224,160,0.16)" />
+      <rect x="270" y="58" width="86" height="18" rx="9" fill="rgba(255,184,77,0.16)" />
+      <rect x="368" y="58" width="92" height="18" rx="9" fill="rgba(255,111,97,0.16)" />
+    </g>
+  </g>
+  <g opacity="0.8" fill="#eef7ff">
+    <circle cx="160" cy="120" r="2.4" />
+    <circle cx="360" cy="150" r="1.6" opacity="0.7" />
+    <circle cx="560" cy="190" r="2" opacity="0.8" />
+    <circle cx="1320" cy="120" r="2.4" opacity="0.88" />
+    <circle cx="1460" cy="210" r="1.6" opacity="0.7" />
+    <circle cx="1500" cy="780" r="2.2" opacity="0.86" />
+  </g>
+</svg>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Join IC Educate as a Teacher</title>
+    <meta
+      name="description"
+      content="Teachers can join IC Educate, share subjects, syllabus, free times, area, lesson type, fee, and WhatsApp consent for Malaysia and Hong Kong student matching."
+    />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="IC Educate" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="tutor-page teacher-recruit-page">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="IC Educate home">
+        <span class="brand-mark">IC</span>
+        <span>IC Educate</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="./find-tutor.html">Student request</a>
+        <a href="./leads.html">Lead kit</a>
+        <a href="./hong-kong.html">Hong Kong</a>
+      </nav>
+      <a class="button small primary" href="#teacherSignup">Join as teacher</a>
+    </header>
+
+    <main class="page tutor-page-main">
+      <section class="tutor-hero">
+        <div class="tutor-hero-copy">
+          <p class="eyebrow">Teacher recruitment</p>
+          <h1>Get matched with students who fit your subject, syllabus, time, and area.</h1>
+          <p class="intro">
+            IC Educate is starting with Malaysia and Hong Kong. Teachers can submit a profile once,
+            then student requests are routed by subject fit, rating, lesson type, and location.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#teacherSignup">Create teacher profile</a>
+            <a class="button secondary" href="https://wa.me/60178265300?text=Hi%2C%20I%20want%20to%20join%20IC%20Educate%20as%20a%20teacher." target="_blank" rel="noreferrer">Malaysia WhatsApp</a>
+            <a class="button secondary" href="https://wa.me/85255115251?text=Hi%2C%20I%20want%20to%20join%20IC%20Educate%20Hong%20Kong%20as%20a%20teacher." target="_blank" rel="noreferrer">Hong Kong WhatsApp</a>
+          </div>
+          <div class="status-row">
+            <span class="chip">Maths</span>
+            <span class="chip">Physics</span>
+            <span class="chip">Chemistry</span>
+            <span class="chip">DSE / IGCSE / IB</span>
+          </div>
+        </div>
+
+        <aside class="tutor-hero-aside">
+          <figure class="lead-visual tutor-hero-image">
+            <img src="./assets/teacher-guidance-BjXlXmXR.png" alt="Teacher helping students during a lesson" />
+            <figcaption>
+              <span class="chip">Online</span>
+              <span class="chip">Physical</span>
+              <span class="chip">WhatsApp ready</span>
+            </figcaption>
+          </figure>
+          <article class="tutor-kicker-card">
+            <span class="tag">What teachers give</span>
+            <h2>Photo, subjects, syllabus, free time, fee, area, and lesson type.</h2>
+            <p>The first version keeps closing simple: public page for trust, shared queue for leads, WhatsApp for the deal.</p>
+          </article>
+        </aside>
+      </section>
+
+      <section class="section-band">
+        <div class="section-heading compact">
+          <p class="eyebrow">Recruiting priority</p>
+          <h2>Start with strong supply in the areas parents already search.</h2>
+          <p>Use this page when posting in teacher groups or replying to tutors who want student leads.</p>
+        </div>
+        <div class="product-grid">
+          <article class="feature-card accent-blue">
+            <span class="tag">Malaysia</span>
+            <h3>KL, PJ, Subang, Shah Alam</h3>
+            <p>Prioritize Maths, Physics, Chemistry, Biology, English, and IGCSE/SPM support.</p>
+          </article>
+          <article class="feature-card accent-green">
+            <span class="tag">Hong Kong</span>
+            <h3>HK Island, Kowloon, New Territories</h3>
+            <p>Prioritize DSE, IGCSE, IB, Maths, Science, English, and school interview support.</p>
+          </article>
+          <article class="feature-card accent-amber">
+            <span class="tag">Workflow</span>
+            <h3>Teacher joins, student requests, best match first</h3>
+            <p>The queue can rank by subject, syllabus, rating, timing, and physical lesson proximity.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="teacherSignup" class="section-band tutor-intake">
+        <div class="section-heading compact">
+          <p class="eyebrow">Teacher profile</p>
+          <h2>Submit your teaching details.</h2>
+          <p>After submission, the profile is saved in this browser and added to the IC Educate lead queue for follow-up.</p>
+        </div>
+
+        <div class="tutor-intake-grid">
+          <form id="teacherLeadForm" class="lead-form tutor-request-form">
+            <span class="tag">Join IC Educate</span>
+            <div class="grid">
+              <div class="field">
+                <label for="teacherLeadMarket">Market</label>
+                <select id="teacherLeadMarket">
+                  <option value="malaysia">Malaysia</option>
+                  <option value="hongkong">Hong Kong</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="teacherLeadName">Teacher name</label>
+                <input id="teacherLeadName" type="text" placeholder="Your name" required />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="teacherLeadPhone">WhatsApp number</label>
+                <input id="teacherLeadPhone" type="text" placeholder="+60..." required />
+              </div>
+              <div class="field">
+                <label for="teacherLeadPhoto">Profile picture</label>
+                <input id="teacherLeadPhoto" type="file" accept="image/*" />
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="teacherLeadSubjects">Subjects taught</label>
+                <textarea id="teacherLeadSubjects" rows="4" placeholder="Maths, Algebra, Physics, Chemistry" required></textarea>
+              </div>
+              <div class="field">
+                <label for="teacherLeadSyllabus">Syllabus taught</label>
+                <textarea id="teacherLeadSyllabus" rows="4" placeholder="SPM, IGCSE, DSE, IB, A-level" required></textarea>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="teacherLeadArea">Area / district</label>
+                <input id="teacherLeadArea" type="text" placeholder="Petaling Jaya, Kowloon, Central" required />
+              </div>
+              <div class="field">
+                <label for="teacherLeadMode">Lesson type</label>
+                <select id="teacherLeadMode">
+                  <option value="both">Online and physical</option>
+                  <option value="online">Online only</option>
+                  <option value="physical">Physical only</option>
+                </select>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="teacherLeadTime">Free times</label>
+                <input id="teacherLeadTime" type="text" placeholder="Weekday evenings, Sunday afternoon" />
+              </div>
+              <div class="field">
+                <label for="teacherLeadFee">Fee</label>
+                <input id="teacherLeadFee" type="text" placeholder="RM90/hr or HKD350/hr" />
+              </div>
+            </div>
+            <div class="field field-wide">
+              <label for="teacherLeadNote">Short teaching intro</label>
+              <textarea id="teacherLeadNote" rows="4" placeholder="What levels do you teach well? What kind of students do you help best?"></textarea>
+            </div>
+            <label class="check-row consent-row">
+              <input id="teacherLeadConsent" type="checkbox" required />
+              <span>
+                <strong>WhatsApp consent</strong>
+                <small>Allow IC Educate to contact me about student requests and teacher onboarding.</small>
+              </span>
+            </label>
+            <div class="button-row">
+              <button id="teacherLeadSubmitBtn" type="submit">Save teacher lead</button>
+              <button id="teacherLeadSampleBtn" type="button" class="secondary-btn">Use sample</button>
+              <button id="teacherLeadResetBtn" type="button" class="secondary-btn">Clear</button>
+            </div>
+            <p id="teacherLeadStatus" class="hint" aria-live="polite">Teacher lead will be saved locally and shared to the backend if configured.</p>
+          </form>
+
+          <div class="tutor-results-shell" aria-live="polite">
+            <article id="teacherLeadPreview" class="tutor-summary-card">
+              <span class="tag">Preview</span>
+              <h3>Teacher profile preview</h3>
+              <p class="hint">Add teacher details to generate a WhatsApp-ready onboarding brief.</p>
+              <div class="result-links">
+                <span class="chip">Subjects</span>
+                <span class="chip">Syllabus</span>
+                <span class="chip">Area</span>
+                <span class="chip">Time</span>
+              </div>
+            </article>
+            <article class="tutor-next-step">
+              <div>
+                <span class="tag">Next step</span>
+                <h3>Send onboarding details through WhatsApp.</h3>
+                <p>The link routes Malaysia to +60178265300 and Hong Kong to +85255115251.</p>
+              </div>
+              <div class="button-row">
+                <a id="teacherLeadWhatsappLink" class="button primary" href="https://wa.me/60178265300" target="_blank" rel="noreferrer">Open WhatsApp route</a>
+                <button id="teacherLeadCopyBtn" type="button" class="secondary-btn">Copy teacher brief</button>
+              </div>
+            </article>
+            <div id="teacherLeadQueue" class="saved-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="page-switcher" aria-label="Site switcher">
+      <a class="chip ghost" href="../index.html">Hub</a>
+      <a class="chip ghost" href="./index.html">IC Educate</a>
+      <a class="chip ghost" href="./admin.html">Admin</a>
+      <a class="chip ghost" href="./teachers.html">Teachers</a>
+      <a class="chip ghost" href="./find-tutor.html">Tutor Finder</a>
+      <a class="chip ghost" href="./leads.html">Lead Kit</a>
+      <a class="chip ghost" href="./hong-kong.html">Hong Kong</a>
+    </nav>
+
+    <script src="./config.js"></script>
+    <script src="./pwa.js"></script>
+    <script src="./teachers.js"></script>
+  </body>
+</html>

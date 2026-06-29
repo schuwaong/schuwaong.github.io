@@ -64,7 +64,19 @@ create table if not exists public.ic_educate_leads (
 
 alter table public.ic_educate_leads
   add column if not exists user_id uuid references auth.users(id) on delete set null,
+  add column if not exists phone text,
+  add column if not exists topic text,
+  add column if not exists area text,
+  add column if not exists mode text,
+  add column if not exists lead_type text not null default 'student',
+  add column if not exists preferred_time text,
+  add column if not exists consent_whatsapp boolean not null default false,
+  add column if not exists market text not null default 'malaysia',
+  add column if not exists note text,
   add column if not exists updated_at timestamptz not null default now();
+
+alter table public.ic_educate_leads
+  alter column email drop not null;
 
 create table if not exists public.ic_educate_paper_requests (
   id uuid primary key default gen_random_uuid(),
@@ -243,6 +255,8 @@ create table if not exists public.card_reviews (
 
 create index if not exists ic_educate_leads_email_idx on public.ic_educate_leads (email);
 create index if not exists ic_educate_leads_user_id_idx on public.ic_educate_leads (user_id);
+create index if not exists ic_educate_leads_market_status_idx on public.ic_educate_leads (market, status, created_at desc);
+create index if not exists ic_educate_leads_type_subject_idx on public.ic_educate_leads (lead_type, subject);
 create index if not exists ic_educate_paper_requests_email_idx on public.ic_educate_paper_requests (email);
 create index if not exists ic_educate_paper_requests_user_id_idx on public.ic_educate_paper_requests (user_id);
 create index if not exists ic_educate_paper_requests_client_request_id_idx on public.ic_educate_paper_requests (client_request_id);
@@ -369,9 +383,10 @@ on public.ic_educate_leads
 for insert
 to anon, authenticated
 with check (
-  email is not null
-  and email <> ''
-  and source in ('free-7-day-plan', 'personalized-exam-pdf-request')
+  coalesce(nullif(email, ''), nullif(phone, '')) is not null
+  and source in ('free-7-day-plan', 'personalized-exam-pdf-request', 'teacher-signup', 'tutor-finder', 'lead-kit')
+  and lead_type in ('student', 'parent', 'teacher')
+  and market in ('malaysia', 'hongkong')
   and (user_id is null or user_id = auth.uid())
 );
 
