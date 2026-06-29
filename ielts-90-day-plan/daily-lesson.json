@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-06-28",
-  "seedDateKey": "2026-06-28",
+  "dateKey": "2026-06-29",
+  "seedDateKey": "2026-06-29",
   "source": "workflow",
   "vocab": {
-    "category": "writing",
-    "term": "mitigate",
-    "zh": "减轻；缓解",
-    "simpleEn": "to make a problem less serious",
-    "simpleZh": "让问题没那么严重。",
-    "exampleEn": "Governments can mitigate traffic congestion by improving public transport.",
-    "exampleZh": "政府可以通过改善公共交通来缓解交通拥堵。",
-    "upgradeEn": "Use mitigate with problems: mitigate stress, risk, pressure, or pollution.",
-    "upgradeZh": "mitigate 常搭配问题：stress、risk、pressure、pollution。"
+    "category": "speaking",
+    "term": "reluctant",
+    "zh": "不太愿意的；犹豫的",
+    "simpleEn": "not really willing to do something",
+    "simpleZh": "不是很想做，心里有点抗拒。",
+    "exampleEn": "I was reluctant to speak English at first because I was afraid of making mistakes.",
+    "exampleZh": "一开始我不太愿意说英语，因为我怕犯错。",
+    "upgradeEn": "Use I was reluctant to... when explaining fear or hesitation.",
+    "upgradeZh": "解释害怕或犹豫时，可以用 I was reluctant to..."
   },
   "cycle": {
-    "number": 15,
-    "phase": 3,
-    "titleEn": "Final review and calm",
-    "titleZh": "最后复习与稳定心态",
-    "summaryEn": "Light review, good sleep, and simple answers on exam day.",
-    "summaryZh": "轻复习、睡好觉，考试当天把答案写得简单清楚。",
+    "number": 1,
+    "phase": 1,
+    "titleEn": "Test format and target band",
+    "titleZh": "考试结构与目标分",
+    "summaryEn": "Learn the four sections, the timing, and what a 6, 7, or 8 answer looks like.",
+    "summaryZh": "先弄懂四个部分、时间安排，以及 6、7、8 分答案的样子。",
     "focusWords": [
-      "final / 最后",
-      "calm / 冷静",
-      "simple / 简单",
-      "confidence / 自信"
+      "band score / 分数档",
+      "criteria / 评分标准",
+      "timing / 时间安排",
+      "format / 结构"
     ]
   },
   "frame": {
-    "slot": "Task 1 / 小作文",
-    "en": "The overall trend is...",
-    "zh": "总体趋势是...",
-    "useEn": "Use in graph and chart descriptions.",
-    "useZh": "适合图表描述和趋势题。"
+    "slot": "Task 2 / 大作文",
+    "en": "I strongly believe that...",
+    "zh": "我强烈认为...",
+    "useEn": "Use to give a clear opinion.",
+    "useZh": "用来表达清晰观点。"
   },
-  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
-  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"mitigate\" using The overall trend is...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"mitigate\" 和 总体趋势是... 写一句 Becky 自己的话。",
+  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
+  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"reluctant\" using I strongly believe that...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"reluctant\" 和 我强烈认为... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
