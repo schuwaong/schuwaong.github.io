@@ -139,8 +139,17 @@
       color: #fff;
     }
 
+    .btn.whatsapp,
+    .link-btn.whatsapp {
+      border-color: #128c7e;
+      background: #128c7e;
+      color: #fff;
+    }
+
     .band,
     .metric,
+    .pick-card,
+    .share-panel,
     .analysis-card,
     .source-item,
     .listing-card {
@@ -415,6 +424,131 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
+    }
+
+    .decision-band {
+      display: grid;
+      gap: 14px;
+    }
+
+    .decision-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.6fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .pick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .pick-card,
+    .share-panel {
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .pick-card {
+      display: grid;
+      gap: 10px;
+      background: #fff;
+    }
+
+    .pick-card.green {
+      border-color: rgba(20, 113, 79, 0.32);
+      background: linear-gradient(180deg, rgba(20, 113, 79, 0.08), #fff 56%);
+    }
+
+    .pick-card.amber {
+      border-color: rgba(173, 111, 21, 0.32);
+      background: linear-gradient(180deg, rgba(173, 111, 21, 0.1), #fff 56%);
+    }
+
+    .pick-card.red {
+      border-color: rgba(180, 35, 24, 0.28);
+      background: linear-gradient(180deg, rgba(180, 35, 24, 0.08), #fff 56%);
+    }
+
+    .pick-label {
+      width: fit-content;
+      min-height: 26px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0 10px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pick-card h3,
+    .share-panel h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .pick-card p,
+    .share-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pick-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .pick-stats div {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.76);
+      padding: 8px;
+    }
+
+    .pick-stats span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pick-stats strong {
+      display: block;
+      margin-top: 2px;
+      line-height: 1.2;
+    }
+
+    .share-panel {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      background: #0f1418;
+      color: #fff;
+    }
+
+    .share-panel p,
+    .share-panel .mini-list {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 13px;
+      line-height: 1.35;
     }
 
     .listing-grid {
@@ -723,8 +857,13 @@
       }
 
       .summary-band,
+      .pick-grid,
       .analysis-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .decision-layout {
+        grid-template-columns: 1fr;
       }
 
       .listing-grid {
@@ -755,6 +894,7 @@
       }
 
       .summary-band,
+      .pick-grid,
       .analysis-grid,
       .controls,
       .stats,
@@ -789,6 +929,7 @@
       <nav class="actions" aria-label="Page navigation">
         <a class="btn" href="#roi">ROI scan</a>
         <a class="btn" href="#listings">Listings</a>
+        <a class="btn" href="#decision">Top 3</a>
         <a class="btn primary" href="#sources">Sources</a>
       </nav>
     </header>
@@ -807,11 +948,12 @@
             <span class="chip">Landed only</span>
             <span class="chip">Up to RM1M</span>
             <span class="chip">Gross ROI screen</span>
-            <span class="chip">Updated 30 Jun 2026</span>
+            <span class="chip">Updated 2 Jul 2026</span>
           </div>
           <div class="hero-actions">
             <a class="btn primary" href="#listings">Open shortlist</a>
             <a class="btn" href="#roi">Check ROI</a>
+            <a class="btn whatsapp" data-whatsapp-share href="https://wa.me/?text=Darren%27s%20Damansara%20shortlist%3A%20https%3A%2F%2Fschuwaong.github.io%2Fic-property%2Fdarren-damansara.html" target="_blank" rel="noreferrer">WhatsApp shortlist</a>
             <a class="btn" href="#sources">See sources</a>
           </div>
         </div>
@@ -867,6 +1009,29 @@
         <strong id="topMatch">Freehold landed house near SS2</strong>
         <small id="topMatchNote">highest base-yield option</small>
       </article>
+    </section>
+
+    <section class="band section-band decision-band" id="decision" aria-label="Decision shortlist">
+      <div class="section-head">
+        <div>
+          <h2>Decision shortlist</h2>
+          <p>Three practical next calls for Darren before spending time on viewings.</p>
+        </div>
+        <a class="btn whatsapp" data-whatsapp-share href="https://wa.me/?text=Darren%27s%20Damansara%20shortlist%3A%20https%3A%2F%2Fschuwaong.github.io%2Fic-property%2Fdarren-damansara.html" target="_blank" rel="noreferrer">WhatsApp top picks</a>
+      </div>
+      <div class="decision-layout">
+        <div class="pick-grid" id="actionPicks"></div>
+        <aside class="share-panel" aria-label="Share summary">
+          <h3>Send this first</h3>
+          <p id="shareSummary">Best ROI, best balance, and negotiation candidate will load here.</p>
+          <ul class="mini-list">
+            <li>Ask agents to confirm availability before viewing.</li>
+            <li>Use actual achievable rent, not optimistic headline rent.</li>
+            <li>Reject units with unclear title, illegal extensions, or major hidden renovation.</li>
+          </ul>
+          <a class="btn whatsapp" data-whatsapp-share href="https://wa.me/?text=Darren%27s%20Damansara%20shortlist%3A%20https%3A%2F%2Fschuwaong.github.io%2Fic-property%2Fdarren-damansara.html" target="_blank" rel="noreferrer">Open WhatsApp</a>
+        </aside>
+      </div>
     </section>
 
     <section class="band section-band" id="roi">
@@ -930,7 +1095,7 @@
       <div class="section-head">
         <div>
           <h2>Sources</h2>
-          <p>Current search snippets and live photo galleries captured from PropertyGuru on 26 and 30 Jun 2026.</p>
+          <p>Current search snippets and live photo galleries captured from PropertyGuru on 26 and 30 Jun 2026. Page workflow refreshed on 2 Jul 2026.</p>
         </div>
       </div>
       <div class="source-list" id="sourceList"></div>
@@ -974,7 +1139,14 @@
             caption: "Kitchen"
           }
         ],
-        note: "Lowest ticket and best base-case ROI. Good fit if Darren wants the cleanest entry point."
+        note: "Lowest ticket and best base-case ROI. Good fit if Darren wants the cleanest entry point.",
+        pick: {
+          rank: 1,
+          label: "Best ROI",
+          tone: "green",
+          action: "Call this agent first",
+          reason: "Lowest entry price in the set, freehold, and still clears the 4% gross screen before costs."
+        }
       },
       {
         area: "Damansara Jaya",
@@ -1128,7 +1300,14 @@
             caption: "Interior"
           }
         ],
-        note: "Good SS2-adjacent rental story; verify exact condition because the listing is basic and well-kept rather than fully renovated."
+        note: "Good SS2-adjacent rental story; verify exact condition because the listing is basic and well-kept rather than fully renovated.",
+        pick: {
+          rank: 2,
+          label: "Best balance",
+          tone: "amber",
+          action: "Shortlist for viewing",
+          reason: "Freehold, SS2-adjacent, and supported by stronger whole-house rental anchors than Kota Damansara."
+        }
       },
       {
         area: "Ara Damansara",
@@ -1284,7 +1463,14 @@
             caption: "Kitchen"
           }
         ],
-        note: "Good usable size, but still needs rent upside or price negotiation to clear a 4% gross screen comfortably."
+        note: "Good usable size, but still needs rent upside or price negotiation to clear a 4% gross screen comfortably.",
+        pick: {
+          rank: 3,
+          label: "Needs negotiation",
+          tone: "red",
+          action: "Only view after price talk",
+          reason: "Good size, but the rent band is too tight at RM950k unless the seller moves or rent is proven higher."
+        }
       },
       {
         area: "Seksyen 17 PJ",
@@ -1319,6 +1505,9 @@
     const sortInput = document.getElementById("sortInput");
     const listingsEl = document.getElementById("listings");
     const sourceListEl = document.getElementById("sourceList");
+    const actionPicksEl = document.getElementById("actionPicks");
+    const shareSummaryEl = document.getElementById("shareSummary");
+    const pageUrl = "https://schuwaong.github.io/ic-property/darren-damansara.html";
 
     function formatRM(value) {
       return `RM${Math.round(Number(value) || 0).toLocaleString("en-MY")}`;
@@ -1401,6 +1590,106 @@
       return "red";
     }
 
+    function cachedPhotoSrc(src) {
+      const match = String(src || "").match(/\/listing\/([^/]+)\/([^/]+)\/([^/?#]+)/);
+      if (!match) return src;
+      return `./assets/darren-listings/${match[1]}-${match[2]}-${match[3]}`;
+    }
+
+    function whatsappUrl(text) {
+      return `https://wa.me/?text=${encodeURIComponent(text)}`;
+    }
+
+    function pickListings(items) {
+      return items
+        .filter((listing) => listing.pick)
+        .sort((a, b) => a.pick.rank - b.pick.rank);
+    }
+
+    function shareTextFor(picks) {
+      const lines = picks.map((listing) => {
+        const roi = formatPct(listing.midYield);
+        return `${listing.pick.label}: ${listing.title} (${formatCompactRM(listing.price)}, ${roi} gross ROI)`;
+      });
+      return [
+        "Darren's Damansara property shortlist",
+        ...lines,
+        "Verify availability, title, renovation, and actual achievable rent before viewing.",
+        pageUrl
+      ].join("\n");
+    }
+
+    function wireShareLinks(text) {
+      if (typeof document.querySelectorAll !== "function") return;
+      document.querySelectorAll("[data-whatsapp-share]").forEach((link) => {
+        link.href = whatsappUrl(text);
+      });
+    }
+
+    function wireImageFallbacks(root) {
+      if (!root || typeof root.querySelectorAll !== "function") return;
+      root.querySelectorAll("img[data-remote-src]").forEach((image) => {
+        image.addEventListener("error", () => {
+          if (!image.dataset.triedRemote) {
+            image.dataset.triedRemote = "1";
+            image.src = image.dataset.remoteSrc;
+            return;
+          }
+          image.onerror = null;
+          image.src = image.dataset.fallbackSrc;
+        });
+      });
+    }
+
+    function renderActionPicks(items, targetPct) {
+      const picks = pickListings(items);
+      if (!picks.length) {
+        actionPicksEl.innerHTML = `<div class="empty-state">No decision picks are tagged yet.</div>`;
+        shareSummaryEl.textContent = "No decision picks are tagged yet.";
+        wireShareLinks(`Darren's Damansara shortlist\n${pageUrl}`);
+        return;
+      }
+
+      actionPicksEl.innerHTML = picks.map((listing) => {
+        const targetMonthly = targetRent(listing.price, targetPct);
+        const deltaMonthly = listing.midRent - targetMonthly;
+        return `
+          <article class="pick-card ${escapeHtml(listing.pick.tone)}">
+            <span class="pick-label">${escapeHtml(listing.pick.label)}</span>
+            <h3>${escapeHtml(listing.title)}</h3>
+            <p>${escapeHtml(listing.pick.reason)}</p>
+            <div class="pick-stats">
+              <div>
+                <span>Price</span>
+                <strong>${escapeHtml(formatCompactRM(listing.price))}</strong>
+              </div>
+              <div>
+                <span>Gross ROI</span>
+                <strong>${escapeHtml(formatPct(listing.midYield))}</strong>
+              </div>
+              <div>
+                <span>Base rent</span>
+                <strong>${escapeHtml(formatRM(listing.midRent))}</strong>
+              </div>
+              <div>
+                <span>Vs target</span>
+                <strong>${deltaMonthly >= 0 ? "+" : "-"}${escapeHtml(formatRM(Math.abs(deltaMonthly)))}/mo</strong>
+              </div>
+            </div>
+            <div class="actions" style="justify-content:flex-start">
+              <a class="link-btn primary" href="${escapeHtml(listing.saleUrl)}" target="_blank" rel="noreferrer">${escapeHtml(listing.pick.action)}</a>
+              <a class="link-btn whatsapp" href="${escapeHtml(whatsappUrl(`${listing.pick.label}: ${listing.title} ${formatCompactRM(listing.price)} ${formatPct(listing.midYield)} gross ROI\n${listing.saleUrl}`))}" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      shareSummaryEl.textContent = picks
+        .map((listing) => `${listing.pick.label}: ${listing.title}`)
+        .join(" / ");
+      wireShareLinks(shareTextFor(picks));
+    }
+
     function renderSummary(visible, targetPct) {
       const priceValues = visible.map((item) => item.price);
       const yields = visible.map((item) => item.midYield);
@@ -1429,6 +1718,9 @@
       const deltaMonthly = midRent - targetMonthly;
       const badgeTone = roiClass(delta);
       const photos = (listing.photos || []).slice(0, 2);
+      const pickBadge = listing.pick
+        ? `<span class="badge ${escapeHtml(listing.pick.tone)}">${escapeHtml(listing.pick.label)}</span>`
+        : "";
 
       return `
         <article class="listing-card">
@@ -1436,7 +1728,7 @@
             ${photos.map((photo) => `
               <a class="photo-tile" href="${escapeHtml(listing.saleUrl)}" target="_blank" rel="noreferrer">
                 <div class="photo-frame">
-                  <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(`${listing.title} ${photo.caption}`)}" loading="lazy" decoding="async">
+                  <img src="${escapeHtml(cachedPhotoSrc(photo.src))}" data-remote-src="${escapeHtml(photo.src)}" data-fallback-src="./assets/section17-pj.jpg" alt="${escapeHtml(`${listing.title} ${photo.caption}`)}" loading="lazy" decoding="async">
                 </div>
                 <span class="photo-caption">${escapeHtml(photo.caption)}</span>
               </a>
@@ -1453,6 +1745,7 @@
             <h3 class="title">${escapeHtml(listing.title)}</h3>
             <p class="subtitle">${escapeHtml(listing.subtitle)}</p>
             <div class="badges">
+              ${pickBadge}
               <span class="badge">${escapeHtml(listing.type)}</span>
               <span class="badge">${escapeHtml(listing.tenure)}</span>
               <span class="badge">${escapeHtml(listing.beds)}</span>
@@ -1498,6 +1791,7 @@
             <div class="actions" style="justify-content:flex-start">
               <a class="link-btn primary" href="${escapeHtml(listing.saleUrl)}" target="_blank" rel="noreferrer">Open sale source</a>
               <a class="link-btn" href="${escapeHtml(listing.rentUrl)}" target="_blank" rel="noreferrer">Open rent source</a>
+              <a class="link-btn whatsapp" href="${escapeHtml(whatsappUrl(`${listing.title} ${formatCompactRM(listing.price)} ${formatPct(midYield)} gross ROI\n${listing.saleUrl}`))}" target="_blank" rel="noreferrer">WhatsApp this</a>
             </div>
           </div>
         </article>
@@ -1521,7 +1815,8 @@
         ["Bandar Sri Damansara rent page", "Bandar Sri Damansara landed rental search used as a conservative rent anchor.", "https://www.propertyguru.com.my/terrace-for-rent/in-bandar-sri-damansara-muy33"],
         ["Seksyen 17 sale listing", "Exact-cap RM1M 2.5-storey terrace used as a watchlist stretch.", "https://www.propertyguru.com.my/property-listing/seksyen-17-petaling-jaya-for-sale-by-mahirah-501163504"],
         ["Seksyen 17 rent page", "Seksyen 17 terraced-house rental search used for the stretch-case rent band.", "https://www.propertyguru.com.my/2-terraced-house-for-rent/in-seksyen-17-53p7n"],
-        ["Listing photos", "Live gallery previews linked from the shortlisted PropertyGuru listings.", "https://www.propertyguru.com.my/"],
+        ["Listing photos", "Local cached previews served from this repo, with live PropertyGuru galleries as fallback.", "./assets/darren-listings/manifest.json"],
+        ["Refresh workflow", "Simple checklist and photo-cache command for the next shortlist update.", "./darren-damansara-refresh.md"],
         ["Hero image", "Section 17, Petaling Jaya skyline image used as generic local visual context.", "https://commons.wikimedia.org/wiki/File:Section_17_PJ_4.jpg"]
       ];
 
@@ -1555,10 +1850,12 @@
       );
 
       renderSummary(visible, targetPct);
+      renderActionPicks(enriched, targetPct);
 
       listingsEl.innerHTML = visible.length
         ? visible.map((listing) => renderCard(listing, targetPct)).join("")
         : `<div class="empty-state">No matches. Try clearing the search field or changing the area term.</div>`;
+      wireImageFallbacks(listingsEl);
     }
 
     searchInput.addEventListener("input", render);
