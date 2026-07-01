@@ -8,12 +8,7 @@
       name="description"
       content="IC Educate generates personalized exam papers, answer keys, and mistake-based revision plans for parents and tutors."
     />
-    <meta name="theme-color" content="#0f766e" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="IC Educate" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
+    <link rel="canonical" href="https://schuwaong.github.io/ic-educate/" />
     <link rel="stylesheet" href="/shared/ui-selector.css">
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -25,9 +20,9 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#products">Offer</a>
+        <a href="#campaigns">Campaigns</a>
         <a href="#free-plan">Diagnostic</a>
         <a href="#find-tutor">Find a tutor</a>
-        <a href="./admin.html">Admin</a>
         <a href="#pricing">Pricing</a>
         <a href="#mistake-memory">Recovery loop</a>
         <a href="#faq">FAQ</a>
@@ -45,7 +40,7 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#free-plan">Build 7-day plan</a>
-            <a class="button secondary" href="#find-tutor">Find a tutor</a>
+            <a class="button secondary" href="#campaigns">Open campaign pages</a>
           </div>
           <div class="status-row">
             <span id="leadCaptureStatus" class="chip"><svg class="icon" aria-hidden="true"><use href="#icon-scan"></use></svg> Parent brief</span>
@@ -114,6 +109,86 @@
             <strong>Output: next-paper input</strong>
           </article>
         </div>
+        <div class="proof-strip" aria-label="Trust signals">
+          <article class="proof-pill">
+            <strong>Original practice</strong>
+            <span>Generated from indexed syllabus structure, not copied worksheet dumps.</span>
+          </article>
+          <article class="proof-pill">
+            <strong>Parent-readable handoff</strong>
+            <span>Weak topic, 7-day plan, and next paid option stay in one brief.</span>
+          </article>
+          <article class="proof-pill">
+            <strong>Answer key included</strong>
+            <span>Every paid paper is positioned as practice plus checking, not just more questions.</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="campaigns" class="section-band campaign-hub-section">
+        <div class="section-heading compact">
+          <p class="eyebrow">Instagram queue</p>
+          <h2>Landing pages for the next IC Educate posts.</h2>
+          <p>
+            Each campaign now has a focused page, a clear lead form, and a direct path back to the parent diagnostic.
+          </p>
+        </div>
+
+        <div class="campaign-card-grid">
+          <article class="campaign-card">
+            <figure class="campaign-card-visual">
+              <img src="./assets/weak-topic-recovery-hero.svg" alt="IGCSE Biology weak topic recovery dashboard" />
+            </figure>
+            <div class="campaign-card-body">
+              <span class="tag">Review required</span>
+              <h3>IGCSE Biology worksheet demo</h3>
+              <p>
+                For parents and Year 10/11 students who need to turn one weak Biology topic into notes, quiz lanes, and a worksheet.
+              </p>
+              <div class="campaign-meta">
+                <span>Worksheet demo</span>
+                <span>DM PLAN</span>
+              </div>
+              <a class="button secondary" href="./igcse-biology-worksheet-demo.html">Open landing page</a>
+            </div>
+          </article>
+
+          <article class="campaign-card">
+            <figure class="campaign-card-visual">
+              <img src="./assets/seven-day-recovery-board.svg" alt="SPM Add Maths seven day recovery board" />
+            </figure>
+            <div class="campaign-card-body">
+              <span class="tag">Queued</span>
+              <h3>SPM Add Maths weak-topic picker</h3>
+              <p>
+                For Form 4 and Form 5 students who are revising everything and need to pick the one subtopic that unlocks progress.
+              </p>
+              <div class="campaign-meta">
+                <span>Add Maths</span>
+                <span>7-day reset</span>
+              </div>
+              <a class="button secondary" href="./spm-add-maths-weak-topic.html">Open landing page</a>
+            </div>
+          </article>
+
+          <article class="campaign-card">
+            <figure class="campaign-card-visual">
+              <img src="./assets/ic-educate-product-hero.png" alt="IC Educate exam pathway planner interface" />
+            </figure>
+            <div class="campaign-card-body">
+              <span class="tag">Queued</span>
+              <h3>Exam pathways study planner</h3>
+              <p>
+                For parents comparing SPM, IGCSE, IB, and A Level who need one planner instead of separate scattered resources.
+              </p>
+              <div class="campaign-meta">
+                <span>SPM to A Level</span>
+                <span>Planner</span>
+              </div>
+              <a class="button secondary" href="./exam-pathways-study-planner.html">Open landing page</a>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section id="free-plan" class="section-band lead-section">
@@ -145,6 +220,15 @@
           <p class="hint">
             Keep the free starter short and useful enough to earn the follow-up.
           </p>
+          <div class="brief-proof-card">
+            <span class="tag">What parents get first</span>
+            <h3>Free brief, then a clear upgrade path.</h3>
+            <ul class="clean-list">
+              <li>7-day weak-topic recovery plan</li>
+              <li>Visible topic/chapter brief for tutor or parent follow-up</li>
+              <li>Paid upgrade only after the family sees the exact gap</li>
+            </ul>
+          </div>
         </div>
 
         <div class="lead-studio">
@@ -244,6 +328,35 @@
           <p class="muted">Enter a level, choose subjects, and select chapters to see the 7-day recovery plan.</p>
         </div>
       </section>
+      <section class="section-band proof-pack-section" aria-labelledby="proof-pack-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Proof packs</p>
+          <h2 id="proof-pack-title">Two niches are closest to converting.</h2>
+          <p>
+            IC Educate already has the campaign angle. What it needs next is a sharp proof pack in the same niche so parents can see the jump from weak topic to usable practice.
+          </p>
+        </div>
+        <div class="product-grid">
+          <article class="feature-card accent-blue">
+            <span class="tag">IGCSE</span>
+            <h3>Biology 0610 proof pack</h3>
+            <p>Lead with coordination and response: one 7-day plan, one 10-question worksheet, and one answer key.</p>
+            <strong>Best use: Instagram DM PLAN follow-up</strong>
+          </article>
+          <article class="feature-card accent-green">
+            <span class="tag">SPM</span>
+            <h3>Add Maths proof pack</h3>
+            <p>Lead with functions or quadratics: one method card, one narrow worksheet, and one retest step.</p>
+            <strong>Best use: Form 4 / Form 5 parent chats</strong>
+          </article>
+          <article class="feature-card accent-amber">
+            <span class="tag">Retention</span>
+            <h3>Lead worksheet loop</h3>
+            <p>Track curriculum, weak topic, generated pack, and next follow-up date so the free plan actually turns into paid practice.</p>
+            <strong>Best use: founder-led WhatsApp follow-up</strong>
+          </article>
+        </div>
+      </section>
 
       <section id="mistake-memory" class="section-band">
         <div class="section-heading compact">
@@ -333,6 +446,12 @@
             <strong>Free</strong>
           </article>
         </div>
+        <div class="pricing-note-card">
+          <strong>Positioning note</strong>
+          <p>
+            The free tier should sell clarity. The paid tier should sell a finished worksheet or paper with answers, not just a longer form.
+          </p>
+        </div>
 
         <div class="conversion-actions">
           <a class="button primary" href="#free-plan">Start free plan</a>
@@ -363,7 +482,6 @@
     </main>
 
     <script src="./config.js"></script>
-    <script src="./pwa.js"></script>
     <script src="./landing.js" type="module"></script>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
       <symbol id="icon-scan" viewBox="0 0 24 24">

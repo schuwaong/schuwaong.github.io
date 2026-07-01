@@ -3,12 +3,609 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content="0; url=/ielts-90-day-plan/" />
-    <title>IELTS 90-Day Plan</title>
-    <link rel="canonical" href="https://schuwaong.github.io/ielts-90-day-plan/" />
-    <link rel="stylesheet" href="/shared/ui-selector.css">
+    <title>Schu Wong Project Studio | Launch Tools and Learning Products</title>
+    <meta
+      name="description"
+      content="A focused hub for Schu Wong's live product experiments: exam recovery plans, job-search automation, market education, property tools, and AI styling."
+    />
+    <link rel="canonical" href="https://schuwaong.github.io/" />
+    <link rel="stylesheet" href="/shared/ui-selector.css" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f4ed;
+        --surface: #fffdf8;
+        --ink: #141917;
+        --muted: #5e6a66;
+        --line: #ddd7cc;
+        --green: #0f6b5a;
+        --blue: #284f9f;
+        --rose: #b74863;
+        --gold: #b98322;
+        --shadow: 0 22px 70px rgba(34, 43, 40, 0.12);
+        --radius: 8px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.5;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fffdf8;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .nav-links a,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 0 13px;
+        background: rgba(255, 253, 248, 0.84);
+        font-size: 13px;
+        font-weight: 850;
+        white-space: nowrap;
+      }
+
+      .button.primary {
+        border-color: var(--green);
+        background: var(--green);
+        color: #fff;
+      }
+
+      .button.secondary {
+        background: #fffdf8;
+        color: var(--green);
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+        gap: clamp(24px, 5vw, 64px);
+        align-items: end;
+        width: min(1160px, calc(100% - 32px));
+        min-height: calc(100svh - 80px);
+        margin: 0 auto;
+        padding: 58px 0 38px;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 11ch;
+        margin-bottom: 18px;
+        font-size: clamp(54px, 10vw, 116px);
+        line-height: 0.88;
+        letter-spacing: 0;
+      }
+
+      .hero-copy > p:not(.eyebrow) {
+        max-width: 660px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: clamp(17px, 2vw, 21px);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .proof-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .proof-row article {
+        min-height: 96px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 253, 248, 0.72);
+      }
+
+      .proof-row strong {
+        display: block;
+        color: var(--green);
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .proof-row span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .hero-panel {
+        position: relative;
+        overflow: hidden;
+        min-height: 520px;
+        border-radius: var(--radius);
+        background: #101816;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-panel img {
+        height: 100%;
+        min-height: 520px;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0.92;
+      }
+
+      .hero-panel::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(16, 24, 22, 0.05), rgba(16, 24, 22, 0.82)),
+          linear-gradient(90deg, rgba(16, 24, 22, 0.74), transparent 58%);
+      }
+
+      .hero-panel-card {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 16px;
+        align-items: end;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        background: rgba(10, 16, 14, 0.72);
+        color: #fffdf8;
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-panel-card h2 {
+        margin-bottom: 6px;
+        font-size: clamp(23px, 2.6vw, 34px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .hero-panel-card p {
+        margin-bottom: 0;
+        color: rgba(255, 253, 248, 0.78);
+      }
+
+      .section {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 54px 0;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(0, 0.7fr) minmax(280px, 0.3fr);
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 22px;
+      }
+
+      .section-heading h2 {
+        max-width: 720px;
+        margin-bottom: 0;
+        font-size: clamp(34px, 5vw, 68px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .section-heading p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .offer-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .offer-card {
+        display: grid;
+        min-height: 360px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .offer-card img {
+        height: 180px;
+        object-fit: cover;
+        background: #d9e5df;
+      }
+
+      .offer-body {
+        display: grid;
+        align-content: start;
+        gap: 12px;
+        padding: 17px;
+      }
+
+      .tag {
+        display: inline-flex;
+        width: fit-content;
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: #e6f1ed;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .offer-card h3 {
+        margin-bottom: 0;
+        font-size: 24px;
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      .offer-card p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .offer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+      }
+
+      .agent-band {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.42fr);
+        gap: 18px;
+        align-items: stretch;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .agent-band h2 {
+        max-width: 740px;
+        margin-bottom: 10px;
+        font-size: clamp(32px, 4.8vw, 62px);
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .agent-band p {
+        max-width: 760px;
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .agent-checks {
+        display: grid;
+        gap: 10px;
+      }
+
+      .agent-checks span {
+        display: block;
+        padding: 12px;
+        border-radius: var(--radius);
+        background: #f2eee5;
+        color: #41504b;
+        font-weight: 800;
+      }
+
+      footer {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 44px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .site-nav,
+        .section-heading,
+        .hero,
+        .agent-band {
+          grid-template-columns: 1fr;
+        }
+
+        .site-nav {
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 32px;
+        }
+
+        .hero-panel,
+        .hero-panel img {
+          min-height: 400px;
+        }
+
+        .offer-grid,
+        .proof-row {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-panel-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .site-nav {
+          position: static;
+        }
+
+        .hero-panel,
+        .hero-panel img {
+          min-height: 360px;
+        }
+
+        .nav-links a,
+        .button {
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
-    <p><a href="/ielts-90-day-plan/">Open IELTS 90-Day Plan</a></p>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="brand" href="#top">
+        <span class="brand-mark">SW</span>
+        <span>Project Studio</span>
+      </a>
+      <div class="nav-links">
+        <a href="#offers">Live offers</a>
+        <a href="#agent">Landing agent</a>
+        <a href="/projectplanner/">Planner</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Live product experiments</p>
+          <h1 id="hero-title">Pick the offer that fixes the problem today.</h1>
+          <p>
+            This hub routes visitors to the clearest current funnels: exam recovery, job-search automation,
+            market education, property review tools, and AI styling.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="/ic-educate/">Build an exam recovery plan</a>
+            <a class="button secondary" href="https://ic-wearables.vercel.app/">Open IC Wearables</a>
+          </div>
+          <div class="proof-row" aria-label="Portfolio proof">
+            <article>
+              <strong>5</strong>
+              <span>Live funnel families with clearer first actions.</span>
+            </article>
+            <article>
+              <strong>1</strong>
+              <span>Landing-page agent now checks the conversion basics.</span>
+            </article>
+            <article>
+              <strong>0</strong>
+              <span>Passwords or private data needed to browse the public pages.</span>
+            </article>
+          </div>
+        </div>
+
+        <figure class="hero-panel">
+          <img src="/ic-educate/assets/homepage-hero-B-9CNr0p.png" alt="IC Educate learning dashboard with study materials and product previews" />
+          <figcaption class="hero-panel-card">
+            <div>
+              <h2>Start with the page that already matches intent.</h2>
+              <p>Each path has one primary action, visible proof, and a practical next step.</p>
+            </div>
+            <a class="button primary" href="#offers">Choose path</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="offers">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Best next pages</p>
+            <h2>Focused landing pages by visitor type.</h2>
+          </div>
+          <p>
+            The old root redirected to IELTS. This now works as a portfolio funnel and sends each visitor to the highest-intent page.
+          </p>
+        </div>
+
+        <div class="offer-grid">
+          <article class="offer-card">
+            <img src="/ic-educate/assets/weak-topic-recovery-hero.svg" alt="Weak topic recovery dashboard" />
+            <div class="offer-body">
+              <span class="tag">Parents and students</span>
+              <h3>Find the weak topic. Fix it in 7 days.</h3>
+              <p>Generate a parent-readable recovery brief, then upgrade into practice papers and answer keys.</p>
+              <div class="offer-links">
+                <a class="button primary" href="/ic-educate/">Open IC Educate</a>
+                <a class="button secondary" href="/ic-educate/spm-add-maths-weak-topic.html">SPM Add Maths</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer-card">
+            <img src="https://ic-wearables.vercel.app/assets/ic-wearables-mens-ai-fit-v1.png" alt="IC Wearables AI menswear styling scan" />
+            <div class="offer-body">
+              <span class="tag">Style shoppers</span>
+              <h3>Face scan first. Outfit shortlist next.</h3>
+              <p>Turn a clear photo into a colour read, fit direction, five looks, and shoppable product links.</p>
+              <div class="offer-links">
+                <a class="button primary" href="https://ic-wearables.vercel.app/">Open IC Wearables</a>
+                <a class="button secondary" href="https://ic-wearables.vercel.app/bundles.html">See bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer-card">
+            <img src="/ic-investing-cache-desk/assets/market-command-center.png" alt="Market education command center dashboard" />
+            <div class="offer-body">
+              <span class="tag">Market learners</span>
+              <h3>Read the market with one chart, one thesis, one risk.</h3>
+              <p>Education-first market notes and dashboards for process, not personal financial advice.</p>
+              <div class="offer-links">
+                <a class="button primary" href="/ic-investing-cache-desk/">Open market desk</a>
+                <a class="button secondary" href="/projectplanner/options-volatility.html">Options view</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer-card">
+            <img src="/ic-property/assets/section17-pj.jpg" alt="Property shortlist in Section 17 Petaling Jaya" />
+            <div class="offer-body">
+              <span class="tag">Property decisions</span>
+              <h3>Compare listings before the viewing.</h3>
+              <p>Shortlists, calculators, and due-diligence notes for owners, renters, and first-time buyers.</p>
+              <div class="offer-links">
+                <a class="button primary" href="/ic-property/">Open property desk</a>
+                <a class="button secondary" href="/ic-property/darren-damansara.html">Sample shortlist</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer-card">
+            <img src="/ic-educate/assets/lesson-ops-hero-DCoDSaqB.png" alt="Lesson operations dashboard repurposed as a job-search workflow preview" />
+            <div class="offer-body">
+              <span class="tag">Job seekers</span>
+              <h3>Turn a job search into a daily approved run.</h3>
+              <p>Start with a paid pilot: CV clarity, shortlist, outreach pack, and human approval before automation.</p>
+              <div class="offer-links">
+                <a class="button primary" href="https://schuwaong.github.io/jobs-hunt-fastlane/">Open Jobs Hunt</a>
+                <a class="button secondary" href="https://schuwaong.github.io/jobs-hunt-fastlane/paid-pilot-intake.html">Paid pilot</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="offer-card">
+            <img src="/projectplanner/icons/icon-512.png" alt="Project planner app icon" />
+            <div class="offer-body">
+              <span class="tag">Operating system</span>
+              <h3>See what the growth agents are working on.</h3>
+              <p>The planner tracks project status, next moves, and local automation outputs.</p>
+              <div class="offer-links">
+                <a class="button primary" href="/projectplanner/">Open planner</a>
+                <a class="button secondary" href="#agent">Landing agent</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="agent">
+        <div class="agent-band">
+          <div>
+            <p class="eyebrow">New local agent</p>
+            <h2>Landing-page checks before the page goes live.</h2>
+            <p>
+              The new local auditor in Project Growth Agents classifies the page type, checks the hero promise,
+              CTA, proof, visual asset, friction, SEO basics, and live-link readiness, then writes a report for the next pass.
+            </p>
+          </div>
+          <div class="agent-checks" aria-label="Landing page agent checks">
+            <span>One campaign goal</span>
+            <span>Direct promise above the fold</span>
+            <span>Visible CTA and trust proof</span>
+            <span>Mobile-readable layout</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Live root: https://schuwaong.github.io/. Local source: /Users/j/Desktop/schuwaong.github.io/index.html.
+    </footer>
   </body>
 </html>
