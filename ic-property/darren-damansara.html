@@ -1593,7 +1593,9 @@
     function cachedPhotoSrc(src) {
       const match = String(src || "").match(/\/listing\/([^/]+)\/([^/]+)\/([^/?#]+)/);
       if (!match) return src;
-      return `./assets/darren-listings/${match[1]}-${match[2]}-${match[3]}`;
+      const photoId = (match[2].match(/\d+/) || [match[2]])[0];
+      const extension = (match[3].match(/\.(jpe?g|png)$/i) || ["", "jpg"])[1].toLowerCase();
+      return `./assets/darren-listings/${match[1]}-${photoId}.${extension}`;
     }
 
     function whatsappUrl(text) {

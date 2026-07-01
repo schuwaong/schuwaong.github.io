@@ -32,7 +32,9 @@ function localNameFor(url) {
   const listingId = parts[listingIndex + 1] || "listing";
   const variant = parts[listingIndex + 2] || "photo";
   const fileName = parts[listingIndex + 3] || parts.at(-1) || "photo.jpg";
-  return `${listingId}-${decodeURIComponent(variant)}-${decodeURIComponent(fileName)}`;
+  const photoId = (variant.match(/\d+/) || [variant.replace(/[^A-Za-z0-9_-]/g, "-")])[0];
+  const extension = (fileName.match(/\.(jpe?g|png)$/i) || ["", "jpg"])[1].toLowerCase();
+  return `${listingId}-${photoId}.${extension}`;
 }
 
 async function exists(path) {
