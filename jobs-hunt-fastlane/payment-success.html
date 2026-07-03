@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs Hunt Payment Success</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6f3;
+      --panel: #ffffff;
+      --ink: #101512;
+      --muted: #607067;
+      --line: #d9e4dc;
+      --accent: #126b56;
+      --accent-soft: #dff2eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 56px 0 64px;
+    }
+    h1, h2, p { margin: 0; }
+    .shell {
+      display: grid;
+      gap: 18px;
+    }
+    .band {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .eyebrow {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .lede {
+      margin-top: 10px;
+      max-width: 720px;
+      color: var(--muted);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .button.secondary {
+      background: #dfe8e1;
+      color: var(--ink);
+    }
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+    .step {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+    .step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .package {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #0c5a48;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 16px;
+    }
+    code {
+      font: inherit;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #edf3ef;
+      padding: 2px 6px;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 720px) {
+      main { padding-top: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="shell">
+      <section class="band">
+        <p class="eyebrow">Jobs Hunt</p>
+        <h1 style="margin-top:8px;">Payment received. Next step is WhatsApp.</h1>
+        <p class="lede">
+          Your pilot is not left floating after checkout. Send the payment confirmation on WhatsApp so I can match
+          the payment to the right package and queue the kickoff from my side.
+        </p>
+        <p class="package" id="packageBadge">Paid pilot</p>
+        <div class="actions">
+          <a class="button primary" id="whatsappButton" href="https://wa.me/60178265300?text=Hi%20Jobs%20Hunt%2C%20I%20completed%20payment%20for%20the%20paid%20pilot.">Confirm on WhatsApp</a>
+          <a class="button secondary" href="./index.html">Back to Jobs Hunt home</a>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="steps">
+          <div class="step">
+            <strong>Step 1</strong>
+            Open WhatsApp and send your confirmation using the button above.
+          </div>
+          <div class="step">
+            <strong>Step 2</strong>
+            Include the name or email used during payment if it is different from your WhatsApp profile.
+          </div>
+          <div class="step">
+            <strong>Step 3</strong>
+            I will confirm the package, match the payment, and send the kickoff next step from my side.
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <p class="eyebrow">Stripe redirect</p>
+        <h2 style="margin-top:8px;">Ready for package-specific links</h2>
+        <p class="lede" style="margin-top:8px;">
+          This page can be reused for all Stripe Payment Links. Add a query like
+          <code>?package=cv-tailoring</code> or <code>?package=application-sprint</code> to tailor the WhatsApp handoff.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const packageKey = params.get("package") || "paid-pilot";
+    const packageMap = {
+      "cv-tailoring": "CV tailoring only",
+      "shortlist": "CV + 10 role shortlist",
+      "application-sprint": "CV + shortlist + approval-gated applications",
+      "paid-pilot": "Paid pilot"
+    };
+    const packageLabel = packageMap[packageKey] || packageMap["paid-pilot"];
+    const packageBadge = document.getElementById("packageBadge");
+    const whatsappButton = document.getElementById("whatsappButton");
+    const message = [
+      "Hi Jobs Hunt, I completed payment for the paid pilot.",
+      `Package: ${packageLabel}.`,
+      "I am confirming here on WhatsApp so you can queue the kickoff."
+    ].join(" ");
+
+    packageBadge.textContent = packageLabel;
+    whatsappButton.href = `https://wa.me/60178265300?text=${encodeURIComponent(message)}`;
+  </script>
+</body>
+</html>

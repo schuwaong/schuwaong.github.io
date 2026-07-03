@@ -1,0 +1,226 @@
+<!doctype html>
+<html data-ui-mode="utility" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs Hunt Paid Pilot Intake | Human-Reviewed Job Search Run</title>
+  <meta
+    name="description"
+    content="Send your Jobs Hunt paid-pilot details: target market, role direction, approval rule, and CV context before any application automation runs."
+  >
+  <link rel="canonical" href="https://jobs-hunt-fastlane.pages.dev/paid-pilot-intake.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root { color-scheme: light; --ink:#121615; --muted:#64706b; --line:#dde5df; --paper:#fffefa; --soft:#f3f6f2; --green:#0f6b55; --clay:#ca5f42; --gold:#d1a248; --radius:8px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 16px/1.55 "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: linear-gradient(135deg, rgba(15,107,85,.08), transparent 32%), linear-gradient(315deg, rgba(202,95,66,.08), transparent 34%), var(--soft); }
+    main { width: min(1080px, calc(100vw - 32px)); margin: 0 auto; padding: 28px 0 56px; }
+    nav { display: flex; justify-content: space-between; gap: 14px; align-items: center; margin-bottom: 18px; padding: 12px 14px; border: 1px solid rgba(255,255,255,.52); border-radius: 999px; background: rgba(255,254,250,.82); box-shadow: 0 18px 42px rgba(18,22,21,.08); }
+    nav a { color: var(--ink); font-weight: 850; text-decoration: none; }
+    h1, h2 { font-family: "DM Serif Display", serif; font-weight: 400; letter-spacing: 0; }
+    h1 { max-width: 11ch; margin: 0; font-size: 64px; line-height: .9; }
+    h2 { margin: 0 0 6px; font-size: 24px; line-height: 1.05; }
+    p { color: var(--muted); max-width: 720px; }
+    .hero { display: grid; grid-template-columns: minmax(0, .92fr) minmax(280px, .68fr); gap: 18px; align-items: stretch; }
+    .hero-copy, .panel, .offer { border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255,254,250,.9); box-shadow: 0 18px 48px rgba(18,22,21,.08); }
+    .hero-copy { display: grid; align-content: end; min-height: 430px; padding: clamp(24px, 4vw, 42px); background: linear-gradient(145deg, rgba(255,254,250,.96), rgba(231,243,238,.84)); }
+    .hero-copy .eyebrow, .offer span { color: var(--clay); font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .hero-proof { display: grid; gap: 12px; }
+    .proof-card { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: #121615; color: #fffefa; }
+    .proof-card p { margin: 6px 0 0; color: rgba(255,254,250,.72); }
+    .panel { margin-top: 18px; padding: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 800; }
+    input, select, textarea { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; font: inherit; background: #fff; }
+    textarea { min-height: 110px; resize: vertical; }
+    button { min-height: 46px; border: 0; border-radius: var(--radius); padding: 0 16px; color: white; background: var(--ink); font-weight: 850; cursor: pointer; }
+    button.whatsapp { color: #062114; background: #25d366; }
+    button.secondary { color: var(--ink); background: #dfe7e1; }
+    .offer-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .offer { padding: 16px; }
+    .offer strong { color: var(--ink); font-size: 24px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .status { min-height: 20px; margin-top: 10px; font-size: 13px; }
+    .status.success { color: var(--green); }
+    .status.warning { color: #9a5b07; }
+    .note { font-size: 13px; }
+    @media (max-width: 860px) { .hero, .grid, .offer-strip { grid-template-columns: 1fr; } h1 { font-size: 44px; } nav { align-items: flex-start; border-radius: var(--radius); } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Primary">
+      <a href="./index.html">Jobs Hunt</a>
+      <a href="https://wa.me/60178265300?text=Hi%20Jobs%20Hunt%2C%20I%20am%20on%20the%20paid%20pilot%20intake%20page.">WhatsApp first</a>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Paid pilot intake</p>
+        <h1>Give the run enough context to be useful.</h1>
+        <p>Use this after, or just before, the first WhatsApp conversation. It structures your target market, role direction, and approval rule so the pilot can produce a reviewed shortlist instead of vague advice.</p>
+        <div class="actions">
+          <button class="whatsapp" id="heroWhatsappButton" type="button">WhatsApp before filling</button>
+        </div>
+      </div>
+      <div class="hero-proof" aria-label="Pilot safety promises">
+        <article class="proof-card">
+          <strong>No blind applications</strong>
+          <p>Drafts and next actions stay in review until you approve them.</p>
+        </article>
+        <article class="proof-card">
+          <strong>No passwords upfront</strong>
+          <p>The first run can start from CV context, public sources, and role direction.</p>
+        </article>
+        <article class="proof-card">
+          <strong>One clear output</strong>
+          <p>You get a focused shortlist, positioning notes, and outreach direction.</p>
+        </article>
+      </div>
+    </header>
+
+    <div class="offer-strip" aria-label="Jobs Hunt paid pilot offers">
+      <article class="offer">
+        <span>Entry</span>
+        <h2>CV tailoring</h2>
+        <strong>from RM49</strong>
+        <p>One CV pass for a target role family.</p>
+      </article>
+      <article class="offer">
+        <span>Pilot</span>
+        <h2>CV + 10 role shortlist</h2>
+        <strong>from RM149</strong>
+        <p>Target roles, fit notes, and application priorities.</p>
+      </article>
+      <article class="offer">
+        <span>Approval gated</span>
+        <h2>Application sprint</h2>
+        <strong>from RM299</strong>
+        <p>Drafted applications only; user approves before any submission.</p>
+      </article>
+    </div>
+    <section class="panel">
+      <form id="pilotForm">
+        <div class="grid">
+          <label>Name <input name="name" required></label>
+          <label>Contact <input name="contact" placeholder="Email or WhatsApp" required></label>
+          <label>Target market <input name="target_market" placeholder="Hong Kong, Singapore, Malaysia, remote..." required></label>
+          <label>Pilot package
+            <select name="package">
+              <option>CV tailoring only</option>
+              <option>CV + 10 role shortlist</option>
+              <option>CV + shortlist + approval-gated applications</option>
+            </select>
+          </label>
+        </div>
+        <label>Target role or job links <textarea name="target_roles" required></textarea></label>
+        <label>Approval rule
+          <select name="approval_rule">
+            <option>Drafts only, I send manually</option>
+            <option>Prepare applications for my approval</option>
+            <option>Call me before any submission</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button type="submit">Save draft on this device</button>
+          <button class="whatsapp" id="paymentButton" type="button">WhatsApp to start</button>
+        </div>
+        <p class="status" id="pilotStatus" aria-live="polite">Best path: save the pilot online, then click WhatsApp to confirm the request directly with me.</p>
+        <p class="note">No application is sent from this form. It now saves the pilot request online, and WhatsApp is still the fastest handoff for next-step coordination.</p>
+      </form>
+    </section>
+  </main>
+  <script src="./config.js"></script>
+  <script>
+    const form = document.getElementById("pilotForm");
+    const status = document.getElementById("pilotStatus");
+    const paymentButton = document.getElementById("paymentButton");
+    const heroWhatsappButton = document.getElementById("heroWhatsappButton");
+    const leadEndpoint = window.JOBS_HUNT_LEAD_ENDPOINT || "";
+    const paymentUrl = window.JOBS_HUNT_PAYMENT_URL || "";
+    const whatsappNumber = "60178265300";
+
+    function setStatus(message, state) {
+      status.textContent = message;
+      status.className = `status ${state || ""}`.trim();
+    }
+
+    function readLeads() {
+      try {
+        const leads = JSON.parse(localStorage.getItem("jobsHuntPaidPilotLeads") || "[]");
+        return Array.isArray(leads) ? leads : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveLead(payload) {
+      localStorage.setItem("jobsHuntPaidPilotLeads", JSON.stringify([payload, ...readLeads()].slice(0, 100)));
+    }
+
+    async function postLead(payload) {
+      if (!leadEndpoint) return false;
+      const response = await fetch(leadEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return true;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const fields = Object.fromEntries(new FormData(form).entries());
+      const payload = {
+        project: "jobs_hunt",
+        offer: "paid-pilot",
+        fields,
+        page: window.location.href,
+        createdAt: new Date().toISOString()
+      };
+      saveLead(payload);
+      const button = form.querySelector("button[type='submit']");
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = "Saving...";
+      try {
+        const online = await postLead(payload);
+        setStatus(online ? "Saved online. Now click WhatsApp to confirm the approved pilot with the same details." : "Saved only on this device. Continue on WhatsApp so I actually receive the request.", online ? "success" : "warning");
+      } catch (error) {
+        setStatus(`Saved locally, but the endpoint failed: ${error.message}`, "warning");
+      } finally {
+        button.disabled = false;
+        button.textContent = original;
+      }
+    });
+
+    function openWhatsappFromForm() {
+      localStorage.setItem("jobsHuntLastPaymentIntent", new Date().toISOString());
+      if (paymentUrl) {
+        window.location.href = paymentUrl;
+        return;
+      }
+      const fields = Object.fromEntries(new FormData(form).entries());
+      const message = [
+        "Hi Jobs Hunt, I want to start the paid pilot.",
+        fields.package ? `Package: ${fields.package}.` : "",
+        fields.target_market ? `Target market: ${fields.target_market}.` : "",
+        fields.target_roles ? `Target role/job links: ${fields.target_roles}.` : ""
+      ]
+        .filter(Boolean)
+        .join(" ");
+      window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      setStatus("Opening WhatsApp with your pilot details.", "success");
+    }
+
+    paymentButton.addEventListener("click", openWhatsappFromForm);
+    heroWhatsappButton.addEventListener("click", openWhatsappFromForm);
+  </script>
+</body>
+</html>

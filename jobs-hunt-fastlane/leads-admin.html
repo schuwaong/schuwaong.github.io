@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs Hunt Lead Console</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f6f3;
+      --panel: #ffffff;
+      --ink: #101512;
+      --muted: #607067;
+      --line: #d9e4dc;
+      --accent: #126b56;
+      --accent-soft: #dff2eb;
+      --warn: #8f5a08;
+      --warn-soft: #f5ead6;
+      --chip: #edf3ef;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1240px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    .shell {
+      display: grid;
+      gap: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .topbar, .stats, .actions, .lead-head, .lead-toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .eyebrow {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    .stats {
+      justify-content: flex-start;
+    }
+    .stat {
+      min-width: 150px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+      margin-top: 4px;
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    input, button, textarea, select {
+      font: inherit;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+    input {
+      min-height: 44px;
+      width: min(420px, 100%);
+    }
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+    select {
+      min-height: 44px;
+    }
+    button,
+    .action-link {
+      min-height: 42px;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 14px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+    button.secondary,
+    .action-link.secondary {
+      background: #dfe8e1;
+      color: var(--ink);
+    }
+    button.compact,
+    .action-link.compact {
+      min-height: 38px;
+      padding: 0 12px;
+      font-size: 14px;
+    }
+    .status {
+      min-height: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .status.success { color: var(--accent); }
+    .status.warning { color: var(--warn); }
+    .lead-list {
+      display: grid;
+      gap: 12px;
+    }
+    .lead-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+    }
+    .lead-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+    }
+    .lead-grid div {
+      min-width: 0;
+    }
+    .lead-grid strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .lead-grid span, .lead-grid a {
+      overflow-wrap: anywhere;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .lead-controls {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .chip[data-status="new"] { background: #edf3ef; }
+    .chip[data-status="contacted"] { background: #e5eef9; }
+    .chip[data-status="qualified"] { background: var(--accent-soft); color: #0c5a48; }
+    .chip[data-status="won"] { background: #d8f4df; color: #0f5f2e; }
+    .chip[data-status="archived"] { background: #ececec; color: #525252; }
+    .empty {
+      padding: 24px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      text-align: center;
+      background: #fbfcfb;
+    }
+    .hidden {
+      display: none;
+    }
+    .mini-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .message-box {
+      margin-top: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfb;
+    }
+    .message-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .message-preview {
+      margin: 0;
+      color: var(--ink);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 920px) {
+      .lead-grid,
+      .lead-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="shell">
+      <section class="panel">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Jobs Hunt</p>
+            <h1>Lead Console</h1>
+          </div>
+          <div class="actions">
+            <button class="secondary" id="refreshButton" type="button">Refresh</button>
+            <button class="secondary" id="clearKeyButton" type="button">Forget key</button>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:8px;">Hidden admin queue for paid pilot leads captured through the public site.</p>
+      </section>
+
+      <section class="panel">
+        <label>
+          Admin key
+          <input id="adminKey" type="password" placeholder="Paste the lead console key">
+        </label>
+        <div class="actions" style="margin-top:12px;">
+          <button id="loadButton" type="button">Load leads</button>
+        </div>
+        <p class="status" id="status" aria-live="polite">Enter the admin key to fetch leads.</p>
+      </section>
+
+      <section class="panel hidden" id="summaryPanel">
+        <div class="stats">
+          <div class="stat">
+            <span class="eyebrow">Leads</span>
+            <strong id="leadCount">0</strong>
+          </div>
+          <div class="stat">
+            <span class="eyebrow">New</span>
+            <strong id="newCount">0</strong>
+          </div>
+          <div class="stat">
+            <span class="eyebrow">Qualified</span>
+            <strong id="qualifiedCount">0</strong>
+          </div>
+          <div class="stat">
+            <span class="eyebrow">Latest</span>
+            <strong id="latestLead">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div id="leadList" class="lead-list">
+          <div class="empty">No leads loaded yet.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./config.js"></script>
+  <script>
+    const STORAGE_KEY = "jobsHuntAdminKey";
+    const adminKeyInput = document.getElementById("adminKey");
+    const loadButton = document.getElementById("loadButton");
+    const refreshButton = document.getElementById("refreshButton");
+    const clearKeyButton = document.getElementById("clearKeyButton");
+    const status = document.getElementById("status");
+    const leadList = document.getElementById("leadList");
+    const summaryPanel = document.getElementById("summaryPanel");
+    const leadCount = document.getElementById("leadCount");
+    const newCount = document.getElementById("newCount");
+    const qualifiedCount = document.getElementById("qualifiedCount");
+    const latestLead = document.getElementById("latestLead");
+    const STATUS_OPTIONS = ["new", "contacted", "qualified", "won", "archived"];
+    const WHATSAPP_NUMBER = "60178265300";
+
+    let leadsCache = [];
+    let adminPaymentUrl = "";
+    adminKeyInput.value = localStorage.getItem(STORAGE_KEY) || "";
+
+    function setStatus(message, state) {
+      status.textContent = message;
+      status.className = `status ${state || ""}`.trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function titleCase(value) {
+      return String(value || "").replace(/(^|\\s)\\S/g, (char) => char.toUpperCase());
+    }
+
+    function compactText(value) {
+      return String(value || "").replace(/\s+/g, " ").trim();
+    }
+
+    function formatLeadMessage(lead, queueStatusOverride, notesOverride) {
+      const queueStatus = queueStatusOverride || lead.queue_status || "new";
+      const notes = compactText(notesOverride != null ? notesOverride : lead.admin_notes);
+      const introByStatus = {
+        new: `Hi ${lead.name || "there"}, thanks for reaching out to Jobs Hunt.`,
+        contacted: `Hi ${lead.name || "there"}, following up on your Jobs Hunt pilot.`,
+        qualified: `Hi ${lead.name || "there"}, you look like a strong fit for the Jobs Hunt pilot.`,
+        won: `Hi ${lead.name || "there"}, great to have you moving forward with Jobs Hunt.`,
+        archived: `Hi ${lead.name || "there"}, sharing a quick closeout note from Jobs Hunt.`
+      };
+      const defaultNextStep = queueStatus === "won"
+        ? adminPaymentUrl
+          ? "Next step: use the payment link below to confirm the pilot and I will lock in the kickoff."
+          : "Next step: reply here and I will send the payment step directly."
+        : "Next step: reply here with your latest CV or the job links you want me to focus on, and I will map the best next move with you.";
+
+      const lines = [
+        introByStatus[queueStatus] || introByStatus.new,
+        lead.target_market ? `Target market: ${compactText(lead.target_market)}.` : "",
+        lead.pilot_package ? `Package: ${compactText(lead.pilot_package)}.` : "",
+        lead.target_roles ? `Target roles / links: ${compactText(lead.target_roles)}.` : "",
+        notes ? `Next step: ${notes}` : defaultNextStep,
+        queueStatus === "won" && adminPaymentUrl ? `Payment link: ${adminPaymentUrl}` : "",
+        queueStatus === "won"
+          ? "Once payment is confirmed, I will queue the pilot kickoff and continue with you here on WhatsApp."
+          : "You can continue everything with me here on WhatsApp."
+      ];
+
+      return lines.filter(Boolean).join("\n");
+    }
+
+    function getWhatsappHref(lead, queueStatusOverride, notesOverride) {
+      const text = formatLeadMessage(lead, queueStatusOverride, notesOverride);
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    }
+
+    async function copyText(value) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+
+      const helper = document.createElement("textarea");
+      helper.value = value;
+      helper.setAttribute("readonly", "");
+      helper.style.position = "absolute";
+      helper.style.left = "-9999px";
+      document.body.appendChild(helper);
+      helper.select();
+      const copied = document.execCommand("copy");
+      helper.remove();
+      return copied;
+    }
+
+    function updateMessagePreview(card) {
+      const leadId = card.dataset.leadId;
+      const lead = leadsCache.find((item) => item.id === leadId);
+      if (!lead) return;
+
+      const statusSelect = card.querySelector("[data-status-select]");
+      const notesInput = card.querySelector("[data-notes-input]");
+      const preview = card.querySelector("[data-message-preview]");
+      const whatsappLink = card.querySelector("[data-open-whatsapp]");
+
+      const messageText = formatLeadMessage(lead, statusSelect.value, notesInput.value);
+      preview.textContent = messageText;
+      whatsappLink.href = getWhatsappHref(lead, statusSelect.value, notesInput.value);
+    }
+
+    function renderSummary(leads) {
+      summaryPanel.classList.remove("hidden");
+      leadCount.textContent = String(leads.length);
+      newCount.textContent = String(leads.filter((lead) => lead.queue_status === "new").length);
+      qualifiedCount.textContent = String(leads.filter((lead) => lead.queue_status === "qualified").length);
+      latestLead.textContent = leads.length ? new Date(leads[0].created_at).toLocaleString() : "-";
+    }
+
+    function renderLeads(leads) {
+      leadsCache = Array.isArray(leads) ? leads : [];
+      renderSummary(leadsCache);
+
+      if (!leadsCache.length) {
+        leadList.innerHTML = '<div class="empty">No leads captured yet.</div>';
+        return;
+      }
+
+      leadList.innerHTML = leadsCache.map((lead) => `
+        <article class="lead-card" data-lead-id="${escapeHtml(lead.id)}">
+          <div class="lead-head">
+            <div>
+              <div class="chip-row">
+                <span class="chip" data-status="${escapeHtml(lead.queue_status || "new")}">${escapeHtml(titleCase(lead.queue_status || "new"))}</span>
+                <span class="chip">${escapeHtml(lead.offer || "paid-pilot")}</span>
+              </div>
+              <h3 style="margin-top:10px;">${escapeHtml(lead.name || "Unnamed lead")}</h3>
+            </div>
+            <p class="muted">${escapeHtml(new Date(lead.created_at).toLocaleString())}</p>
+          </div>
+
+          <div class="lead-grid">
+            <div>
+              <strong>Contact</strong>
+              <span>${escapeHtml(lead.contact)}</span>
+            </div>
+            <div>
+              <strong>Target market</strong>
+              <span>${escapeHtml(lead.target_market)}</span>
+            </div>
+            <div>
+              <strong>Package</strong>
+              <span>${escapeHtml(lead.pilot_package)}</span>
+            </div>
+            <div>
+              <strong>Approval rule</strong>
+              <span>${escapeHtml(lead.approval_rule)}</span>
+            </div>
+            <div>
+              <strong>Updated</strong>
+              <span>${escapeHtml(lead.updated_at ? new Date(lead.updated_at).toLocaleString() : "-")}</span>
+            </div>
+            <div>
+              <strong>ID</strong>
+              <span>${escapeHtml(lead.id)}</span>
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <strong>Target roles / links</strong>
+              <span>${escapeHtml(lead.target_roles)}</span>
+            </div>
+            <div style="grid-column: 1 / -1;">
+              <strong>Source page</strong>
+              <a href="${escapeHtml(lead.source_page)}" target="_blank" rel="noreferrer">${escapeHtml(lead.source_page)}</a>
+            </div>
+          </div>
+
+          <div class="lead-controls">
+            <div>
+              <label>
+                Queue status
+                <select data-status-select>
+                  ${STATUS_OPTIONS.map((option) => `
+                    <option value="${option}" ${lead.queue_status === option ? "selected" : ""}>${titleCase(option)}</option>
+                  `).join("")}
+                </select>
+              </label>
+              <p class="mini-note">Use status to move leads from new to contacted, qualified, won, or archived.</p>
+            </div>
+            <div>
+              <label>
+                Admin notes
+                <textarea data-notes-input placeholder="Next step, WhatsApp outcome, follow-up timing, or why this lead is strong.">${escapeHtml(lead.admin_notes || "")}</textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="lead-toolbar" style="margin-top:12px;">
+            <div class="actions">
+              <button class="compact" type="button" data-save-lead>Save update</button>
+              <button class="secondary compact" type="button" data-mark-contacted>Mark contacted</button>
+              <button class="secondary compact" type="button" data-mark-qualified>Mark qualified</button>
+              <button class="secondary compact" type="button" data-mark-won-payment>Mark won + payment</button>
+              <button class="secondary compact" type="button" data-mark-archived>Archive</button>
+              <a class="action-link secondary compact" data-open-whatsapp href="${escapeHtml(getWhatsappHref(lead))}" target="_blank" rel="noreferrer">Open WhatsApp draft</a>
+              ${adminPaymentUrl ? `<a class="action-link secondary compact" href="${escapeHtml(adminPaymentUrl)}" target="_blank" rel="noreferrer">Open checkout</a>` : ""}
+              <button class="secondary compact" type="button" data-copy-message>Copy message</button>
+            </div>
+            <p class="mini-note" data-lead-message></p>
+          </div>
+
+          <div class="message-box">
+            <strong>WhatsApp draft</strong>
+            <p class="message-preview" data-message-preview>${escapeHtml(formatLeadMessage(lead))}</p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    async function loadLeads() {
+      const key = adminKeyInput.value.trim();
+      if (!key) {
+        setStatus("Enter the admin key first.", "warning");
+        return;
+      }
+
+      toggleTopButtons(true);
+      setStatus("Loading leads...", "");
+
+      try {
+        const response = await fetch("/api/paid-pilot-leads-list", {
+          headers: {
+            "x-jobs-hunt-admin-key": key
+          }
+        });
+
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || `HTTP ${response.status}`);
+        }
+
+        localStorage.setItem(STORAGE_KEY, key);
+        adminPaymentUrl = typeof data.adminPaymentUrl === "string" ? data.adminPaymentUrl : "";
+        renderLeads(data.leads || []);
+        setStatus("Lead queue loaded.", "success");
+      } catch (error) {
+        renderLeads([]);
+        setStatus(`Could not load leads: ${error.message}`, "warning");
+      } finally {
+        toggleTopButtons(false);
+      }
+    }
+
+    function toggleTopButtons(disabled) {
+      loadButton.disabled = disabled;
+      refreshButton.disabled = disabled;
+      clearKeyButton.disabled = disabled;
+    }
+
+    async function updateLead(card, queueStatusOverride, options = {}) {
+      const key = adminKeyInput.value.trim();
+      const leadId = card.dataset.leadId;
+      const statusSelect = card.querySelector("[data-status-select]");
+      const notesInput = card.querySelector("[data-notes-input]");
+      const message = card.querySelector("[data-lead-message]");
+      const button = card.querySelector("[data-save-lead]");
+      const nextStatus = queueStatusOverride || statusSelect.value;
+
+      if (!key) {
+        setStatus("Admin key is missing.", "warning");
+        return;
+      }
+
+      statusSelect.value = nextStatus;
+      button.disabled = true;
+      message.textContent = options.loadingMessage || "Saving...";
+
+      try {
+        const response = await fetch("/api/paid-pilot-leads-update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-jobs-hunt-admin-key": key
+          },
+          body: JSON.stringify({
+            leadId,
+            queueStatus: nextStatus,
+            adminNotes: notesInput.value
+          })
+        });
+
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || `HTTP ${response.status}`);
+        }
+
+        const lead = leadsCache.find((item) => item.id === leadId);
+        if (lead) {
+          lead.queue_status = data.queueStatus;
+          lead.admin_notes = data.adminNotes;
+          lead.updated_at = data.updatedAt;
+        }
+
+        const updatedLead = lead
+          ? { ...lead }
+          : {
+              id: leadId,
+              queue_status: data.queueStatus,
+              admin_notes: data.adminNotes,
+              updated_at: data.updatedAt
+            };
+
+        renderLeads(leadsCache);
+        if (!options.skipStatusMessage) {
+          setStatus(options.successMessage || `Lead ${leadId.slice(0, 8)} updated.`, "success");
+        }
+        return { ok: true, lead: updatedLead };
+      } catch (error) {
+        message.textContent = "";
+        if (!options.skipStatusMessage) {
+          setStatus(`Could not update lead: ${error.message}`, "warning");
+        }
+        return { ok: false, error };
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    async function markWonAndOpenPayment(card) {
+      const leadId = card.dataset.leadId;
+      const lead = leadsCache.find((item) => item.id === leadId);
+      const notesInput = card.querySelector("[data-notes-input]");
+      const followupWindow = window.open("", "_blank");
+      const result = await updateLead(card, "won", {
+        loadingMessage: "Saving and opening payment follow-up...",
+        skipStatusMessage: true
+      });
+
+      if (!result || !result.ok) {
+        if (followupWindow) followupWindow.close();
+        setStatus(`Could not update lead: ${result && result.error ? result.error.message : "Unknown error."}`, "warning");
+        return;
+      }
+
+      const nextLead = result.lead || lead;
+      const href = getWhatsappHref(nextLead, "won", notesInput ? notesInput.value : "");
+      if (followupWindow) {
+        followupWindow.location = href;
+      } else {
+        window.open(href, "_blank", "noopener,noreferrer");
+      }
+
+      setStatus(
+        adminPaymentUrl
+          ? `Lead ${leadId.slice(0, 8)} marked won and payment follow-up opened.`
+          : `Lead ${leadId.slice(0, 8)} marked won. Payment URL is not set yet, so the WhatsApp follow-up opened without a checkout link.`,
+        adminPaymentUrl ? "success" : "warning"
+      );
+    }
+
+    loadButton.addEventListener("click", loadLeads);
+    refreshButton.addEventListener("click", loadLeads);
+
+    clearKeyButton.addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      adminKeyInput.value = "";
+      leadsCache = [];
+      summaryPanel.classList.add("hidden");
+      leadList.innerHTML = '<div class="empty">Admin key cleared.</div>';
+      setStatus("Key removed from this browser.", "success");
+    });
+
+    leadList.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-lead-id]");
+      if (!card) return;
+
+      if (event.target.matches("[data-save-lead]")) {
+        updateLead(card);
+      } else if (event.target.matches("[data-mark-contacted]")) {
+        updateLead(card, "contacted");
+      } else if (event.target.matches("[data-mark-qualified]")) {
+        updateLead(card, "qualified");
+      } else if (event.target.matches("[data-mark-won-payment]")) {
+        markWonAndOpenPayment(card);
+      } else if (event.target.matches("[data-mark-archived]")) {
+        updateLead(card, "archived");
+      } else if (event.target.matches("[data-copy-message]")) {
+        const lead = leadsCache.find((item) => item.id === card.dataset.leadId);
+        const notesInput = card.querySelector("[data-notes-input]");
+        const statusSelect = card.querySelector("[data-status-select]");
+        const message = card.querySelector("[data-lead-message]");
+        if (!lead) return;
+
+        copyText(formatLeadMessage(lead, statusSelect.value, notesInput.value))
+          .then(() => {
+            message.textContent = "WhatsApp draft copied.";
+          })
+          .catch((error) => {
+            message.textContent = `Copy failed: ${error.message}`;
+          });
+      }
+    });
+
+    leadList.addEventListener("input", (event) => {
+      const card = event.target.closest("[data-lead-id]");
+      if (!card) return;
+      if (event.target.matches("[data-notes-input], [data-status-select]")) {
+        updateMessagePreview(card);
+      }
+    });
+
+    leadList.addEventListener("change", (event) => {
+      const card = event.target.closest("[data-lead-id]");
+      if (!card) return;
+      if (event.target.matches("[data-status-select]")) {
+        updateMessagePreview(card);
+      }
+    });
+  </script>
+</body>
+</html>

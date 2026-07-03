@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Jobs Hunt dashboard for signed-in users to upload a CV, watch AI progress, grant browser access, and review job queue updates."
+    />
+    <title>Jobs Hunt Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dashboard.css" />
+  </head>
+  <body class="dashboard-page">
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="Jobs Hunt home">
+        <span class="brand-mark" aria-hidden="true">JH</span>
+        <span>
+          <strong>Jobs Hunt</strong>
+          <small>Browser-assisted job search</small>
+        </span>
+      </a>
+
+      <div class="topbar-meta">
+        <span class="status-chip" id="sessionBadge">Guest session</span>
+        <span class="muted" id="workspaceClock">Waiting for sign in</span>
+      </div>
+
+      <div class="topbar-actions">
+        <a class="secondary-button" href="./paid-pilot-intake.html">Pilot intake</a>
+        <button class="primary-button" id="helpFindJobsButton" type="button">Help find jobs</button>
+      </div>
+    </header>
+
+    <main class="dashboard-shell">
+      <aside class="sidebar">
+        <section class="panel auth-panel" id="authPanel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Sign in</p>
+              <h1 class="panel-title">Create your workspace</h1>
+            </div>
+          </div>
+
+          <form id="signInForm" class="stack-form">
+            <div class="field-grid">
+              <label>
+                Full name
+                <input name="name" type="text" placeholder="Aina Tan" required />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" placeholder="aina@example.com" required />
+              </label>
+              <label>
+                Target market
+                <select name="market">
+                  <option>Hong Kong</option>
+                  <option>Singapore</option>
+                  <option>Malaysia</option>
+                  <option>Remote</option>
+                </select>
+              </label>
+              <label>
+                Focus role
+                <input name="role" type="text" placeholder="Operations, product, finance..." required />
+              </label>
+            </div>
+
+            <label class="file-field">
+              <span>Upload CV</span>
+              <input id="cvUpload" name="cv" type="file" accept=".pdf,.doc,.docx" />
+              <small id="cvHint">No CV submitted yet.</small>
+            </label>
+
+            <button class="primary-button" type="submit">Sign in</button>
+          </form>
+        </section>
+
+        <section class="panel profile-panel is-hidden" id="profilePanel" aria-live="polite">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Workspace</p>
+              <h2 id="profileName">Signed in</h2>
+            </div>
+            <button class="ghost-button" id="switchAccountButton" type="button">Switch</button>
+          </div>
+
+          <dl class="profile-grid">
+            <div>
+              <dt>Market</dt>
+              <dd id="profileMarket">-</dd>
+            </div>
+            <div>
+              <dt>Role focus</dt>
+              <dd id="profileRole">-</dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd id="profileEmail">-</dd>
+            </div>
+            <div>
+              <dt>CV</dt>
+              <dd id="profileCv">Not uploaded</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="preview-frame">
+            <img src="./assets/jobs-hunt-site-shot.png" alt="Jobs Hunt workspace preview" />
+          </div>
+          <div class="panel-copy">
+            <p class="eyebrow">Workspace snapshot</p>
+            <p id="previewCaption">Login, upload a CV, then hand the browser to the AI helper.</p>
+          </div>
+        </section>
+
+        <section class="panel browser-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Browser access</p>
+              <h2>Consent before control</h2>
+            </div>
+          </div>
+
+          <label class="consent-row">
+            <input id="browserConsent" type="checkbox" />
+            <span>Allow this session to open approved job pages on this laptop.</span>
+          </label>
+
+          <button class="primary-button" id="browserAccessButton" type="button">Give browser access</button>
+          <p id="browserStatus" class="panel-note">Locked until you grant access.</p>
+          <p class="panel-note">
+            The helper can stage pages, draft fields, and pause for review. Final submit stays visible.
+          </p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <section class="panel overview-panel">
+          <div class="overview-copy">
+            <p class="eyebrow">AI progress</p>
+            <h1>Watch the run in real time.</h1>
+            <p id="workspaceSummary">
+              Sign in, upload a CV, and press Help find jobs to start matching roles and preparing the browser flow.
+            </p>
+          </div>
+
+          <div class="overview-actions">
+            <button class="primary-button" id="pauseRunButton" type="button" disabled>Pause run</button>
+            <button class="ghost-button" id="resetWorkspaceButton" type="button">Reset workspace</button>
+          </div>
+
+          <div class="metric-grid" aria-label="Run summary">
+            <article class="metric">
+              <span>Jobs found</span>
+              <strong id="jobsFound">0</strong>
+            </article>
+            <article class="metric">
+              <span>Drafts ready</span>
+              <strong id="draftsReady">0</strong>
+            </article>
+            <article class="metric">
+              <span>Browser</span>
+              <strong id="browserMetric">Locked</strong>
+            </article>
+            <article class="metric">
+              <span>Approval queue</span>
+              <strong id="approvalQueue">0</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel pipeline-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Pipeline</p>
+              <h2>From CV to browser-ready drafts</h2>
+            </div>
+            <span class="status-chip" id="phaseLabel">Waiting</span>
+          </div>
+
+          <ol class="stepper" id="stepper" aria-label="AI workflow steps"></ol>
+
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressFill"></span>
+          </div>
+
+          <div class="pipeline-note" id="pipelineNote">
+            The workspace is idle until you upload a CV and press Help find jobs.
+          </div>
+        </section>
+
+        <section class="split-grid">
+          <section class="panel queue-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Matched jobs</p>
+                <h2>Queue</h2>
+              </div>
+              <span class="status-chip" id="queueCount">0 jobs</span>
+            </div>
+
+            <div class="queue-list" id="jobQueue" aria-live="polite"></div>
+          </section>
+
+          <section class="panel activity-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Activity log</p>
+                <h2>What the AI is doing</h2>
+              </div>
+            </div>
+
+            <div class="activity-list" id="activityFeed" aria-live="polite"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./dashboard.js"></script>
+  </body>
+</html>

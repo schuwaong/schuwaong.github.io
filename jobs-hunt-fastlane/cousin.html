@@ -1,0 +1,847 @@
+<!doctype html>
+<html data-ui-mode="exploratory" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Damansara PJ Eats</title>
+    <meta
+      name="description"
+      content="Real restaurants near Damansara and Petaling Jaya with official booking links, GrabFood delivery, and multi-dimensional ratings."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./cousin.css" />
+  <link rel="stylesheet" href="shared/ui-selector.css">
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Primary">
+      <a class="site-brand" href="#top">DPJ Eats</a>
+      <div>
+        <a href="#restaurants">Restaurants</a>
+        <a href="#live-booking">Booking</a>
+        <a href="#review">Review</a>
+      </div>
+    </nav>
+
+    <main>
+      <header class="hero" id="top">
+        <img src="./assets/dpj-eats-hero.png" alt="A cozy restaurant table with food, a booking phone, and rating cards" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <section class="hero-copy">
+          <p>Damansara / Petaling Jaya dining board</p>
+          <h1>Damansara PJ Eats</h1>
+          <span>
+            Real restaurants near Damansara and PJ, with official booking links, GrabFood delivery, and a richer way
+            to rate what people actually ate.
+          </span>
+          <div class="hero-actions">
+            <a class="primary-link" href="#restaurants">Browse restaurants</a>
+            <a class="secondary-link" href="#live-booking">Live booking</a>
+          </div>
+        </section>
+      </header>
+
+      <section class="quick-strip" aria-label="Area highlights" data-reveal>
+        <p data-reveal-item><strong>12 spots</strong> restaurants worth comparing</p>
+        <p data-reveal-item><strong>6 GrabFood links</strong> direct delivery pages for quick orders</p>
+        <p data-reveal-item><strong>3 booking systems</strong> UMAI, Hilton dining, direct site</p>
+      </section>
+
+      <section class="section-heading" id="restaurants" data-reveal>
+        <p>Restaurants</p>
+        <h2>Real tables to rate, book, and revisit.</h2>
+      </section>
+
+      <section class="restaurant-filters" data-reveal aria-label="Restaurant filters">
+        <div class="filter-bar" data-reveal-item>
+          <button type="button" class="filter-tab is-active" data-restaurant-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-tab" data-restaurant-filter="nearby" aria-pressed="false">Nearby</button>
+          <button type="button" class="filter-tab" data-restaurant-filter="recommended" aria-pressed="false">
+            Recommended
+          </button>
+          <button type="button" class="filter-tab" data-restaurant-filter="grab" aria-pressed="false">
+            Grab delivery
+          </button>
+        </div>
+      </section>
+
+      <section class="restaurant-grid" aria-label="Restaurants near Damansara and PJ" data-reveal>
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended book grab">
+          <span>01</span>
+          <h3>Table &amp; Apron</h3>
+          <p class="spot-location">23 Jalan SS 20/11, Damansara Kim, Petaling Jaya</p>
+          <p>Neighbourhood comfort food with official reservations, GrabFood delivery, and a waitlist when fully booked.</p>
+          <div class="card-meta">
+            <span class="tag">Direct reservation</span>
+            <span class="tag">GrabFood</span>
+            <span class="tag">Damansara Kim</span>
+            <span class="tag">Recommended</span>
+          </div>
+          <p class="card-note">Tue-Thu dinner only; Fri-Sun lunch and dinner; max 12 pax.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://www.tableandapron.my/reservations" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="https://food.grab.com/my/en/restaurants?search=Table%20%26%20Apron" target="_blank" rel="noreferrer">GrabFood</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended book">
+          <span>02</span>
+          <h3>KomPassion</h3>
+          <p class="spot-location">5 Jalan SS 20/11, Damansara Kim, Petaling Jaya</p>
+          <p>Thai fusion in Damansara Kim, with live reservations on UMAI.</p>
+          <div class="card-meta">
+            <span class="tag">UMAI</span>
+            <span class="tag">Thai fusion</span>
+            <span class="tag">Damansara Kim</span>
+            <span class="tag">Recommended</span>
+          </div>
+          <p class="card-note">Reservations recommended on weekends.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://reservation.umai.io/en/widget/kompassion" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended book grab">
+          <span>03</span>
+          <h3>Jatujak Bangkok Street Food</h3>
+          <p class="spot-location">B-G, 31 Jalan PJU 1a/3j, Ara Damansara, Petaling Jaya</p>
+          <p>Busy Thai street-food spot with reservations, GrabFood delivery, and a lively Ara Damansara address.</p>
+          <div class="card-meta">
+            <span class="tag">UMAI</span>
+            <span class="tag">Thai</span>
+            <span class="tag">Ara Damansara</span>
+            <span class="tag">GrabFood</span>
+          </div>
+          <p class="card-note">Good pick for group dinners and long menus.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://reservation.umai.io/en/widget/jatujak-bangkok-street-food" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="https://food.grab.com/my/en/restaurants?search=Jatujak%20Bangkok%20Street%20Food" target="_blank" rel="noreferrer">GrabFood</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby book">
+          <span>04</span>
+          <h3>KANTAN @ Kota Damansara</h3>
+          <p class="spot-location">B-GF-07 Sunway Nexis, Jalan PJU 5/1, Kota Damansara, Petaling Jaya</p>
+          <p>Kelantanese comfort food with UMAI reservations and a family-friendly dining room.</p>
+          <div class="card-meta">
+            <span class="tag">UMAI</span>
+            <span class="tag">Malaysian</span>
+            <span class="tag">Kota Damansara</span>
+          </div>
+          <p class="card-note">Tue-Sun, 11am-10pm on the official page.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://reservation.umai.io/en/widget/kantan-kd" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby book">
+          <span>05</span>
+          <h3>SUKI-YA @ Citta Mall</h3>
+          <p class="spot-location">Lot G-03, G-03A &amp; G-05, Citta Mall, Ara Damansara</p>
+          <p>Japanese hotpot at Citta Mall with live reservations on UMAI.</p>
+          <div class="card-meta">
+            <span class="tag">UMAI</span>
+            <span class="tag">Japanese</span>
+            <span class="tag">Ara Damansara</span>
+          </div>
+          <p class="card-note">Use the reservation page for current slot availability.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://reservation.umai.io/en/widget/sukiya-citta-mall" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="book">
+          <span>06</span>
+          <h3>Genji Japanese Restaurant</h3>
+          <p class="spot-location">No 2 Jalan Barat, Hilton Petaling Jaya</p>
+          <p>Authentic Japanese dining inside Hilton Petaling Jaya with the hotel's official dining page.</p>
+          <div class="card-meta">
+            <span class="tag">Hilton dining</span>
+            <span class="tag">Japanese</span>
+            <span class="tag">PJ</span>
+          </div>
+          <p class="card-note">Book a table from the official Hilton dining page.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="book">
+          <span>07</span>
+          <h3>Paya Serai restaurant</h3>
+          <p class="spot-location">No 2 Jalan Barat, Hilton Petaling Jaya</p>
+          <p>Local and global buffet dining with reservations from Hilton's official dining page.</p>
+          <div class="card-meta">
+            <span class="tag">Hilton dining</span>
+            <span class="tag">Buffet</span>
+            <span class="tag">PJ</span>
+          </div>
+          <p class="card-note">Good for group lunches and family dinners.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="book">
+          <span>08</span>
+          <h3>Toh Yuen Chinese Restaurant</h3>
+          <p class="spot-location">No 2 Jalan Barat, Hilton Petaling Jaya</p>
+          <p>Modern Cantonese dining with a booking path from Hilton PJ's dining page.</p>
+          <div class="card-meta">
+            <span class="tag">Hilton dining</span>
+            <span class="tag">Cantonese</span>
+            <span class="tag">PJ</span>
+          </div>
+          <p class="card-note">Weekday dim sum lunch and weekend family meals.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/" target="_blank" rel="noreferrer">Book seat</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended grab">
+          <span>09</span>
+          <h3>Al-Sham Arabian Cuisine</h3>
+          <p class="spot-location">Damansara Kim, Petaling Jaya</p>
+          <p>Arabian dishes and pasta with a delivery-first setup on GrabFood.</p>
+          <div class="card-meta">
+            <span class="tag">GrabFood</span>
+            <span class="tag">Arabic</span>
+            <span class="tag">Damansara Kim</span>
+            <span class="tag">Recommended</span>
+          </div>
+          <p class="card-note">Great for easy delivery nights and shared platters.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://food.grab.com/my/en/restaurants?search=Al-Sham%20Arabian%20Cuisine" target="_blank" rel="noreferrer">Order on Grab</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby grab">
+          <span>10</span>
+          <h3>Pure Saiva</h3>
+          <p class="spot-location">Bandar Baru Petaling Jaya</p>
+          <p>South Indian delivery with a current GrabFood search link and fast weekday lunches.</p>
+          <div class="card-meta">
+            <span class="tag">GrabFood</span>
+            <span class="tag">South Indian</span>
+            <span class="tag">PJ</span>
+          </div>
+          <p class="card-note">Delivery-only; check the app for active service zones.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://food.grab.com/my/en/restaurants?search=Pure%20Saiva" target="_blank" rel="noreferrer">Order on Grab</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended grab">
+          <span>11</span>
+          <h3>Restoran Jemari</h3>
+          <p class="spot-location">Kelana Damansara Suites, Petaling Jaya</p>
+          <p>Malay comfort food with delivery-friendly portions and a GrabFood search page.</p>
+          <div class="card-meta">
+            <span class="tag">GrabFood</span>
+            <span class="tag">Malay</span>
+            <span class="tag">PJ</span>
+            <span class="tag">Recommended</span>
+          </div>
+          <p class="card-note">Good for rice dishes, sides, and sharing.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://food.grab.com/my/en/restaurants?search=Restoran%20Jemari" target="_blank" rel="noreferrer">Order on Grab</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+
+        <article class="restaurant-card" data-reveal-item data-categories="nearby recommended grab">
+          <span>12</span>
+          <h3>Sushi Ten</h3>
+          <p class="spot-location">Ara Damansara</p>
+          <p>Sushi, sashimi, and bento in Ara Damansara with GrabFood delivery on demand.</p>
+          <div class="card-meta">
+            <span class="tag">GrabFood</span>
+            <span class="tag">Japanese</span>
+            <span class="tag">Ara Damansara</span>
+            <span class="tag">Recommended</span>
+          </div>
+          <p class="card-note">Delivery-only; works well for lunch and dinner orders.</p>
+          <div class="card-actions">
+            <a class="primary-link" href="https://food.grab.com/my/en/restaurants?search=Sushi%20Ten" target="_blank" rel="noreferrer">Order on Grab</a>
+            <a class="secondary-link" href="#review">Rate it</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="live-booking" id="live-booking" data-reveal>
+        <div class="section-heading" data-reveal-item>
+          <p>Live booking</p>
+          <h2>Pick a venue and load the live seat screen.</h2>
+        </div>
+        <div class="booking-desk-shell" data-reveal-item>
+          <div class="booking-tabs" role="tablist" aria-label="Restaurant booking widgets">
+            <button
+              type="button"
+              class="booking-tab is-active"
+              role="tab"
+              aria-selected="true"
+              data-booking-tab="table-apron"
+            >
+              Table &amp; Apron
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="kompassion">
+              KomPassion
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="jatujak">
+              Jatujak Bangkok Street Food
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="kantan">
+              KANTAN @ Kota Damansara
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="sukiya">
+              SUKI-YA @ Citta Mall
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="genji">
+              Genji Japanese Restaurant
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="paya-serai">
+              Paya Serai restaurant
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-booking-tab="toh-yuen">
+              Toh Yuen Chinese Restaurant
+            </button>
+          </div>
+          <div class="booking-stage" id="booking-panel" role="tabpanel" aria-labelledby="booking-title">
+            <div class="booking-stage-head">
+              <div>
+                <p id="booking-source">Direct reservation page</p>
+                <h3 id="booking-title">Table &amp; Apron</h3>
+              </div>
+              <a
+                id="booking-open-link"
+                class="secondary-link"
+                href="https://www.tableandapron.my/reservations"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open page
+              </a>
+            </div>
+            <div class="booking-frame-shell">
+              <iframe
+                id="booking-frame"
+                title="Table &amp; Apron reservation widget"
+                src="https://www.tableandapron.my/reservations"
+                loading="eager"
+              ></iframe>
+              <div id="booking-external" class="booking-external" hidden>
+                <div>
+                  <p>Official page only</p>
+                  <h4 id="booking-external-title">Hilton Petaling Jaya keeps reservations on its own dining page.</h4>
+                  <p id="booking-external-copy">
+                    Open the official Hilton page in a new tab to check current slots for Genji, Paya Serai, or Toh
+                    Yuen.
+                  </p>
+                  <a
+                    id="booking-external-link"
+                    class="primary-link"
+                    href="https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open official page
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p id="booking-note" class="booking-note">
+              The restaurant owns the seat inventory in this view.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="notes-band" id="booking" data-reveal>
+        <div class="section-heading" data-reveal-item>
+          <p>Booking</p>
+          <h2>Availability stays with the restaurant's own system.</h2>
+        </div>
+        <div class="notes-grid">
+          <article data-reveal-item>
+            <h3>UMAI</h3>
+            <p>Table &amp; Apron, KomPassion, Jatujak, KANTAN, and SUKI-YA all use UMAI reservation pages.</p>
+          </article>
+          <article data-reveal-item>
+            <h3>Hilton dining</h3>
+            <p>Hilton Petaling Jaya routes diners through its official dining page for Genji, Paya Serai, and Toh Yuen.</p>
+          </article>
+          <article data-reveal-item>
+            <h3>Direct site</h3>
+            <p>If the venue owns the reservation page, link to that page and let their system handle the seats.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="booking-panel" aria-label="How to connect booking" data-reveal>
+        <div data-reveal-item>
+          <p>How to connect it</p>
+          <h2>Use the vendor widget or API if you want live seats on your own site.</h2>
+        </div>
+        <div class="booking-copy" data-reveal-item>
+          <p>
+            The safe path is simple: send people to the restaurant's official reservation page. If the venue wants
+            availability shown inside your page, ask for their widget script or partner API access first. UMAI and
+            direct reservation pages can be embedded; Hilton stays cleaner as an outbound page.
+          </p>
+          <dl>
+            <div>
+              <dt>Best move</dt>
+              <dd>Link to the official booking page</dd>
+            </div>
+            <div>
+              <dt>Inline seats</dt>
+              <dd>Use the venue's widget or partner API</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="review-panel" id="review" data-reveal>
+        <div data-reveal-item>
+          <p>Add Review</p>
+          <h2>Let people rate the meal, not the marketing.</h2>
+        </div>
+        <div class="review-stack" data-reveal-item>
+          <form id="review-form">
+            <label for="restaurant-select">
+              Restaurant
+              <select id="restaurant-select" name="restaurant" required>
+                <option>Table &amp; Apron</option>
+                <option>KomPassion</option>
+                <option>Jatujak Bangkok Street Food</option>
+                <option>KANTAN @ Kota Damansara</option>
+                <option>SUKI-YA @ Citta Mall</option>
+                <option>Genji Japanese Restaurant</option>
+                <option>Paya Serai restaurant</option>
+                <option>Toh Yuen Chinese Restaurant</option>
+                <option>Al-Sham Arabian Cuisine</option>
+                <option>Pure Saiva</option>
+                <option>Restoran Jemari</option>
+                <option>Sushi Ten</option>
+              </select>
+            </label>
+            <div class="rating-grid" aria-label="Rating dimensions">
+              <label for="food-rating">
+                Food
+                <select id="food-rating" name="food_rating" required>
+                  <option value="5">5 - excellent</option>
+                  <option value="4">4 - very good</option>
+                  <option value="3">3 - solid</option>
+                  <option value="2">2 - okay</option>
+                  <option value="1">1 - skip</option>
+                </select>
+              </label>
+              <label for="environment-rating">
+                Environment
+                <select id="environment-rating" name="environment_rating" required>
+                  <option value="5">5 - excellent</option>
+                  <option value="4">4 - very good</option>
+                  <option value="3">3 - solid</option>
+                  <option value="2">2 - okay</option>
+                  <option value="1">1 - skip</option>
+                </select>
+              </label>
+              <label for="noise-rating">
+                Noise
+                <select id="noise-rating" name="noise_rating" required>
+                  <option value="5">5 - quietest</option>
+                  <option value="4">4 - calm</option>
+                  <option value="3">3 - moderate</option>
+                  <option value="2">2 - lively</option>
+                  <option value="1">1 - loud</option>
+                </select>
+              </label>
+              <label for="crowd-rating">
+                Crowd
+                <select id="crowd-rating" name="crowd_rating" required>
+                  <option value="5">5 - empty</option>
+                  <option value="4">4 - light</option>
+                  <option value="3">3 - steady</option>
+                  <option value="2">2 - busy</option>
+                  <option value="1">1 - packed</option>
+                </select>
+              </label>
+            </div>
+            <label for="visit-date">
+              Visit date
+              <input id="visit-date" name="visit_date" type="date" required />
+            </label>
+            <label for="party-size">
+              Party size
+              <input id="party-size" name="party_size" type="number" min="1" step="1" placeholder="2" required />
+            </label>
+            <label for="review-notes">
+              Notes
+              <textarea
+                id="review-notes"
+                name="notes"
+                rows="4"
+                placeholder="What to order, what to skip, and whether you'd book again"
+              ></textarea>
+            </label>
+            <button type="submit">Submit Review</button>
+          </form>
+
+          <section class="review-feed" aria-labelledby="review-feed-title">
+            <div class="review-feed-head">
+              <div>
+                <p>Recent ratings</p>
+                <h3 id="review-feed-title">Latest diner notes</h3>
+              </div>
+              <div class="review-summary">
+                <div class="review-summary-main">
+                  <span id="review-count">0 reviews</span>
+                  <strong id="review-average">N/A</strong>
+                </div>
+                <div class="review-metrics" aria-label="Average rating breakdown">
+                  <div>
+                    <span>Food</span>
+                    <strong id="review-food-average">N/A</strong>
+                  </div>
+                  <div>
+                    <span>Environment</span>
+                    <strong id="review-environment-average">N/A</strong>
+                  </div>
+                  <div>
+                    <span>Noise</span>
+                    <strong id="review-noise-average">N/A</strong>
+                  </div>
+                  <div>
+                    <span>Crowd</span>
+                    <strong id="review-crowd-average">N/A</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="review-list" class="review-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const revealSections = Array.from(document.querySelectorAll("[data-reveal]"));
+      const bookingEntries = {
+        "table-apron": {
+          title: "Table & Apron",
+          source: "UMAI widget",
+          note: "This venue exposes a live UMAI widget and it loads inline here.",
+          url: "https://reservation.umai.io/en/widget/table-apron",
+          iframe: true,
+        },
+        kompassion: {
+          title: "KomPassion",
+          source: "UMAI widget",
+          note: "Live seats come from the venue's UMAI widget.",
+          url: "https://reservation.umai.io/en/widget/kompassion",
+          iframe: true,
+        },
+        jatujak: {
+          title: "Jatujak Bangkok Street Food",
+          source: "UMAI widget",
+          note: "Live seats come from the venue's UMAI widget.",
+          url: "https://reservation.umai.io/en/widget/jatujak-bangkok-street-food",
+          iframe: true,
+        },
+        kantan: {
+          title: "KANTAN @ Kota Damansara",
+          source: "UMAI widget",
+          note: "Live seats come from the venue's UMAI widget.",
+          url: "https://reservation.umai.io/en/widget/kantan-kd",
+          iframe: true,
+        },
+        sukiya: {
+          title: "SUKI-YA @ Citta Mall",
+          source: "UMAI widget",
+          note: "Live seats come from the venue's UMAI widget.",
+          url: "https://reservation.umai.io/en/widget/sukiya-citta-mall",
+          iframe: true,
+        },
+        genji: {
+          title: "Genji Japanese Restaurant",
+          source: "Hilton dining page",
+          note: "Hilton keeps this on its own dining page, so it opens externally.",
+          url: "https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/",
+          iframe: false,
+        },
+        "paya-serai": {
+          title: "Paya Serai restaurant",
+          source: "Hilton dining page",
+          note: "Hilton keeps this on its own dining page, so it opens externally.",
+          url: "https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/",
+          iframe: false,
+        },
+        "toh-yuen": {
+          title: "Toh Yuen Chinese Restaurant",
+          source: "Hilton dining page",
+          note: "Hilton keeps this on its own dining page, so it opens externally.",
+          url: "https://www.hilton.com/en/hotels/pethitw-hilton-petaling-jaya/dining/",
+          iframe: false,
+        },
+      };
+
+      const restaurantCards = Array.from(document.querySelectorAll(".restaurant-card"));
+      const filterTabs = Array.from(document.querySelectorAll("[data-restaurant-filter]"));
+      const STORAGE_KEY = "dpj-eats-reviews";
+      const bookingTabs = Array.from(document.querySelectorAll("[data-booking-tab]"));
+      const bookingTitle = document.getElementById("booking-title");
+      const bookingSource = document.getElementById("booking-source");
+      const bookingFrame = document.getElementById("booking-frame");
+      const bookingExternal = document.getElementById("booking-external");
+      const bookingExternalTitle = document.getElementById("booking-external-title");
+      const bookingExternalCopy = document.getElementById("booking-external-copy");
+      const bookingExternalLink = document.getElementById("booking-external-link");
+      const bookingOpenLink = document.getElementById("booking-open-link");
+      const bookingNote = document.getElementById("booking-note");
+
+      const form = document.getElementById("review-form");
+      const reviewList = document.getElementById("review-list");
+      const reviewCount = document.getElementById("review-count");
+      const reviewAverage = document.getElementById("review-average");
+      const reviewFoodAverage = document.getElementById("review-food-average");
+      const reviewEnvironmentAverage = document.getElementById("review-environment-average");
+      const reviewNoiseAverage = document.getElementById("review-noise-average");
+      const reviewCrowdAverage = document.getElementById("review-crowd-average");
+
+      function setActiveRestaurantFilter(filterKey) {
+        filterTabs.forEach((tab) => {
+          const active = tab.dataset.restaurantFilter === filterKey;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+
+        restaurantCards.forEach((card) => {
+          if (filterKey === "all") {
+            card.hidden = false;
+            return;
+          }
+
+          const categories = (card.dataset.categories || "").split(/\s+/).filter(Boolean);
+          card.hidden = !categories.includes(filterKey);
+        });
+      }
+
+      function setupReveal() {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion || !revealSections.length) {
+          revealSections.forEach((section) => section.classList.add("is-visible"));
+          return;
+        }
+
+        revealSections.forEach((section, index) => {
+          window.setTimeout(() => section.classList.add("is-visible"), 90 + index * 110);
+        });
+      }
+
+      function setActiveBooking(tabKey) {
+        const entry = bookingEntries[tabKey];
+        if (!entry) return;
+
+        bookingTabs.forEach((tab) => {
+          const active = tab.dataset.bookingTab === tabKey;
+          tab.classList.toggle("is-active", active);
+          tab.setAttribute("aria-selected", active ? "true" : "false");
+        });
+
+        bookingTitle.textContent = entry.title;
+        bookingSource.textContent = entry.source;
+        bookingOpenLink.href = entry.url;
+        bookingNote.textContent = entry.note;
+
+        if (entry.iframe) {
+          bookingFrame.hidden = false;
+          bookingExternal.hidden = true;
+          bookingFrame.src = entry.url;
+          bookingFrame.title = `${entry.title} reservation widget`;
+        } else {
+          bookingFrame.hidden = true;
+          bookingExternal.hidden = false;
+          bookingExternalTitle.textContent = entry.title;
+          bookingExternalCopy.textContent = entry.note;
+          bookingExternalLink.href = entry.url;
+        }
+      }
+
+      bookingTabs.forEach((tab) => {
+        tab.addEventListener("click", () => setActiveBooking(tab.dataset.bookingTab));
+      });
+
+      filterTabs.forEach((tab) => {
+        tab.addEventListener("click", () => setActiveRestaurantFilter(tab.dataset.restaurantFilter));
+      });
+
+      setupReveal();
+      setActiveRestaurantFilter("all");
+      setActiveBooking("table-apron");
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[char]);
+      }
+
+      function formatVisitDate(value) {
+        if (!value) return "Date not set";
+        const parsed = new Date(`${value}T12:00:00`);
+        if (Number.isNaN(parsed.getTime())) return "Date not set";
+        return parsed.toLocaleDateString("en-MY", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      }
+
+      function starRow(rating) {
+        const safeRating = Math.max(1, Math.min(5, Number(rating) || 0));
+        return `${"&#9733;".repeat(safeRating)}${"&#9734;".repeat(5 - safeRating)}`;
+      }
+
+      function ratingValue(review, key, fallbackKey) {
+        const primary = Number(review?.[key]);
+        if (Number.isFinite(primary) && primary > 0) return primary;
+
+        const fallback = Number(review?.[fallbackKey]);
+        if (Number.isFinite(fallback) && fallback > 0) return fallback;
+
+        return 0;
+      }
+
+      function averageRating(reviews, key, fallbackKey = key) {
+        if (!reviews.length) return null;
+        return reviews.reduce((total, review) => total + ratingValue(review, key, fallbackKey), 0) / reviews.length;
+      }
+
+      function formatAverage(value) {
+        return value == null ? "N/A" : `${value.toFixed(1)} / 5`;
+      }
+
+      function loadReviews() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          const parsed = raw ? JSON.parse(raw) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveReviews(reviews) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+      }
+
+      let reviews = loadReviews();
+
+      function renderReviews() {
+        if (!reviews.length) {
+          reviewCount.textContent = "0 reviews";
+          reviewAverage.textContent = "N/A";
+          reviewFoodAverage.textContent = "N/A";
+          reviewEnvironmentAverage.textContent = "N/A";
+          reviewNoiseAverage.textContent = "N/A";
+          reviewCrowdAverage.textContent = "N/A";
+          reviewList.innerHTML = '<p class="review-empty">No ratings yet. Be the first to leave one.</p>';
+          return;
+        }
+
+        const average = averageRating(reviews, "overallRating", "rating");
+        const foodAverage = averageRating(reviews, "foodRating", "rating");
+        const environmentAverage = averageRating(reviews, "environmentRating", "rating");
+        const noiseAverage = averageRating(reviews, "noiseRating", "rating");
+        const crowdAverage = averageRating(reviews, "crowdRating", "rating");
+        reviewCount.textContent = `${reviews.length} review${reviews.length === 1 ? "" : "s"}`;
+        reviewAverage.textContent = formatAverage(average);
+        reviewFoodAverage.textContent = formatAverage(foodAverage);
+        reviewEnvironmentAverage.textContent = formatAverage(environmentAverage);
+        reviewNoiseAverage.textContent = formatAverage(noiseAverage);
+        reviewCrowdAverage.textContent = formatAverage(crowdAverage);
+
+        reviewList.innerHTML = reviews
+          .map((review) => {
+            const rating = Math.max(1, Math.min(5, ratingValue(review, "overallRating", "rating")));
+            const food = Math.max(1, Math.min(5, ratingValue(review, "foodRating", "rating")));
+            const environment = Math.max(1, Math.min(5, ratingValue(review, "environmentRating", "rating")));
+            const noise = Math.max(1, Math.min(5, ratingValue(review, "noiseRating", "rating")));
+            const crowd = Math.max(1, Math.min(5, ratingValue(review, "crowdRating", "rating")));
+            const note = review.notes ? escapeHtml(review.notes) : "No notes added.";
+            return `
+              <article class="review-item">
+                <div class="review-item-top">
+                  <div>
+                    <h4>${escapeHtml(review.restaurant || "Restaurant")}</h4>
+                    <p>${starRow(rating)}</p>
+                  </div>
+                  <span class="review-pill">${rating}/5</span>
+                </div>
+                <p class="review-notes">${note}</p>
+                <div class="review-dimensions">
+                  <span>Food ${escapeHtml(food)}/5</span>
+                  <span>Environment ${escapeHtml(environment)}/5</span>
+                  <span>Noise ${escapeHtml(noise)}/5</span>
+                  <span>Crowd ${escapeHtml(crowd)}/5</span>
+                </div>
+                <div class="review-meta">
+                  <span>Party of ${escapeHtml(review.partySize || "2")}</span>
+                  <span>Visited ${escapeHtml(formatVisitDate(review.visitDate))}</span>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const foodRating = Number(data.get("food_rating") || 0);
+        const environmentRating = Number(data.get("environment_rating") || 0);
+        const noiseRating = Number(data.get("noise_rating") || 0);
+        const crowdRating = Number(data.get("crowd_rating") || 0);
+        const overallRating = Math.round((foodRating + environmentRating + noiseRating + crowdRating) / 4);
+        const review = {
+          restaurant: String(data.get("restaurant") || "").trim(),
+          overallRating,
+          rating: overallRating,
+          foodRating,
+          environmentRating,
+          noiseRating,
+          crowdRating,
+          visitDate: String(data.get("visit_date") || ""),
+          partySize: Number(data.get("party_size") || 0),
+          notes: String(data.get("notes") || "").trim(),
+          createdAt: new Date().toISOString(),
+        };
+
+        reviews = [review, ...reviews].slice(0, 24);
+        saveReviews(reviews);
+        form.reset();
+        renderReviews();
+      });
+
+      renderReviews();
+    </script>
+  </body>
+</html>
