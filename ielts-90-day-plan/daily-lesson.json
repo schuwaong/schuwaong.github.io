@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-04",
-  "seedDateKey": "2026-07-04",
+  "dateKey": "2026-07-05",
+  "seedDateKey": "2026-07-05",
   "source": "workflow",
   "vocab": {
-    "category": "speaking",
-    "term": "straightforward",
-    "zh": "简单明了的；直接的",
-    "simpleEn": "clear and easy to understand",
-    "simpleZh": "清楚、不复杂、容易理解。",
-    "exampleEn": "The instructions were straightforward, so I knew exactly what to do.",
-    "exampleZh": "说明很清楚，所以我知道该做什么。",
-    "upgradeEn": "Use straightforward instead of very easy when talking about tasks or explanations.",
-    "upgradeZh": "说任务或解释很简单时，用 straightforward 比 very easy 更自然。"
+    "category": "reading",
+    "term": "assumption",
+    "zh": "假设；想当然的看法",
+    "simpleEn": "something people believe without proof",
+    "simpleZh": "没有证据但先相信的想法。",
+    "exampleEn": "The article challenges the assumption that technology always saves time.",
+    "exampleZh": "文章挑战了技术总能节省时间这个假设。",
+    "upgradeEn": "Use challenge the assumption that... for reading and Task 2 ideas.",
+    "upgradeZh": "challenge the assumption that... 适合阅读理解和大作文。"
   },
   "cycle": {
-    "number": 10,
-    "phase": 2,
-    "titleEn": "Paraphrasing and coherence",
-    "titleZh": "改写与连贯",
-    "summaryEn": "Turn simple ideas into cleaner IELTS lines and link them smoothly.",
-    "summaryZh": "把简单意思改成更像雅思答案的表达，并把句子连起来。",
+    "number": 11,
+    "phase": 3,
+    "titleEn": "Timed mini tests",
+    "titleZh": "限时小测",
+    "summaryEn": "Use short sets to build speed, focus, and calm under pressure.",
+    "summaryZh": "用短小测练速度、专注和压力下的稳定性。",
     "focusWords": [
-      "paraphrase / 改写",
-      "coherence / 连贯性",
-      "cohesion / 衔接",
-      "linker / 连接词"
+      "timed / 限时",
+      "focus / 专注",
+      "pressure / 压力",
+      "review / 复盘"
     ]
   },
   "frame": {
-    "slot": "Compare / 比较",
-    "en": "Compared with ..., ...",
-    "zh": "与……相比，...",
-    "useEn": "Use when comparing ideas or data.",
-    "useZh": "用来比较观点或数据。"
+    "slot": "Reason / 原因",
+    "en": "This happens because...",
+    "zh": "这是因为...",
+    "useEn": "Use to explain why something happens.",
+    "useZh": "用来解释原因。"
   },
-  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
-  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"straightforward\" using Compared with ..., ...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"straightforward\" 和 与……相比，... 写一句 Becky 自己的话。",
+  "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
+  "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"assumption\" using This happens because...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"assumption\" 和 这是因为... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
