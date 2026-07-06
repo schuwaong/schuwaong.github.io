@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-05",
-  "seedDateKey": "2026-07-05",
+  "dateKey": "2026-07-06",
+  "seedDateKey": "2026-07-06",
   "source": "workflow",
   "vocab": {
     "category": "reading",
-    "term": "assumption",
-    "zh": "假设；想当然的看法",
-    "simpleEn": "something people believe without proof",
-    "simpleZh": "没有证据但先相信的想法。",
-    "exampleEn": "The article challenges the assumption that technology always saves time.",
-    "exampleZh": "文章挑战了技术总能节省时间这个假设。",
-    "upgradeEn": "Use challenge the assumption that... for reading and Task 2 ideas.",
-    "upgradeZh": "challenge the assumption that... 适合阅读理解和大作文。"
+    "term": "evidence",
+    "zh": "证据",
+    "simpleEn": "facts that support an idea",
+    "simpleZh": "支持观点的事实或依据。",
+    "exampleEn": "The writer provides evidence to support the claim.",
+    "exampleZh": "作者提供证据来支持这个说法。",
+    "upgradeEn": "Use evidence shows/suggests/indicates for formal answers.",
+    "upgradeZh": "正式表达可用 evidence shows / suggests / indicates。"
   },
   "cycle": {
-    "number": 11,
+    "number": 12,
     "phase": 3,
-    "titleEn": "Timed mini tests",
-    "titleZh": "限时小测",
-    "summaryEn": "Use short sets to build speed, focus, and calm under pressure.",
-    "summaryZh": "用短小测练速度、专注和压力下的稳定性。",
+    "titleEn": "Mock listening and reading",
+    "titleZh": "听读模拟",
+    "summaryEn": "Do listening and reading like the real test, then check the mistakes right away.",
+    "summaryZh": "像正式考试一样做听力和阅读，然后立刻订正。",
     "focusWords": [
-      "timed / 限时",
-      "focus / 专注",
-      "pressure / 压力",
-      "review / 复盘"
+      "mock / 模拟",
+      "answer sheet / 答题卡",
+      "mistake / 错误",
+      "score / 分数"
     ]
   },
   "frame": {
-    "slot": "Reason / 原因",
-    "en": "This happens because...",
-    "zh": "这是因为...",
-    "useEn": "Use to explain why something happens.",
-    "useZh": "用来解释原因。"
+    "slot": "Result / 结果",
+    "en": "As a result, ...",
+    "zh": "因此，...",
+    "useEn": "Use after showing cause and effect.",
+    "useZh": "写因果关系时使用。"
   },
   "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
   "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"assumption\" using This happens because...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"assumption\" 和 这是因为... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"evidence\" using As a result, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"evidence\" 和 因此，... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
