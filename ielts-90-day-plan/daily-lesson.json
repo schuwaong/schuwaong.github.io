@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-06",
-  "seedDateKey": "2026-07-06",
+  "dateKey": "2026-07-07",
+  "seedDateKey": "2026-07-07",
   "source": "workflow",
   "vocab": {
     "category": "reading",
-    "term": "evidence",
-    "zh": "证据",
-    "simpleEn": "facts that support an idea",
-    "simpleZh": "支持观点的事实或依据。",
-    "exampleEn": "The writer provides evidence to support the claim.",
-    "exampleZh": "作者提供证据来支持这个说法。",
-    "upgradeEn": "Use evidence shows/suggests/indicates for formal answers.",
-    "upgradeZh": "正式表达可用 evidence shows / suggests / indicates。"
+    "term": "imply",
+    "zh": "暗示；意味着",
+    "simpleEn": "to suggest something without saying it directly",
+    "simpleZh": "没有直接说，但暗示出某个意思。",
+    "exampleEn": "The data imply that younger people are spending more time online.",
+    "exampleZh": "数据暗示年轻人花在网上的时间更多。",
+    "upgradeEn": "Use imply when the meaning is suggested, not directly stated.",
+    "upgradeZh": "意思没有明说但能推出来时，用 imply。"
   },
   "cycle": {
-    "number": 12,
+    "number": 13,
     "phase": 3,
-    "titleEn": "Mock listening and reading",
-    "titleZh": "听读模拟",
-    "summaryEn": "Do listening and reading like the real test, then check the mistakes right away.",
-    "summaryZh": "像正式考试一样做听力和阅读，然后立刻订正。",
+    "titleEn": "Mock speaking and recording",
+    "titleZh": "口语模拟与录音",
+    "summaryEn": "Record your speaking, listen back, and fix hesitation and weak vocabulary.",
+    "summaryZh": "把口语录下来，回听并修正卡顿和弱词汇。",
     "focusWords": [
-      "mock / 模拟",
-      "answer sheet / 答题卡",
-      "mistake / 错误",
-      "score / 分数"
+      "record / 录音",
+      "hesitation / 犹豫",
+      "pronunciation / 发音",
+      "natural / 自然"
     ]
   },
   "frame": {
-    "slot": "Result / 结果",
-    "en": "As a result, ...",
-    "zh": "因此，...",
-    "useEn": "Use after showing cause and effect.",
-    "useZh": "写因果关系时使用。"
+    "slot": "Linking / 衔接",
+    "en": "Moreover, ...",
+    "zh": "此外，...",
+    "useEn": "Use to connect ideas smoothly.",
+    "useZh": "用来把句子连接起来。"
   },
   "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
   "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"evidence\" using As a result, ...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"evidence\" 和 因此，... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"imply\" using Moreover, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"imply\" 和 此外，... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
