@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-07",
-  "seedDateKey": "2026-07-07",
+  "dateKey": "2026-07-08",
+  "seedDateKey": "2026-07-08",
   "source": "workflow",
   "vocab": {
-    "category": "reading",
-    "term": "imply",
-    "zh": "暗示；意味着",
-    "simpleEn": "to suggest something without saying it directly",
-    "simpleZh": "没有直接说，但暗示出某个意思。",
-    "exampleEn": "The data imply that younger people are spending more time online.",
-    "exampleZh": "数据暗示年轻人花在网上的时间更多。",
-    "upgradeEn": "Use imply when the meaning is suggested, not directly stated.",
-    "upgradeZh": "意思没有明说但能推出来时，用 imply。"
+    "category": "listening",
+    "term": "approximately",
+    "zh": "大约",
+    "simpleEn": "about; not exact",
+    "simpleZh": "大概，不是精确数字。",
+    "exampleEn": "The tour takes approximately two hours.",
+    "exampleZh": "这次游览大约需要两个小时。",
+    "upgradeEn": "Use approximately for time, cost, distance, and number answers.",
+    "upgradeZh": "approximately 常用于时间、费用、距离和数字。"
   },
   "cycle": {
-    "number": 13,
+    "number": 14,
     "phase": 3,
-    "titleEn": "Mock speaking and recording",
-    "titleZh": "口语模拟与录音",
-    "summaryEn": "Record your speaking, listen back, and fix hesitation and weak vocabulary.",
-    "summaryZh": "把口语录下来，回听并修正卡顿和弱词汇。",
+    "titleEn": "Full writing practice",
+    "titleZh": "完整写作练习",
+    "summaryEn": "Write Task 1 and Task 2 under time, then improve the weakest paragraph.",
+    "summaryZh": "限时写完 Task 1 和 Task 2，再修改最弱的一段。",
     "focusWords": [
-      "record / 录音",
-      "hesitation / 犹豫",
-      "pronunciation / 发音",
-      "natural / 自然"
+      "task response / 任务回应",
+      "paragraph / 段落",
+      "band / 分数档",
+      "polish / 打磨"
     ]
   },
   "frame": {
-    "slot": "Linking / 衔接",
-    "en": "Moreover, ...",
-    "zh": "此外，...",
-    "useEn": "Use to connect ideas smoothly.",
-    "useZh": "用来把句子连接起来。"
+    "slot": "Opinion / 观点",
+    "en": "In my view, ...",
+    "zh": "在我看来，...",
+    "useEn": "Use to show your opinion clearly.",
+    "useZh": "用来清楚表达观点。"
   },
-  "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
-  "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"imply\" using Moreover, ...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"imply\" 和 此外，... 写一句 Becky 自己的话。",
+  "meaningEn": "This listening word helps Becky catch answers, numbers, and details.",
+  "meaningZh": "这个听力词可以帮助 Becky 抓住答案、数字和细节。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"approximately\" using In my view, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"approximately\" 和 在我看来，... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
