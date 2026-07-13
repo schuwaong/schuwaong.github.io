@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-12",
-  "seedDateKey": "2026-07-12",
+  "dateKey": "2026-07-13",
+  "seedDateKey": "2026-07-13",
   "source": "workflow",
   "vocab": {
-    "category": "writing",
-    "term": "ambiguity",
-    "zh": "模糊；不明确",
-    "simpleEn": "uncertainty because something is not clear",
-    "simpleZh": "因为不清楚而产生的不确定。",
-    "exampleEn": "Ambiguity in instructions can lead to mistakes.",
-    "exampleZh": "指令不明确可能会导致错误。",
-    "upgradeEn": "Use ambiguity for instructions, policies, communication, and data.",
-    "upgradeZh": "ambiguity 适合指令、政策、沟通和数据类话题。"
+    "category": "speaking",
+    "term": "resilient",
+    "zh": "有韧性的；抗压的",
+    "simpleEn": "able to recover after difficulty",
+    "simpleZh": "遇到困难后还能恢复和继续。",
+    "exampleEn": "Language learners need to be resilient because progress is not always obvious.",
+    "exampleZh": "语言学习者需要有韧性，因为进步不总是明显的。",
+    "upgradeEn": "Use resilient for people, teams, learners, and communities.",
+    "upgradeZh": "resilient 可形容人、团队、学习者和社区。"
   },
   "cycle": {
-    "number": 9,
+    "number": 10,
     "phase": 2,
-    "titleEn": "Vocabulary and collocations",
-    "titleZh": "词汇与搭配",
-    "summaryEn": "Learn useful word partnerships so your English sounds more natural.",
-    "summaryZh": "学习常用搭配，让英语听起来更自然。",
+    "titleEn": "Paraphrasing and coherence",
+    "titleZh": "改写与连贯",
+    "summaryEn": "Turn simple ideas into cleaner IELTS lines and link them smoothly.",
+    "summaryZh": "把简单意思改成更像雅思答案的表达，并把句子连起来。",
     "focusWords": [
-      "collocation / 搭配",
-      "lexical resource / 词汇资源",
-      "natural / 自然",
-      "range / 范围"
+      "paraphrase / 改写",
+      "coherence / 连贯性",
+      "cohesion / 衔接",
+      "linker / 连接词"
     ]
   },
   "frame": {
-    "slot": "Speaking / 口语",
-    "en": "What I mean is...",
-    "zh": "我的意思是...",
-    "useEn": "Use this to answer clearly and naturally.",
-    "useZh": "用来让口语回答更清楚自然。"
+    "slot": "Task 1 / 小作文",
+    "en": "The overall trend is...",
+    "zh": "总体趋势是...",
+    "useEn": "Use in graph and chart descriptions.",
+    "useZh": "适合图表描述和趋势题。"
   },
-  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
-  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"ambiguity\" using What I mean is...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"ambiguity\" 和 我的意思是... 写一句 Becky 自己的话。",
+  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
+  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"resilient\" using The overall trend is...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"resilient\" 和 总体趋势是... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
