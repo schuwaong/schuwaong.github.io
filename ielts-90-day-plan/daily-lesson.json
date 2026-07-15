@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-14",
-  "seedDateKey": "2026-07-14",
+  "dateKey": "2026-07-15",
+  "seedDateKey": "2026-07-15",
   "source": "workflow",
   "vocab": {
-    "category": "reading",
-    "term": "precise",
-    "zh": "精确的；准确的",
-    "simpleEn": "exact and clear",
-    "simpleZh": "准确、清楚。",
-    "exampleEn": "Precise language makes an answer easier to understand.",
-    "exampleZh": "精确的语言让答案更容易理解。",
-    "upgradeEn": "Use precise language/details/data for IELTS reading and writing.",
-    "upgradeZh": "常用搭配：precise language / details / data。"
+    "category": "writing",
+    "term": "outcome",
+    "zh": "结果；成果",
+    "simpleEn": "the result of an action or process",
+    "simpleZh": "行动或过程产生的结果。",
+    "exampleEn": "The outcome of a study plan depends on how consistently it is followed.",
+    "exampleZh": "学习计划的成果取决于执行是否持续。",
+    "upgradeEn": "Use outcome instead of result when discussing work, study, or policy.",
+    "upgradeZh": "讨论工作、学习或政策时，用 outcome 替代 result。"
   },
   "cycle": {
-    "number": 11,
+    "number": 12,
     "phase": 3,
-    "titleEn": "Timed mini tests",
-    "titleZh": "限时小测",
-    "summaryEn": "Use short sets to build speed, focus, and calm under pressure.",
-    "summaryZh": "用短小测练速度、专注和压力下的稳定性。",
+    "titleEn": "Mock listening and reading",
+    "titleZh": "听读模拟",
+    "summaryEn": "Do listening and reading like the real test, then check the mistakes right away.",
+    "summaryZh": "像正式考试一样做听力和阅读，然后立刻订正。",
     "focusWords": [
-      "timed / 限时",
-      "focus / 专注",
-      "pressure / 压力",
-      "review / 复盘"
+      "mock / 模拟",
+      "answer sheet / 答题卡",
+      "mistake / 错误",
+      "score / 分数"
     ]
   },
   "frame": {
-    "slot": "Task 2 / 大作文",
-    "en": "I strongly believe that...",
-    "zh": "我强烈认为...",
-    "useEn": "Use to give a clear opinion.",
-    "useZh": "用来表达清晰观点。"
+    "slot": "Evidence / 例子",
+    "en": "For instance, ...",
+    "zh": "例如...",
+    "useEn": "Use to support your point with an example.",
+    "useZh": "用例子支持观点。"
   },
-  "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
-  "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"precise\" using I strongly believe that...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"precise\" 和 我强烈认为... 写一句 Becky 自己的话。",
+  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
+  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"outcome\" using For instance, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"outcome\" 和 例如... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
