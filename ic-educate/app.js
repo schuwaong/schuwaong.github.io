@@ -2,9 +2,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const defaultApiBase = (() => {
   if (window.IC_EDUCATE_API_BASE) return window.IC_EDUCATE_API_BASE;
-  if (window.location.hostname.endsWith("github.io")) return "http://127.0.0.1:8001";
   if (window.location.protocol.startsWith("http")) return window.location.origin;
-  return "http://127.0.0.1:8001";
+  return "";
 })();
 
 const API_BASE = defaultApiBase.replace(/\/$/, "");
@@ -446,9 +445,8 @@ const formatStatusLabel = (value = "") =>
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
 const isOwnerAccount = () => {
-  const role = String(APP_STATE.profile?.preferences?.role || "").toLowerCase();
-  const email = String(APP_STATE.user?.email || APP_STATE.profile?.email || "").trim().toLowerCase();
-  return role === "owner" || role === "admin" || OWNER_EMAILS.has(email);
+  const email = String(APP_STATE.user?.email || "").trim().toLowerCase();
+  return OWNER_EMAILS.has(email);
 };
 
 const normalizePaperOrder = (row = {}, source = "local") => {

@@ -17,9 +17,10 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, email, display_name)
+  insert into public.profiles (id, user_id, email, display_name)
   values (
     new.id,
+    new.id::text,
     new.email,
     coalesce(
       nullif(new.raw_user_meta_data ->> 'full_name', ''),
@@ -37,6 +38,7 @@ $$;
 
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
+  user_id text unique,
   email text,
   display_name text,
   school_name text,
@@ -46,6 +48,44 @@ create table if not exists public.profiles (
   preferences jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
+);
+
+alter table public.profiles
+  add column if not exists id uuid references auth.users(id) on delete cascade,
+  add column if not exists user_id text,
+  add column if not exists email text,
+  add column if not exists school_name text,
+  add column if not exists level text,
+  add column if not exists avatar_url text,
+  add column if not exists timezone text,
+  add column if not exists preferences jsonb not null default '{}'::jsonb;
+
+do $$
+begin
+  if exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'profiles'
+      and column_name = 'user_id'
+  ) then
+    update public.profiles
+    set id = nullif(trim(user_id), '')::uuid
+    where id is null
+      and user_id ~* '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$';
+  end if;
+end;
+$$;
+
+create unique index if not exists profiles_id_key on public.profiles (id);
+
+create table if not exists public.ic_educate_account_deletions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null,
+  email text,
+  reason text,
+  deleted_rows jsonb not null default '{}'::jsonb,
+  requested_at timestamptz not null default now()
 );
 
 create table if not exists public.ic_educate_leads (
@@ -64,12 +104,22 @@ create table if not exists public.ic_educate_leads (
 
 alter table public.ic_educate_leads
   add column if not exists user_id uuid references auth.users(id) on delete set null,
+  add column if not exists client_request_id text,
   add column if not exists phone text,
   add column if not exists topic text,
+  add column if not exists syllabus text,
   add column if not exists area text,
   add column if not exists mode text,
+  add column if not exists budget text,
   add column if not exists lead_type text not null default 'student',
   add column if not exists preferred_time text,
+  add column if not exists selected_tutor_key text,
+  add column if not exists selected_tutor_name text,
+  add column if not exists booking_day text,
+  add column if not exists booking_slot text,
+  add column if not exists booking_mode text,
+  add column if not exists booking_venue text,
+  add column if not exists edit_token_hash text,
   add column if not exists consent_whatsapp boolean not null default false,
   add column if not exists market text not null default 'malaysia',
   add column if not exists note text,
@@ -77,6 +127,196 @@ alter table public.ic_educate_leads
 
 alter table public.ic_educate_leads
   alter column email drop not null;
+
+create table if not exists public.ic_educate_admin_allowlist (
+  email text primary key,
+  role text not null default 'admin' check (role in ('owner', 'admin')),
+  note text,
+  is_active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  check (email = lower(trim(email))),
+  check (position('@' in email) > 1)
+);
+
+alter table public.ic_educate_admin_allowlist
+  add column if not exists role text not null default 'admin',
+  add column if not exists note text,
+  add column if not exists is_active boolean not null default true,
+  add column if not exists created_at timestamptz not null default now(),
+  add column if not exists updated_at timestamptz not null default now();
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'ic_educate_admin_allowlist_role_check'
+      and conrelid = 'public.ic_educate_admin_allowlist'::regclass
+  ) then
+    alter table public.ic_educate_admin_allowlist
+      add constraint ic_educate_admin_allowlist_role_check
+      check (role in ('owner', 'admin'));
+  end if;
+end;
+$$;
+
+create table if not exists public.ic_educate_teacher_profiles (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete set null,
+  submission_id text not null unique,
+  display_name text not null,
+  market text not null default 'malaysia' check (market in ('malaysia', 'hongkong')),
+  subjects text[] not null default '{}',
+  syllabuses text[] not null default '{}',
+  levels text[] not null default '{}',
+  experience_years smallint not null default 0 check (experience_years between 0 and 60),
+  qualifications text,
+  languages text[] not null default '{}',
+  area text not null,
+  lesson_modes text[] not null default '{online}',
+  availability text[] not null default '{}',
+  fee_label text,
+  bio text,
+  avatar_url text,
+  status text not null default 'pending' check (status in ('pending', 'published', 'hidden')),
+  review_note text,
+  reviewed_by text,
+  reviewed_at timestamptz,
+  published_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  check (cardinality(subjects) > 0),
+  check (cardinality(levels) > 0),
+  check (lesson_modes <@ array['online', 'physical']::text[])
+);
+
+alter table public.ic_educate_teacher_profiles
+  add column if not exists user_id uuid references auth.users(id) on delete set null,
+  add column if not exists review_note text,
+  add column if not exists reviewed_by text,
+  add column if not exists reviewed_at timestamptz;
+
+create or replace function public.set_teacher_profile_published_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  if new.status = 'published' and new.published_at is null then
+    new.published_at = now();
+  elsif new.status <> 'published' then
+    new.published_at = null;
+  end if;
+  return new;
+end;
+$$;
+
+create table if not exists public.ic_educate_saved_tutors (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  teacher_key text not null,
+  teacher_name text not null,
+  snapshot jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (user_id, teacher_key)
+);
+
+create table if not exists public.ic_educate_marketplace_messages (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  request_id uuid not null references public.ic_educate_leads(id) on delete cascade,
+  sender_role text not null default 'student' check (sender_role in ('student', 'operator', 'tutor')),
+  body text not null check (body <> '' and char_length(body) <= 4000),
+  read_at timestamptz,
+  created_at timestamptz not null default now()
+);
+
+create or replace function public.save_ic_educate_tutor_request(p_payload jsonb, p_edit_token text)
+returns uuid
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_id uuid;
+  v_existing public.ic_educate_leads%rowtype;
+  v_client_request_id text := nullif(trim(p_payload ->> 'client_request_id'), '');
+  v_phone text := nullif(trim(p_payload ->> 'phone'), '');
+  v_email text := nullif(trim(p_payload ->> 'email'), '');
+  v_token_hash text := encode(digest(coalesce(p_edit_token, ''), 'sha256'), 'hex');
+begin
+  if v_client_request_id is null or char_length(coalesce(p_edit_token, '')) < 20 then
+    raise exception 'A client request id and edit token are required';
+  end if;
+
+  select * into v_existing
+  from public.ic_educate_leads
+  where client_request_id = v_client_request_id
+  limit 1;
+
+  if found then
+    if not (
+      (auth.uid() is not null and v_existing.user_id = auth.uid())
+      or (v_existing.user_id is null and v_existing.edit_token_hash = v_token_hash)
+    ) then
+      raise exception 'Request ownership check failed';
+    end if;
+
+    update public.ic_educate_leads
+    set user_id = coalesce(user_id, auth.uid()),
+        email = coalesce(v_email, email),
+        name = nullif(trim(p_payload ->> 'name'), ''),
+        phone = coalesce(v_phone, phone),
+        subject = nullif(trim(p_payload ->> 'subject'), ''),
+        topic = nullif(trim(p_payload ->> 'topic'), ''),
+        syllabus = nullif(trim(p_payload ->> 'syllabus'), ''),
+        level = nullif(trim(p_payload ->> 'level'), ''),
+        area = nullif(trim(p_payload ->> 'area'), ''),
+        mode = nullif(trim(p_payload ->> 'mode'), ''),
+        budget = nullif(trim(p_payload ->> 'budget'), ''),
+        preferred_time = nullif(trim(p_payload ->> 'preferred_time'), ''),
+        selected_tutor_key = nullif(trim(p_payload ->> 'selected_tutor_key'), ''),
+        selected_tutor_name = nullif(trim(p_payload ->> 'selected_tutor_name'), ''),
+        booking_day = nullif(trim(p_payload ->> 'booking_day'), ''),
+        booking_slot = nullif(trim(p_payload ->> 'booking_slot'), ''),
+        booking_mode = nullif(trim(p_payload ->> 'booking_mode'), ''),
+        booking_venue = nullif(trim(p_payload ->> 'booking_venue'), ''),
+        consent_whatsapp = coalesce((p_payload ->> 'consent_whatsapp')::boolean, consent_whatsapp),
+        note = nullif(trim(p_payload ->> 'note'), ''),
+        page = nullif(trim(p_payload ->> 'page'), ''),
+        status = v_existing.status,
+        updated_at = now()
+    where id = v_existing.id
+    returning id into v_id;
+    return v_id;
+  end if;
+
+  if coalesce(v_phone, v_email) is null then
+    raise exception 'A phone number or email is required';
+  end if;
+
+  insert into public.ic_educate_leads (
+    user_id, client_request_id, email, name, phone, subject, topic, syllabus, level, area, mode, budget,
+    lead_type, preferred_time, selected_tutor_key, selected_tutor_name, booking_day, booking_slot,
+    booking_mode, booking_venue, edit_token_hash, consent_whatsapp, market, note, page, source, status
+  ) values (
+    auth.uid(), v_client_request_id, v_email, nullif(trim(p_payload ->> 'name'), ''), v_phone,
+    nullif(trim(p_payload ->> 'subject'), ''), nullif(trim(p_payload ->> 'topic'), ''),
+    nullif(trim(p_payload ->> 'syllabus'), ''), nullif(trim(p_payload ->> 'level'), ''),
+    nullif(trim(p_payload ->> 'area'), ''), nullif(trim(p_payload ->> 'mode'), ''),
+    nullif(trim(p_payload ->> 'budget'), ''), 'student', nullif(trim(p_payload ->> 'preferred_time'), ''),
+    nullif(trim(p_payload ->> 'selected_tutor_key'), ''), nullif(trim(p_payload ->> 'selected_tutor_name'), ''),
+    nullif(trim(p_payload ->> 'booking_day'), ''), nullif(trim(p_payload ->> 'booking_slot'), ''),
+    nullif(trim(p_payload ->> 'booking_mode'), ''), nullif(trim(p_payload ->> 'booking_venue'), ''),
+    v_token_hash, coalesce((p_payload ->> 'consent_whatsapp')::boolean, false),
+    case when p_payload ->> 'market' = 'hongkong' then 'hongkong' else 'malaysia' end,
+    nullif(trim(p_payload ->> 'note'), ''), nullif(trim(p_payload ->> 'page'), ''), 'tutor-finder', 'new'
+  ) returning id into v_id;
+
+  return v_id;
+end;
+$$;
 
 create table if not exists public.ic_educate_paper_requests (
   id uuid primary key default gen_random_uuid(),
@@ -121,10 +361,46 @@ set search_path = public
 as $$
   select exists (
     select 1
-    from public.profiles
-    where id = auth.uid()
-      and coalesce(preferences ->> 'role', '') in ('owner', 'admin')
+    from auth.users as admin_user
+    join public.ic_educate_admin_allowlist as allowlist
+      on allowlist.email = lower(coalesce(admin_user.email, ''))
+     and allowlist.is_active
+    where admin_user.id = auth.uid()
+      and allowlist.role in ('owner', 'admin')
   );
+$$;
+
+create or replace function public.guard_ic_educate_teacher_profile_update()
+returns trigger
+language plpgsql
+set search_path = public
+as $$
+begin
+  if tg_op <> 'UPDATE' then
+    return new;
+  end if;
+
+  if public.is_ic_educate_admin() then
+    return new;
+  end if;
+
+  if auth.uid() is null or old.user_id is distinct from auth.uid() then
+    return new;
+  end if;
+
+  if new.review_note is distinct from old.review_note
+     or new.reviewed_by is distinct from old.reviewed_by
+     or new.reviewed_at is distinct from old.reviewed_at
+     or new.published_at is distinct from old.published_at then
+    raise exception 'Only IC Educate admins can change moderation fields';
+  end if;
+
+  if new.status is distinct from 'pending' then
+    raise exception 'Teacher profile updates must return to pending review';
+  end if;
+
+  return new;
+end;
 $$;
 
 create table if not exists public.ic_educate_mistakes (
@@ -255,8 +531,20 @@ create table if not exists public.card_reviews (
 
 create index if not exists ic_educate_leads_email_idx on public.ic_educate_leads (email);
 create index if not exists ic_educate_leads_user_id_idx on public.ic_educate_leads (user_id);
+create unique index if not exists ic_educate_leads_client_request_id_uidx
+  on public.ic_educate_leads (client_request_id) where client_request_id is not null;
 create index if not exists ic_educate_leads_market_status_idx on public.ic_educate_leads (market, status, created_at desc);
 create index if not exists ic_educate_leads_type_subject_idx on public.ic_educate_leads (lead_type, subject);
+create index if not exists ic_educate_teacher_profiles_status_published_idx
+  on public.ic_educate_teacher_profiles (status, published_at desc);
+create index if not exists ic_educate_teacher_profiles_market_idx
+  on public.ic_educate_teacher_profiles (market, created_at desc);
+create index if not exists ic_educate_teacher_profiles_user_id_idx
+  on public.ic_educate_teacher_profiles (user_id, updated_at desc);
+create index if not exists ic_educate_saved_tutors_user_id_idx
+  on public.ic_educate_saved_tutors (user_id, updated_at desc);
+create index if not exists ic_educate_marketplace_messages_request_idx
+  on public.ic_educate_marketplace_messages (request_id, created_at asc);
 create index if not exists ic_educate_paper_requests_email_idx on public.ic_educate_paper_requests (email);
 create index if not exists ic_educate_paper_requests_user_id_idx on public.ic_educate_paper_requests (user_id);
 create index if not exists ic_educate_paper_requests_client_request_id_idx on public.ic_educate_paper_requests (client_request_id);
@@ -272,7 +560,12 @@ create index if not exists revision_cards_user_id_topic_idx on public.revision_c
 create index if not exists card_reviews_user_id_card_idx on public.card_reviews (user_id, card_id, reviewed_at desc);
 
 alter table public.profiles enable row level security;
+alter table public.ic_educate_account_deletions enable row level security;
 alter table public.ic_educate_leads enable row level security;
+alter table public.ic_educate_admin_allowlist enable row level security;
+alter table public.ic_educate_teacher_profiles enable row level security;
+alter table public.ic_educate_saved_tutors enable row level security;
+alter table public.ic_educate_marketplace_messages enable row level security;
 alter table public.ic_educate_paper_requests enable row level security;
 alter table public.ic_educate_mistakes enable row level security;
 alter table public.worksheet_attempts enable row level security;
@@ -294,6 +587,31 @@ for each row execute function public.set_updated_at();
 drop trigger if exists set_ic_educate_leads_updated_at on public.ic_educate_leads;
 create trigger set_ic_educate_leads_updated_at
 before update on public.ic_educate_leads
+for each row execute function public.set_updated_at();
+
+drop trigger if exists set_ic_educate_admin_allowlist_updated_at on public.ic_educate_admin_allowlist;
+create trigger set_ic_educate_admin_allowlist_updated_at
+before update on public.ic_educate_admin_allowlist
+for each row execute function public.set_updated_at();
+
+drop trigger if exists set_ic_educate_teacher_profiles_updated_at on public.ic_educate_teacher_profiles;
+create trigger set_ic_educate_teacher_profiles_updated_at
+before update on public.ic_educate_teacher_profiles
+for each row execute function public.set_updated_at();
+
+drop trigger if exists guard_ic_educate_teacher_profiles_owner_update on public.ic_educate_teacher_profiles;
+create trigger guard_ic_educate_teacher_profiles_owner_update
+before update on public.ic_educate_teacher_profiles
+for each row execute function public.guard_ic_educate_teacher_profile_update();
+
+drop trigger if exists set_ic_educate_teacher_profiles_published_at on public.ic_educate_teacher_profiles;
+create trigger set_ic_educate_teacher_profiles_published_at
+before insert or update on public.ic_educate_teacher_profiles
+for each row execute function public.set_teacher_profile_published_at();
+
+drop trigger if exists set_ic_educate_saved_tutors_updated_at on public.ic_educate_saved_tutors;
+create trigger set_ic_educate_saved_tutors_updated_at
+before update on public.ic_educate_saved_tutors
 for each row execute function public.set_updated_at();
 
 drop trigger if exists set_ic_educate_paper_requests_updated_at on public.ic_educate_paper_requests;
@@ -324,13 +642,29 @@ for each row execute function public.set_updated_at();
 revoke all on schema public from anon, authenticated;
 grant usage on schema public to anon, authenticated;
 grant execute on function public.is_ic_educate_admin() to authenticated;
+revoke all on function public.save_ic_educate_tutor_request(jsonb, text) from public;
+grant execute on function public.save_ic_educate_tutor_request(jsonb, text) to anon, authenticated;
 
 revoke all on public.profiles from anon, authenticated;
 grant select, insert, update on public.profiles to authenticated;
 
+revoke all on public.ic_educate_account_deletions from anon, authenticated;
+
 revoke all on public.ic_educate_leads from anon, authenticated;
 grant insert on public.ic_educate_leads to anon, authenticated;
 grant select, insert, update on public.ic_educate_leads to authenticated;
+
+revoke all on public.ic_educate_admin_allowlist from anon, authenticated;
+
+revoke all on public.ic_educate_teacher_profiles from anon, authenticated;
+grant select, insert on public.ic_educate_teacher_profiles to anon, authenticated;
+grant update on public.ic_educate_teacher_profiles to authenticated;
+
+revoke all on public.ic_educate_saved_tutors from anon, authenticated;
+grant select, insert, update, delete on public.ic_educate_saved_tutors to authenticated;
+
+revoke all on public.ic_educate_marketplace_messages from anon, authenticated;
+grant select, insert, update on public.ic_educate_marketplace_messages to authenticated;
 
 revoke all on public.ic_educate_paper_requests from anon, authenticated;
 grant insert on public.ic_educate_paper_requests to anon, authenticated;
@@ -418,6 +752,100 @@ on public.ic_educate_leads
 for update
 to authenticated
 using (public.is_ic_educate_admin())
+with check (public.is_ic_educate_admin());
+
+drop policy if exists "Public can submit teacher profiles" on public.ic_educate_teacher_profiles;
+create policy "Public can submit teacher profiles"
+on public.ic_educate_teacher_profiles
+for insert
+to anon, authenticated
+with check (
+  status = 'pending'
+  and (user_id is null or user_id = auth.uid())
+  and display_name <> ''
+  and area <> ''
+  and cardinality(subjects) > 0
+  and cardinality(levels) > 0
+);
+
+drop policy if exists "Public can read published teacher profiles" on public.ic_educate_teacher_profiles;
+create policy "Public can read published teacher profiles"
+on public.ic_educate_teacher_profiles
+for select
+to anon, authenticated
+using (status = 'published');
+
+drop policy if exists "IC Educate admins can read teacher profiles" on public.ic_educate_teacher_profiles;
+create policy "IC Educate admins can read teacher profiles"
+on public.ic_educate_teacher_profiles
+for select
+to authenticated
+using (public.is_ic_educate_admin());
+
+drop policy if exists "IC Educate admins can update teacher profiles" on public.ic_educate_teacher_profiles;
+create policy "IC Educate admins can update teacher profiles"
+on public.ic_educate_teacher_profiles
+for update
+to authenticated
+using (public.is_ic_educate_admin())
+with check (public.is_ic_educate_admin());
+
+drop policy if exists "Teacher profiles are readable by owner" on public.ic_educate_teacher_profiles;
+create policy "Teacher profiles are readable by owner"
+on public.ic_educate_teacher_profiles for select to authenticated
+using (user_id = auth.uid());
+
+drop policy if exists "Teacher profiles are updatable by owner" on public.ic_educate_teacher_profiles;
+create policy "Teacher profiles are updatable by owner"
+on public.ic_educate_teacher_profiles for update to authenticated
+using (user_id = auth.uid() and status in ('pending', 'hidden'))
+with check (user_id = auth.uid() and status = 'pending');
+
+drop policy if exists "Saved tutors are readable by owner" on public.ic_educate_saved_tutors;
+create policy "Saved tutors are readable by owner"
+on public.ic_educate_saved_tutors for select to authenticated
+using (user_id = auth.uid());
+
+drop policy if exists "Saved tutors are insertable by owner" on public.ic_educate_saved_tutors;
+create policy "Saved tutors are insertable by owner"
+on public.ic_educate_saved_tutors for insert to authenticated
+with check (user_id = auth.uid());
+
+drop policy if exists "Saved tutors are updatable by owner" on public.ic_educate_saved_tutors;
+create policy "Saved tutors are updatable by owner"
+on public.ic_educate_saved_tutors for update to authenticated
+using (user_id = auth.uid()) with check (user_id = auth.uid());
+
+drop policy if exists "Saved tutors are deletable by owner" on public.ic_educate_saved_tutors;
+create policy "Saved tutors are deletable by owner"
+on public.ic_educate_saved_tutors for delete to authenticated
+using (user_id = auth.uid());
+
+drop policy if exists "Marketplace messages are readable by request owner" on public.ic_educate_marketplace_messages;
+create policy "Marketplace messages are readable by request owner"
+on public.ic_educate_marketplace_messages for select to authenticated
+using (
+  user_id = auth.uid()
+  and exists (select 1 from public.ic_educate_leads where id = request_id and user_id = auth.uid())
+);
+
+drop policy if exists "Marketplace messages are insertable by request owner" on public.ic_educate_marketplace_messages;
+create policy "Marketplace messages are insertable by request owner"
+on public.ic_educate_marketplace_messages for insert to authenticated
+with check (
+  user_id = auth.uid()
+  and sender_role = 'student'
+  and exists (select 1 from public.ic_educate_leads where id = request_id and user_id = auth.uid())
+);
+
+drop policy if exists "Marketplace messages are readable by admin" on public.ic_educate_marketplace_messages;
+create policy "Marketplace messages are readable by admin"
+on public.ic_educate_marketplace_messages for select to authenticated
+using (public.is_ic_educate_admin());
+
+drop policy if exists "Marketplace messages are insertable by admin" on public.ic_educate_marketplace_messages;
+create policy "Marketplace messages are insertable by admin"
+on public.ic_educate_marketplace_messages for insert to authenticated
 with check (public.is_ic_educate_admin());
 
 drop policy if exists "Public can create IC Educate paper requests" on public.ic_educate_paper_requests;

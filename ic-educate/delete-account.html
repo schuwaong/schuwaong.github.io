@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete Account | IC Educate</title>
+    <meta
+      name="description"
+      content="Delete your IC Educate account and synced tutoring records."
+    />
+    <meta name="theme-color" content="#0f766e" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="policy-page">
+    <header class="site-header login-header">
+      <a class="brand" href="./index.html" aria-label="IC Educate home">
+        <span class="brand-mark">IC</span>
+        <span>IC Educate</span>
+      </a>
+      <a class="button small secondary" href="./find-tutor.html?screen=student-profile">Back to profile</a>
+    </header>
+
+    <main class="policy-shell">
+      <section class="policy-card">
+        <p class="eyebrow">Account deletion</p>
+        <h1>Delete your IC Educate account</h1>
+        <p class="policy-meta">Updated: July 12, 2026</p>
+        <p>
+          This page deletes the signed-in IC Educate account and the synced records attached to it. If you are not signed in,
+          sign in first and return to this page.
+        </p>
+        <p id="deleteAccountSummary" class="account-delete-summary">Checking account status...</p>
+      </section>
+
+      <section class="policy-grid">
+        <article class="policy-card">
+          <h2>What will be removed</h2>
+          <div class="account-delete-checklist">
+            <span class="chip">Signed-in account</span>
+            <span class="chip">Synced profile</span>
+            <span class="chip">Tutor requests linked to the account</span>
+            <span class="chip">Saved tutors and synced messages</span>
+            <span class="chip">Teacher profiles created while signed in</span>
+          </div>
+        </article>
+
+        <article class="policy-card">
+          <h2>What may need manual support</h2>
+          <ul>
+            <li>Teacher submissions created before you signed in and not linked to your account.</li>
+            <li>Standalone WhatsApp conversations that happened outside the app.</li>
+            <li>Any exported files you already downloaded onto your own device.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="policy-card">
+        <h2>Confirm deletion</h2>
+        <form id="deleteAccountForm" class="account-delete-form">
+          <label class="field">
+            <span>Optional reason</span>
+            <textarea id="deleteAccountReason" rows="4" placeholder="Tell IC Educate why you are deleting this account."></textarea>
+          </label>
+          <label class="field">
+            <span>Type DELETE to confirm</span>
+            <input id="deleteAccountConfirm" type="text" autocomplete="off" placeholder="DELETE" required />
+          </label>
+          <div class="button-row">
+            <button id="deleteAccountSubmitBtn" type="submit" class="danger-btn">Delete my account</button>
+            <a class="button secondary" href="./support.html">Need help instead</a>
+          </div>
+        </form>
+        <p id="deleteAccountStatus" class="hint account-delete-status" aria-live="polite">
+          Sign in before using this page.
+        </p>
+      </section>
+    </main>
+
+    <nav class="site-footer-links" aria-label="Policy and support links">
+      <a class="chip ghost" href="./support.html">Support</a>
+      <a class="chip ghost" href="./privacy.html">Privacy</a>
+      <a class="chip ghost" href="./terms.html">Terms</a>
+      <a class="chip ghost" href="./delete-account.html">Delete account</a>
+    </nav>
+
+    <script src="./config.js"></script>
+    <script src="./pwa.js"></script>
+    <script src="./delete-account.js"></script>
+  </body>
+</html>

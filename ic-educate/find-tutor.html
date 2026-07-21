@@ -2,267 +2,1292 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>IC Educate Tutor Finder</title>
     <meta
       name="description"
-      content="Looking for a tutor? IC Educate helps students share their subject, level, area, and schedule, then ranks tutor matches and saves the request for follow-up."
+      content="IC Educate matches students with tutors by subject, syllabus, area, availability, and lesson mode across Malaysia and Hong Kong."
     />
     <meta name="theme-color" content="#0f766e" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="IC Educate" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="../favicon.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./assets/pwa/apple-touch-icon.png" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260714-profile-upcoming-3" />
+    <link rel="stylesheet" href="./find-tutor-embedded.css?v=20260714-profile-upcoming-3" />
   </head>
-  <body class="tutor-page">
-    <header class="site-header">
+  <body class="tutor-page marketplace-page">
+    <header class="site-header marketplace-header">
       <a class="brand" href="./index.html" aria-label="IC Educate home">
         <span class="brand-mark">IC</span>
         <span>IC Educate</span>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="./index.html#products">Core offer</a>
-        <a href="#tutor-form">Find a tutor</a>
-        <a href="#matches">Tutor matches</a>
-        <a href="./leads.html">Lead kit</a>
+
+      <nav class="marketplace-topnav" aria-label="Primary app navigation">
+        <button type="button" class="marketplace-topnav-btn active" data-screen-target="discover">
+          <svg class="icon" aria-hidden="true"><use href="#icon-find-nav"></use></svg>
+          <span class="nav-tab-label">Discover</span>
+        </button>
+        <button type="button" class="marketplace-topnav-btn" data-screen-target="inbox">
+          <svg class="icon" aria-hidden="true"><use href="#icon-inbox-nav"></use></svg>
+          <span class="nav-tab-label">Messages</span>
+        </button>
+        <button type="button" class="marketplace-topnav-btn" data-screen-target="upcoming">
+          <svg class="icon" aria-hidden="true"><use href="#icon-upcoming-nav"></use></svg>
+          <span class="nav-tab-label">Upcoming</span>
+        </button>
+        <button type="button" class="marketplace-topnav-btn" data-screen-target="resources">
+          <svg class="icon" aria-hidden="true"><use href="#icon-resources-nav"></use></svg>
+          <span class="nav-tab-label">Resources</span>
+        </button>
+        <button type="button" class="marketplace-topnav-btn" data-screen-target="student-profile">
+          <svg class="icon" aria-hidden="true"><use href="#icon-profile-nav"></use></svg>
+          <span class="nav-tab-label">Profile</span>
+        </button>
       </nav>
-      <a class="button small primary" href="#tutor-form">Start request</a>
+
+      <div class="marketplace-header-actions">
+        <a class="button small secondary header-teach-link" href="./teachers.html">Join as a teacher</a>
+      </div>
     </header>
 
-    <main class="page tutor-page-main">
-      <section class="tutor-hero">
-        <div class="tutor-hero-copy">
-          <p class="eyebrow">IC Educate Tutor Finder</p>
-          <h1>Looking for a tutor? Give us the details and get a clean shortlist.</h1>
-          <p class="intro">
-            Tell us the subject, level, area, and lesson type. We'll rank tutors by fit,
-            save the request for follow-up, and keep the handoff simple.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#tutor-form">Start request</a>
-            <a class="button secondary" href="#matches">See sample matches</a>
-            <a class="button secondary" href="./leads.html">Open lead kit</a>
-          </div>
-          <div class="status-row">
-            <span class="chip">Subject match</span>
-            <span class="chip">Schedule fit</span>
-            <span class="chip">Area routing</span>
-            <span class="chip">WhatsApp ready</span>
-          </div>
-          <div class="hero-points">
-            <span class="mini-chip">Step 1: details</span>
-            <span class="mini-chip">Step 2: shortlist</span>
-            <span class="mini-chip">Step 3: follow-up</span>
-          </div>
-        </div>
+    <main class="page marketplace-shell">
+      <aside class="marketplace-rail" aria-label="Live request rail">
+        <nav class="marketplace-rail-nav" aria-label="Desktop screen navigation">
+          <button type="button" class="rail-nav-btn active" data-screen-target="discover">Discover</button>
+          <button type="button" class="rail-nav-btn" data-screen-target="inbox">Messages</button>
+          <button type="button" class="rail-nav-btn" data-screen-target="upcoming">Upcoming</button>
+          <button type="button" class="rail-nav-btn" data-screen-target="resources">Resources</button>
+          <button type="button" class="rail-nav-btn" data-screen-target="student-profile">Profile</button>
+        </nav>
 
-        <aside class="tutor-hero-aside">
-          <figure class="lead-visual tutor-hero-image">
-            <img src="./assets/space-dashboard.svg" alt="Premium tutor finder dashboard visualization" />
-            <figcaption>
-              <span class="chip">DSE</span>
-              <span class="chip">IGCSE</span>
-              <span class="chip">IB</span>
-            </figcaption>
-          </figure>
-          <div class="visual-grid tutor-hero-grid">
-            <figure class="visual-frame">
-              <img src="./assets/space-teacher-orbit.svg" alt="Tutor orbit visualization" />
-            </figure>
-            <figure class="visual-frame">
-              <img src="./assets/space-memory-loop.svg" alt="Mistake memory visualization" />
-            </figure>
+        <article id="tutorSummary" class="rail-panel rail-brief-card" aria-live="polite">
+          <span class="tag">Live brief</span>
+          <h3>Start with subject, level, or area.</h3>
+          <p class="hint">As you build the request, the shortlist and tutor fit will stay visible here.</p>
+        </article>
+
+        <article id="railTopTutor" class="rail-panel rail-tutor-card" aria-live="polite"></article>
+
+        <article class="rail-panel rail-actions-card">
+          <span class="tag">Close fast</span>
+          <p>Keep the structured brief ready for WhatsApp and follow-up.</p>
+          <div class="button-row rail-action-row">
+            <a
+              id="tutorWhatsappLink"
+              class="button primary"
+              href="https://wa.me/60178265300"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp route
+            </a>
+            <button id="copyTutorBriefBtn" type="button" class="secondary-btn" hidden>Copy brief</button>
           </div>
-          <article class="tutor-kicker-card">
-            <span class="tag">Fast routing</span>
-            <h2>We match by subject, syllabus, timing, and location.</h2>
-            <p>One request goes into the same queue the marketplace can reuse later.</p>
-            <div class="tutor-kicker-stats">
-              <span class="chip">Malaysia</span>
-              <span class="chip">Hong Kong</span>
-              <span class="chip">Online</span>
-              <span class="chip">Physical</span>
+        </article>
+      </aside>
+
+      <section class="marketplace-stage">
+        <section class="app-screen is-active" data-screen="discover" aria-labelledby="discoverTitle">
+          <div class="screen-heading screen-heading-hero home-screen-heading">
+            <div>
+              <p class="eyebrow">Home</p>
+              <h1 id="discoverTitle">Find the right tutor fast.</h1>
+              <p class="intro">
+                Start with just the essentials, get a shortlist instantly, and only go deeper when a tutor already looks right.
+              </p>
             </div>
-          </article>
-        </aside>
-      </section>
+            <div class="screen-actions">
+              <button type="button" class="button primary" data-home-submit="true">Show best tutors</button>
+              <button type="button" class="button secondary" data-screen-target="search">Advanced form</button>
+            </div>
+          </div>
 
-      <section class="section-band">
-        <div class="section-heading compact">
-          <p class="eyebrow">Why this works</p>
-          <h2>Keep the first request short, then let the matching do the heavy lifting.</h2>
-          <p>That keeps parents and students moving without making them fill a huge form up front.</p>
-        </div>
-        <div class="product-grid">
-          <article class="feature-card accent-blue">
-            <span class="tag">Step 1</span>
-            <h3>Share the basics</h3>
-            <p>Subject, topic, level, syllabus, area, and lesson type are enough to begin.</p>
-          </article>
-          <article class="feature-card accent-green">
-            <span class="tag">Step 2</span>
-            <h3>See strong tutor fits</h3>
-            <p>Matches are ranked by subject, timing, and location so the shortlist feels useful.</p>
-          </article>
-          <article class="feature-card accent-amber">
-            <span class="tag">Step 3</span>
-            <h3>Save and route</h3>
-            <p>The request is stored locally and can be pushed into the lead flow when needed.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="tutor-form" class="section-band tutor-intake">
-        <div class="section-heading compact">
-          <p class="eyebrow">Tutor request</p>
-          <h2>Input your details to find a tutor.</h2>
-          <p>Fill this in once, and IC Educate will build a ranked shortlist for you.</p>
-        </div>
-
-        <div class="tutor-intake-grid">
-          <form id="tutorRequestForm" class="lead-form tutor-request-form">
-            <span class="tag">Find my tutor</span>
-            <div class="grid">
-              <div class="field">
-                <label for="tutorName">Student / parent name</label>
-                <input id="tutorName" type="text" placeholder="Your name" required />
+          <section class="discover-hero-band">
+            <div class="discover-hero-copy">
+              <div class="discover-market-row">
+                <span class="chip">Malaysia</span>
+                <span class="chip ghost">Hong Kong</span>
+                <span class="chip ghost">Online or physical</span>
               </div>
-              <div class="field">
-                <label for="tutorPhone">WhatsApp number</label>
-                <input id="tutorPhone" type="text" placeholder="+60..." />
+              <h2>Start simple, then compare in one place.</h2>
+              <p>
+                Familiar app flow: quick start first, shortlist next, tutor profile after that, then request confirmation.
+              </p>
+              <div class="home-shortcut-row" aria-label="Popular tutor routes">
+                <button type="button" class="home-shortcut-card" data-launch-subject="Mathematics" data-launch-level="IGCSE" data-launch-area="Petaling Jaya">
+                  <strong>Maths</strong>
+                  <span>IGCSE in PJ</span>
+                </button>
+                <button type="button" class="home-shortcut-card" data-launch-subject="Physics" data-launch-level="IGCSE" data-launch-area="Kuala Lumpur">
+                  <strong>Physics</strong>
+                  <span>KL exam prep</span>
+                </button>
+                <button type="button" class="home-shortcut-card" data-launch-subject="English" data-launch-level="MYP" data-launch-area="Kowloon">
+                  <strong>English</strong>
+                  <span>Kowloon writing</span>
+                </button>
               </div>
             </div>
-            <div class="grid">
-              <div class="field">
-                <label for="tutorSubject">Subject</label>
-                <input id="tutorSubject" type="text" placeholder="Mathematics" required />
+
+            <article class="screen-panel home-start-card">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Quick match start</p>
+                  <h2>Tell us just enough to show strong matches.</h2>
+                </div>
               </div>
-              <div class="field">
-                <label for="tutorTopic">Topic</label>
-                <input id="tutorTopic" type="text" placeholder="Algebra, fractions, waves" />
+              <div class="home-mode-row" aria-label="Lesson type">
+                <button type="button" class="segment-btn active" data-legacy-home-mode="online">Online</button>
+                <button type="button" class="segment-btn" data-legacy-home-mode="physical">Physical</button>
+              </div>
+              <input id="legacyHomeMode" type="hidden" value="online" />
+              <div class="home-start-form">
+                <label class="field">
+                  <span>Subject</span>
+                  <input id="legacyHomeSubject" type="text" placeholder="Mathematics" />
+                </label>
+                <label class="field">
+                  <span>Syllabus</span>
+                  <select id="legacyHomeSyllabus">
+                    <option value="">Any syllabus</option>
+                    <option>Cambridge IGCSE</option>
+                    <option>HK DSE</option>
+                    <option>IB</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Level</span>
+                  <input id="legacyHomeLevel" type="text" placeholder="IGCSE, Junior, Form 5" />
+                </label>
+                <label class="field">
+                  <span>Area</span>
+                  <input id="legacyHomeArea" type="text" placeholder="Petaling Jaya, KL, Kowloon" />
+                </label>
+              </div>
+              <div class="home-chip-row">
+                <button type="button" class="quick-pick-btn" data-home-subject="Mathematics">Maths</button>
+                <button type="button" class="quick-pick-btn" data-home-subject="Physics">Physics</button>
+                <button type="button" class="quick-pick-btn" data-home-subject="Chemistry">Chemistry</button>
+                <button type="button" class="quick-pick-btn" data-home-subject="English">English</button>
+              </div>
+              <div class="button-row">
+                <button type="button" class="button primary" data-home-submit="true">Show best tutors</button>
+                <button type="button" class="secondary-btn" data-screen-target="discover-more">Browse starts</button>
+              </div>
+              <p id="legacyHomeStartStatus" class="hint" aria-live="polite">Pick a subject and level to open the first shortlist.</p>
+            </article>
+          </section>
+
+          <section class="screen-panel home-lanes-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Fast path</p>
+                <h2>Keep the main screen light, then branch out.</h2>
               </div>
             </div>
-            <div class="grid">
-              <div class="field">
-                <label for="tutorSyllabus">Syllabus</label>
-                <select id="tutorSyllabus">
+            <div class="home-shortcut-row home-lane-row" aria-label="Next actions">
+              <button type="button" class="home-shortcut-card home-lane-card" data-screen-target="results">
+                <strong>Open shortlist</strong>
+                <span>Jump into tutor cards and filters.</span>
+              </button>
+              <button type="button" class="home-shortcut-card home-lane-card" data-screen-target="student-profile">
+                <strong>Profile</strong>
+                <span>See subjects taken and upcoming classes.</span>
+              </button>
+              <button type="button" class="home-shortcut-card home-lane-card" data-screen-target="search">
+                <strong>Advanced request</strong>
+                <span>Fill the full form when you need more control.</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="screen-panel discover-feed-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Discover feed</p>
+                <h2 id="discoverFeedTitle">Browse teacher posts, saved tutors, and friend activity.</h2>
+              </div>
+            </div>
+            <div class="discover-feed-shell">
+              <div id="discoverFeedGrid" class="discover-feed-grid discover-activity-grid" aria-live="polite"></div>
+              <div class="discover-side-stack">
+                <section class="discover-side-card">
+                  <div class="panel-heading">
+                    <div>
+                      <p class="eyebrow">Saved tutors</p>
+                      <h3>Your shortlist stays visible.</h3>
+                    </div>
+                  </div>
+                  <div id="discoverSavedTutorStrip" class="discover-saved-tutors" aria-live="polite"></div>
+                </section>
+
+                <section class="discover-side-card">
+                  <div class="panel-heading">
+                    <div>
+                      <p class="eyebrow">Friend activity</p>
+                      <h3>Referrals, intros, and similar requests.</h3>
+                    </div>
+                  </div>
+                  <div id="discoverFriendActivity" class="discover-friend-activity" aria-live="polite"></div>
+                </section>
+              </div>
+            </div>
+          </section>
+
+          <section class="screen-panel quest-merge-band" hidden>
+            <div class="quest-merge-hero">
+              <div class="quest-merge-copy">
+                <p class="eyebrow">GradeQuest merge</p>
+                <h2>Let teachers promote themselves like creators, not listings.</h2>
+                <p>
+                  This layer merges the GradeQuest social energy into IC Educate: teachers can publish promo posts with images or video, students can save favourite teachers, and parents can build a trusted circle before they ever send a WhatsApp.
+                </p>
+              <div class="result-links">
+                  <span class="chip">Teacher promos</span>
+                  <span class="chip">My teachers</span>
+                  <span class="chip">Friends and referrals</span>
+                </div>
+                <div class="quest-link-row">
+                  <a class="chip ghost" href="./student-resources.html">Open StudioPrime resources</a>
+                  <a class="chip ghost" href="./teachers.html">Open teacher intake</a>
+                </div>
+              </div>
+              <div class="quest-merge-visual">
+                <article class="quest-preview-card quest-preview-card-primary">
+                  <img src="./assets/gradequest-student-dashboard.png" alt="GradeQuest student dashboard showing social discovery and navigation" />
+                  <div class="quest-preview-copy">
+                    <strong>Student-side discover flow</strong>
+                    <span>Browse, save, compare, and move into a tutor request without losing context.</span>
+                  </div>
+                </article>
+                <article class="quest-preview-card quest-preview-card-secondary">
+                  <img src="./assets/gradequest-teacher-dashboard.png" alt="GradeQuest teacher dashboard showing classroom and teaching workflow" />
+                  <div class="quest-preview-copy">
+                    <strong>Teacher creator mode</strong>
+                    <span>Promotion, trust, and subject authority can live next to the matching engine.</span>
+                  </div>
+                </article>
+                <div class="quest-shield-badge">
+                  <img src="./assets/gradequest-shield-logo.png" alt="GradeQuest shield logo merged into IC Educate discover" />
+                </div>
+              </div>
+            </div>
+
+            <form id="teacherPromoForm" class="quest-promo-form">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Teacher promo post</p>
+                  <h3>Upload an image or short video to attract students.</h3>
+                </div>
+              </div>
+              <div class="results-filter-grid">
+                <label class="field">
+                  <span>Teacher name</span>
+                  <input id="promoTeacherName" type="text" placeholder="Maya Lim" />
+                </label>
+                <label class="field">
+                  <span>Subject</span>
+                  <input id="promoSubject" type="text" placeholder="Mathematics" />
+                </label>
+                <label class="field">
+                  <span>Headline</span>
+                  <input id="promoHeadline" type="text" placeholder="IGCSE algebra rescue sessions open" />
+                </label>
+                <label class="field">
+                  <span>Media</span>
+                  <input id="promoMediaInput" type="file" accept="image/*,video/*" />
+                </label>
+              </div>
+              <label class="field field-wide">
+                <span>Caption</span>
+                <textarea id="promoCaption" rows="3" placeholder="What students can expect, strongest topics, available areas, and your style."></textarea>
+              </label>
+              <div class="button-row booking-actions">
+                <button type="submit" class="button primary">Publish promo</button>
+                <button type="button" class="secondary-btn" data-seed-promo="true">Load sample promo</button>
+              </div>
+            </form>
+          </section>
+
+          <div class="discover-community-grid" hidden>
+            <section class="screen-panel quest-cosmic-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Teacher promo stream</p>
+                  <h2>Posts that help teachers sell their fit.</h2>
+                </div>
+              </div>
+              <div id="teacherPromoFeed" class="teacher-promo-feed" aria-live="polite"></div>
+            </section>
+
+            <div class="discover-network-stack">
+              <section class="screen-panel network-panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">My teachers</p>
+                    <h3>Keep the tutors you trust close.</h3>
+                  </div>
+                </div>
+                <form id="myTeacherForm" class="mini-network-form">
+                  <input id="myTeacherName" type="text" placeholder="Teacher name" />
+                  <input id="myTeacherFocus" type="text" placeholder="Subject or specialty" />
+                  <input id="myTeacherArea" type="text" placeholder="Area or online" />
+                  <button type="submit" class="button small primary">Add teacher</button>
+                </form>
+                <div id="myTeachersList" class="network-list" aria-live="polite"></div>
+              </section>
+
+              <section class="screen-panel network-panel">
+                <div class="panel-heading">
+                  <div>
+                    <p class="eyebrow">Friends</p>
+                    <h3>Referrals and study buddies.</h3>
+                  </div>
+                </div>
+                <form id="friendsForm" class="mini-network-form">
+                  <input id="friendName" type="text" placeholder="Friend name" />
+                  <input id="friendFocus" type="text" placeholder="Subject interest" />
+                  <input id="friendNote" type="text" placeholder="Parent, student, or referral note" />
+                  <button type="submit" class="button small primary">Add friend</button>
+                </form>
+                <div id="friendsList" class="network-list" aria-live="polite"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="discover-more" aria-labelledby="discoverMoreTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Browse</p>
+              <h2 id="discoverMoreTitle">Popular starts and tutor previews.</h2>
+              <p class="hint">This stays as the second step after Home, so the main tab can feel clean and app-like.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button primary" data-home-submit="true">Use quick match</button>
+              <button type="button" class="button secondary" data-screen-target="results">Open results</button>
+            </div>
+          </div>
+
+          <section class="screen-panel discover-subject-panel home-shortlist-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Popular starts</p>
+                <h2>Common routes families open first.</h2>
+              </div>
+              <button type="button" class="button small secondary" data-screen-target="results">Open results</button>
+            </div>
+            <div id="discoverSubjectRail" class="discover-subject-rail" aria-live="polite"></div>
+          </section>
+
+          <div class="discover-grid home-feed-grid">
+            <section class="screen-panel home-tutor-preview-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Tutor preview</p>
+                  <h2>Popular tutors right now.</h2>
+                </div>
+                <button type="button" class="button small secondary" data-screen-target="results">See all matches</button>
+              </div>
+              <div id="discoverFeaturedTutors" class="discover-tutor-grid" aria-live="polite"></div>
+            </section>
+
+            <section class="screen-panel home-next-step-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">How it works</p>
+                  <h2>One clear path from first tap to tutor request.</h2>
+                </div>
+              </div>
+              <div class="home-step-list">
+                <article class="home-step-card">
+                  <span class="tag">1</span>
+                  <h3>Start</h3>
+                  <p>Pick lesson type, subject, level, and area.</p>
+                </article>
+                <article class="home-step-card">
+                  <span class="tag">2</span>
+                  <h3>Compare</h3>
+                  <p>See rating, fees, timing, and fit side by side.</p>
+                </article>
+                <article class="home-step-card">
+                  <span class="tag">3</span>
+                  <h3>Request</h3>
+                  <p>Confirm the tutor and slot before moving into WhatsApp.</p>
+                </article>
+              </div>
+              <div class="button-row">
+                <button type="button" class="button primary" data-home-submit="true">Use quick match</button>
+                <button type="button" class="secondary-btn" data-screen-target="profile">Preview a tutor profile</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="search" aria-labelledby="searchTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Search</p>
+              <h2 id="searchTitle">Build the request in one pass.</h2>
+              <p class="hint">This screen stays dense and practical: just enough detail to rank tutor fit properly.</p>
+            </div>
+            <div class="screen-actions">
+              <button id="tutorSampleBtn" type="button" class="button secondary">Load sample request</button>
+              <button id="tutorResetBtn" type="button" class="button secondary">Clear</button>
+            </div>
+          </div>
+
+          <div class="search-screen-layout">
+            <form id="tutorRequestForm" class="lead-form app-search-form">
+              <span class="tag">Tutor request</span>
+
+              <div class="app-segmented" role="tablist" aria-label="Lesson type">
+                <button type="button" class="segment-btn active" data-mode-choice="online" aria-pressed="true">Online</button>
+                <button type="button" class="segment-btn" data-mode-choice="physical" aria-pressed="false">Physical</button>
+                <button type="button" class="segment-btn" data-mode-choice="both" aria-pressed="false">Either</button>
+              </div>
+              <select id="tutorMode" class="app-hidden-select" aria-hidden="true" tabindex="-1">
+                <option value="online">Online</option>
+                <option value="physical">Physical</option>
+                <option value="both">Either</option>
+              </select>
+
+              <div class="quick-subject-row" aria-label="Popular subjects">
+                <button type="button" class="quick-pick-btn" data-quick-subject="Mathematics">Maths</button>
+                <button type="button" class="quick-pick-btn" data-quick-subject="Physics">Physics</button>
+                <button type="button" class="quick-pick-btn" data-quick-subject="Chemistry">Chemistry</button>
+                <button type="button" class="quick-pick-btn" data-quick-subject="English">English</button>
+              </div>
+
+              <div class="grid app-primary-grid">
+                <div class="field">
+                  <label for="tutorSubject">Subject</label>
+                  <input id="tutorSubject" type="text" placeholder="Mathematics" required />
+                </div>
+                <div class="field">
+                  <label for="tutorTopic">Topic</label>
+                  <input id="tutorTopic" type="text" placeholder="Algebra, fractions, waves" />
+                </div>
+              </div>
+
+              <div class="grid app-primary-grid">
+                <div class="field">
+                  <label for="tutorSyllabus">Syllabus</label>
+                  <select id="tutorSyllabus">
+                    <option value="">Any syllabus</option>
+                    <option>Cambridge IGCSE</option>
+                    <option>HK DSE</option>
+                    <option>IB</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="tutorLevel">Level</label>
+                  <input id="tutorLevel" type="text" placeholder="IGCSE, Junior, Form 5" required />
+                </div>
+              </div>
+
+              <div class="grid app-primary-grid">
+                <div class="field">
+                  <div class="field-inline-head">
+                    <label for="tutorArea">Area</label>
+                    <span class="field-inline-note">Closest tutors if physical</span>
+                  </div>
+                  <input id="tutorArea" type="text" placeholder="Kuala Lumpur, Petaling Jaya, Kowloon" />
+                </div>
+                <div class="field">
+                  <label for="tutorTime">Preferred time</label>
+                  <select id="tutorTime">
+                    <option value="">Any time</option>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                    <option>Weekend</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="search-location-row">
+                <button id="detectLocationBtn" type="button" class="button small secondary">Use my location</button>
+                <p id="locationStatus" class="hint app-location-status" aria-live="polite">
+                  We can auto-detect your nearest supported area and use it to improve physical tutor ranking.
+                </p>
+              </div>
+
+              <div class="grid app-secondary-grid">
+                <div class="field">
+                  <label for="tutorName">Student / parent name</label>
+                  <input id="tutorName" type="text" placeholder="Your name" required />
+                </div>
+                <div class="field">
+                  <label for="tutorPhone">WhatsApp number</label>
+                  <input id="tutorPhone" type="text" placeholder="+60..." />
+                </div>
+                <div class="field">
+                  <label for="tutorBudget">Budget</label>
+                  <input id="tutorBudget" type="text" placeholder="RM80/hr" />
+                </div>
+              </div>
+
+              <div class="field field-wide">
+                <label for="tutorNote">What should the tutor focus on?</label>
+                <textarea
+                  id="tutorNote"
+                  rows="4"
+                  placeholder="Exam drilling, weak topics, homework help, confidence building, or structure."
+                ></textarea>
+              </div>
+
+              <label class="check-row consent-row">
+                <input id="tutorConsent" type="checkbox" />
+                <span>
+                  <strong>WhatsApp consent</strong>
+                  <small>Allow IC Educate to use this number to send tutor matches and follow-up.</small>
+                </span>
+              </label>
+
+              <div class="button-row app-form-actions">
+                <button id="tutorRequestBtn" type="submit">Save request and shortlist tutors</button>
+                <button type="button" class="secondary-btn" data-screen-target="results">Preview matches</button>
+              </div>
+
+              <p id="tutorRequestStatus" class="hint app-request-status" aria-live="polite">
+                Start with subject, level, or area and we will preview tutor fits live.
+              </p>
+            </form>
+
+            <aside class="search-screen-side">
+              <figure class="search-side-visual">
+                <img src="./assets/subjects-suite-Dbrq0XHT.png" alt="Study materials and subjects overview for tutor search" />
+              </figure>
+              <article id="searchTopMatch" class="screen-panel search-side-card" aria-live="polite">
+                <span class="tag">Search preview</span>
+                <h3>Add the first few details to see the strongest live fit.</h3>
+                <p class="hint">As soon as the request has enough context, the tutor preview updates here.</p>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="results" aria-labelledby="resultsTitle">
+          <section class="find-quick-start" aria-labelledby="findQuickTitle">
+            <div class="find-quick-copy">
+              <p class="eyebrow">Quick match</p>
+              <h1 id="findQuickTitle">Find the right tutor.</h1>
+              <p class="hint">Start with your subject and level. Your location is used only to rank nearby physical tutors.</p>
+            </div>
+            <div class="home-mode-row" aria-label="Lesson type">
+              <button type="button" class="segment-btn active" data-home-mode="online">Online</button>
+              <button type="button" class="segment-btn" data-home-mode="physical">Physical</button>
+            </div>
+            <input id="homeMode" type="hidden" value="online" />
+            <div class="home-start-form find-start-form">
+              <label class="field">
+                <span>Subject</span>
+                <input id="homeSubject" type="text" placeholder="Mathematics" />
+              </label>
+              <label class="field">
+                <span>Syllabus</span>
+                <select id="homeSyllabus">
                   <option value="">Any syllabus</option>
                   <option>Cambridge IGCSE</option>
                   <option>HK DSE</option>
                   <option>IB</option>
                 </select>
-              </div>
-              <div class="field">
-                <label for="tutorLevel">Level</label>
-                <input id="tutorLevel" type="text" placeholder="IGCSE, Junior, Form 5" required />
-              </div>
+              </label>
+              <label class="field">
+                <span>Level</span>
+                <input id="homeLevel" type="text" placeholder="IGCSE, Junior, Form 5" />
+              </label>
+              <label class="field">
+                <span>Area</span>
+                <input id="homeArea" type="text" placeholder="Use my location or enter an area" />
+              </label>
             </div>
-            <div class="grid">
-              <div class="field">
-                <label for="tutorArea">Area</label>
-                <input id="tutorArea" type="text" placeholder="Kuala Lumpur, Petaling Jaya, Kowloon" />
+            <div class="find-start-actions">
+              <button type="button" class="button primary" data-home-submit="true">Show best tutors</button>
+              <button id="findDetectLocationBtn" type="button" class="secondary-btn">Use my location</button>
+              <button type="button" class="secondary-btn" data-screen-target="search">More details</button>
+            </div>
+            <p id="homeStartStatus" class="hint" aria-live="polite">Choose a subject and level to start.</p>
+          </section>
+
+          <section id="communityTeacherPanel" class="community-teacher-panel" aria-labelledby="communityTeacherTitle" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">New teacher profiles</p>
+                <h2 id="communityTeacherTitle">Meet teachers who just joined IC Educate.</h2>
+                <p class="hint">Compare what they teach, their experience, lesson area, and availability.</p>
               </div>
-              <div class="field">
-                <label for="tutorMode">Lesson type</label>
-                <select id="tutorMode">
+              <a class="button small secondary" href="./teachers.html">Create teacher profile</a>
+            </div>
+            <div id="communityTeacherGrid" class="community-teacher-grid" aria-live="polite"></div>
+          </section>
+
+          <div class="screen-heading">
+            <div>
+              <p class="eyebrow">Learning support directory</p>
+              <h2 id="resultsTitle">Find tutors or tuition centres</h2>
+            </div>
+          </div>
+
+          <div class="directory-type-switch" aria-label="Search type">
+            <button type="button" class="segment-btn active" data-directory-type="tutors">Tutors</button>
+            <button type="button" class="segment-btn" data-directory-type="centres">Tuition centres</button>
+          </div>
+
+          <div class="tutor-directory-search" role="search">
+            <label class="field tutor-search-field" for="tutorDirectorySearch">
+              <span id="directorySearchLabel">Tutor name or subject</span>
+              <input id="tutorDirectorySearch" type="search" placeholder="Search Maya, Physics, English..." />
+            </label>
+            <button id="tutorDirectorySearchBtn" type="button" class="button primary">Search</button>
+          </div>
+
+          <article id="resultsRequestChips" class="results-request-strip" aria-live="polite"></article>
+
+          <div class="results-sort-bar" aria-label="Sort tutor matches">
+            <button type="button" class="results-sort-btn active" data-result-sort="match">Best match</button>
+            <button type="button" class="results-sort-btn" data-result-sort="closest">Closest</button>
+            <button type="button" class="results-sort-btn" data-result-sort="rating">Highest rated</button>
+            <button type="button" class="results-sort-btn" data-result-sort="price-low">Price: low to high</button>
+            <button type="button" class="results-sort-btn" data-result-sort="price-high">Price: high to low</button>
+            <button type="button" class="results-sort-btn" data-result-sort="fastest">Fastest reply</button>
+            <button type="button" class="results-sort-btn" data-filter-open="true">Filters</button>
+          </div>
+
+          <section id="resultsFilterPanel" class="screen-panel results-filter-panel" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Refine shortlist</p>
+                <h3>Filter by trust, budget, and lesson type.</h3>
+              </div>
+              <button type="button" class="button small secondary" data-filter-reset="true">Reset filters</button>
+            </div>
+            <div class="results-filter-grid">
+              <label class="field">
+                <span>Minimum rating</span>
+                <select id="filterMinRating">
+                  <option value="0">Any rating</option>
+                  <option value="4.9">4.9 and above</option>
+                  <option value="4.8">4.8 and above</option>
+                  <option value="4.7">4.7 and above</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Lesson mode</span>
+                <select id="filterLessonMode">
+                  <option value="any">Any lesson mode</option>
+                  <option value="online">Online only</option>
+                  <option value="physical">Physical only</option>
+                  <option value="both">Flexible tutors</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Availability</span>
+                <select id="filterAvailability">
+                  <option value="">Any time</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Afternoon">Afternoon</option>
+                  <option value="Evening">Evening</option>
+                  <option value="Weekend">Weekend</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Budget cap</span>
+                <select id="filterBudgetCap">
+                  <option value="0">Any budget</option>
+                  <option value="80">Up to RM80/hr</option>
+                  <option value="90">Up to RM90/hr</option>
+                  <option value="100">Up to RM100/hr</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Tutor gender</span>
+                <select id="filterTutorGender">
+                  <option value="any">Any gender</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <div id="tutorMatches" class="tutor-match-grid marketplace-results-grid" aria-live="polite"></div>
+
+          <section class="find-recommended-section" aria-labelledby="recommendedTitle">
+            <div class="screen-heading">
+            <div>
+              <p class="eyebrow">For your learning plan</p>
+              <h2 id="recommendedTitle">Recommended teachers and classes</h2>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button secondary" data-edit-learning="true">Edit subjects &amp; level</button>
+            </div>
+            </div>
+            <div id="recommendedPanel" aria-live="polite"></div>
+          </section>
+        </section>
+
+        <section class="app-screen" data-screen="resources" aria-labelledby="resourcesTitle">
+          <div class="screen-heading">
+            <div>
+              <p class="eyebrow">StudioPrime library</p>
+              <h2 id="resourcesTitle">Resources</h2>
+            </div>
+          </div>
+
+          <section class="resource-connect-band">
+            <div>
+              <h3>Browse your StudioPrime folder</h3>
+              <p class="hint">Local files stay on this device.</p>
+            </div>
+            <label class="button primary resource-folder-picker">
+              Choose StudioPrime folder
+              <input id="studioPrimeFolderInput" type="file" webkitdirectory directory multiple />
+            </label>
+          </section>
+
+          <div class="resource-search-row">
+            <label class="field" for="resourceSearchInput">
+              <span>Search files</span>
+              <input id="resourceSearchInput" type="search" placeholder="Worksheet, Maths, P6, notes..." disabled />
+            </label>
+            <span id="resourceFolderStatus" class="chip">No folder selected</span>
+          </div>
+
+          <section class="resource-built-in-grid" aria-label="Built-in resources">
+            <a class="resource-library-card" href="./student-resources.html">
+              <span class="tag">IC Educate</span>
+              <h3>Student resources</h3>
+              <p>Worksheets, notes, and study tools already connected to the app.</p>
+            </a>
+            <a class="resource-library-card" href="../studioprime/student-resources.html">
+              <span class="tag">StudioPrime</span>
+              <h3>Open current library</h3>
+              <p>Browse the StudioPrime resource page already available in this site.</p>
+            </a>
+          </section>
+
+          <div id="resourceFileList" class="resource-file-list" aria-live="polite">
+            <article class="resource-empty-state">
+              <h3>Your selected files will appear here.</h3>
+              <p>StudioPrime folder not connected.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="teach" aria-labelledby="teachTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Teach</p>
+              <h2 id="teachTitle">A teacher cockpit, not just a sign-up page.</h2>
+              <p class="hint">This is the GradeQuest merge made useful: tutor promos, incoming demand, teaching resources, and next actions in one place.</p>
+            </div>
+            <div class="screen-actions">
+              <a class="button secondary" href="./teachers.html">Open full teacher intake</a>
+            </div>
+          </div>
+
+          <section class="teach-hero-band">
+            <article class="screen-panel teach-hero-card teach-cosmic-card">
+              <div class="teach-hero-copy">
+                <span class="tag">Teacher mode</span>
+                <h3>Show proof, catch leads, and move fast.</h3>
+                <p>
+                  Teachers need more than a static profile. Let them publish topic promos, respond to matched requests, and point students toward the right materials without leaving the app.
+                </p>
+                <div class="result-links">
+                  <span class="chip">Promos live</span>
+                  <span class="chip">Leads ranked</span>
+                  <span class="chip">Resources linked</span>
+                </div>
+              </div>
+              <figure class="teach-hero-visual">
+                <img src="./assets/gradequest-teacher-dashboard.png" alt="GradeQuest teacher dashboard adapted into IC Educate teacher cockpit" />
+              </figure>
+            </article>
+
+            <div class="teach-kpi-stack">
+              <article class="screen-panel teach-kpi-card">
+                <span class="tag">Demand</span>
+                <strong>12</strong>
+                <p class="hint">Active requests that match Maths, Physics, Chemistry, and English tutors this week.</p>
+              </article>
+              <article class="screen-panel teach-kpi-card">
+                <span class="tag">Fastest route</span>
+                <strong>WhatsApp in 1 tap</strong>
+                <p class="hint">Copy the tutor brief or jump straight into follow-up once a parent replies.</p>
+              </article>
+            </div>
+          </section>
+
+          <div class="teach-grid">
+            <section class="screen-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Matched demand</p>
+                  <h3>Jobs teachers actually want to respond to.</h3>
+                </div>
+                <button type="button" class="button small secondary" data-screen-target="admin">Open admin queue</button>
+              </div>
+              <div id="teachLeadBoard" class="teach-lead-board" aria-live="polite"></div>
+            </section>
+
+            <section class="screen-panel teach-resource-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Resource layer</p>
+                  <h3>Use StudioPrime materials after the match.</h3>
+                </div>
+                <a class="button small secondary" href="./student-resources.html">Open resources</a>
+              </div>
+              <div class="teach-resource-stack">
+                <article class="teach-resource-card">
+                  <strong>Worksheet path</strong>
+                  <p>Send topic packs right after the first consultation so the tutor relationship starts with value, not just scheduling.</p>
+                </article>
+                <article class="teach-resource-card">
+                  <strong>Subject packs</strong>
+                  <p>IGCSE Biology, Maths, DSE English, and exam topic recovery can become reusable post-match flows.</p>
+                </article>
+                <article class="teach-resource-card">
+                  <strong>Retention layer</strong>
+                  <p>Once a student is matched, materials, progress notes, and future requests can all stack behind the same tutor relationship.</p>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="inbox" aria-labelledby="inboxTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <p class="eyebrow">Messages</p>
+              <h2 id="inboxTitle">Your tutor conversations</h2>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button secondary" data-screen-target="results">Open matches</button>
+            </div>
+          </div>
+          <div class="inbox-layout inbox-merged-layout">
+            <aside id="inboxThreadList" class="screen-panel inbox-thread-list" aria-live="polite"></aside>
+            <article id="inboxMessageView" class="screen-panel inbox-message-view" aria-live="polite"></article>
+            <aside id="inboxSocialRail" class="screen-panel inbox-social-rail" aria-live="polite"></aside>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="student-profile" aria-labelledby="profileHomeTitle">
+          <div class="screen-heading">
+            <div>
+              <p class="eyebrow">Profile</p>
+              <h2 id="profileHomeTitle">Your profile</h2>
+            </div>
+            <div class="screen-actions">
+              <button id="studentProfileEditBtn" type="button" class="button secondary" data-edit-learning="true">Edit profile</button>
+            </div>
+          </div>
+
+          <section id="marketplaceAccountPanel" class="screen-panel marketplace-account-panel" aria-labelledby="marketplaceAccountTitle" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Account</p>
+                <h3 id="marketplaceAccountTitle">Your IC Educate account</h3>
+              </div>
+              <span id="marketplaceBackendStatus" class="chip warn">Checking sync</span>
+            </div>
+            <p id="marketplaceAccountSummary" class="marketplace-account-summary">Not signed in</p>
+            <div class="button-row marketplace-account-actions">
+              <button id="marketplaceSignOutBtn" type="button" class="secondary-btn" hidden>Sign out</button>
+              <a class="button secondary" href="./support.html">Support</a>
+              <a class="button danger" href="./delete-account.html">Delete account</a>
+            </div>
+            <p id="marketplaceAuthMessage" class="hint" aria-live="polite">Signed-out activity stays on this device.</p>
+            <div class="marketplace-legal-links" aria-label="Account policies">
+              <a class="chip ghost" href="./privacy.html">Privacy</a>
+              <a class="chip ghost" href="./terms.html">Terms</a>
+              <a class="chip ghost" href="./support.html">Support</a>
+            </div>
+          </section>
+
+          <form id="studentLearningEditor" class="screen-panel student-learning-editor" hidden>
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Profile editor</p>
+                <h3>Profile details</h3>
+              </div>
+              <button type="button" class="secondary-btn" data-close-learning="true">Close</button>
+            </div>
+            <div class="student-photo-editor">
+              <div id="studentPhotoPreview" class="student-photo-preview" aria-hidden="true"></div>
+              <div class="student-photo-editor-copy">
+                <div>
+                  <span class="field-label">Photo</span>
+                  <p class="hint">Add a clear student photo so tutors can spot the right profile fast.</p>
+                </div>
+                <div class="button-row student-photo-actions">
+                  <label for="studentPhotoInput" class="secondary-btn file-upload-trigger">Upload photo</label>
+                  <button id="studentPhotoRemoveBtn" type="button" class="secondary-btn">Remove</button>
+                </div>
+              </div>
+              <input id="studentPhotoInput" type="file" accept="image/png,image/jpeg,image/webp,image/heic,image/heif" hidden />
+            </div>
+            <label class="field">
+              <span>Name</span>
+              <input id="studentNameInput" type="text" autocomplete="name" placeholder="Your name" />
+            </label>
+            <label class="field">
+              <span>Account type</span>
+              <select id="profileRoleInput">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Current level</span>
+              <select id="studentLevelInput">
+                <option>IGCSE</option>
+                <option>IB MYP</option>
+                <option>HK DSE</option>
+                <option>Primary</option>
+                <option>Secondary</option>
+              </select>
+            </label>
+            <fieldset class="student-subject-options">
+              <legend>Subjects taken</legend>
+              <label class="student-subject-option">
+                <input type="checkbox" name="studentSubject" value="Mathematics" />
+                <svg class="subject-option-icon" aria-hidden="true"><use href="#icon-subject-mathematics"></use></svg>
+                <span>Mathematics</span>
+              </label>
+              <label class="student-subject-option">
+                <input type="checkbox" name="studentSubject" value="Physics" />
+                <svg class="subject-option-icon" aria-hidden="true"><use href="#icon-subject-physics"></use></svg>
+                <span>Physics</span>
+              </label>
+              <label class="student-subject-option">
+                <input type="checkbox" name="studentSubject" value="Chemistry" />
+                <svg class="subject-option-icon" aria-hidden="true"><use href="#icon-subject-chemistry"></use></svg>
+                <span>Chemistry</span>
+              </label>
+              <label class="student-subject-option">
+                <input type="checkbox" name="studentSubject" value="Biology" />
+                <svg class="subject-option-icon" aria-hidden="true"><use href="#icon-subject-biology"></use></svg>
+                <span>Biology</span>
+              </label>
+              <label class="student-subject-option">
+                <input type="checkbox" name="studentSubject" value="English" />
+                <svg class="subject-option-icon" aria-hidden="true"><use href="#icon-subject-english"></use></svg>
+                <span>English</span>
+              </label>
+            </fieldset>
+            <button type="submit" class="button primary">Save profile</button>
+          </form>
+
+          <div id="studentProfilePanel" aria-live="polite"></div>
+          <div id="marketplaceGuestUtilities" class="marketplace-guest-utilities" hidden>
+            <p class="hint">Need help before signing in? Support and policy links stay available here.</p>
+            <div class="marketplace-legal-links" aria-label="Guest help and policies">
+              <a class="chip ghost" href="./privacy.html">Privacy</a>
+              <a class="chip ghost" href="./terms.html">Terms</a>
+              <a class="chip ghost" href="./support.html">Support</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="profile" aria-labelledby="profileTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Tutor</p>
+              <h2 id="profileTitle">Check one tutor properly before you request.</h2>
+              <p class="hint">Keep this screen focused on trust: teaching fit, reviews, areas served, and weekly slots.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button secondary" data-screen-target="results">Back to matches</button>
+              <button type="button" class="button secondary" data-screen-target="student-profile">Profile</button>
+              <button type="button" class="button primary" data-screen-target="book">Continue request</button>
+            </div>
+          </div>
+
+          <div id="tutorProfile" aria-live="polite"></div>
+        </section>
+
+        <section class="app-screen" data-screen="book" aria-labelledby="bookTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Confirm</p>
+              <h2 id="bookTitle">Confirm the tutor request and preferred slot.</h2>
+              <p class="hint">This is the simple confirmation screen: lock the tutor, slot, and venue, then move the handoff into WhatsApp.</p>
+            </div>
+          </div>
+
+          <div class="booking-screen-layout">
+            <article id="bookingTutorCard" class="screen-panel" aria-live="polite"></article>
+
+            <article class="screen-panel booking-config-panel">
+              <div class="booking-field-group">
+                <label for="bookLessonMode">Lesson mode</label>
+                <select id="bookLessonMode">
                   <option value="online">Online</option>
                   <option value="physical">Physical</option>
                   <option value="both">Either</option>
                 </select>
               </div>
-            </div>
-            <div class="grid">
-              <div class="field">
-                <label for="tutorTime">Preferred time</label>
-                <select id="tutorTime">
-                  <option value="">Any time</option>
-                  <option>Morning</option>
-                  <option>Afternoon</option>
-                  <option>Evening</option>
-                  <option>Weekend</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="tutorBudget">Budget</label>
-                <input id="tutorBudget" type="text" placeholder="RM80/hr" />
-              </div>
-            </div>
-            <div class="field field-wide">
-              <label for="tutorNote">What should the tutor focus on?</label>
-              <textarea
-                id="tutorNote"
-                rows="4"
-                placeholder="Example: exam drilling, weak topics, homework help, or confidence building."
-              ></textarea>
-            </div>
-            <label class="check-row consent-row">
-              <input id="tutorConsent" type="checkbox" />
-              <span>
-                <strong>WhatsApp consent</strong>
-                <small>Allow IC Educate to use this number to send tutor matches and follow-up.</small>
-              </span>
-            </label>
-            <div class="button-row">
-              <button id="tutorRequestBtn" type="submit">Find my tutor</button>
-              <button id="tutorSampleBtn" type="button" class="secondary-btn">Use sample details</button>
-              <button id="tutorResetBtn" type="button" class="secondary-btn">Clear form</button>
-            </div>
-            <p id="tutorRequestStatus" class="hint" aria-live="polite">
-              Your request will be saved locally and can be routed into the IC Educate lead queue.
-            </p>
-          </form>
 
-          <div id="matches" class="tutor-results-shell" aria-live="polite">
-            <article id="tutorSummary" class="tutor-summary-card">
-              <span class="tag">Tutor preview</span>
-              <h3>Tell us what you need to see a shortlist.</h3>
-              <p class="hint">We'll show tutor matches here once the form is filled in.</p>
-              <div class="result-links">
-                <span class="chip">Subject</span>
-                <span class="chip">Level</span>
-                <span class="chip">Area</span>
-                <span class="chip">Time</span>
+              <div class="booking-field-group">
+                <label>Choose a day</label>
+                <div id="bookingDayPicker" class="booking-day-row" aria-live="polite"></div>
               </div>
-            </article>
 
-            <div id="tutorMatches" class="tutor-match-grid"></div>
+              <div class="booking-field-group">
+                <label>Choose a slot</label>
+                <div id="bookingSlotGrid" class="booking-slot-grid" aria-live="polite"></div>
+              </div>
 
-            <article class="tutor-next-step">
-              <div>
-                <span class="tag">Next step</span>
-                <h3>Send the request to WhatsApp or keep it in the queue.</h3>
-                <p>The same request can be reused by the lead kit and the main marketplace.</p>
+              <div class="booking-field-group">
+                <label for="bookingVenue">Location or lesson link</label>
+                <input id="bookingVenue" type="text" placeholder="Zoom, Kuala Lumpur, Kowloon, or exact venue" />
               </div>
-              <div class="button-row">
-                <a
-                  id="tutorWhatsappLink"
-                  class="button primary"
-                  href="https://wa.me/60178265300"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open WhatsApp route
-                </a>
-                <button id="copyTutorBriefBtn" type="button" class="secondary-btn" hidden>Copy brief</button>
+
+              <div class="button-row booking-actions">
+                <button id="bookingConfirmBtn" type="button">Save request and continue</button>
+                <button type="button" class="secondary-btn" data-screen-target="results">Keep comparing</button>
               </div>
+              <p id="bookingStatus" class="hint" aria-live="polite">Choose a day and time to save the request step.</p>
             </article>
           </div>
-        </div>
+
+          <article id="bookingSummary" class="screen-panel booking-summary-panel" aria-live="polite"></article>
+        </section>
+
+        <section class="app-screen" data-screen="requests" aria-labelledby="requestsTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Requests</p>
+              <h2 id="requestsTitle">Track every saved request and reopen it fast.</h2>
+              <p class="hint">This is the lightweight queue parents and operators actually need: new, matched, or booked.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button primary" data-screen-target="search">New request</button>
+            </div>
+          </div>
+
+          <div id="savedRequestsList" class="requests-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="app-screen" data-screen="upcoming" aria-labelledby="upcomingTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Upcoming</p>
+              <h2 id="upcomingTitle">Upcoming classes and next checkpoints.</h2>
+              <p class="hint">This screen should feel operational: what’s next this week, who it’s with, and what materials or goals are attached.</p>
+            </div>
+            <div class="screen-actions">
+              <button
+                id="upcomingCalendarBtn"
+                type="button"
+                class="icon-action-btn"
+                aria-label="Add next class to Google Calendar"
+                title="Add next class to Google Calendar"
+              >
+                <svg class="icon" aria-hidden="true"><use href="#icon-calendar-plus"></use></svg>
+              </button>
+              <button type="button" class="button secondary" data-screen-target="student-profile">Open profile</button>
+            </div>
+          </div>
+
+          <div id="upcomingClassesPanel" class="requests-grid" aria-live="polite"></div>
+          <div id="upcomingGuestUtilities" class="marketplace-guest-utilities" hidden>
+            <p class="hint">Need help before signing in? Support and policy links stay available here.</p>
+            <div class="marketplace-legal-links" aria-label="Guest help and policies">
+              <a class="chip ghost" href="./privacy.html">Privacy</a>
+              <a class="chip ghost" href="./terms.html">Terms</a>
+              <a class="chip ghost" href="./support.html">Support</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="app-screen" data-screen="admin" aria-labelledby="adminTitle">
+          <div class="screen-heading">
+            <div class="screen-heading-copy">
+              <button type="button" class="screen-back-btn" data-screen-back="true" aria-label="Go back">
+                <svg class="icon" aria-hidden="true"><use href="#icon-back-nav"></use></svg>
+                <span>Back</span>
+              </button>
+              <p class="eyebrow">Admin queue</p>
+              <h2 id="adminTitle">Run the intake pipeline like an operator.</h2>
+              <p class="hint">New, contacted, matched, and closed all stay visible so you can actually work the leads.</p>
+            </div>
+            <div class="screen-actions">
+              <button type="button" class="button primary" data-screen-target="search">New request</button>
+            </div>
+          </div>
+          <div class="admin-kpi-row">
+            <article class="screen-panel admin-kpi-card">
+              <span class="tag">New</span>
+              <strong id="adminNewCount">0</strong>
+              <p class="hint">Needs first outreach</p>
+            </article>
+            <article class="screen-panel admin-kpi-card">
+              <span class="tag">Contacted</span>
+              <strong id="adminContactedCount">0</strong>
+              <p class="hint">Waiting for reply</p>
+            </article>
+            <article class="screen-panel admin-kpi-card">
+              <span class="tag">Matched</span>
+              <strong id="adminMatchedCount">0</strong>
+              <p class="hint">Tutor shortlist ready</p>
+            </article>
+            <article class="screen-panel admin-kpi-card">
+              <span class="tag">Closed</span>
+              <strong id="adminClosedCount">0</strong>
+              <p class="hint">Booked or completed</p>
+            </article>
+          </div>
+          <div id="adminQueueBoard" class="admin-queue-board" aria-live="polite"></div>
+        </section>
       </section>
     </main>
 
-    <nav class="page-switcher" aria-label="Site switcher">
-      <a class="chip ghost" href="../index.html">Hub</a>
-      <a class="chip ghost" href="./index.html">IC Educate</a>
-      <a class="chip ghost" href="./admin.html">Admin</a>
-      <a class="chip ghost" href="./find-tutor.html">Tutor Finder</a>
-      <a class="chip ghost" href="./leads.html">Lead Kit</a>
-      <a class="chip ghost" href="./hong-kong.html">Hong Kong</a>
+    <nav class="app-bottom-nav marketplace-bottom-nav" aria-label="App navigation">
+      <button type="button" class="bottom-nav-btn active" data-screen-target="discover" aria-label="Discover">
+        <svg class="icon" aria-hidden="true"><use href="#icon-find-nav"></use></svg>
+        <span class="nav-tab-label">Discover</span>
+      </button>
+      <button type="button" class="bottom-nav-btn" data-screen-target="inbox" aria-label="Messages">
+        <svg class="icon" aria-hidden="true"><use href="#icon-inbox-nav"></use></svg>
+        <span class="nav-tab-label">Messages</span>
+      </button>
+      <button type="button" class="bottom-nav-btn" data-screen-target="upcoming" aria-label="Upcoming">
+        <svg class="icon" aria-hidden="true"><use href="#icon-upcoming-nav"></use></svg>
+        <span class="nav-tab-label">Upcoming</span>
+      </button>
+      <button type="button" class="bottom-nav-btn" data-screen-target="resources" aria-label="Resources">
+        <svg class="icon" aria-hidden="true"><use href="#icon-resources-nav"></use></svg>
+        <span class="nav-tab-label">Resources</span>
+      </button>
+      <button type="button" class="bottom-nav-btn" data-screen-target="student-profile" aria-label="Profile">
+        <svg class="icon" aria-hidden="true"><use href="#icon-profile-nav"></use></svg>
+        <span class="nav-tab-label">Profile</span>
+      </button>
     </nav>
 
-    <script src="./pwa.js"></script>
-    <script src="./find-tutor.js"></script>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-back-nav" viewBox="0 0 24 24">
+        <path d="M15 5l-7 7 7 7" />
+        <path d="M9 12h10" />
+      </symbol>
+      <symbol id="icon-home-nav" viewBox="0 0 24 24">
+        <path d="M3 11.5L12 4l9 7.5" />
+        <path d="M5 10.5V20h14v-9.5" />
+        <path d="M10 20v-5h4v5" />
+      </symbol>
+      <symbol id="icon-find-nav" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="6.5" />
+        <path d="M16 16l4.5 4.5" />
+      </symbol>
+      <symbol id="icon-teach-nav" viewBox="0 0 24 24">
+        <path d="M3 9l9-5 9 5-9 5-9-5z" />
+        <path d="M7 11.5V16c0 1.7 2.2 3 5 3s5-1.3 5-3v-4.5" />
+      </symbol>
+      <symbol id="icon-inbox-nav" viewBox="0 0 24 24">
+        <path d="M4 6h16v12H4z" />
+        <path d="M4 14h4l2 3h4l2-3h4" />
+      </symbol>
+      <symbol id="icon-resources-nav" viewBox="0 0 24 24">
+        <path d="M4 5.5h6l2 2h8v11H4z" />
+        <path d="M4 9h16" />
+      </symbol>
+      <symbol id="icon-upcoming-nav" viewBox="0 0 24 24">
+        <rect x="4" y="6" width="16" height="14" rx="3" />
+        <path d="M8 3.5v5" />
+        <path d="M16 3.5v5" />
+        <path d="M4 10h16" />
+        <path d="M9 14h3" />
+        <path d="M9 17h6" />
+      </symbol>
+      <symbol id="icon-profile-nav" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M5 19c1.8-3 4.3-4.5 7-4.5s5.2 1.5 7 4.5" />
+        <path d="M4 20h16" />
+      </symbol>
+      <symbol id="icon-calendar-plus" viewBox="0 0 24 24">
+        <rect x="4" y="6" width="16" height="14" rx="3" />
+        <path d="M8 3.5v5" />
+        <path d="M16 3.5v5" />
+        <path d="M4 10h16" />
+        <path d="M12 13v5" />
+        <path d="M9.5 15.5h5" />
+      </symbol>
+      <symbol id="icon-subject-mathematics" viewBox="0 0 24 24">
+        <path d="M6 7h12" />
+        <path d="M6 17h12" />
+        <path d="M7 12h10" />
+        <path d="M9 5l-2 14" />
+        <path d="M17 5l-2 14" />
+      </symbol>
+      <symbol id="icon-subject-physics" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="2" />
+        <ellipse cx="12" cy="12" rx="8" ry="3.5" />
+        <ellipse cx="12" cy="12" rx="8" ry="3.5" transform="rotate(60 12 12)" />
+        <ellipse cx="12" cy="12" rx="8" ry="3.5" transform="rotate(120 12 12)" />
+      </symbol>
+      <symbol id="icon-subject-chemistry" viewBox="0 0 24 24">
+        <path d="M10 3h4" />
+        <path d="M11 3v6l-5 8a3 3 0 0 0 2.6 4.5h6.8A3 3 0 0 0 18 17l-5-8V3" />
+        <path d="M8.5 14h7" />
+      </symbol>
+      <symbol id="icon-subject-biology" viewBox="0 0 24 24">
+        <path d="M12 20c5-2.2 8-6.6 8-12-5.2 0-9.2 1.7-12 5-1.8 2.1-2.9 4.4-4 7 3.8 0 6.4-.8 8-2.2" />
+        <path d="M9 15c1.8-1.2 4.2-2.4 7-3" />
+      </symbol>
+      <symbol id="icon-subject-english" viewBox="0 0 24 24">
+        <path d="M6 5.5h8a3 3 0 0 1 3 3V19l-4-2-4 2-4-2-4 2V8.5a3 3 0 0 1 3-3h2" />
+        <path d="M8 10h6" />
+        <path d="M8 13h6" />
+      </symbol>
+      <symbol id="icon-lock-card" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="9" rx="2.5" />
+        <path d="M8 11V8.5A4 4 0 0 1 12 4.5a4 4 0 0 1 4 4V11" />
+      </symbol>
+    </svg>
+
+    <script src="./config.js?v=20260719-marketplace-review-2"></script>
+    <script src="./pwa.js?v=20260717-profile-auth-1"></script>
+    <script src="./find-tutor.js?v=20260719-marketplace-review-2"></script>
   </body>
 </html>

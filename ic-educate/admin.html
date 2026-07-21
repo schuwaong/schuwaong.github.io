@@ -57,7 +57,7 @@
           <div class="admin-console-head">
             <span class="tag">Shared database</span>
             <h2>Supabase admin login</h2>
-            <p class="hint">Optional. The queue works locally now; sign in when your Supabase admin account is ready.</p>
+            <p class="hint">Optional. The local queue still works without Supabase, but only allowlisted admin emails can open the shared lead queue and teacher review queue.</p>
           </div>
           <form id="adminLoginForm" class="admin-login-form">
             <div class="field">
@@ -78,6 +78,26 @@
 
       <section class="section-band admin-stats-section" aria-label="Queue stats">
         <div id="adminStats" class="admin-stats-grid"></div>
+      </section>
+
+      <section class="section-band admin-workbench" aria-label="Teacher moderation queue">
+        <div class="section-heading compact">
+          <p class="eyebrow">Teacher moderation</p>
+          <h2>Review pending teacher profiles before they go live.</h2>
+          <p>
+            This queue shows the shared teacher profiles that asked to appear in tutor search. Pending profiles stay hidden until an allowlisted admin publishes or hides them.
+          </p>
+        </div>
+
+        <div class="admin-list-head">
+          <h3>Teacher profile queue</h3>
+          <div class="result-links">
+            <span id="adminTeacherQueueStatus" class="chip">Sign in to load shared reviews</span>
+            <span id="adminTeacherVisibleCount" class="chip">0 profiles</span>
+          </div>
+        </div>
+        <div id="adminTeacherStats" class="result-links"></div>
+        <div id="adminTeacherQueue" class="admin-lead-list" aria-live="polite"></div>
       </section>
 
       <section class="section-band admin-workbench">
