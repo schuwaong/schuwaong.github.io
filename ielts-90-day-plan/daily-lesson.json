@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-07-20",
-  "seedDateKey": "2026-07-20",
+  "dateKey": "2026-07-21",
+  "seedDateKey": "2026-07-21",
   "source": "workflow",
   "vocab": {
     "category": "writing",
-    "term": "inevitable",
-    "zh": "不可避免的",
-    "simpleEn": "certain to happen",
-    "simpleZh": "一定会发生，无法避免。",
-    "exampleEn": "Some level of stress is inevitable before an important exam.",
-    "exampleZh": "重要考试前有一定压力是不可避免的。",
-    "upgradeEn": "Use inevitable when something cannot be completely avoided.",
-    "upgradeZh": "无法完全避免的事情，可以用 inevitable。"
+    "term": "sustainable",
+    "zh": "可持续的",
+    "simpleEn": "able to continue for a long time",
+    "simpleZh": "可以长期继续下去。",
+    "exampleEn": "A sustainable study routine is better than a perfect one-day plan.",
+    "exampleZh": "可持续的学习习惯比完美的一天计划更有用。",
+    "upgradeEn": "Use sustainable for environment, habits, work, and study routines.",
+    "upgradeZh": "sustainable 可用于环境、习惯、工作和学习节奏。"
   },
   "cycle": {
-    "number": 8,
+    "number": 9,
     "phase": 2,
-    "titleEn": "Grammar and sentence control",
-    "titleZh": "语法与句子控制",
-    "summaryEn": "Build clean sentences with the right tense, articles, and clause control.",
-    "summaryZh": "把时态、冠词和从句控制好，句子更稳。",
+    "titleEn": "Vocabulary and collocations",
+    "titleZh": "词汇与搭配",
+    "summaryEn": "Learn useful word partnerships so your English sounds more natural.",
+    "summaryZh": "学习常用搭配，让英语听起来更自然。",
     "focusWords": [
-      "tense / 时态",
-      "clause / 从句",
-      "article / 冠词",
-      "accuracy / 准确性"
+      "collocation / 搭配",
+      "lexical resource / 词汇资源",
+      "natural / 自然",
+      "range / 范围"
     ]
   },
   "frame": {
-    "slot": "Linking / 衔接",
-    "en": "Moreover, ...",
-    "zh": "此外，...",
-    "useEn": "Use to connect ideas smoothly.",
-    "useZh": "用来把句子连接起来。"
+    "slot": "Opinion / 观点",
+    "en": "In my view, ...",
+    "zh": "在我看来，...",
+    "useEn": "Use to show your opinion clearly.",
+    "useZh": "用来清楚表达观点。"
   },
   "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
   "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"inevitable\" using Moreover, ...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"inevitable\" 和 此外，... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"sustainable\" using In my view, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"sustainable\" 和 在我看来，... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
