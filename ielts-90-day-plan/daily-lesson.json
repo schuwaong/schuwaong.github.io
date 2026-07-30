@@ -1,30 +1,30 @@
 {
-  "dateKey": "2026-07-29",
-  "seedDateKey": "2026-07-29",
+  "dateKey": "2026-07-30",
+  "seedDateKey": "2026-07-30",
   "source": "workflow",
   "vocab": {
-    "category": "writing",
-    "term": "feasible",
-    "zh": "可行的",
-    "simpleEn": "possible and realistic",
-    "simpleZh": "现实中可以做到。",
-    "exampleEn": "A 30-minute daily speaking routine is more feasible than a three-hour plan.",
-    "exampleZh": "每天 30 分钟口语练习比 3 小时计划更可行。",
-    "upgradeEn": "Use feasible plan/solution/option for Task 2 and study answers.",
-    "upgradeZh": "常用搭配：feasible plan / solution / option。"
+    "category": "speaking",
+    "term": "genuinely",
+    "zh": "真正地；真诚地",
+    "simpleEn": "really, in an honest way",
+    "simpleZh": "真的、发自内心地。",
+    "exampleEn": "I genuinely enjoy learning new expressions when I can use them in real conversations.",
+    "exampleZh": "当我能在真实对话中使用新表达时，我真的很享受学习它们。",
+    "upgradeEn": "Use genuinely to make personal answers sound more sincere.",
+    "upgradeZh": "genuinely 能让个人回答更真诚自然。"
   },
   "cycle": {
-    "number": 2,
-    "phase": 1,
-    "titleEn": "Listening basics and spelling",
-    "titleZh": "听力基础与拼写",
-    "summaryEn": "Train your ear for numbers, names, dates, and clean spelling.",
-    "summaryZh": "先练数字、姓名、日期和拼写，把听力基础打稳。",
+    "number": 9,
+    "phase": 2,
+    "titleEn": "Vocabulary and collocations",
+    "titleZh": "词汇与搭配",
+    "summaryEn": "Learn useful word partnerships so your English sounds more natural.",
+    "summaryZh": "学习常用搭配，让英语听起来更自然。",
     "focusWords": [
-      "spelling / 拼写",
-      "numbers / 数字",
-      "name / 姓名",
-      "prediction / 预测"
+      "collocation / 搭配",
+      "lexical resource / 词汇资源",
+      "natural / 自然",
+      "range / 范围"
     ]
   },
   "frame": {
@@ -34,10 +34,10 @@
     "useEn": "Use to explain why something happens.",
     "useZh": "用来解释原因。"
   },
-  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
-  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"feasible\" using This happens because...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"feasible\" 和 这是因为... 写一句 Becky 自己的话。",
+  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
+  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"genuinely\" using This happens because...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"genuinely\" 和 这是因为... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
