@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-08-26",
-  "seedDateKey": "2026-08-26",
+  "dateKey": "2026-08-27",
+  "seedDateKey": "2026-08-27",
   "source": "workflow",
   "vocab": {
     "category": "speaking",
-    "term": "memorable",
-    "zh": "难忘的",
-    "simpleEn": "easy to remember",
-    "simpleZh": "容易记住、让人印象深刻。",
-    "exampleEn": "The most memorable lesson I had was the one that changed my study habits.",
-    "exampleZh": "我最难忘的一节课是改变了我学习习惯的那节课。",
-    "upgradeEn": "Use memorable for people, places, lessons, events, and experiences.",
-    "upgradeZh": "memorable 可形容人、地方、课程、事件和经历。"
+    "term": "straightforward",
+    "zh": "简单明了的；直接的",
+    "simpleEn": "clear and easy to understand",
+    "simpleZh": "清楚、不复杂、容易理解。",
+    "exampleEn": "The instructions were straightforward, so I knew exactly what to do.",
+    "exampleZh": "说明很清楚，所以我知道该做什么。",
+    "upgradeEn": "Use straightforward instead of very easy when talking about tasks or explanations.",
+    "upgradeZh": "说任务或解释很简单时，用 straightforward 比 very easy 更自然。"
   },
   "cycle": {
-    "number": 15,
-    "phase": 3,
-    "titleEn": "Final review and calm",
-    "titleZh": "最后复习与稳定心态",
-    "summaryEn": "Light review, good sleep, and simple answers on exam day.",
-    "summaryZh": "轻复习、睡好觉，考试当天把答案写得简单清楚。",
+    "number": 1,
+    "phase": 1,
+    "titleEn": "Test format and target band",
+    "titleZh": "考试结构与目标分",
+    "summaryEn": "Learn the four sections, the timing, and what a 6, 7, or 8 answer looks like.",
+    "summaryZh": "先弄懂四个部分、时间安排，以及 6、7、8 分答案的样子。",
     "focusWords": [
-      "final / 最后",
-      "calm / 冷静",
-      "simple / 简单",
-      "confidence / 自信"
+      "band score / 分数档",
+      "criteria / 评分标准",
+      "timing / 时间安排",
+      "format / 结构"
     ]
   },
   "frame": {
-    "slot": "Reason / 原因",
-    "en": "This happens because...",
-    "zh": "这是因为...",
-    "useEn": "Use to explain why something happens.",
-    "useZh": "用来解释原因。"
+    "slot": "Result / 结果",
+    "en": "As a result, ...",
+    "zh": "因此，...",
+    "useEn": "Use after showing cause and effect.",
+    "useZh": "写因果关系时使用。"
   },
   "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
   "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"memorable\" using This happens because...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"memorable\" 和 这是因为... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"straightforward\" using As a result, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"straightforward\" 和 因此，... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
