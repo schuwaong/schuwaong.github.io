@@ -1390,15 +1390,15 @@ $("#watchlistRegionTabs").addEventListener("click", (event) => {
   state.watchlistRegion = tab.dataset.region || "all";
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#contentTickerSelect").addEventListener("change", (event) => {
+$("#contentTickerSelect")?.addEventListener("change", (event) => {
   state.selectedContentSymbol = event.target.value;
   if (state.cache) renderContent(state.cache);
 });
-$("#contentFormatSelect").addEventListener("change", (event) => {
+$("#contentFormatSelect")?.addEventListener("change", (event) => {
   state.contentFormat = event.target.value;
   if (state.cache) renderContent(state.cache);
 });
-$("#contentScript").addEventListener("click", async (event) => {
+$("#contentScript")?.addEventListener("click", async (event) => {
   if (!event.target.closest("#copyContentScript")) return;
   try {
     await navigator.clipboard.writeText(state.lastContentScript || "");

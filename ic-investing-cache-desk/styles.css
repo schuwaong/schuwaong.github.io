@@ -746,6 +746,23 @@ td {
     padding: 14px;
   }
 
+  .panel-heading,
+  .watchlist-tools {
+    min-width: 0;
+  }
+
+  .watchlist-tools {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .watchlist-tools input,
+  .watchlist-tools select {
+    width: min(100%, 190px);
+    max-width: 100%;
+    flex: 1 1 150px;
+  }
+
   .hero-panel {
     min-height: 420px;
   }
