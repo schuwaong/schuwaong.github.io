@@ -314,10 +314,6 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.one-col {
-  grid-template-columns: 1fr;
-}
-
 .market-grid {
   grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
 }
@@ -594,11 +590,6 @@ h3 {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
-}
-
-.headline-item-disabled {
-  cursor: default;
-  opacity: 0.72;
 }
 
 .risk-details {
@@ -1072,14 +1063,33 @@ h3,
   color: rgba(210, 232, 224, 0.48);
 }
 
-.signal-controls {
+.watchlist-tools select {
+  min-height: 32px;
+  max-width: 190px;
+  padding: 0 28px 0 10px;
+  border: 1px solid rgba(0, 230, 167, 0.22);
+  border-radius: 8px;
+  color: #ecf5ee;
+  background: rgba(236, 245, 238, 0.055);
+  font: inherit;
+  font-size: 12px;
+}
+
+.strategy-line {
+  margin-top: 2px;
+  color: #8ee4dc;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.content-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
 }
 
-.signal-controls select {
+.content-controls select {
   min-height: 32px;
   max-width: 210px;
   padding: 0 28px 0 10px;
@@ -1091,22 +1101,35 @@ h3,
   font-size: 12px;
 }
 
-.signal-lens-card {
+.script-card {
   border-color: rgba(0, 230, 167, 0.22);
   background:
     linear-gradient(135deg, rgba(0, 230, 167, 0.1), transparent 38%),
     rgba(4, 12, 10, 0.9);
 }
 
-.signal-mini-grid,
-.signal-quality {
+.script-beats,
+.script-mini-grid,
+.script-quality {
   display: grid;
   gap: 9px;
   margin-top: 12px;
 }
 
-.signal-mini-grid span,
-.signal-quality div {
+.script-beat {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px;
+  border: 1px solid rgba(236, 245, 238, 0.1);
+  border-radius: 8px;
+  background: rgba(236, 245, 238, 0.04);
+}
+
+.script-beat span,
+.script-mini-grid span,
+.script-quality div {
   color: rgba(210, 232, 224, 0.72);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
@@ -1114,11 +1137,41 @@ h3,
   text-transform: uppercase;
 }
 
-.signal-mini-grid {
+.script-beat p {
+  margin: 0;
+  color: rgba(236, 245, 238, 0.86);
+  line-height: 1.45;
+}
+
+.script-caption {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(0, 230, 167, 0.16);
+  border-radius: 8px;
+  color: rgba(217, 255, 241, 0.88);
+  background: rgba(0, 230, 167, 0.06);
+  line-height: 1.45;
+}
+
+.script-card pre {
+  max-height: 220px;
+  overflow: auto;
+  margin: 12px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  color: #d9fff1;
+  background: #020403;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.script-mini-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.signal-mini-grid span {
+.script-mini-grid span {
   min-width: 0;
   padding: 10px;
   border: 1px solid rgba(236, 245, 238, 0.1);
@@ -1126,7 +1179,7 @@ h3,
   background: rgba(236, 245, 238, 0.04);
 }
 
-.signal-mini-grid strong {
+.script-mini-grid strong {
   display: block;
   margin-top: 6px;
   color: #f4fff9;
@@ -1137,7 +1190,7 @@ h3,
   text-transform: none;
 }
 
-.signal-quality div {
+.script-quality div {
   padding: 10px;
   border: 1px solid rgba(236, 245, 238, 0.1);
   border-radius: 8px;
@@ -2112,159 +2165,22 @@ h3,
   color: rgba(210, 232, 224, 0.68);
 }
 
-.portfolio-analysis-intro {
-  display: grid;
-  gap: 8px;
-}
-
-.portfolio-analysis-disclaimer {
-  margin: 0;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-.portfolio-analysis-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.portfolio-summary-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.portfolio-summary-card {
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid rgba(236, 245, 238, 0.1);
-  border-radius: 8px;
-  background: rgba(236, 245, 238, 0.045);
-}
-
-.portfolio-summary-card small {
-  display: block;
-  color: rgba(210, 232, 224, 0.62);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.portfolio-summary-card strong {
-  display: block;
-  margin-top: 7px;
-  color: #f4fff9;
-  font-size: 14px;
-  line-height: 1.35;
-}
-
-.portfolio-analysis-columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.panel-subheading {
-  display: grid;
-  gap: 4px;
-  margin-bottom: 10px;
-}
-
-.panel-subheading h3 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.portfolio-analysis-card {
-  display: grid;
-  gap: 10px;
-  border-color: rgba(0, 230, 167, 0.14);
-  background:
-    linear-gradient(135deg, rgba(0, 230, 167, 0.08), transparent 34%),
-    rgba(4, 10, 9, 0.92);
-}
-
-.portfolio-analysis-card.trim {
-  border-color: rgba(255, 77, 109, 0.36);
-}
-
-.portfolio-analysis-card.hold {
-  border-color: rgba(244, 193, 82, 0.3);
-}
-
-.portfolio-analysis-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.portfolio-analysis-metrics span {
-  min-width: 0;
-  padding: 9px 10px;
-  border: 1px solid rgba(236, 245, 238, 0.1);
-  border-radius: 8px;
-  background: rgba(236, 245, 238, 0.045);
-}
-
-.portfolio-analysis-metrics small {
-  display: block;
-  margin-bottom: 5px;
-  color: rgba(210, 232, 224, 0.62);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.portfolio-analysis-metrics strong {
-  display: block;
-  color: #f4fff9;
-  font-size: 13px;
-  line-height: 1.2;
-  word-break: break-word;
-}
-
-.portfolio-analysis-when {
-  padding: 11px 12px;
-  border: 1px solid rgba(236, 245, 238, 0.1);
-  border-radius: 8px;
-  color: rgba(236, 245, 238, 0.84);
-  background: rgba(236, 245, 238, 0.035);
-  line-height: 1.45;
-}
-
-.portfolio-analysis-notes {
-  display: grid;
-  gap: 6px;
-  margin-top: 14px;
-}
-
 @media (max-width: 760px) {
   .section-grid.two-col:has(#watchlist) {
     grid-template-columns: 1fr;
   }
 
   .watch-metrics,
-  .portfolio-summary-grid,
-  .portfolio-analysis-columns,
-  .portfolio-analysis-metrics,
   .report-hero,
   .thesis-grid,
   .report-summary,
   .report-levels,
   .score-grid,
-  .signal-mini-grid {
+  .script-mini-grid {
     grid-template-columns: 1fr;
   }
 
-  .signal-controls {
+  .content-controls {
     justify-content: stretch;
   }
 
@@ -2277,12 +2193,16 @@ h3,
     justify-content: space-between;
   }
 
-  .signal-controls select {
+  .content-controls select {
     max-width: none;
     flex: 1 1 150px;
   }
 
   .brief-form {
+    grid-template-columns: 1fr;
+  }
+
+  .script-beat {
     grid-template-columns: 1fr;
   }
 

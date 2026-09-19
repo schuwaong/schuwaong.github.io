@@ -3,7 +3,10 @@ const state = {
   loading: false,
   watchlistQuery: "",
   watchlistRegion: "all",
-  selectedSignalSymbol: "",
+  watchlistSort: "decision_score:desc",
+  selectedContentSymbol: "",
+  contentFormat: "reel",
+  lastContentScript: "",
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -51,10 +54,43 @@ function formatPct(value) {
   return `${sign}${number.toFixed(2)}%`;
 }
 
-function formatWeight(value) {
+function numberValue(value) {
+  if (value === null || value === undefined || value === "") return null;
   const number = Number(value);
-  if (!Number.isFinite(number)) return "n/a";
-  return `${number.toFixed(2)}%`;
+  return Number.isFinite(number) ? number : null;
+}
+
+function formatMetric(value, digits = 2) {
+  const number = numberValue(value);
+  if (number === null) return "n/a";
+  return number.toFixed(digits);
+}
+
+function formatCompact(value) {
+  const number = numberValue(value);
+  if (number === null) return "n/a";
+  return new Intl.NumberFormat(undefined, {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(number);
+}
+
+function currencyFor(item) {
+  if (item?.market === "HK" || String(item?.raw_code || "").startsWith("HK.")) return "HKD";
+  if (item?.market === "SG" || String(item?.raw_code || "").startsWith("SG.")) return "SGD";
+  if (item?.market === "MY" || String(item?.raw_code || "").startsWith("MY.")) return "MYR";
+  return "USD";
+}
+
+function formatMoneyCompact(value, item) {
+  const number = numberValue(value);
+  if (number === null) return "n/a";
+  return new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: currencyFor(item),
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(number);
 }
 
 function pctClass(value) {
@@ -69,13 +105,6 @@ function statusClass(value) {
 
 function empty(message = "No cached data found yet.") {
   return `<div class="empty-state">${escapeHtml(message)}</div>`;
-}
-
-function githubRawCacheUrl() {
-  const basePath = window.location.pathname.includes("ic-investing-cache-desk-latest")
-    ? "ic-investing-cache-desk-latest"
-    : "ic-investing-cache-desk";
-  return `https://raw.githubusercontent.com/schuwaong/schuwaong.github.io/main/${basePath}/cache-snapshot.json?ts=${Date.now()}`;
 }
 
 function compactText(value, max = 220) {
@@ -204,6 +233,29 @@ function watchlistItems() {
 
 function findWatchlistItem(symbol) {
   return watchlistItems().find((item) => item.symbol === symbol || item.raw_code === symbol);
+}
+
+function watchlistSortValue(item, key) {
+  if (key === "strategy_label") return String(item.strategy_label || item.strategy_status || item.bucket_label || "");
+  if (key === "status") return String(item.status || "");
+  if (key === "pe_ttm") return numberValue(item.pe_ttm ?? item.pe_ratio);
+  if (key === "last") return numberValue(item.last ?? item.current_price);
+  return numberValue(item[key]);
+}
+
+function sortedWatchlistRows(rows) {
+  const [key = "decision_score", direction = "desc"] = String(state.watchlistSort || "decision_score:desc").split(":");
+  const multiplier = direction === "asc" ? 1 : -1;
+  return [...rows].sort((left, right) => {
+    const a = watchlistSortValue(left, key);
+    const b = watchlistSortValue(right, key);
+    if (a === null && b === null) return String(left.symbol).localeCompare(String(right.symbol));
+    if (a === null) return 1;
+    if (b === null) return -1;
+    if (typeof a === "string" || typeof b === "string") return String(a).localeCompare(String(b)) * multiplier;
+    if (a === b) return String(left.symbol).localeCompare(String(right.symbol));
+    return (a - b) * multiplier;
+  });
 }
 
 function gateSummary(gates = []) {
@@ -392,53 +444,85 @@ function positionSummary(cache, item) {
     .join(" | ");
 }
 
-function validHttpUrl(value) {
-  try {
-    const url = new URL(value);
-    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
-  } catch {
-    return "";
+function scriptDraft(cache, item, format) {
+  const { bull, bear } = buildBullBear(item);
+  const geopolitics = rankContentSignals(cache.content?.geopolitics?.items || [], item, 3);
+  const instagram = rankContentSignals(cache.content?.instagram?.items || [], item, 2);
+  const symbol = item.symbol || item.raw_code || "this setup";
+  const thesis = item.thesis || item.reason || item.bullbear_theory || "No thesis saved in the current cache.";
+  const bullLine = bull[0] || thesis;
+  const bearLine = bear[0] || "The bear case is not fully expressed in the current gates, so I would keep sizing conservative.";
+  const geoLine = geopolitics[0]
+    ? `${stripMarkup(geopolitics[0].title)} (${signalFreshness(geopolitics[0])})`
+    : "No fresh geopolitical signal matched this ticker in the cache.";
+  const socialLine = instagram[0]
+    ? `${stripMarkup(instagram[0].title)} (${signalFreshness(instagram[0])})`
+    : "No strong Instagram/social buzz signal matched this ticker in the cache.";
+  const levelLine = `Entry ${item.entry_zone || "n/a"}, add ${item.add_zone || "n/a"}, invalidation ${item.invalidation || "n/a"}, max ${item.max_nav_pct ?? "n/a"}% NAV.`;
+  const positionLine = positionSummary(cache, item);
+  const hook =
+    item.status === "watch_pullback"
+      ? `${symbol} is not a chase for me - it is a patience test.`
+      : `${symbol} is on my watchlist, but I want the bull case and the risk case side by side.`;
+
+  if (format === "carousel") {
+    return {
+      title: `${symbol} carousel script`,
+      beats: [
+        ["Slide 1", `${symbol}: a watchlist case study, not a buy signal.`],
+        ["Slide 2", `The simple thesis: ${thesis}`],
+        ["Slide 3", `Bull case: ${bullLine}`],
+        ["Slide 4", `Bear case: ${bearLine}`],
+        ["Slide 5", `Geopolitical overlay: ${geoLine}`],
+        ["Slide 6", `Position/zone check: ${positionLine}. ${levelLine}`],
+        ["Slide 7", "My rule: if the invalidation breaks or the risk news gets worse, the setup goes back to review."],
+      ],
+      caption: `Research-only watchlist note on ${symbol}. The point is not prediction; it is separating thesis, risk, and price discipline.`,
+    };
   }
+
+  if (format === "voiceover") {
+    return {
+      title: `${symbol} voiceover script`,
+      beats: [
+        ["Open", hook],
+        ["Context", `The thesis is simple: ${thesis}`],
+        ["Bull", `The bull case is: ${bullLine}`],
+        ["Bear", `The bear case is: ${bearLine}`],
+        ["Geopolitics", `The geopolitical line I would keep on screen is: ${geoLine}`],
+        ["Social angle", `The content/buzz angle in the cache is: ${socialLine}`],
+        ["Process", `My level discipline is: ${levelLine} ${positionLine}`],
+        ["Close", "This is research-only. I am trying to decide what would make me wrong before I decide what would make me excited."],
+      ],
+      caption: `${symbol} in plain English: thesis, bear case, geopolitics, and invalidation before action.`,
+    };
+  }
+
+  return {
+    title: `${symbol} reel script`,
+    beats: [
+      ["0-3s", hook],
+      ["3-8s", `The bull case: ${bullLine}`],
+      ["8-14s", `The bear case: ${bearLine}`],
+      ["14-20s", `The geopolitics check: ${geoLine}`],
+      ["20-25s", `The social/content signal: ${socialLine}`],
+      ["25-32s", `The trading rule: ${levelLine}`],
+      ["32-38s", `OpenD/portfolio context: ${positionLine}`],
+      ["Close", "No hype, no prediction. Just thesis, risk, and the price where the idea is wrong."],
+    ],
+    caption: `Research-only ${symbol} watchlist breakdown: bull case, bear case, geopolitics, and invalidation before action.`,
+  };
 }
 
-function textTokens(value) {
-  return new Set(
-    String(value || "")
-      .toLowerCase()
-      .replace(/[^a-z0-9 ]/g, " ")
-      .split(/\s+/)
-      .filter((token) => token.length >= 4),
-  );
-}
-
-function sourceLinkForHeadline(cache, headline) {
-  const direct = validHttpUrl(headline?.link || headline?.url || headline?.source_url);
-  if (direct) return direct;
-
-  const titleTokens = textTokens(headline?.title || headline?.headline || "");
-  if (!titleTokens.size) return "";
-
-  const candidateSignals = [
-    ...(cache.content?.geopolitics?.items || []),
-    ...(cache.content?.instagram?.items || []),
-    ...(cache.news_headline_events || []),
-  ];
-  let best = { score: 0, link: "" };
-  for (const signal of candidateSignals) {
-    const link = validHttpUrl(signal?.link || signal?.url || signal?.source_url);
-    if (!link) continue;
-    const candidateTokens = textTokens(`${signal?.title || ""} ${signal?.headline || ""} ${stripMarkup(signal?.summary || "")}`);
-    let score = 0;
-    titleTokens.forEach((token) => {
-      if (candidateTokens.has(token)) score += 1;
-    });
-    if (score > best.score) best = { score, link };
-  }
-  if (best.score >= 3) return best.link;
-
-  const title = String(headline?.title || headline?.headline || "").trim();
-  if (!title) return "";
-  return `https://news.google.com/search?q=${encodeURIComponent(title)}`;
+function draftToText(draft) {
+  return [
+    draft.title,
+    "",
+    ...draft.beats.map(([label, text]) => `${label}: ${text}`),
+    "",
+    `Caption: ${draft.caption}`,
+    "Hashtags: #investing #stocks #watchlist #riskmanagement #geopolitics",
+  ].join("\n");
 }
 
 function decisionLabel(item) {
@@ -637,7 +721,6 @@ async function loadCache() {
 async function fetchCachePayload() {
   const attempts = [
     { url: "/api/cache", source: "live local API" },
-    { url: githubRawCacheUrl(), source: "GitHub raw snapshot" },
     { url: "./cache-snapshot.json", source: "GitHub snapshot" },
   ];
   const errors = [];
@@ -702,8 +785,10 @@ function renderWatchlist(cache) {
   const otherCount = sourceRows.filter((item) => watchlistRegionForItem(item) === "other" && matchesQuery(item)).length;
   const tableRows = allTableRows.filter((item) => matchesQuery(item) && matchesRegion(item));
   const items = allItems.filter((item) => matchesQuery(item) && matchesRegion(item));
+  const sortedTableRows = sortedWatchlistRows(tableRows);
+  const sortedItems = sortedWatchlistRows(items);
   const removed = cache.watchlist?.removed || [];
-  $("#watchlistCount").textContent = tableRows.length || items.length;
+  $("#watchlistCount").textContent = sortedTableRows.length || sortedItems.length;
   $("#removedCount").textContent = removed.length;
   $("#watchlistRegionTabs").innerHTML = [
     ...WATCHLIST_REGIONS,
@@ -726,11 +811,12 @@ function renderWatchlist(cache) {
     })
     .join("");
 
-  $("#watchlistItems").innerHTML = tableRows.length
+  $("#watchlistItems").innerHTML = sortedTableRows.length
     ? `
       <div class="watchlist-meta">
         <span>${escapeHtml(cache.watchlist?.mode || "research-only")}</span>
         <span>${escapeHtml(watchlistRegionLabel(activeRegion))} region</span>
+        <span>Sorted by ${escapeHtml($("#watchlistSort")?.selectedOptions?.[0]?.textContent || "strategy score")}</span>
         <span>Updated ${escapeHtml(cache.watchlist?.table_generated_at || formatDate(cache.watchlist?.updated_at))}</span>
       </div>
       <div class="watchlist-table-wrap">
@@ -742,6 +828,10 @@ function renderWatchlist(cache) {
               <th>Last</th>
               <th>Today</th>
               <th>Decision</th>
+              <th>Strategy</th>
+              <th>Mkt cap</th>
+              <th>P/E</th>
+              <th>Turnover</th>
               <th>ML</th>
               <th>Entry / Add</th>
               <th>Invalidation</th>
@@ -749,7 +839,7 @@ function renderWatchlist(cache) {
             </tr>
           </thead>
           <tbody>
-            ${tableRows
+            ${sortedTableRows
               .map(
                 (item) => `
                   <tr class="watch-row status-${escapeHtml(item.status || "watch")}">
@@ -761,6 +851,19 @@ function renderWatchlist(cache) {
                     <td>${escapeHtml(item.last ?? "n/a")}</td>
                     <td><span class="${pctClass(item.change_pct)}">${escapeHtml(formatPct(item.change_pct))}</span></td>
                     <td>${escapeHtml(item.decision_score ?? "n/a")}</td>
+                    <td>
+                      ${escapeHtml(item.strategy_label || item.strategy_status || "n/a")}
+                      <div class="meta-line">${escapeHtml(item.market_status || item.committee_result || "")}</div>
+                    </td>
+                    <td>${escapeHtml(formatMoneyCompact(item.market_cap, item))}</td>
+                    <td>
+                      ${escapeHtml(formatMetric(item.pe_ttm ?? item.pe_ratio, 2))}
+                      <div class="meta-line">PB ${escapeHtml(formatMetric(item.pb_ratio, 2))}</div>
+                    </td>
+                    <td>
+                      ${escapeHtml(formatMoneyCompact(item.turnover, item))}
+                      <div class="meta-line">Vol ${escapeHtml(formatCompact(item.volume))}</div>
+                    </td>
                     <td>
                       ${escapeHtml(item.ml_score ?? "n/a")}
                       <div class="meta-line">${escapeHtml(item.ml_status || "")}</div>
@@ -782,9 +885,9 @@ function renderWatchlist(cache) {
         </table>
       </div>
     `
-    : items.length === 0
+    : sortedItems.length === 0
       ? empty(`No ${watchlistRegionLabel(activeRegion)} watchlist names match the current filters.`)
-      : items
+      : sortedItems
           .map(
             (item) => `
               <article class="item-card watchlist-card status-${escapeHtml(item.status || "watch")}" data-symbol="${escapeHtml(item.symbol)}">
@@ -798,10 +901,14 @@ function renderWatchlist(cache) {
                 <div class="watch-metrics">
                   <span><small>Last</small><strong>${escapeHtml(item.current_price || "n/a")}</strong></span>
                   <span><small>Today</small><strong class="${pctClass(item.change_pct)}">${escapeHtml(formatPct(item.change_pct))}</strong></span>
+                  <span><small>Mkt cap</small><strong>${escapeHtml(formatMoneyCompact(item.market_cap, item))}</strong></span>
+                  <span><small>P/E</small><strong>${escapeHtml(formatMetric(item.pe_ttm ?? item.pe_ratio, 2))}</strong></span>
+                  <span><small>Turnover</small><strong>${escapeHtml(formatMoneyCompact(item.turnover, item))}</strong></span>
                   <span><small>Entry</small><strong>${escapeHtml(item.entry_point || item.entry_zone || "n/a")}</strong></span>
                   <span><small>Add</small><strong>${escapeHtml(item.add_zone || "n/a")}</strong></span>
                   <span><small>Invalid</small><strong>${escapeHtml(item.stoploss || item.invalidation || "n/a")}</strong></span>
                 </div>
+                <div class="strategy-line">${escapeHtml(item.strategy_label || item.strategy_status || "Unclassified strategy")} · ${escapeHtml(item.market_status || item.committee_result || "research")}</div>
                 <div class="reason">${escapeHtml(item.reason || item.thesis || "No thesis saved.")}</div>
                 <div class="agent-strip">
                   ${(item.source_agents || [])
@@ -832,91 +939,6 @@ function renderWatchlist(cache) {
             `,
           )
           .join("");
-}
-
-function renderPortfolioAnalysis(cache) {
-  const analysis = cache.portfolio_analysis || {};
-  const trims = analysis.trim_candidates || [];
-  const holds = analysis.hold_review || [];
-  const summary = analysis.summary || {};
-  const notes = analysis.notes || [];
-
-  if (!trims.length && !holds.length) {
-    $("#portfolioAnalysis").innerHTML = empty("No sample portfolio analysis is cached yet.");
-    return;
-  }
-
-  const summaryCards = [
-    ["Names reviewed", summary.positions_reviewed ?? "n/a"],
-    ["Trim candidates", summary.trim_candidates ?? 0],
-    ["Hold review", summary.hold_review_names ?? 0],
-    ["Focus", summary.focus || "Current sample trim plan"],
-  ];
-
-  const renderItem = (item, tone) => `
-    <article class="item-card portfolio-analysis-card ${tone}">
-      <div class="item-topline">
-        <div>
-          <h3><span class="ticker">${escapeHtml(item.symbol || "n/a")}</span> ${escapeHtml(item.name || "")}</h3>
-          <div class="status">${escapeHtml(item.sample_action || "Sample review")}</div>
-        </div>
-        <span class="status">${escapeHtml(item.status || "review")}</span>
-      </div>
-      <div class="portfolio-analysis-metrics">
-        <span><small>Last</small><strong>${escapeHtml(item.last_price || "n/a")}</strong></span>
-        <span><small>Weight</small><strong>${escapeHtml(formatWeight(item.portfolio_weight_pct))}</strong></span>
-        <span><small>Unrealized</small><strong class="${pctClass(item.unrealized_pct)}">${escapeHtml(item.unrealized_pct || "n/a")}</strong></span>
-        <span><small>Sample sell zone</small><strong>${escapeHtml(item.sample_sell_band || "n/a")}</strong></span>
-      </div>
-      <div class="reason">${escapeHtml(item.why || "No reason saved.")}</div>
-      <div class="portfolio-analysis-when">${escapeHtml(item.when_to_sell || "No sample sell timing saved.")}</div>
-    </article>
-  `;
-
-  $("#portfolioAnalysis").innerHTML = `
-    <div class="portfolio-analysis-intro">
-      <p class="portfolio-analysis-disclaimer">${escapeHtml(analysis.disclaimer || "Educational sample only.")}</p>
-      <div class="portfolio-analysis-meta">
-        <span>Updated ${escapeHtml(formatDate(analysis.updated_at || cache.generated_at))}</span>
-        <span>Sample framing for the public website</span>
-      </div>
-    </div>
-    <div class="portfolio-summary-grid">
-      ${summaryCards
-        .map(
-          ([label, value]) => `
-            <div class="portfolio-summary-card">
-              <small>${escapeHtml(label)}</small>
-              <strong>${escapeHtml(value)}</strong>
-            </div>
-          `,
-        )
-        .join("")}
-    </div>
-    <div class="portfolio-analysis-columns">
-      <div>
-        <div class="panel-subheading">
-          <p class="section-kicker">Sample trim plan</p>
-          <h3>When to sell</h3>
-        </div>
-        <div class="stack-list">
-          ${trims.length ? trims.map((item) => renderItem(item, "trim")).join("") : empty("No trim candidates were generated.")}
-        </div>
-      </div>
-      <div>
-        <div class="panel-subheading">
-          <p class="section-kicker">Hold review</p>
-          <h3>Sell discipline</h3>
-        </div>
-        <div class="stack-list">
-          ${holds.length ? holds.map((item) => renderItem(item, "hold")).join("") : empty("No hold review names were generated.")}
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-analysis-notes">
-      ${notes.map((note) => `<div class="meta-line">${escapeHtml(note)}</div>`).join("")}
-    </div>
-  `;
 }
 
 function renderMarket(cache) {
@@ -975,16 +997,14 @@ function renderMarket(cache) {
       ? empty("No headlines cached.")
       : headlines
           .slice(0, 12)
-          .map((item) => {
-            const link = sourceLinkForHeadline(cache, item);
-            const source = link ? sourceHost(link) : "source link missing";
-            return `
-              <a class="headline-item ${link ? "" : "headline-item-disabled"}" href="${escapeHtml(link || "#")}" ${link ? 'target="_blank" rel="noreferrer"' : 'aria-disabled="true"'}>
+          .map(
+            (item) => `
+              <a class="headline-item" href="${escapeHtml(item.link || "#")}" target="_blank" rel="noreferrer">
                 ${escapeHtml(item.title)}
-                <span class="headline-source">${escapeHtml([item.published, item.description, source].filter(Boolean).join(" | "))}</span>
+                <span class="headline-source">${escapeHtml(item.published || item.description || "")}</span>
               </a>
-            `;
-          })
+            `,
+          )
           .join("");
 }
 
@@ -1098,7 +1118,26 @@ function renderCandidates(cache) {
       `;
 }
 
-function renderLimitations(cache) {
+function renderIdeas(cache) {
+  const ideas = cache.market?.content_ideas || [];
+  $("#contentIdeas").innerHTML =
+    ideas.length === 0
+      ? empty("No briefing ideas cached.")
+      : ideas
+          .map(
+            (item) => `
+              <article class="item-card">
+                <div class="item-topline">
+                  <h3>${escapeHtml(item.hook || "Briefing idea")}</h3>
+                  <span class="status">${escapeHtml(item.format || "idea")}</span>
+                </div>
+                <div class="reason">${escapeHtml(item.beats || "")}</div>
+                <div class="meta-line">${escapeHtml(item.caption || item.source_hint || "")}</div>
+              </article>
+            `,
+          )
+          .join("");
+
   const limitations = [...new Set([...(cache.market?.limitations || []), ...(cache.reddit?.limitations || [])])];
   $("#limitationsList").innerHTML =
     limitations.length === 0
@@ -1114,64 +1153,87 @@ function renderLimitations(cache) {
           .join("");
 }
 
-function renderSignals(cache) {
+function renderContent(cache) {
   const items = watchlistItems();
-  const tickerSelect = $("#signalTickerSelect");
+  const tickerSelect = $("#contentTickerSelect");
+  const formatSelect = $("#contentFormatSelect");
   if (!items.length) {
     tickerSelect.innerHTML = "";
-    $("#signalLens").innerHTML = empty("No watchlist names available for signal review.");
-    $("#signalFeed").innerHTML = empty("No source context available.");
+    $("#contentScript").innerHTML = empty("No watchlist names available for script generation.");
+    $("#contentSignals").innerHTML = empty("No content context available.");
     return;
   }
 
-  if (!state.selectedSignalSymbol || !items.some((item) => item.symbol === state.selectedSignalSymbol)) {
-    state.selectedSignalSymbol = items[0].symbol;
+  if (state.contentFormat !== formatSelect.value) {
+    state.contentFormat = formatSelect.value || "reel";
   }
+  if (!state.selectedContentSymbol || !items.some((item) => item.symbol === state.selectedContentSymbol)) {
+    state.selectedContentSymbol = items[0].symbol;
+  }
+  formatSelect.value = state.contentFormat;
   tickerSelect.innerHTML = items
-    .map((item) => `<option value="${escapeHtml(item.symbol)}" ${item.symbol === state.selectedSignalSymbol ? "selected" : ""}>${escapeHtml(item.symbol)} - ${escapeHtml(item.setup_label || item.status || "watch")}</option>`)
+    .map((item) => `<option value="${escapeHtml(item.symbol)}" ${item.symbol === state.selectedContentSymbol ? "selected" : ""}>${escapeHtml(item.symbol)} - ${escapeHtml(item.setup_label || item.status || "watch")}</option>`)
     .join("");
 
-  const item = findWatchlistItem(state.selectedSignalSymbol) || items[0];
+  const item = findWatchlistItem(state.selectedContentSymbol) || items[0];
+  const draft = scriptDraft(cache, item, state.contentFormat);
+  const text = draftToText(draft);
+  state.lastContentScript = text;
   const { bull, bear } = buildBullBear(item);
   const geoSignals = rankContentSignals(cache.content?.geopolitics?.items || [], item, 4);
   const instaSignals = rankContentSignals(cache.content?.instagram?.items || [], item, 4);
-  const signalRiskLabel = cache.summary?.risk_state === "RISK_OFF" ? "Hold / de-risk" : "Research / build";
+  const contentRiskLabel = cache.summary?.risk_state === "RISK_OFF" ? "Hold / de-risk" : "Research / build";
 
-  $("#signalLens").innerHTML = `
-    <article class="item-card signal-lens-card">
+  $("#contentScript").innerHTML = `
+    <article class="item-card script-card">
       <div class="item-topline">
         <div>
-          <h3>${escapeHtml(item.symbol || item.raw_code || "Watchlist setup")} signal lens</h3>
-          <div class="status">${escapeHtml(item.status || "watch")} | ${escapeHtml(item.market || "market")} | ${escapeHtml(signalRiskLabel)}</div>
+          <h3>${escapeHtml(draft.title)}</h3>
+          <div class="status">${escapeHtml(item.status || "watch")} | ${escapeHtml(item.market || "market")} | ${escapeHtml(contentRiskLabel)}</div>
         </div>
+        <button class="status-chip" id="copyContentScript" type="button">Copy</button>
       </div>
-      <div class="signal-mini-grid">
+      <div class="script-beats">
+        ${draft.beats
+          .map(
+            ([label, line]) => `
+              <div class="script-beat">
+                <span>${escapeHtml(label)}</span>
+                <p>${escapeHtml(line)}</p>
+              </div>
+            `,
+          )
+          .join("")}
+      </div>
+      <div class="script-caption">${escapeHtml(draft.caption)}</div>
+      <pre>${escapeHtml(text)}</pre>
+    </article>
+
+    <article class="item-card">
+      <div class="item-topline">
+        <h3>Trading Pipeline Check</h3>
+        <span class="status">${escapeHtml(item.confidence || "research")}</span>
+      </div>
+      <div class="script-mini-grid">
         <span>Bull Case<strong>${escapeHtml(compactText(bull[0] || item.thesis || "No bull thesis saved.", 130))}</strong></span>
         <span>Bear Case<strong>${escapeHtml(compactText(bear[0] || "No bear case saved.", 130))}</strong></span>
         <span>Levels<strong>${escapeHtml(`Entry ${item.entry_zone || "n/a"} | Add ${item.add_zone || "n/a"} | Invalid ${item.invalidation || "n/a"}`)}</strong></span>
         <span>OpenD<strong>${escapeHtml(positionSummary(cache, item))}</strong></span>
       </div>
     </article>
-    <article class="item-card">
-      <div class="item-topline">
-        <h3>Agent Gate Summary</h3>
-        <span class="status">${escapeHtml(item.confidence || "research")}</span>
-      </div>
-      <div class="reason">${escapeHtml(gateSummary(item.agent_gates || []))}</div>
-    </article>
   `;
 
   const qualityRows = [
-    qualityLine("News/social scan", cache.content?.instagram || {}),
+    qualityLine("Instagram", cache.content?.instagram || {}),
     qualityLine("Geopolitics", cache.content?.geopolitics || {}),
   ];
-  $("#signalFeed").innerHTML = `
+  $("#contentSignals").innerHTML = `
     <article class="item-card">
       <div class="item-topline">
         <h3>Data Quality</h3>
         <span class="status">${escapeHtml(cache.summary?.opend_positions ? `${cache.summary.opend_positions} positions` : "watchlist")}</span>
       </div>
-      <div class="signal-quality">
+      <div class="script-quality">
         ${qualityRows.map((row) => `<div>${escapeHtml(row)}</div>`).join("")}
       </div>
     </article>
@@ -1195,7 +1257,7 @@ function renderSignals(cache) {
     </article>
     <article class="item-card">
       <div class="item-topline">
-        <h3>Matched News/Social Sources</h3>
+        <h3>Matched Instagram/Social</h3>
         <span class="status">${escapeHtml(cache.content?.instagram?.quality?.status || "missing")}</span>
       </div>
       ${instaSignals.length
@@ -1303,13 +1365,12 @@ function render() {
   $("#heroMeta").textContent = `Workspace ${cache.workspace}. Source ${state.cacheSource || "cache"}. Refresh ${formatDate(cache.generated_at)}. Latest market cache ${formatDate(cache.files?.market_mover?.modified_at)}.`;
   renderKpis(summary);
   renderWatchlist(cache);
-  renderPortfolioAnalysis(cache);
   renderMarket(cache);
   renderReddit(cache);
   renderRisk(cache);
   renderCandidates(cache);
-  renderLimitations(cache);
-  renderSignals(cache);
+  renderIdeas(cache);
+  renderContent(cache);
   renderSources(cache);
   renderReports(cache);
 }
@@ -1319,15 +1380,35 @@ $("#watchlistSearch").addEventListener("input", (event) => {
   state.watchlistQuery = event.target.value;
   if (state.cache) renderWatchlist(state.cache);
 });
+$("#watchlistSort").addEventListener("change", (event) => {
+  state.watchlistSort = event.target.value;
+  if (state.cache) renderWatchlist(state.cache);
+});
 $("#watchlistRegionTabs").addEventListener("click", (event) => {
   const tab = event.target.closest("[data-region]");
   if (!tab) return;
   state.watchlistRegion = tab.dataset.region || "all";
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#signalTickerSelect").addEventListener("change", (event) => {
-  state.selectedSignalSymbol = event.target.value;
-  if (state.cache) renderSignals(state.cache);
+$("#contentTickerSelect").addEventListener("change", (event) => {
+  state.selectedContentSymbol = event.target.value;
+  if (state.cache) renderContent(state.cache);
+});
+$("#contentFormatSelect").addEventListener("change", (event) => {
+  state.contentFormat = event.target.value;
+  if (state.cache) renderContent(state.cache);
+});
+$("#contentScript").addEventListener("click", async (event) => {
+  if (!event.target.closest("#copyContentScript")) return;
+  try {
+    await navigator.clipboard.writeText(state.lastContentScript || "");
+    event.target.textContent = "Copied";
+    setTimeout(() => {
+      event.target.textContent = "Copy";
+    }, 1200);
+  } catch {
+    event.target.textContent = "Select text";
+  }
 });
 $("#watchlistItems").addEventListener("click", (event) => {
   const trigger = event.target.closest("[data-symbol]");
