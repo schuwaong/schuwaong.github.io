@@ -719,10 +719,7 @@ async function loadCache() {
 }
 
 async function fetchCachePayload() {
-  const attempts = [
-    { url: "/api/cache", source: "live local API" },
-    { url: "./cache-snapshot.json", source: "GitHub snapshot" },
-  ];
+  const attempts = [{ url: "./cache-snapshot.json", source: "GitHub snapshot" }];
   const errors = [];
   for (const attempt of attempts) {
     try {
@@ -1119,24 +1116,27 @@ function renderCandidates(cache) {
 }
 
 function renderIdeas(cache) {
+  const ideasTarget = $("#contentIdeas");
   const ideas = cache.market?.content_ideas || [];
-  $("#contentIdeas").innerHTML =
-    ideas.length === 0
-      ? empty("No briefing ideas cached.")
-      : ideas
-          .map(
-            (item) => `
-              <article class="item-card">
-                <div class="item-topline">
-                  <h3>${escapeHtml(item.hook || "Briefing idea")}</h3>
-                  <span class="status">${escapeHtml(item.format || "idea")}</span>
-                </div>
-                <div class="reason">${escapeHtml(item.beats || "")}</div>
-                <div class="meta-line">${escapeHtml(item.caption || item.source_hint || "")}</div>
-              </article>
-            `,
-          )
-          .join("");
+  if (ideasTarget) {
+    ideasTarget.innerHTML =
+      ideas.length === 0
+        ? empty("No briefing ideas cached.")
+        : ideas
+            .map(
+              (item) => `
+                <article class="item-card">
+                  <div class="item-topline">
+                    <h3>${escapeHtml(item.hook || "Briefing idea")}</h3>
+                    <span class="status">${escapeHtml(item.format || "idea")}</span>
+                  </div>
+                  <div class="reason">${escapeHtml(item.beats || "")}</div>
+                  <div class="meta-line">${escapeHtml(item.caption || item.source_hint || "")}</div>
+                </article>
+              `,
+            )
+            .join("");
+  }
 
   const limitations = [...new Set([...(cache.market?.limitations || []), ...(cache.reddit?.limitations || [])])];
   $("#limitationsList").innerHTML =
@@ -1155,22 +1155,20 @@ function renderIdeas(cache) {
 
 function renderContent(cache) {
   const items = watchlistItems();
-  const tickerSelect = $("#contentTickerSelect");
-  const formatSelect = $("#contentFormatSelect");
+  const tickerSelect = $("#signalTickerSelect");
+  const lensTarget = $("#signalLens");
+  const feedTarget = $("#signalFeed");
+  if (!tickerSelect || !lensTarget || !feedTarget) return;
   if (!items.length) {
     tickerSelect.innerHTML = "";
-    $("#contentScript").innerHTML = empty("No watchlist names available for script generation.");
-    $("#contentSignals").innerHTML = empty("No content context available.");
+    lensTarget.innerHTML = empty("No watchlist names available for signal review.");
+    feedTarget.innerHTML = empty("No content context available.");
     return;
   }
 
-  if (state.contentFormat !== formatSelect.value) {
-    state.contentFormat = formatSelect.value || "reel";
-  }
   if (!state.selectedContentSymbol || !items.some((item) => item.symbol === state.selectedContentSymbol)) {
     state.selectedContentSymbol = items[0].symbol;
   }
-  formatSelect.value = state.contentFormat;
   tickerSelect.innerHTML = items
     .map((item) => `<option value="${escapeHtml(item.symbol)}" ${item.symbol === state.selectedContentSymbol ? "selected" : ""}>${escapeHtml(item.symbol)} - ${escapeHtml(item.setup_label || item.status || "watch")}</option>`)
     .join("");
@@ -1184,7 +1182,7 @@ function renderContent(cache) {
   const instaSignals = rankContentSignals(cache.content?.instagram?.items || [], item, 4);
   const contentRiskLabel = cache.summary?.risk_state === "RISK_OFF" ? "Hold / de-risk" : "Research / build";
 
-  $("#contentScript").innerHTML = `
+  lensTarget.innerHTML = `
     <article class="item-card script-card">
       <div class="item-topline">
         <div>
@@ -1227,7 +1225,7 @@ function renderContent(cache) {
     qualityLine("Instagram", cache.content?.instagram || {}),
     qualityLine("Geopolitics", cache.content?.geopolitics || {}),
   ];
-  $("#contentSignals").innerHTML = `
+  feedTarget.innerHTML = `
     <article class="item-card">
       <div class="item-topline">
         <h3>Data Quality</h3>
@@ -1306,7 +1304,7 @@ function renderSources(cache) {
                 <span class="fresh-dot ${present ? "" : "missing"}"></span>
                 <div>
                   <h3>${escapeHtml(sourceLabel(key))}</h3>
-                  <div class="source-path">${escapeHtml(file?.path || "Missing or not generated yet.")}</div>
+                  <div class="source-path">${escapeHtml(file?.name || file?.path || "Missing or not generated yet.")}</div>
                 </div>
                 <div class="meta-line">${escapeHtml(present ? `${formatDate(file.modified_at)} | ${formatBytes(file.size)}` : "missing")}</div>
               </div>
@@ -1349,7 +1347,7 @@ function renderReports(cache) {
             (report) => `
               <details class="item-card report-card">
                 <summary>${escapeHtml(report.label)} ${report.file ? "" : "(missing)"}</summary>
-                <div class="meta-line">${escapeHtml(report.file?.path || "No file found.")}</div>
+                <div class="meta-line">${escapeHtml(report.file?.name || report.file?.path || "No file found.")}</div>
                 <div class="meta-line">Updated ${escapeHtml(formatDate(report.file?.modified_at))}</div>
                 <pre>${escapeHtml(report.preview || "No preview available.")}</pre>
               </details>
@@ -1362,7 +1360,10 @@ function render() {
   const cache = state.cache;
   if (!cache) return;
   const summary = cache.summary || {};
-  $("#heroMeta").textContent = `Workspace ${cache.workspace}. Source ${state.cacheSource || "cache"}. Refresh ${formatDate(cache.generated_at)}. Latest market cache ${formatDate(cache.files?.market_mover?.modified_at)}.`;
+  const marketCacheText = cache.files?.market_mover?.modified_at
+    ? `Latest market cache ${formatDate(cache.files.market_mover.modified_at)}`
+    : "Market cache timing withheld from public snapshot";
+  $("#heroMeta").textContent = `Workspace ${cache.workspace}. Source ${state.cacheSource || "cache"}. Refresh ${formatDate(cache.generated_at)}. ${marketCacheText}.`;
   renderKpis(summary);
   renderWatchlist(cache);
   renderMarket(cache);
@@ -1375,48 +1376,32 @@ function render() {
   renderReports(cache);
 }
 
-$("#refreshButton").addEventListener("click", loadCache);
-$("#watchlistSearch").addEventListener("input", (event) => {
+$("#refreshButton")?.addEventListener("click", loadCache);
+$("#watchlistSearch")?.addEventListener("input", (event) => {
   state.watchlistQuery = event.target.value;
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#watchlistSort").addEventListener("change", (event) => {
+$("#watchlistSort")?.addEventListener("change", (event) => {
   state.watchlistSort = event.target.value;
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#watchlistRegionTabs").addEventListener("click", (event) => {
+$("#watchlistRegionTabs")?.addEventListener("click", (event) => {
   const tab = event.target.closest("[data-region]");
   if (!tab) return;
   state.watchlistRegion = tab.dataset.region || "all";
   if (state.cache) renderWatchlist(state.cache);
 });
-$("#contentTickerSelect")?.addEventListener("change", (event) => {
+$("#signalTickerSelect")?.addEventListener("change", (event) => {
   state.selectedContentSymbol = event.target.value;
   if (state.cache) renderContent(state.cache);
 });
-$("#contentFormatSelect")?.addEventListener("change", (event) => {
-  state.contentFormat = event.target.value;
-  if (state.cache) renderContent(state.cache);
-});
-$("#contentScript")?.addEventListener("click", async (event) => {
-  if (!event.target.closest("#copyContentScript")) return;
-  try {
-    await navigator.clipboard.writeText(state.lastContentScript || "");
-    event.target.textContent = "Copied";
-    setTimeout(() => {
-      event.target.textContent = "Copy";
-    }, 1200);
-  } catch {
-    event.target.textContent = "Select text";
-  }
-});
-$("#watchlistItems").addEventListener("click", (event) => {
+$("#watchlistItems")?.addEventListener("click", (event) => {
   const trigger = event.target.closest("[data-symbol]");
   if (!trigger) return;
   openStockReport(trigger.dataset.symbol, trigger.dataset.agent || "");
 });
-$("#closeStockDialog").addEventListener("click", closeStockReport);
-$("#stockDialog").addEventListener("click", (event) => {
+$("#closeStockDialog")?.addEventListener("click", closeStockReport);
+$("#stockDialog")?.addEventListener("click", (event) => {
   if (event.target.id === "stockDialog") closeStockReport();
 });
 async function setupMotionRuntime() {

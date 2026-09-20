@@ -1,11 +1,12 @@
 <!doctype html>
-<html data-ui-mode="analytical" lang="en">
+<html lang="en" data-ui-mode="analytical">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IC Investing Cache Desk</title>
-    <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="shared/ui-selector.css">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css?v=20260920">
+    <link rel="stylesheet" href="/shared/ui-selector.css">
   </head>
   <body>
     <div class="app-shell">
@@ -90,13 +91,13 @@
               <div class="watchlist-tools">
                 <input id="watchlistSearch" type="search" placeholder="META, AMZN..." aria-label="Search watchlist symbol">
                 <select id="watchlistSort" aria-label="Sort watchlist">
-                  <option value="decision_score:desc">Strategy score</option>
-                  <option value="strategy_label:asc">Strategy A-Z</option>
-                  <option value="market_cap:desc">Market cap high-low</option>
-                  <option value="pe_ttm:asc">P/E low-high</option>
-                  <option value="turnover:desc">Turnover high-low</option>
-                  <option value="change_pct:desc">Today high-low</option>
-                  <option value="status:asc">Pipeline lane</option>
+                  <option value="decision_score:desc">Score: high to low</option>
+                  <option value="decision_score:asc">Score: low to high</option>
+                  <option value="change_pct:desc">Today: high to low</option>
+                  <option value="change_pct:asc">Today: low to high</option>
+                  <option value="pe_ttm:asc">P/E: low to high</option>
+                  <option value="market_cap:desc">Market cap: high to low</option>
+                  <option value="strategy_label:asc">Strategy: A to Z</option>
                 </select>
                 <span class="mini-count" id="watchlistCount">0</span>
               </div>
@@ -121,12 +122,19 @@
           <article class="panel">
             <div class="panel-heading">
               <div>
-                <p class="section-kicker">Sample only</p>
-                <h2>Portfolio Analysis</h2>
+                <p class="section-kicker">Privacy boundary</p>
+                <h2>Private portfolio data stays local</h2>
               </div>
-              <span class="risk-badge">Educational sample</span>
+              <span class="risk-badge">Hidden on GitHub</span>
             </div>
-            <div id="portfolioAnalysis"></div>
+            <p class="panel-intro">
+              This hosted snapshot contains research candidates and committee evidence only.
+              Holdings, P/L, weights, account identifiers, and sizing gates remain on the local dashboard.
+            </p>
+            <div class="privacy-note">
+              <strong>Public boundary</strong>
+              <span>Refresh reloads the latest published snapshot; it does not run your private trading pipeline.</span>
+            </div>
           </article>
         </section>
 
@@ -357,18 +365,6 @@
               <p>Looks for the weakest part of the idea before you act, so shaky setups get challenged early.</p>
             </div>
           </div>
-          <div class="agent-row">
-            <span class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path d="M4 17h16M6 13l3-3 3 2 5-7"></path>
-                <path d="M7 7h10"></path>
-              </svg>
-            </span>
-            <div>
-              <h3>Options Desk</h3>
-              <p>Tracks volatility and event risk so options ideas start with a clearer setup and a clearer caution flag.</p>
-            </div>
-          </div>
         </div>
 
         <div class="agent-chip-cloud" aria-label="Active agent names">
@@ -377,7 +373,6 @@
           <span>value check</span>
           <span>news watch</span>
           <span>risk challenge</span>
-          <span>options desk</span>
         </div>
 
         <button class="paywall-cta" id="openAgentDesk" type="button">Open the desk</button>
@@ -408,6 +403,6 @@
       </div>
     </dialog>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=20260920"></script>
   </body>
 </html>

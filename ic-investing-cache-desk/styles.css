@@ -332,6 +332,27 @@ h3 {
   margin-bottom: 14px;
 }
 
+.panel-intro {
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.privacy-note {
+  display: grid;
+  gap: 4px;
+  max-width: 760px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--teal);
+  background: rgba(15, 140, 132, 0.08);
+}
+
+.privacy-note span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .mini-count,
 .risk-badge {
   display: inline-flex;
