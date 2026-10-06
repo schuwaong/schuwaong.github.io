@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-10-05",
-  "seedDateKey": "2026-10-05",
+  "dateKey": "2026-10-06",
+  "seedDateKey": "2026-10-06",
   "source": "workflow",
   "vocab": {
-    "category": "speaking",
-    "term": "perspective",
-    "zh": "视角；看法",
-    "simpleEn": "a way of thinking about something",
-    "simpleZh": "看待一件事的角度。",
-    "exampleEn": "From my perspective, short daily practice is easier to maintain.",
-    "exampleZh": "从我的角度看，短时间每日练习更容易坚持。",
-    "upgradeEn": "Use from my perspective to vary in my opinion.",
-    "upgradeZh": "用 from my perspective 替代 in my opinion。"
+    "category": "writing",
+    "term": "clarify",
+    "zh": "澄清；讲清楚",
+    "simpleEn": "to make something clear",
+    "simpleZh": "把某件事说清楚。",
+    "exampleEn": "Teachers should clarify the task before students start writing.",
+    "exampleZh": "学生开始写作前，老师应该把任务讲清楚。",
+    "upgradeEn": "Use clarify the question/goal/requirement in study and work topics.",
+    "upgradeZh": "常用搭配：clarify the question / goal / requirement。"
   },
   "cycle": {
-    "number": 5,
-    "phase": 1,
-    "titleEn": "Speaking Part 2 cue card",
-    "titleZh": "口语 Part 2 口语卡",
-    "summaryEn": "Build a 2-minute answer with a beginning, detail, example, and ending.",
-    "summaryZh": "练出 2 分钟答案，包含开头、细节、例子和结尾。",
+    "number": 6,
+    "phase": 2,
+    "titleEn": "Writing Task 1 overview",
+    "titleZh": "写作 Task 1 总览",
+    "summaryEn": "Learn how to describe trends, compare data, and write a proper overview.",
+    "summaryZh": "学会描述趋势、比较数据，并写出像样的总览。",
     "focusWords": [
-      "cue card / 口语卡",
-      "detail / 细节",
-      "follow-up / 追问",
-      "example / 例子"
+      "overview / 总览",
+      "trend / 趋势",
+      "compare / 比较",
+      "data / 数据"
     ]
   },
   "frame": {
-    "slot": "Speaking / 口语",
-    "en": "What I mean is...",
-    "zh": "我的意思是...",
-    "useEn": "Use this to answer clearly and naturally.",
-    "useZh": "用来让口语回答更清楚自然。"
+    "slot": "Task 1 / 小作文",
+    "en": "The overall trend is...",
+    "zh": "总体趋势是...",
+    "useEn": "Use in graph and chart descriptions.",
+    "useZh": "适合图表描述和趋势题。"
   },
-  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
-  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"perspective\" using What I mean is...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"perspective\" 和 我的意思是... 写一句 Becky 自己的话。",
+  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
+  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"clarify\" using The overall trend is...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"clarify\" 和 总体趋势是... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
