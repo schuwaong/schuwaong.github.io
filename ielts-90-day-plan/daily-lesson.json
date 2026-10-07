@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-10-06",
-  "seedDateKey": "2026-10-06",
+  "dateKey": "2026-10-07",
+  "seedDateKey": "2026-10-07",
   "source": "workflow",
   "vocab": {
     "category": "writing",
-    "term": "clarify",
-    "zh": "澄清；讲清楚",
-    "simpleEn": "to make something clear",
-    "simpleZh": "把某件事说清楚。",
-    "exampleEn": "Teachers should clarify the task before students start writing.",
-    "exampleZh": "学生开始写作前，老师应该把任务讲清楚。",
-    "upgradeEn": "Use clarify the question/goal/requirement in study and work topics.",
-    "upgradeZh": "常用搭配：clarify the question / goal / requirement。"
+    "term": "streamline",
+    "zh": "简化流程；提高效率",
+    "simpleEn": "to make a process simpler and faster",
+    "simpleZh": "让流程更简单、更快。",
+    "exampleEn": "Digital tools can streamline routine administrative tasks.",
+    "exampleZh": "数字工具可以简化日常行政任务。",
+    "upgradeEn": "Use streamline for systems, workflows, services, and processes.",
+    "upgradeZh": "streamline 适合系统、工作流、服务和流程。"
   },
   "cycle": {
-    "number": 6,
+    "number": 7,
     "phase": 2,
-    "titleEn": "Writing Task 1 overview",
-    "titleZh": "写作 Task 1 总览",
-    "summaryEn": "Learn how to describe trends, compare data, and write a proper overview.",
-    "summaryZh": "学会描述趋势、比较数据，并写出像样的总览。",
+    "titleEn": "Writing Task 2 opinion essays",
+    "titleZh": "写作 Task 2 观点作文",
+    "summaryEn": "Practice opinion, advantage-disadvantage, and discussion style essays.",
+    "summaryZh": "练习观点、利弊和讨论类作文。",
     "focusWords": [
-      "overview / 总览",
-      "trend / 趋势",
-      "compare / 比较",
-      "data / 数据"
+      "thesis / 论点",
+      "paragraph / 段落",
+      "support / 支持",
+      "conclusion / 结论"
     ]
   },
   "frame": {
-    "slot": "Task 1 / 小作文",
-    "en": "The overall trend is...",
-    "zh": "总体趋势是...",
-    "useEn": "Use in graph and chart descriptions.",
-    "useZh": "适合图表描述和趋势题。"
+    "slot": "Task 2 / 大作文",
+    "en": "I strongly believe that...",
+    "zh": "我强烈认为...",
+    "useEn": "Use to give a clear opinion.",
+    "useZh": "用来表达清晰观点。"
   },
   "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
   "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"clarify\" using The overall trend is...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"clarify\" 和 总体趋势是... 写一句 Becky 自己的话。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"streamline\" using I strongly believe that...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"streamline\" 和 我强烈认为... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
