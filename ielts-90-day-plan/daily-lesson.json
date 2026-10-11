@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-10-10",
-  "seedDateKey": "2026-10-10",
+  "dateKey": "2026-10-11",
+  "seedDateKey": "2026-10-11",
   "source": "workflow",
   "vocab": {
-    "category": "reading",
-    "term": "imply",
-    "zh": "暗示；意味着",
-    "simpleEn": "to suggest something without saying it directly",
-    "simpleZh": "没有直接说，但暗示出某个意思。",
-    "exampleEn": "The data imply that younger people are spending more time online.",
-    "exampleZh": "数据暗示年轻人花在网上的时间更多。",
-    "upgradeEn": "Use imply when the meaning is suggested, not directly stated.",
-    "upgradeZh": "意思没有明说但能推出来时，用 imply。"
+    "category": "listening",
+    "term": "approximately",
+    "zh": "大约",
+    "simpleEn": "about; not exact",
+    "simpleZh": "大概，不是精确数字。",
+    "exampleEn": "The tour takes approximately two hours.",
+    "exampleZh": "这次游览大约需要两个小时。",
+    "upgradeEn": "Use approximately for time, cost, distance, and number answers.",
+    "upgradeZh": "approximately 常用于时间、费用、距离和数字。"
   },
   "cycle": {
-    "number": 1,
+    "number": 2,
     "phase": 1,
-    "titleEn": "Test format and target band",
-    "titleZh": "考试结构与目标分",
-    "summaryEn": "Learn the four sections, the timing, and what a 6, 7, or 8 answer looks like.",
-    "summaryZh": "先弄懂四个部分、时间安排，以及 6、7、8 分答案的样子。",
+    "titleEn": "Listening basics and spelling",
+    "titleZh": "听力基础与拼写",
+    "summaryEn": "Train your ear for numbers, names, dates, and clean spelling.",
+    "summaryZh": "先练数字、姓名、日期和拼写，把听力基础打稳。",
     "focusWords": [
-      "band score / 分数档",
-      "criteria / 评分标准",
-      "timing / 时间安排",
-      "format / 结构"
+      "spelling / 拼写",
+      "numbers / 数字",
+      "name / 姓名",
+      "prediction / 预测"
     ]
   },
   "frame": {
-    "slot": "Compare / 比较",
-    "en": "Compared with ..., ...",
-    "zh": "与……相比，...",
-    "useEn": "Use when comparing ideas or data.",
-    "useZh": "用来比较观点或数据。"
+    "slot": "Reason / 原因",
+    "en": "This happens because...",
+    "zh": "这是因为...",
+    "useEn": "Use to explain why something happens.",
+    "useZh": "用来解释原因。"
   },
-  "meaningEn": "This reading word helps Becky understand questions and paraphrases faster.",
-  "meaningZh": "这个阅读词可以帮助 Becky 更快看懂题目和改写。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"imply\" using Compared with ..., ...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"imply\" 和 与……相比，... 写一句 Becky 自己的话。",
+  "meaningEn": "This listening word helps Becky catch answers, numbers, and details.",
+  "meaningZh": "这个听力词可以帮助 Becky 抓住答案、数字和细节。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"approximately\" using This happens because...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"approximately\" 和 这是因为... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
