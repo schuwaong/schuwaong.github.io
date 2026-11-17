@@ -1,43 +1,43 @@
 {
-  "dateKey": "2026-11-16",
-  "seedDateKey": "2026-11-16",
+  "dateKey": "2026-11-17",
+  "seedDateKey": "2026-11-17",
   "source": "workflow",
   "vocab": {
-    "category": "writing",
-    "term": "prioritise",
-    "zh": "优先考虑",
-    "simpleEn": "to treat something as more important",
-    "simpleZh": "把某件事放在更重要的位置。",
-    "exampleEn": "Students should prioritise accuracy before trying to use complex vocabulary.",
-    "exampleZh": "学生应该先重视准确性，再尝试复杂词汇。",
-    "upgradeEn": "Use prioritise when giving advice or discussing choices.",
-    "upgradeZh": "给建议或讨论选择时可以用 prioritise。"
+    "category": "speaking",
+    "term": "genuinely",
+    "zh": "真正地；真诚地",
+    "simpleEn": "really, in an honest way",
+    "simpleZh": "真的、发自内心地。",
+    "exampleEn": "I genuinely enjoy learning new expressions when I can use them in real conversations.",
+    "exampleZh": "当我能在真实对话中使用新表达时，我真的很享受学习它们。",
+    "upgradeEn": "Use genuinely to make personal answers sound more sincere.",
+    "upgradeZh": "genuinely 能让个人回答更真诚自然。"
   },
   "cycle": {
-    "number": 8,
+    "number": 9,
     "phase": 2,
-    "titleEn": "Grammar and sentence control",
-    "titleZh": "语法与句子控制",
-    "summaryEn": "Build clean sentences with the right tense, articles, and clause control.",
-    "summaryZh": "把时态、冠词和从句控制好，句子更稳。",
+    "titleEn": "Vocabulary and collocations",
+    "titleZh": "词汇与搭配",
+    "summaryEn": "Learn useful word partnerships so your English sounds more natural.",
+    "summaryZh": "学习常用搭配，让英语听起来更自然。",
     "focusWords": [
-      "tense / 时态",
-      "clause / 从句",
-      "article / 冠词",
-      "accuracy / 准确性"
+      "collocation / 搭配",
+      "lexical resource / 词汇资源",
+      "natural / 自然",
+      "range / 范围"
     ]
   },
   "frame": {
-    "slot": "Task 2 / 大作文",
-    "en": "I strongly believe that...",
-    "zh": "我强烈认为...",
-    "useEn": "Use to give a clear opinion.",
-    "useZh": "用来表达清晰观点。"
+    "slot": "Evidence / 例子",
+    "en": "For instance, ...",
+    "zh": "例如...",
+    "useEn": "Use to support your point with an example.",
+    "useZh": "用例子支持观点。"
   },
-  "meaningEn": "This writing word helps Becky build stronger IELTS paragraphs and ideas.",
-  "meaningZh": "这个写作词可以帮助 Becky 写出更强的雅思段落和观点。",
-  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"prioritise\" using I strongly believe that...",
-  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"prioritise\" 和 我强烈认为... 写一句 Becky 自己的话。",
+  "meaningEn": "This speaking word helps Becky sound clearer and more natural.",
+  "meaningZh": "这个口语词可以帮助 Becky 说得更清楚、更自然。",
+  "promptEn": "China drill: read the Chinese meaning, shadow the example twice, then make one Becky-style sentence with \"genuinely\" using For instance, ...",
+  "promptZh": "中文母语者练法：先看中文意思，跟读例句两遍，再用 \"genuinely\" 和 例如... 写一句 Becky 自己的话。",
   "sourceEn": "This harder word is auto-picked for Becky and refreshes every day with a China-friendly output drill.",
   "sourceZh": "这个高分词会每天自动为 Becky 刷新，并配中文母语者适用的输出练习。"
 }
